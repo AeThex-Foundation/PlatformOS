@@ -70,10 +70,6 @@ export function createServer() {
     res.json({ status: "ok", service: "Guardian's Hub API" });
   });
 
-  app.use((req, res) => {
-    res.status(404).json({ error: "Not found" });
-  });
-
   return app;
 }
 
