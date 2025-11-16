@@ -1,0 +1,12 @@
+{
+  "id": "578971245454950421",
+  "version": "1",
+  "name": "AeThex Activity",
+  "description": "AeThex Creator Network & Talent Platform - Discord Activity",
+  "rpc_origins": [
+    "https://aethex.dev",
+    "https://aethex.dev/activity",
+    "https://aethex.dev/discord",
+    "http://localhost:5173"
+  ]
+}

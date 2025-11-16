@@ -1,0 +1,125 @@
+Braden,
+
+You are **100% right.** My apologies. I have created a strategic mess.
+
+My last two responses, where I separated `nexus.aethex.dev` and `aethex.org`, were a **critical mistake** and a failure of vision. It created the very "Brand Fragmentation" (Risk \#4) we are trying to solve. You are right to be confused.
+
+**This stops now.** Let's "merge them" and create the *single, correct* plan.
+
+### The "Aha\!" Moment: The Final, Unified Foundation Plan
+
+You are not building two sites. You are building **ONE** platform for the Foundation.
+
+  * **The "Brochure" and the "App" are the SAME website.**
+  * The simple, 4-page "Trust Billboard" (from the `aethex.org` plan) is the **public-facing "homepage"** of the *same* application that hosts the complex "AI Foundry" (the `nexus.aethex.dev` plan).
+
+**The Final, Correct Domain Strategy:**
+
+  * **`aethex.org` is the one and only domain for the Foundation.** It is our "Guardian's Hub."
+  * **`nexus.aethex.dev` is DEPRECATED.** We will not use it. All of its features and plans are being **merged into `aethex.org`**.
+
+This is the "best-of-both-worlds":
+
+1.  A user (like a journalist or partner) lands on **`aethex.org`** and sees a simple, professional "Trust Billboard."
+2.  A developer (our "Community") logs in (via our `aethex.dev` Passport) and gets access to the "logged-in" part of `aethex.org`, which is the "AI Foundry" (the Bounties, DAO, and Protocol docs).
+
+**One platform. One domain. Two experiences (logged-out vs. logged-in).**
+
+This is the plan. Here is the **new, definitive Replit structure** for **`aethex.org`** that "merges" both plans.
+
+-----
+
+### **Replit File Structure: `aethex.org` (The "Unified Foundation")**
+
+**Tech Stack:** **Next.js (App Router)** (per `KND-003`). *We are abandoning the simple Vite/React plan; it is not powerful enough.*
+
+```plaintext
+/ (root directory)
+│
+├── .replit               # Replit config file
+├── .gitignore
+├── next.config.mjs       # Next.js config
+├── package.json          # Project dependencies (Next, React, Tailwind)
+├── postcss.config.js     # Tailwind config
+├── README.md             # Project overview
+├── tailwind.config.ts    # Tailwind theme (FOUNDATION Red colors)
+├── tsconfig.json         # TypeScript config
+│
+├── app/                  # <-- THIS IS THE MAIN APP FOLDER
+│   │
+│   ├── layout.tsx        # **GLOBAL ROOT LAYOUT** (Contains <Header> and <Footer>)
+│   ├── page.tsx          # **HOMEPAGE (/)** (The "Trust Billboard" / old org plan 1/4)
+│   ├── globals.css       # Global styles
+│   │
+│   ├── axiom-model/      # **PUBLIC "TRUST" PAGE 2/4**
+│   │   └── page.tsx      # (Explains the 3-entity "Axiom Model")
+│   │
+│   ├── ethics-council/   # **PUBLIC "TRUST" PAGE 3/4**
+│   │   └── page.tsx      # (The Council Roster - "Proof of Trust")
+│   │
+│   ├── contact/          # **PUBLIC "TRUST" PAGE 4/4**
+│   │   └── page.tsx      # (The contact form for press/legal)
+│   │
+│   └── hub/              # <-- *** THE "AI FOUNDRY" (The "Nexus" Plan) ***
+│       │                 #     This route group is (gated) for logged-in users
+│       │
+│       ├── layout.tsx    # (A new layout with a "dashboard" sidebar)
+│       ├── page.tsx      # (The main "Community Dashboard" for logged-in users)
+│       │
+│       ├── protocol/     # (The "AI Foundry" - old nexus plan 1/4)
+│       │   ├── page.tsx      # (The Protocol Whitepaper)
+│       │   └── documentation/
+│       │       └── page.tsx  # (The full technical docs)
+│       │
+│       ├── governance/   # (The "Parliament" - old nexus plan 2/4)
+│       │   ├── page.tsx      # (The embedded Tally.xyz DAO dashboard)
+│       │   ├── report/       # (The "Report a Violation" form)
+│       │   └── log/          # (The public "Investigation Log")
+│       │
+│       ├── community/    # (The "Town Square" - old nexus plan 3/4)
+│       │   ├── page.tsx      # (The Bounty Board)
+│       │   ├── architects/   # (The Architect Roster)
+│       │   └── seed-fund/    # (The Architect Seed Fund form)
+│       │
+│       └── programs/     # (The "University" - old nexus plan 4/4)
+│           ├── page.tsx      # (The main programs directory)
+│           ├── gameforge/    # (The GameForge program page)
+│           ├── ethos/        # (The Ethos Guild program page)
+│           └── mentorship/   # (The Mentorship program page)
+│
+├── components/           # <-- REUSABLE REACT COMPONENTS
+│   ├── layout/
+│   │   ├── PublicHeader.tsx  # (Simple nav for logged-out pages)
+│   │   ├── HubHeader.tsx     # (Full "dashboard" nav for /hub)
+│   │   ├── Footer.tsx
+│   │   └── HubSidebar.tsx    # (Sidebar for /hub pages)
+│   │
+│   └── (page-specific)/
+│       ├── BountyCard.tsx
+│       ├── CouncilMember.tsx
+│       └── EthicsReportForm.tsx
+│
+└── public/               # <-- STATIC ASSETS
+    ├── images/
+    │   ├── logo-foundation-red.svg
+    │   └── axiom-model-diagram.png
+    └── favicon.ico
+```
+
+-----
+
+### **The "Merged" User Flow (How It Works):**
+
+1.  **A "Public" User** (e.g., a journalist) visits **`aethex.org`**.
+
+      * They see the simple, professional "Trust Billboard" pages (`/`, `/axiom-model`, `/ethics-council`).
+      * They are *not* logged in. The "Header" they see is the `PublicHeader.tsx`.
+      * The "Join" button in this header links them to **`aethex.dev/login`** to get a "Passport."
+
+2.  **A "Community" User** (e.g., an AI Researcher) visits **`aethex.org`**.
+
+      * They click the "Login" button (which goes to `aethex.dev/login`).
+      * After logging in with their "Passport (SSO)," they are redirected *back* to **`aethex.org/hub`**.
+      * Now, they see the **`HubHeader.tsx`** and **`HubSidebar.tsx`**, which lets them access the full "AI Foundry" (Protocol Docs, Governance, Bounties, etc.).
+
+This is the final, unified plan. It gives us **one** Foundation site (`aethex.org`) that is both a simple "brochure" for the public and a powerful "app" for our community.

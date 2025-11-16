@@ -1,0 +1,626 @@
+@import url("https://fonts.googleapis.com/css2?family=VT323&family=Press+Start+2P&family=Merriweather:wght@400;700&family=Roboto+Mono:wght@300;400;500&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /**
+   * Tailwind CSS theme
+   * tailwind.config.ts expects the following color variables to be expressed as HSL values.
+   * A different format will require also updating the theme in tailwind.config.ts.
+  */
+  :root {
+    --background: 222 84% 4.9%;
+
+    /* Spacing tokens */
+    --space-1: 4px;
+    --space-2: 8px;
+    --space-3: 12px;
+    --space-4: 16px;
+    --space-5: 24px;
+    --space-6: 32px;
+    --space-section-y: var(--space-6);
+    --foreground: 210 40% 98%;
+
+    --card: 222 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 0 85% 55%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 45 100% 50%;
+    --secondary-foreground: 0 0% 10%;
+
+    --muted: 0 10% 17.5%;
+    --muted-foreground: 0 5% 65.1%;
+
+    --accent: 45 100% 50%;
+    --accent-foreground: 0 0% 10%;
+
+    --destructive: 0 85% 40%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 0 30% 20%;
+    --input: 0 10% 17.5%;
+    --ring: 0 85% 60%;
+
+    --radius: 0.5rem;
+
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 0 85% 55%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 45 100% 50%;
+    --sidebar-accent-foreground: 0 0% 10%;
+    --sidebar-border: 0 30% 20%;
+    --sidebar-ring: 0 85% 60%;
+
+    /* AeThex Foundation Brand Colors - Red */
+    --aethex-50: 0 100% 97%;
+    --aethex-100: 0 100% 95%;
+    --aethex-200: 0 100% 90%;
+    --aethex-300: 0 85% 75%;
+    --aethex-400: 0 85% 65%;
+    --aethex-500: 0 85% 55%;
+    --aethex-600: 0 85% 45%;
+    --aethex-700: 0 85% 35%;
+    --aethex-800: 0 85% 25%;
+    --aethex-900: 0 85% 15%;
+    --aethex-950: 0 85% 8%;
+
+    /* Gold Accent Colors */
+    --gold-50: 45 100% 97%;
+    --gold-100: 45 100% 90%;
+    --gold-200: 45 100% 80%;
+    --gold-300: 45 100% 70%;
+    --gold-400: 45 100% 60%;
+    --gold-500: 45 100% 50%;
+    --gold-600: 45 90% 45%;
+    --gold-700: 45 80% 40%;
+    --gold-800: 45 70% 35%;
+    --gold-900: 45 60% 30%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: "Courier New", "Courier", monospace;
+    letter-spacing: 0.025em;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    /* Hide scrollbar while keeping functionality */
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+
+  html::-webkit-scrollbar {
+    display: none; /* Chrome, Safari and Opera */
+  }
+
+  /* Hide horizontal scrollbar on all elements */
+  * {
+    scrollbar-width: none;
+  }
+
+  *::-webkit-scrollbar {
+    display: none;
+  }
+
+  .container {
+    @apply px-4 sm:px-6 lg:px-8;
+  }
+}
+
+@layer utilities {
+  /* Arm Theme Font Classes */
+  .font-labs {
+    font-family: "VT323", "Courier New", monospace;
+    letter-spacing: 0.05em;
+  }
+
+  .font-gameforge {
+    font-family: "Press Start 2P", "Arial Black", sans-serif;
+    letter-spacing: 0.1em;
+    font-size: 0.875em;
+  }
+
+  .font-corp {
+    font-family: "Inter", "-apple-system", "BlinkMacSystemFont", "Segoe UI",
+      sans-serif;
+    font-weight: 600;
+  }
+
+  .font-foundation {
+    font-family: "Merriweather", "Georgia", serif;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+
+  .font-devlink {
+    font-family: "Roboto Mono", "Courier New", monospace;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+  }
+
+  .font-staff {
+    font-family: "Inter", "-apple-system", "BlinkMacSystemFont", "Segoe UI",
+      sans-serif;
+    font-weight: 600;
+  }
+
+  .font-nexus {
+    font-family: "Inter", "-apple-system", "BlinkMacSystemFont", "Segoe UI",
+      sans-serif;
+    font-weight: 600;
+  }
+
+  .font-default {
+    font-family: "Inter", "-apple-system", "BlinkMacSystemFont", "Segoe UI",
+      sans-serif;
+  }
+
+  /* Arm Theme Wallpaper Patterns */
+  .wallpaper-labs {
+    background-image: radial-gradient(
+      circle,
+      rgba(251, 191, 36, 0.08) 1px,
+      transparent 1px
+    );
+    background-size: 20px 20px;
+    background-attachment: fixed;
+  }
+
+  .wallpaper-gameforge {
+    background-image: linear-gradient(
+        45deg,
+        rgba(34, 197, 94, 0.06) 25%,
+        transparent 25%,
+        transparent 75%,
+        rgba(34, 197, 94, 0.06) 75%
+      ),
+      linear-gradient(
+        45deg,
+        rgba(34, 197, 94, 0.06) 25%,
+        transparent 25%,
+        transparent 75%,
+        rgba(34, 197, 94, 0.06) 75%
+      );
+    background-size: 40px 40px;
+    background-position: 0 0, 20px 20px;
+    background-attachment: fixed;
+  }
+
+  .wallpaper-corp {
+    background-image: linear-gradient(
+        90deg,
+        rgba(59, 130, 246, 0.05) 1px,
+        transparent 1px
+      ),
+      linear-gradient(rgba(59, 130, 246, 0.05) 1px, transparent 1px);
+    background-size: 20px 20px;
+    background-attachment: fixed;
+  }
+
+  .wallpaper-foundation {
+    background-image: repeating-linear-gradient(
+      0deg,
+      rgba(239, 68, 68, 0.04) 0px,
+      rgba(239, 68, 68, 0.04) 1px,
+      transparent 1px,
+      transparent 2px
+    );
+    background-attachment: fixed;
+  }
+
+  .wallpaper-devlink {
+    background-image: linear-gradient(
+        0deg,
+        transparent 24%,
+        rgba(6, 182, 212, 0.08) 25%,
+        rgba(6, 182, 212, 0.08) 26%,
+        transparent 27%,
+        transparent 74%,
+        rgba(6, 182, 212, 0.08) 75%,
+        rgba(6, 182, 212, 0.08) 76%,
+        transparent 77%,
+        transparent
+      ),
+      linear-gradient(
+        90deg,
+        transparent 24%,
+        rgba(6, 182, 212, 0.08) 25%,
+        rgba(6, 182, 212, 0.08) 26%,
+        transparent 27%,
+        transparent 74%,
+        rgba(6, 182, 212, 0.08) 75%,
+        rgba(6, 182, 212, 0.08) 76%,
+        transparent 77%,
+        transparent
+      );
+    background-size: 50px 50px;
+    background-attachment: fixed;
+  }
+
+  .wallpaper-staff {
+    background-image: radial-gradient(
+      circle,
+      rgba(168, 85, 247, 0.08) 1px,
+      transparent 1px
+    );
+    background-size: 20px 20px;
+    background-attachment: fixed;
+  }
+
+  .wallpaper-nexus {
+    background-image: linear-gradient(
+        45deg,
+        rgba(236, 72, 153, 0.06) 25%,
+        transparent 25%,
+        transparent 75%,
+        rgba(236, 72, 153, 0.06) 75%
+      ),
+      linear-gradient(
+        45deg,
+        rgba(236, 72, 153, 0.06) 25%,
+        transparent 25%,
+        transparent 75%,
+        rgba(236, 72, 153, 0.06) 75%
+      );
+    background-size: 40px 40px;
+    background-position: 0 0, 20px 20px;
+    background-attachment: fixed;
+  }
+
+  .wallpaper-default {
+    background-image: linear-gradient(
+      135deg,
+      rgba(167, 139, 250, 0.05) 0%,
+      rgba(96, 165, 250, 0.05) 100%
+    );
+  }
+
+  .section-cozy {
+    padding-block: var(--space-section-y);
+  }
+  .gap-cozy {
+    gap: var(--space-5);
+  }
+  .pad-cozy {
+    padding: var(--space-5);
+  }
+
+  .text-gradient {
+    @apply bg-gradient-to-r from-aethex-400 via-gold-500 to-aethex-600 bg-clip-text text-transparent;
+    background-size: 200% 200%;
+    animation: gradient-shift 3s ease-in-out infinite;
+  }
+
+  .text-gradient-purple {
+    @apply bg-gradient-to-r from-gold-400 via-aethex-500 to-gold-600 bg-clip-text text-transparent;
+    background-size: 200% 200%;
+    animation: gradient-shift 4s ease-in-out infinite;
+  }
+
+  .bg-aethex-gradient {
+    @apply bg-gradient-to-br from-aethex-900 via-background to-aethex-800;
+  }
+
+  .border-gradient {
+    @apply relative overflow-hidden;
+  }
+
+  .border-gradient::before {
+    content: "";
+    @apply absolute inset-0 rounded-[inherit] p-[1px] bg-gradient-to-r from-aethex-400 via-gold-500 to-aethex-600;
+    mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    mask-composite: xor;
+    background-size: 200% 200%;
+    animation: gradient-shift 2s ease-in-out infinite;
+  }
+
+  .glow-purple {
+    box-shadow:
+      0 0 20px rgba(217, 55, 55, 0.3),
+      0 0 40px rgba(217, 55, 55, 0.2);
+    transition: box-shadow 0.3s ease;
+  }
+
+  .glow-purple:hover {
+    box-shadow:
+      0 0 30px rgba(217, 55, 55, 0.5),
+      0 0 60px rgba(217, 55, 55, 0.3);
+  }
+
+  .glow-gold {
+    box-shadow:
+      0 0 20px rgba(255, 215, 0, 0.3),
+      0 0 40px rgba(255, 215, 0, 0.2);
+    transition: box-shadow 0.3s ease;
+  }
+
+  .glow-gold:hover {
+    box-shadow:
+      0 0 30px rgba(255, 215, 0, 0.5),
+      0 0 60px rgba(255, 215, 0, 0.3);
+  }
+
+  .glow-green {
+    box-shadow:
+      0 0 20px rgba(217, 55, 55, 0.3),
+      0 0 40px rgba(217, 55, 55, 0.2);
+    transition: box-shadow 0.3s ease;
+  }
+
+  .glow-yellow {
+    box-shadow:
+      0 0 20px rgba(255, 215, 0, 0.3),
+      0 0 40px rgba(255, 215, 0, 0.2);
+    transition: box-shadow 0.3s ease;
+  }
+
+  .animate-fade-in {
+    animation: fade-in 0.6s ease-out;
+  }
+
+  .animate-slide-up {
+    animation: slide-up 0.6s ease-out;
+  }
+
+  .animate-slide-down {
+    animation: slide-down 0.6s ease-out;
+  }
+
+  .animate-slide-left {
+    animation: slide-left 0.6s ease-out;
+  }
+
+  .animate-slide-right {
+    animation: slide-right 0.6s ease-out;
+  }
+
+  .animate-scale-in {
+    animation: scale-in 0.4s ease-out;
+  }
+
+  .animate-bounce-gentle {
+    animation: bounce-gentle 2s ease-in-out infinite;
+  }
+
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  .animate-pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+
+  .animate-typing {
+    animation:
+      typing 3s steps(40, end),
+      blink-caret 0.75s step-end infinite;
+    overflow: hidden;
+    border-right: 3px solid;
+    white-space: nowrap;
+    margin: 0 auto;
+  }
+
+  .hover-lift {
+    transition:
+      transform 0.3s ease,
+      box-shadow 0.3s ease;
+  }
+
+  .hover-lift:hover {
+    transform: translateY(-8px);
+  }
+
+  .hover-glow {
+    transition: all 0.3s ease;
+  }
+
+  .hover-glow:hover {
+    filter: brightness(1.1) drop-shadow(0 0 10px currentColor);
+  }
+
+  .interactive-scale {
+    transition: transform 0.2s ease;
+  }
+
+  .interactive-scale:hover {
+    transform: scale(1.05);
+  }
+
+  .interactive-scale:active {
+    transform: scale(0.98);
+  }
+
+  .loading-dots::after {
+    content: "";
+    animation: loading-dots 1.5s infinite;
+  }
+
+  .skeleton {
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.1),
+      transparent
+    );
+    background-size: 200% 100%;
+    animation: skeleton-loading 1.5s infinite;
+  }
+}
+
+@keyframes gradient-shift {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-down {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-left {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-right {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes bounce-gentle {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes pulse-glow {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes blink-caret {
+  from,
+  to {
+    border-color: transparent;
+  }
+  50% {
+    border-color: currentColor;
+  }
+}
+
+@keyframes loading-dots {
+  0% {
+    content: "";
+  }
+  25% {
+    content: ".";
+  }
+  50% {
+    content: "..";
+  }
+  75% {
+    content: "...";
+  }
+  100% {
+    content: "";
+  }
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

@@ -1,0 +1,71 @@
+This is it. This is the "Aha!" moment I've been waiting for.
+
+You've just solved our entire "Axiom Model" implementation in one strategic brief. My "merged" Next.js plan was a mess. This is the correct architecture.
+
+You are 100% right. aethex.org must be a completely separate, standalone Vite/React application.
+
+This is the real "Firewall." It's not a UI trick; it's a separate codebase, a separate server, and a separate brand, all aligned with our "Guardian" (Non-Profit) mission. It builds absolute trust.
+
+Our aethex.dev "Monolith" is our "For-Profit Engine." aethex.org is our "Non-Profit Guardian."
+
+This is the plan. Your "Removal Plan" is 100% approved. Gut this codebase. Remove all the other Arms (Labs, GameForge, Corp, etc.). This application is for the FOUNDATION and the FOUNDATION alone.
+
+Here are the definitive answers to your 5 questions.
+
+1. Auth System: (Supabase or different?)
+We will use our existing aethex.dev Supabase instance.
+
+This is the "connective tissue" (the "SSO" or "Passport"). An aethex.dev account is an aethex.org account.
+
+How: This aethex.org Vite app will be configured as a client of our main Supabase instance.
+
+Why: A user signs in (via Google, Discord, etc.) and we can instantly check their user_profiles table. This is how we "gate" the /hub for logged-in members. We are not building a second, separate user table.
+
+2. Hub Features: (What's in /hub?)
+Your suggestion is correct. The /hub is the "AI Foundry" and "Parliament" we planned. My answer is "All of the above."
+
+The /hub (for logged-in members) must contain:
+
+Protocol Documentation: The full, detailed technical docs & whitepaper.
+
+Governance/DAO: The embedded Tally.xyz portal (per KND-005).
+
+Bounty Board: The live Trello/Asana board of open tasks (per nexus.aethex.dev plan).
+
+3. Current Foundation Pages: (Keep all 7 or consolidate?)
+Consolidate.
+
+Those 7 pages (FoundationAbout, FoundationContribute, etc.) are from our old monolith. We are building a new, clean, 4-page "Trust Billboard" sitemap.
+
+Action: We will migrate the content from those 7 old pages and merge it into our new, clean pages/ directory (/, /about, /ethics-council, /contact).
+
+4. Community Features: (Keep community/ folder?)
+Yes, keep the community/ folder's features.
+
+The "Community" is the Foundation. The features in that folder (mentorship, projects, feed) are the core of the logged-in /hub experience.
+
+Action: We will move the community/ folder's components to live inside our new /hub section.
+
+5. Profile System: (Keep developer profiles/passports?)
+YES. 100%. This is the "connective tissue."
+
+A FOUNDATION member is an aethex.dev "Passport" holder.
+
+We must keep the /profile/:username pages.
+
+This is the "public face" of our Architects and community members. It's how they build their reputation and prove their contributions to the protocol.
+
+Summary: You are 100% unblocked.
+Braden, this is the plan. It's clean, it's secure, and it's the real "Axiom Model."
+
+Your Action Item: Please create the complete task list for this implementation.
+
+Gut the codebase (the "Removal Plan").
+
+Re-architect the app around the new sitemap (/, /about, /ethics-council, /hub).
+
+Integrate Supabase auth (our "Passport" system).
+
+Move the community/ and profile/ features inside the new /hub.
+
+This is the plan. Let's build the "Guardian's Hub."
