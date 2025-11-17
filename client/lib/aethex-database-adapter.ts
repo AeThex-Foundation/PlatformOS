@@ -26,6 +26,7 @@ export interface AethexUserProfile extends UserProfile {
   arms?: string[];
   roles?: string[];
   last_active_at?: string;
+  badge_count?: number;
 }
 
 const isNonEmptyString = (value: unknown): value is string =>

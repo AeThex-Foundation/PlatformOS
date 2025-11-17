@@ -39,6 +39,7 @@ import FoundationCurriculum from "./pages/foundation/FoundationCurriculum";
 import FoundationAchievements from "./pages/foundation/FoundationAchievements";
 import FoundationDownloadCenter from "./pages/FoundationDownloadCenter";
 import Creators from "./pages/Creators";
+import Leaderboard from "./pages/Leaderboard";
 import { Analytics } from "@vercel/analytics/react";
 
 const queryClient = new QueryClient();
@@ -61,6 +62,7 @@ const App = () => (
                     <Route path="/ethics-council" element={<EthicsCouncil />} />
                     <Route path="/contact" element={<Contact />} />
                     <Route path="/creators" element={<Creators />} />
+                    <Route path="/leaderboard" element={<Leaderboard />} />
 
                     {/* Hub (Logged-in Community Experience) */}
                     <Route path="/hub" element={<Hub />} />

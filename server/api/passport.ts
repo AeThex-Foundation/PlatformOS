@@ -47,6 +47,7 @@ export function isReservedUsername(username: string): boolean {
  * Public profile data shape
  */
 export interface PublicPassportProfile {
+  id: string;
   username: string;
   full_name: string;
   avatar_url: string | null;
@@ -142,6 +143,7 @@ router.get('/:username', async (req: Request, res: Response) => {
 
     // Build public profile response
     const publicProfile: PublicPassportProfile = {
+      id: profile.id,
       username: profile.username as string,
       full_name: profile.full_name as string,
       avatar_url: profile.avatar_url as string | null,
