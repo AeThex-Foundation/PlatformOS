@@ -18,17 +18,17 @@ export default function ProfileSettings() {
 
   const handleSave = async (updates: Partial<AethexUserProfile>) => {
     if (!user?.id) {
-      toastError("You must be logged in to update your profile");
+      toastError({ description: "You must be logged in to update your profile" });
       return;
     }
 
     setIsSaving(true);
     try {
       await updateProfile(updates);
-      toastSuccess("Profile updated successfully");
+      toastSuccess({ description: "Profile updated successfully" });
     } catch (error) {
       console.error("Failed to update profile:", error);
-      toastError("Failed to update profile. Please try again.");
+      toastError({ description: "Failed to update profile. Please try again." });
     } finally {
       setIsSaving(false);
     }

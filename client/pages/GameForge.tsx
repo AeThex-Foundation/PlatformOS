@@ -1,8 +1,8 @@
 import Layout from "@/components/Layout";
+import SEO from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { useArmTheme } from "@/contexts/ArmThemeContext";
 import {
   Gamepad2,
   Calendar,
@@ -14,12 +14,11 @@ import {
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState, useRef } from "react";
 import LoadingScreen from "@/components/LoadingScreen";
-import { useArmToast } from "@/hooks/use-arm-toast";
+import { useAethexToast } from "@/hooks/use-aethex-toast";
 
 export default function GameForge() {
   const navigate = useNavigate();
-  const { theme } = useArmTheme();
-  const armToast = useArmToast();
+  const { success } = useAethexToast();
   const [isLoading, setIsLoading] = useState(true);
   const toastShownRef = useRef(false);
 
@@ -27,13 +26,13 @@ export default function GameForge() {
     const timer = setTimeout(() => {
       setIsLoading(false);
       if (!toastShownRef.current) {
-        armToast.system("GameForge engine initialized");
+        success({ description: "GameForge engine initialized" });
         toastShownRef.current = true;
       }
     }, 900);
 
     return () => clearTimeout(timer);
-  }, [armToast]);
+  }, [success]);
 
   if (isLoading) {
     return (
@@ -106,8 +105,13 @@ export default function GameForge() {
   ];
 
   return (
-    <Layout>
-      <div className="relative min-h-screen bg-black text-white overflow-hidden">
+    <>
+      <SEO
+        pageTitle="GameForge"
+        description="AeThex GameForge - Shipping games monthly. Our internal production studio demonstrates disciplined, efficient development."
+      />
+      <Layout>
+        <div className="relative min-h-screen bg-black text-white overflow-hidden">
         {/* Background */}
         <div className="pointer-events-none absolute inset-0 opacity-[0.12] [background-image:radial-gradient(circle_at_top,#22c55e_0,rgba(0,0,0,0.45)_55%,rgba(0,0,0,0.9)_100%)]" />
         <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(transparent_0,transparent_calc(100%-1px),rgba(34,197,94,0.05)_calc(100%-1px))] bg-[length:100%_32px]" />
@@ -132,7 +136,7 @@ export default function GameForge() {
               </Badge>
 
               <div className="space-y-6 mb-12">
-                <h1 className={`text-4xl lg:text-6xl font-black text-green-300 leading-tight ${theme.fontClass}`}>
+                <h1 className="text-4xl lg:text-6xl font-black text-green-300 leading-tight">
                   Shipping Games Monthly
                 </h1>
                 <p className="text-xl text-green-100/70 max-w-3xl">
@@ -371,5 +375,6 @@ export default function GameForge() {
         </main>
       </div>
     </Layout>
+    </>
   );
 }
