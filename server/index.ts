@@ -8,6 +8,7 @@ import { emailService } from "./email";
 import { randomUUID } from "crypto";
 import blogIndexHandler from "../api/blog/index";
 import blogSlugHandler from "../api/blog/[slug]";
+import oauthRoutes from "./oauth/oauth-routes";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -35,6 +36,9 @@ export function createServer() {
 
   app.get("/api/blog", blogIndexHandler);
   app.get("/api/blog/:slug", blogSlugHandler);
+
+  // OAuth 2.0 Provider Endpoints (Foundation Passport SSO)
+  app.use("/api/oauth", oauthRoutes);
 
   app.post("/api/contact", async (req, res) => {
     try {
