@@ -41,6 +41,9 @@ import FoundationDownloadCenter from "./pages/FoundationDownloadCenter";
 import Creators from "./pages/Creators";
 import Leaderboard from "./pages/Leaderboard";
 import Admin from "./pages/Admin";
+import Workshops from "./pages/Workshops";
+import Resources from "./pages/Resources";
+import OAuthClients from "./pages/OAuthClients";
 import { Analytics } from "@vercel/analytics/react";
 
 const queryClient = new QueryClient();
@@ -64,6 +67,8 @@ const App = () => (
                     <Route path="/contact" element={<Contact />} />
                     <Route path="/creators" element={<Creators />} />
                     <Route path="/leaderboard" element={<Leaderboard />} />
+                    <Route path="/workshops" element={<Workshops />} />
+                    <Route path="/resources" element={<Resources />} />
 
                     {/* Hub (Logged-in Community Experience) */}
                     <Route path="/hub" element={<Hub />} />
@@ -98,6 +103,7 @@ const App = () => (
                     
                     {/* Admin Routes */}
                     <Route path="/admin" element={<Admin />} />
+                    <Route path="/admin/oauth-clients" element={<OAuthClients />} />
 
                     {/* Discord OAuth */}
                     <Route path="/discord-verify" element={<DiscordVerify />} />

@@ -1,0 +1,343 @@
+/**
+ * Resource Library Page
+ * Downloadable materials, guides, templates, and Foundation assets
+ */
+
+import { useState } from "react";
+import Layout from "@/components/Layout";
+import SEO from "@/components/SEO";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Input } from "@/components/ui/input";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { 
+  Download, 
+  FileText, 
+  Code, 
+  Image as ImageIcon, 
+  Package,
+  Search,
+  Star,
+  Eye,
+  ArrowDownToLine
+} from "lucide-react";
+
+interface Resource {
+  id: string;
+  title: string;
+  description: string;
+  type: "guide" | "template" | "asset" | "tool";
+  category: string;
+  format: string;
+  size: string;
+  downloads: number;
+  featured: boolean;
+  tags: string[];
+  downloadUrl: string;
+  previewUrl?: string;
+}
+
+export default function Resources() {
+  const [searchQuery, setSearchQuery] = useState("");
+  const [resources] = useState<Resource[]>([
+    {
+      id: "1",
+      title: "Game Design Document Template",
+      description: "Comprehensive GDD template with sections for core mechanics, narrative, technical specs, and monetization. Used by 500+ developers.",
+      type: "template",
+      category: "Design",
+      format: "PDF",
+      size: "2.4 MB",
+      downloads: 1242,
+      featured: true,
+      tags: ["Design", "Documentation", "Planning"],
+      downloadUrl: "/downloads/gdd-template.pdf",
+      previewUrl: "/previews/gdd-template",
+    },
+    {
+      id: "2",
+      title: "Unity Character Controller Script",
+      description: "Production-ready character controller with movement, jumping, crouching, and camera control. Fully commented and customizable.",
+      type: "template",
+      category: "Code",
+      format: "C# Script",
+      size: "45 KB",
+      downloads: 2156,
+      featured: true,
+      tags: ["Unity", "Character", "Movement"],
+      downloadUrl: "/downloads/unity-character-controller.cs",
+    },
+    {
+      id: "3",
+      title: "Foundation Brand Assets",
+      description: "Official Foundation logos, color palettes, typography guidelines, and brand identity assets. Includes SVG, PNG, and AI formats.",
+      type: "asset",
+      category: "Branding",
+      format: "ZIP",
+      size: "12.8 MB",
+      downloads: 856,
+      featured: false,
+      tags: ["Branding", "Logos", "Design"],
+      downloadUrl: "/downloads/foundation-brand-assets.zip",
+    },
+    {
+      id: "4",
+      title: "UI/UX Best Practices Guide",
+      description: "Complete guide to game UI/UX design covering menus, HUDs, accessibility, and player feedback. 45 pages with examples.",
+      type: "guide",
+      category: "Design",
+      format: "PDF",
+      size: "8.2 MB",
+      downloads: 1834,
+      featured: true,
+      tags: ["UI/UX", "Design", "Accessibility"],
+      downloadUrl: "/downloads/ui-ux-guide.pdf",
+      previewUrl: "/previews/ui-ux-guide",
+    },
+    {
+      id: "5",
+      title: "Shader Collection Pack",
+      description: "20+ optimized shaders for Unity and Unreal Engine including water, fire, dissolve, and post-processing effects.",
+      type: "asset",
+      category: "Graphics",
+      format: "ZIP",
+      size: "5.6 MB",
+      downloads: 3421,
+      featured: false,
+      tags: ["Shaders", "VFX", "Graphics"],
+      downloadUrl: "/downloads/shader-pack.zip",
+    },
+    {
+      id: "6",
+      title: "AI Behavior Tree Framework",
+      description: "Modular behavior tree system with visual editor. Supports custom nodes, blackboard, and debugging. MIT licensed.",
+      type: "tool",
+      category: "AI",
+      format: "Unity Package",
+      size: "1.2 MB",
+      downloads: 987,
+      featured: false,
+      tags: ["AI", "Tools", "Unity"],
+      downloadUrl: "/downloads/behavior-tree.unitypackage",
+    },
+  ]);
+
+  const getTypeIcon = (type: string) => {
+    switch (type) {
+      case "guide": return FileText;
+      case "template": return Code;
+      case "asset": return ImageIcon;
+      case "tool": return Package;
+      default: return FileText;
+    }
+  };
+
+  const getTypeColor = (type: string) => {
+    switch (type) {
+      case "guide": return "bg-blue-500/10 text-blue-400 border-blue-400/30";
+      case "template": return "bg-green-500/10 text-green-400 border-green-400/30";
+      case "asset": return "bg-purple-500/10 text-purple-400 border-purple-400/30";
+      case "tool": return "bg-amber-500/10 text-amber-400 border-amber-400/30";
+      default: return "bg-gray-500/10 text-gray-400 border-gray-400/30";
+    }
+  };
+
+  const filteredResources = resources.filter((resource) =>
+    resource.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    resource.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    resource.tags.some((tag) => tag.toLowerCase().includes(searchQuery.toLowerCase()))
+  );
+
+  const featuredResources = filteredResources.filter((r) => r.featured);
+  const guideResources = filteredResources.filter((r) => r.type === "guide");
+  const templateResources = filteredResources.filter((r) => r.type === "template");
+  const assetResources = filteredResources.filter((r) => r.type === "asset");
+  const toolResources = filteredResources.filter((r) => r.type === "tool");
+
+  const renderResourceCard = (resource: Resource) => {
+    const TypeIcon = getTypeIcon(resource.type);
+
+    return (
+      <Card key={resource.id} className="border-border/30 hover:border-aethex-400/50 transition-all group">
+        <CardHeader>
+          <div className="flex items-start justify-between gap-4">
+            <div className="space-y-2 flex-1">
+              <div className="flex items-center gap-2 flex-wrap">
+                <Badge variant="outline" className={getTypeColor(resource.type)}>
+                  <TypeIcon className="h-3 w-3 mr-1" />
+                  {resource.type.charAt(0).toUpperCase() + resource.type.slice(1)}
+                </Badge>
+                <Badge variant="outline" className="text-xs">
+                  {resource.format}
+                </Badge>
+                {resource.featured && (
+                  <Badge className="bg-gold-500/10 text-gold-400 border-gold-400/30">
+                    <Star className="h-3 w-3 mr-1" />
+                    Featured
+                  </Badge>
+                )}
+              </div>
+              <CardTitle className="text-lg group-hover:text-aethex-400 transition-colors">
+                {resource.title}
+              </CardTitle>
+            </div>
+          </div>
+          <CardDescription>{resource.description}</CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          {/* Tags */}
+          <div className="flex flex-wrap gap-2">
+            {resource.tags.map((tag) => (
+              <Badge key={tag} variant="outline" className="text-xs">
+                {tag}
+              </Badge>
+            ))}
+          </div>
+
+          {/* Stats & Actions */}
+          <div className="flex items-center justify-between pt-2">
+            <div className="flex items-center gap-4 text-sm text-muted-foreground">
+              <div className="flex items-center gap-1">
+                <ArrowDownToLine className="h-4 w-4" />
+                <span>{resource.downloads.toLocaleString()}</span>
+              </div>
+              <span>•</span>
+              <span>{resource.size}</span>
+            </div>
+            <div className="flex gap-2">
+              {resource.previewUrl && (
+                <Button variant="outline" size="sm" className="border-aethex-500/50">
+                  <Eye className="h-4 w-4 mr-2" />
+                  Preview
+                </Button>
+              )}
+              <Button size="sm" className="bg-gradient-to-r from-aethex-500 to-gold-500">
+                <Download className="h-4 w-4 mr-2" />
+                Download
+              </Button>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+    );
+  };
+
+  return (
+    <>
+      <SEO
+        pageTitle="Resource Library"
+        description="Download Foundation resources - guides, templates, assets, and tools for game development"
+      />
+      <Layout>
+        <div className="container mx-auto px-4 py-16 space-y-12">
+          {/* Header */}
+          <section className="space-y-4">
+            <Badge variant="outline" className="border-aethex-400/50 text-aethex-400">
+              Downloads & Resources
+            </Badge>
+            <h1 className="text-4xl font-bold">
+              <span className="text-gradient bg-gradient-to-r from-aethex-500 via-amber-400 to-gold-500 bg-clip-text text-transparent">
+                Resource Library
+              </span>
+            </h1>
+            <p className="text-xl text-muted-foreground max-w-3xl">
+              Free, open-source resources to accelerate your game development journey
+            </p>
+          </section>
+
+          {/* Search */}
+          <section>
+            <div className="relative max-w-md">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+              <Input
+                placeholder="Search resources..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="pl-10 h-12"
+              />
+            </div>
+          </section>
+
+          {/* Stats */}
+          <section className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            <Card className="border-border/30">
+              <CardContent className="pt-6 text-center">
+                <FileText className="h-8 w-8 text-blue-400 mx-auto mb-2" />
+                <p className="text-2xl font-bold">{guideResources.length}</p>
+                <p className="text-sm text-muted-foreground">Guides</p>
+              </CardContent>
+            </Card>
+            <Card className="border-border/30">
+              <CardContent className="pt-6 text-center">
+                <Code className="h-8 w-8 text-green-400 mx-auto mb-2" />
+                <p className="text-2xl font-bold">{templateResources.length}</p>
+                <p className="text-sm text-muted-foreground">Templates</p>
+              </CardContent>
+            </Card>
+            <Card className="border-border/30">
+              <CardContent className="pt-6 text-center">
+                <ImageIcon className="h-8 w-8 text-purple-400 mx-auto mb-2" />
+                <p className="text-2xl font-bold">{assetResources.length}</p>
+                <p className="text-sm text-muted-foreground">Assets</p>
+              </CardContent>
+            </Card>
+            <Card className="border-border/30">
+              <CardContent className="pt-6 text-center">
+                <Package className="h-8 w-8 text-amber-400 mx-auto mb-2" />
+                <p className="text-2xl font-bold">{toolResources.length}</p>
+                <p className="text-sm text-muted-foreground">Tools</p>
+              </CardContent>
+            </Card>
+          </section>
+
+          {/* Resource Tabs */}
+          <Tabs defaultValue="featured" className="space-y-6">
+            <TabsList className="grid w-full grid-cols-5 max-w-2xl">
+              <TabsTrigger value="featured">
+                <Star className="h-4 w-4 mr-2" />
+                Featured
+              </TabsTrigger>
+              <TabsTrigger value="guides">Guides</TabsTrigger>
+              <TabsTrigger value="templates">Templates</TabsTrigger>
+              <TabsTrigger value="assets">Assets</TabsTrigger>
+              <TabsTrigger value="tools">Tools</TabsTrigger>
+            </TabsList>
+
+            <TabsContent value="featured" className="space-y-6">
+              {featuredResources.map(renderResourceCard)}
+            </TabsContent>
+
+            <TabsContent value="guides" className="space-y-6">
+              {guideResources.map(renderResourceCard)}
+            </TabsContent>
+
+            <TabsContent value="templates" className="space-y-6">
+              {templateResources.map(renderResourceCard)}
+            </TabsContent>
+
+            <TabsContent value="assets" className="space-y-6">
+              {assetResources.map(renderResourceCard)}
+            </TabsContent>
+
+            <TabsContent value="tools" className="space-y-6">
+              {toolResources.map(renderResourceCard)}
+            </TabsContent>
+          </Tabs>
+
+          {/* CTA */}
+          <section className="bg-gradient-to-r from-aethex-500/10 to-gold-500/10 rounded-xl p-8 border border-aethex-400/20 text-center">
+            <Package className="h-12 w-12 text-aethex-400 mx-auto mb-4" />
+            <h2 className="text-2xl font-bold mb-2">Have a resource to share?</h2>
+            <p className="text-muted-foreground mb-6">
+              Contribute your guides, templates, or tools to help the community
+            </p>
+            <Button className="bg-gradient-to-r from-aethex-500 to-gold-500">
+              Submit Resource
+            </Button>
+          </section>
+        </div>
+      </Layout>
+    </>
+  );
+}
