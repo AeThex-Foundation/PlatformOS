@@ -194,7 +194,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
           "demo_profiles",
           "demo_posts",
           "demo_seed_v1",
-          "aethex_onboarding_progress_v1",
         ].forEach((key) => window.localStorage.removeItem(key));
 
         // NOTE: We deliberately DO NOT clear:
@@ -930,8 +929,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     setSession(null);
     if (typeof window !== "undefined") {
       try {
-        window.localStorage.removeItem("onboarding_complete");
-        window.localStorage.removeItem("aethex_onboarding_progress_v1");
         const shouldRemove = (key: string) =>
           key.startsWith("sb-") ||
           key.includes("supabase") ||
@@ -1061,8 +1058,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     console.log("Clearing localStorage and IndexedDB...");
     if (typeof window !== "undefined") {
       try {
-        window.localStorage.removeItem("onboarding_complete");
-        window.localStorage.removeItem("aethex_onboarding_progress_v1");
         Object.keys(window.localStorage)
           .filter(
             (key) =>
@@ -1178,25 +1173,11 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
       }));
   }, [user]);
 
-  const profileCompletedByData = useMemo(
+  // Profile completion check (no onboarding localStorage - handled by main AeThex site)
+  const computedComplete = useMemo(
     () => checkProfileComplete(profile, roles),
     [profile, roles],
   );
-
-  const localOnboardingComplete =
-    typeof window !== "undefined" &&
-    window.localStorage.getItem("onboarding_complete") === "1";
-
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    if (profileCompletedByData) {
-      window.localStorage.setItem("onboarding_complete", "1");
-    } else if (window.localStorage.getItem("onboarding_complete") === "1") {
-      window.localStorage.removeItem("onboarding_complete");
-    }
-  }, [profileCompletedByData]);
-
-  const computedComplete = profileCompletedByData || localOnboardingComplete;
 
   const value = {
     user,

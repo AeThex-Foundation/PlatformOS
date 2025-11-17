@@ -51,6 +51,7 @@ export default function CodeLayout({ children, hideFooter }: LayoutProps) {
   const publicNavigation = [
     { name: "Home", href: "/" },
     { name: "About", href: "/about" },
+    { name: "Foundation", href: "/foundation" },
     { name: "Ethics Council", href: "/ethics-council" },
     { name: "Contact", href: "/contact" },
     { name: "Community", href: "/foundation/community" },

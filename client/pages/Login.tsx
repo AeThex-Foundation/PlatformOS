@@ -125,13 +125,11 @@ export default function Login() {
       // Check if there's an OAuth redirect destination stored (e.g., from staff login)
       const oauthRedirect = sessionStorage.getItem("oauth_redirect_to");
 
-      // New logic: if profile exists (even if incomplete), go to Dashboard
-      // Otherwise send to Onboarding for new users
-      const profileExists = profile !== null;
+      // Redirect to Dashboard or next path (no onboarding - handled by main AeThex site)
       const redirectDest =
         (next && next.startsWith("/") ? next : null) ||
         oauthRedirect ||
-        (profileExists ? "/dashboard" : "/onboarding");
+        "/dashboard";
 
       // Clear the stored redirect after using it
       if (oauthRedirect) {
@@ -230,8 +228,7 @@ export default function Login() {
           address,
           nonce: nonce.nonce,
           signature,
-          redirectTo:
-            window.location.origin + (profile ? "/dashboard" : "/onboarding"),
+          redirectTo: window.location.origin + "/dashboard",
         }),
       })
         .then((r) => (r.ok ? r.json() : null))

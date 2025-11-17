@@ -52,3 +52,35 @@ The Guardian's Hub is a Single Page Application (SPA) built with React 18, TypeS
 - **Supabase:** For user authentication and potentially other backend services.
 - **Nodemailer:** For sending emails.
 - **Tally.xyz:** Integrated for DAO governance functionalities within the `/hub/governance` section.
+
+## Recent Changes
+
+### November 17, 2025 - Removed Onboarding Logic & Made Foundation Page Accessible
+- **Removed All Onboarding Logic**:
+  - Removed onboarding redirects from Login.tsx (now redirects to /dashboard only)
+  - Cleaned up AuthContext.tsx - removed localStorage onboarding flags
+  - Removed profile completion synchronization with localStorage
+  - Login flow now redirects authenticated users directly to /dashboard
+  - OAuth and Web3 login flows updated to redirect to /dashboard
+- **Made /foundation Page Accessible**:
+  - Added "Foundation" link to public navigation menu
+  - Page displays Foundation mission, open-source projects, workshops, and resources
+  - Visible to all visitors (not hidden behind authentication)
+- **Context**: Guardian's Hub is login-only. All account creation and onboarding handled by main AeThex site (https://aethex.dev/onboarding)
+- **Result**: Cleaner authentication flow, no duplicate onboarding logic, Foundation info easily accessible
+
+### November 17, 2025 - Foundation Branding & Metadata Updates
+- **Updated All Icons & Social Cards**:
+  - Changed favicon from blue GitBook logo to Foundation logo (`/foundation-logo.png`)
+  - Updated OpenGraph image for social media sharing (Facebook, LinkedIn)
+  - Updated Twitter/X card image
+  - Updated Apple Touch icon
+  - Updated JSON-LD structured data logo
+  - Updated SEO component to always use Foundation logo as fallback
+  - Changed page title prefix from "AeThex" to "AeThex Foundation"
+- **Production Deployment Configuration**:
+  - Added production start script: `npm start` (uses tsx to run TypeScript server)
+  - Updated server to serve static files from `dist/spa` in production
+  - Configured deployment with build command (`npm run build`) and run command (`npm start`)
+  - Set deployment target to `autoscale` for stateless web app scaling
+- **Result**: All browser tabs, social shares, and app icons now display Foundation red/gold branding
