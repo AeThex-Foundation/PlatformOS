@@ -129,7 +129,17 @@ export default function CodeLayout({ children, hideFooter }: LayoutProps) {
               />
             </Link>
 
-            {/* Mobile - Spinning Logo Button */}
+            {/* Mobile - Logo Button */}
+            <Link
+              to="/"
+              className="hover-glow group inline-block sm:hidden"
+            >
+              <img 
+                src="/foundation-logo.png" 
+                alt="AeThex Foundation" 
+                className="h-10 w-10 transition-all duration-300 group-hover:scale-110 group-hover:drop-shadow-[0_0_8px_rgba(239,68,68,0.5)]"
+              />
+            </Link>
           </div>
 
           {/* Navigation */}
