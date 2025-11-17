@@ -101,7 +101,8 @@ export default function Protocol() {
             })}
           </section>
 
-          <Tabs defaultValue="whitepaper" className="space-y-6">
+          <section>
+            <Tabs defaultValue="whitepaper" className="space-y-6">
             <TabsList className="grid w-full grid-cols-4 max-w-2xl">
               <TabsTrigger value="whitepaper">Whitepaper</TabsTrigger>
               <TabsTrigger value="oauth">OAuth 2.0</TabsTrigger>
@@ -291,7 +292,7 @@ export default function Protocol() {
               </Card>
             </TabsContent>
           </Tabs>
-          </section>
+        </section>
         </div>
       </Layout>
     </>
