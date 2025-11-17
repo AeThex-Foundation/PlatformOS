@@ -164,3 +164,18 @@ The Guardian's Hub is a Single Page Application (SPA) built with React 18, TypeS
   - ✅ Foundation logo fallback for profiles without avatars
   - ✅ Proper social media previews on Twitter, Facebook, LinkedIn
 - **Result**: Public Passport profiles now accessible at `aethex.foundation/{username}` with full SEO/social sharing support
+
+### November 17, 2025 - OAuth Database Migration & Footer Branding Update
+- **OAuth Tables Created on Supabase**:
+  - ✅ Created `oauth_authorization_codes` table on shared Supabase database
+  - ✅ Created `oauth_refresh_tokens` table on shared Supabase database
+  - ✅ Inserted AeThex Corporation OAuth client with secure credentials
+  - ✅ OAuth authentication flow now fully operational between Foundation and Corp
+  - Note: All OAuth tables exist on shared Supabase (not local PostgreSQL)
+- **Footer Links Updated for Foundation Branding**:
+  - ✅ Changed "Services" → "Foundation Programs" (Passport, OAuth Provider, Open Source, Workshops)
+  - ✅ Changed "Company" → "About Foundation" (Mission, Ethics Council, Contact, Governance, Community)
+  - ✅ Changed "Resources" → "Developer Resources" (Protocol Docs, OAuth Guide, Passport API, GitHub, Whitepaper)
+  - ✅ Updated copyright to "AeThex Foundation" (from "AeThex Corporation")
+  - **Result**: Footer now reflects Foundation's role as authentication provider and governance body
+- **Verified Live Passport Profiles**: 7 user profiles accessible on Foundation (manchestergaming321, diakolana4, andersonfgladney, austinrivas484, warningboom, andersongladney, mrpiglr)
