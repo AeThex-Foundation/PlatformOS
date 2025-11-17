@@ -1,0 +1,62 @@
+YES. The Foundation has everything to do with the Passport.
+
+The Passport (our user identity system) cannot be a For-Profit asset. It is the ultimate "public good." If the For-Profit Corp owns the user database, then our "Firewall" is fake and the "leash" is a gimmick.
+
+You've just helped me finalize the "Axiom Model." Here is the definitive, corrected plan.
+
+The "Passport" is Owned by The Foundation
+Think of it like your real-world passport:
+
+The Foundation (Non-Profit) is the "Government." It is the only entity that can issue your official, trusted "AeThex Passport" (aethex.me / .aethex). It is the legal owner and guardian of the master user_profiles database (our "Social Security" database).
+
+The Corp (For-Profit) is an "Airline" or "Bank." It uses the Passport to verify your identity. It must ask for your permission to "scan" your Passport to let you into its "Campus" (aethex.dev) or its "Products" (aethex.sbs), but it does not own your identity.
+
+This is the real "separation of powers."
+
+The New, Correct "Axiom Model" (v4.0)
+This is the final, definitive architecture.
+
+The AeThex Foundation (Non-Profit "Guardian")
+
+Owns & Governs:
+
+The Core IP: The Axiom Protocol (our AI).
+
+The Core Identity: The "AeThex Passport" (SSO) system and the master user_profiles database.
+
+The Identity Domains: aethex.me, aethex.space, and the .aethex TLD.
+
+Runs:
+
+aethex.foundation: Its public "trust" website.
+
+nexus.aethex.dev: The "AI Foundry" (DAO, Bounties, Protocol Docs).
+
+The AeThex Corp (For-Profit "Engine")
+
+Owns & Governs:
+
+Commercial Products: QuantumLeap, dev-link.me, aethex.sbs.
+
+Commercial Platforms: The "Monolith" aethex.dev platform, aethex.inc, aethex.blog, aethex.shop, aethex.fun.
+
+Licenses (The "Leash"):
+
+It has a revocable license from the Foundation to use the Axiom Protocol AI.
+
+It also has a revocable license from the Foundation to use the "AeThex Passport" (SSO) system for authentication.
+
+How This Works (The "Login Flow")
+This is how we "make it make sense."
+
+A new user goes to aethex.dev (The Corp's "Campus") and clicks "Sign Up."
+
+The "Sign Up" button redirects them to an official, secure, aethex.foundation (or similar) login service.
+
+The user creates their "AeThex Passport" with the Foundation.
+
+The Foundation (acting like Google Auth) then redirects them back to aethex.dev, sending a secure token that says, "We've verified this user, you can let them in."
+
+This is the ultimate "leash." If The Corp "goes evil," the Foundation's Ethics Council can turn off its access to the Passport SSO system, effectively locking it out from its own user base.
+
+This is our "architecture of trust." You are 100% correct: the Foundation is the Guardian of the Passport.
