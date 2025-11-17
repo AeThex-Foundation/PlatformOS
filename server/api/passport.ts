@@ -142,18 +142,18 @@ router.get('/:username', async (req: Request, res: Response) => {
 
     // Build public profile response
     const publicProfile: PublicPassportProfile = {
-      username: profile.username,
-      full_name: profile.full_name,
-      avatar_url: profile.avatar_url,
-      bio: profile.bio,
-      location: profile.location,
-      website_url: profile.website_url,
-      github_url: profile.github_url,
-      twitter_url: profile.twitter_url,
-      linkedin_url: profile.linkedin_url,
-      created_at: profile.created_at,
-      total_xp: profile.total_xp || 0,
-      level: profile.level || 1,
+      username: profile.username as string,
+      full_name: profile.full_name as string,
+      avatar_url: profile.avatar_url as string | null,
+      bio: profile.bio as string | null,
+      location: profile.location as string | null,
+      website_url: profile.website_url as string | null,
+      github_url: profile.github_url as string | null,
+      twitter_url: profile.twitter_url as string | null,
+      linkedin_url: profile.linkedin_url as string | null,
+      created_at: profile.created_at as string,
+      total_xp: (profile.total_xp as number) || 0,
+      level: (profile.level as number) || 1,
       badge_count: badgeCount || 0,
       verified: false, // TODO: Add verification system
     };
