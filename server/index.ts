@@ -13,6 +13,14 @@ import passportRoutes from "./api/passport";
 import discordRoutes from "./discord/discord-routes";
 import creatorsRoutes from "./routes/creators-routes";
 import profileRoutes from "./routes/profile-routes";
+import achievementsRoutes from "./routes/achievements-routes";
+import leaderboardRoutes from "./routes/leaderboard-routes";
+import adminRoutes from "./routes/admin-routes";
+import workshopsRoutes from "./routes/workshops-routes";
+import resourcesRoutes from "./routes/resources-routes";
+import bountiesRoutes from "./routes/bounties-routes";
+import sessionsRoutes from "./routes/sessions-routes";
+import oauthClientsRoutes from "./routes/oauth-clients-routes";
 import { authMiddleware } from "./middleware/auth";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -39,8 +47,12 @@ export function createServer() {
     next();
   });
 
+  // Authentication middleware - attaches req.user if valid session exists
+  // Does NOT block requests - individual route handlers check auth as needed
+  app.use(authMiddleware);
+
   // ============================================================
-  // PUBLIC ROUTES (No Authentication Required)
+  // PUBLIC ROUTES (No Authentication Required for GET)
   // ============================================================
 
   app.get("/api/blog", blogIndexHandler);
@@ -54,6 +66,21 @@ export function createServer() {
 
   // Creator Directory (Foundation "Hall of Fame" - Public)
   app.use("/api/creators", creatorsRoutes);
+
+  // Leaderboard (Public)
+  app.use("/api/leaderboard", leaderboardRoutes);
+
+  // Achievements (Public read, handlers check auth for write)
+  app.use("/api/achievements", achievementsRoutes);
+
+  // Workshops (Public read, handlers check auth for register)
+  app.use("/api/workshops", workshopsRoutes);
+
+  // Resources (Public read, handlers check auth for download)
+  app.use("/api/resources", resourcesRoutes);
+
+  // Bounties (Public read, handlers check auth for apply)
+  app.use("/api/bounties", bountiesRoutes);
 
   app.post("/api/contact", async (req, res) => {
     try {
@@ -95,17 +122,23 @@ export function createServer() {
   });
 
   // ============================================================
-  // PROTECTED ROUTES (Authentication Required)
+  // ROUTES WITH AUTH CHECKS (handlers verify req.user)
   // ============================================================
-
-  // Authentication middleware - validates Supabase sessions
-  app.use(authMiddleware);
 
   // Discord OAuth Integration (requires auth)
   app.use("/api/discord", discordRoutes);
 
   // Profile Management (requires auth)
   app.use("/api/profile", profileRoutes);
+
+  // Admin Dashboard (requires auth + admin role)
+  app.use("/api/admin", adminRoutes);
+
+  // OAuth Client Management (requires auth)
+  app.use("/api/oauth-clients", oauthClientsRoutes);
+
+  // Session Management (requires auth)
+  app.use("/api/sessions", sessionsRoutes);
 
   // Serve static files in production
   if (process.env.NODE_ENV === "production") {
