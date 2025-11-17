@@ -3,10 +3,11 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import Layout from "@/components/Layout";
 import SEO from "@/components/SEO";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { BookOpen, FileText, Code, Download, ExternalLink } from "lucide-react";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { BookOpen, FileText, Code, Download, ExternalLink, Shield, Lock, Key } from "lucide-react";
 
 export default function Protocol() {
   const { user } = useAuth();
@@ -100,29 +101,196 @@ export default function Protocol() {
             })}
           </section>
 
-          <section className="bg-card/60 backdrop-blur-sm border border-border/30 rounded-xl p-8">
-            <h2 className="text-2xl font-bold mb-6">Foundation Whitepaper</h2>
-            <div className="prose prose-invert max-w-none">
-              <h3 className="text-xl font-semibold mb-4">Overview</h3>
-              <p className="text-muted-foreground mb-6">
-                The AeThex Foundation operates as a non-profit organization dedicated to empowering game developers through open-source tools, quality education, and community collaboration.
-              </p>
-              <h3 className="text-xl font-semibold mb-4">Core Principles</h3>
-              <ul className="text-muted-foreground space-y-2 mb-6">
-                <li>Open Source First - All tools and resources are freely available</li>
-                <li>Community Driven - Governed by contributors and maintained collectively</li>
-                <li>Educational Focus - Quality education and mentorship for all skill levels</li>
-                <li>Transparency - Open governance and public decision-making</li>
-              </ul>
-              <h3 className="text-xl font-semibold mb-4">Technical Architecture</h3>
-              <p className="text-muted-foreground mb-6">
-                The Foundation maintains a suite of open-source tools and frameworks designed to streamline game development workflows. Our architecture emphasizes modularity, extensibility, and developer experience.
-              </p>
-              <Button className="bg-gradient-to-r from-aethex-500 to-red-600 hover:from-aethex-600 hover:to-red-700">
-                <Download className="h-4 w-4 mr-2" />
-                Download Full Whitepaper
-              </Button>
-            </div>
+          <Tabs defaultValue="whitepaper" className="space-y-6">
+            <TabsList className="grid w-full grid-cols-4 max-w-2xl">
+              <TabsTrigger value="whitepaper">Whitepaper</TabsTrigger>
+              <TabsTrigger value="oauth">OAuth 2.0</TabsTrigger>
+              <TabsTrigger value="passport">Passport API</TabsTrigger>
+              <TabsTrigger value="architecture">Architecture</TabsTrigger>
+            </TabsList>
+
+            <TabsContent value="whitepaper" className="space-y-6">
+              <Card className="border-border/30">
+                <CardHeader>
+                  <CardTitle>Foundation Whitepaper</CardTitle>
+                  <CardDescription>Complete vision and technical specifications</CardDescription>
+                </CardHeader>
+                <CardContent className="prose prose-invert max-w-none">
+                  <h3 className="text-xl font-semibold mb-4">Overview</h3>
+                  <p className="text-muted-foreground mb-6">
+                    The AeThex Foundation operates as a non-profit organization dedicated to empowering game developers through open-source tools, quality education, and community collaboration.
+                  </p>
+                  <h3 className="text-xl font-semibold mb-4">Core Principles</h3>
+                  <ul className="text-muted-foreground space-y-2 mb-6">
+                    <li>Open Source First - All tools and resources are freely available</li>
+                    <li>Community Driven - Governed by contributors and maintained collectively</li>
+                    <li>Educational Focus - Quality education and mentorship for all skill levels</li>
+                    <li>Transparency - Open governance and public decision-making</li>
+                  </ul>
+                  <h3 className="text-xl font-semibold mb-4">Technical Architecture</h3>
+                  <p className="text-muted-foreground mb-6">
+                    The Foundation maintains a suite of open-source tools and frameworks designed to streamline game development workflows. Our architecture emphasizes modularity, extensibility, and developer experience.
+                  </p>
+                  <Button className="bg-gradient-to-r from-aethex-500 to-red-600 hover:from-aethex-600 hover:to-red-700">
+                    <Download className="h-4 w-4 mr-2" />
+                    Download Full Whitepaper
+                  </Button>
+                </CardContent>
+              </Card>
+            </TabsContent>
+
+            <TabsContent value="oauth" className="space-y-6">
+              <Card className="border-border/30">
+                <CardHeader>
+                  <CardTitle>OAuth 2.0 Provider Documentation</CardTitle>
+                  <CardDescription>Integrate Foundation Passport authentication into your application</CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-6">
+                  <div>
+                    <h3 className="text-lg font-semibold mb-3 flex items-center gap-2">
+                      <Shield className="h-5 w-5 text-aethex-400" />
+                      Authorization Endpoint
+                    </h3>
+                    <code className="block bg-muted p-4 rounded-lg font-mono text-sm">
+                      GET https://aethex.foundation/api/oauth/authorize
+                    </code>
+                    <p className="text-sm text-muted-foreground mt-2">
+                      Required parameters: client_id, redirect_uri, response_type=code, scope, state, code_challenge, code_challenge_method
+                    </p>
+                  </div>
+
+                  <div>
+                    <h3 className="text-lg font-semibold mb-3 flex items-center gap-2">
+                      <Key className="h-5 w-5 text-aethex-400" />
+                      Token Endpoint
+                    </h3>
+                    <code className="block bg-muted p-4 rounded-lg font-mono text-sm">
+                      POST https://aethex.foundation/api/oauth/token
+                    </code>
+                    <p className="text-sm text-muted-foreground mt-2">
+                      Exchange authorization code for access token. Supports refresh tokens and PKCE verification.
+                    </p>
+                  </div>
+
+                  <div>
+                    <h3 className="text-lg font-semibold mb-3 flex items-center gap-2">
+                      <Lock className="h-5 w-5 text-aethex-400" />
+                      UserInfo Endpoint
+                    </h3>
+                    <code className="block bg-muted p-4 rounded-lg font-mono text-sm">
+                      GET https://aethex.foundation/api/oauth/userinfo
+                    </code>
+                    <p className="text-sm text-muted-foreground mt-2">
+                      Retrieve authenticated user profile data. Requires Bearer token in Authorization header.
+                    </p>
+                  </div>
+
+                  <div className="bg-amber-500/5 border border-amber-500/30 rounded-lg p-4">
+                    <h4 className="font-semibold mb-2 text-amber-400">OAuth Client Registration</h4>
+                    <p className="text-sm text-muted-foreground">
+                      To integrate Foundation Passport into your application, contact Foundation administrators to register your OAuth client.
+                      You'll receive a client_id and client_secret for production use.
+                    </p>
+                  </div>
+                </CardContent>
+              </Card>
+            </TabsContent>
+
+            <TabsContent value="passport" className="space-y-6">
+              <Card className="border-border/30">
+                <CardHeader>
+                  <CardTitle>Passport API Documentation</CardTitle>
+                  <CardDescription>Access public user profiles and achievement data</CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-6">
+                  <div>
+                    <h3 className="text-lg font-semibold mb-3">Get Public Profile</h3>
+                    <code className="block bg-muted p-4 rounded-lg font-mono text-sm">
+                      GET https://aethex.foundation/api/passport/:username
+                    </code>
+                    <p className="text-sm text-muted-foreground mt-2 mb-4">
+                      Retrieve public profile data including username, bio, stats, and achievements.
+                    </p>
+                    <div className="bg-muted/50 p-4 rounded-lg">
+                      <p className="text-xs font-semibold text-muted-foreground mb-2">Example Response:</p>
+                      <pre className="text-xs overflow-x-auto">
+{`{
+  "id": "uuid",
+  "username": "mrpiglr",
+  "full_name": "Mr. PigLR",
+  "avatar_url": "https://...",
+  "bio": "Game developer and educator",
+  "location": "San Francisco, CA",
+  "level": 12,
+  "total_xp": 5420,
+  "current_streak": 7,
+  "badge_count": 8,
+  "social_links": { ... }
+}`}
+                      </pre>
+                    </div>
+                  </div>
+
+                  <div className="bg-blue-500/5 border border-blue-500/30 rounded-lg p-4">
+                    <h4 className="font-semibold mb-2 text-blue-400">Rate Limiting</h4>
+                    <p className="text-sm text-muted-foreground">
+                      Public API endpoints are rate-limited to 100 requests per minute per IP address. 
+                      Response includes cache headers for 5-minute caching.
+                    </p>
+                  </div>
+                </CardContent>
+              </Card>
+            </TabsContent>
+
+            <TabsContent value="architecture" className="space-y-6">
+              <Card className="border-border/30">
+                <CardHeader>
+                  <CardTitle>System Architecture</CardTitle>
+                  <CardDescription>Foundation technical infrastructure and design patterns</CardDescription>
+                </CardHeader>
+                <CardContent className="prose prose-invert max-w-none">
+                  <h3 className="text-xl font-semibold mb-4">The Axiom Model</h3>
+                  <p className="text-muted-foreground mb-4">
+                    Foundation operates as the "Government" - the central authority for identity and authentication across all AeThex properties.
+                  </p>
+                  <ul className="text-muted-foreground space-y-2 mb-6">
+                    <li><strong>Foundation = Government:</strong> Owns the master identity database (user_profiles)</li>
+                    <li><strong>Corp = Client:</strong> Authenticates through Foundation via OAuth 2.0</li>
+                    <li><strong>Separation of Powers:</strong> Foundation can revoke Corp access if needed</li>
+                    <li><strong>Single Source of Truth:</strong> All identities managed centrally</li>
+                  </ul>
+
+                  <h3 className="text-xl font-semibold mb-4">Technology Stack</h3>
+                  <div className="grid grid-cols-2 gap-4 mb-6">
+                    <div>
+                      <p className="font-semibold text-sm mb-2">Frontend</p>
+                      <ul className="text-sm text-muted-foreground space-y-1">
+                        <li>React 18 + TypeScript</li>
+                        <li>Vite build system</li>
+                        <li>TailwindCSS 3 + Radix UI</li>
+                        <li>React Router 6</li>
+                      </ul>
+                    </div>
+                    <div>
+                      <p className="font-semibold text-sm mb-2">Backend</p>
+                      <ul className="text-sm text-muted-foreground space-y-1">
+                        <li>Express server</li>
+                        <li>Supabase (PostgreSQL)</li>
+                        <li>OAuth 2.0 + PKCE</li>
+                        <li>Nodemailer (SMTP)</li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <h3 className="text-xl font-semibold mb-4">Security</h3>
+                  <p className="text-muted-foreground mb-4">
+                    Foundation implements industry-standard security practices including PKCE for OAuth flows,
+                    JWT access tokens, refresh token rotation, and comprehensive session management.
+                  </p>
+                </CardContent>
+              </Card>
+            </TabsContent>
+          </Tabs>
           </section>
         </div>
       </Layout>

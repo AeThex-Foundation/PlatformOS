@@ -33,6 +33,11 @@ import {
   Eye,
   EyeOff,
   Award,
+  Monitor,
+  Smartphone,
+  Tablet,
+  Laptop,
+  X,
 } from "lucide-react";
 
 export default function Dashboard() {
@@ -234,7 +239,7 @@ export default function Dashboard() {
 
             {/* Tabs */}
             <Tabs value={activeTab} onValueChange={handleTabChange} className="space-y-6">
-              <TabsList className="grid w-full grid-cols-4 max-w-2xl">
+              <TabsList className="grid w-full grid-cols-5 max-w-3xl">
                 <TabsTrigger value="overview" className="gap-2">
                   <LayoutDashboard className="h-4 w-4" />
                   Overview
@@ -246,6 +251,10 @@ export default function Dashboard() {
                 <TabsTrigger value="connections" className="gap-2">
                   <Link2 className="h-4 w-4" />
                   Connections
+                </TabsTrigger>
+                <TabsTrigger value="sessions" className="gap-2">
+                  <Monitor className="h-4 w-4" />
+                  Sessions
                 </TabsTrigger>
                 <TabsTrigger value="settings" className="gap-2">
                   <Settings className="h-4 w-4" />
@@ -590,6 +599,125 @@ export default function Dashboard() {
                   onLink={linkProvider}
                   onUnlink={unlinkProvider}
                 />
+              </TabsContent>
+
+              {/* Sessions Tab */}
+              <TabsContent value="sessions" className="space-y-6">
+                <Card className="border-border/50 bg-card/50 backdrop-blur">
+                  <CardHeader>
+                    <CardTitle>Active Sessions</CardTitle>
+                    <CardDescription>Manage your active login sessions across devices</CardDescription>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    {/* Current Session */}
+                    <div className="p-4 border-2 border-green-500/30 rounded-lg bg-green-500/5">
+                      <div className="flex items-start justify-between">
+                        <div className="flex items-start gap-4 flex-1">
+                          <div className="p-3 rounded-lg bg-green-500/20">
+                            <Monitor className="h-6 w-6 text-green-400" />
+                          </div>
+                          <div className="flex-1">
+                            <div className="flex items-center gap-2 mb-1">
+                              <p className="font-semibold">Current Session</p>
+                              <Badge className="bg-green-500/10 text-green-400 border-green-400/30">
+                                <Shield className="h-3 w-3 mr-1" />
+                                Active
+                              </Badge>
+                            </div>
+                            <p className="text-sm text-muted-foreground mb-2">Chrome on macOS</p>
+                            <div className="flex flex-col gap-1 text-xs text-muted-foreground">
+                              <p>IP: 192.168.1.1</p>
+                              <p>Location: San Francisco, CA</p>
+                              <p>Last active: Just now</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Other Sessions */}
+                    <div className="p-4 border border-border/50 rounded-lg hover:border-aethex-400/30 transition-colors">
+                      <div className="flex items-start justify-between">
+                        <div className="flex items-start gap-4 flex-1">
+                          <div className="p-3 rounded-lg bg-blue-500/20">
+                            <Smartphone className="h-6 w-6 text-blue-400" />
+                          </div>
+                          <div className="flex-1">
+                            <p className="font-semibold mb-1">Mobile Session</p>
+                            <p className="text-sm text-muted-foreground mb-2">Safari on iPhone 15</p>
+                            <div className="flex flex-col gap-1 text-xs text-muted-foreground">
+                              <p>IP: 192.168.1.42</p>
+                              <p>Location: San Francisco, CA</p>
+                              <p>Last active: 2 hours ago</p>
+                            </div>
+                          </div>
+                        </div>
+                        <Button 
+                          variant="outline" 
+                          size="sm"
+                          className="border-red-500/50 hover:bg-red-500/10"
+                        >
+                          <X className="h-4 w-4 mr-2" />
+                          Revoke
+                        </Button>
+                      </div>
+                    </div>
+
+                    <div className="p-4 border border-border/50 rounded-lg hover:border-aethex-400/30 transition-colors">
+                      <div className="flex items-start justify-between">
+                        <div className="flex items-start gap-4 flex-1">
+                          <div className="p-3 rounded-lg bg-purple-500/20">
+                            <Laptop className="h-6 w-6 text-purple-400" />
+                          </div>
+                          <div className="flex-1">
+                            <p className="font-semibold mb-1">Work Laptop</p>
+                            <p className="text-sm text-muted-foreground mb-2">Firefox on Windows 11</p>
+                            <div className="flex flex-col gap-1 text-xs text-muted-foreground">
+                              <p>IP: 10.0.0.15</p>
+                              <p>Location: New York, NY</p>
+                              <p>Last active: 1 day ago</p>
+                            </div>
+                          </div>
+                        </div>
+                        <Button 
+                          variant="outline" 
+                          size="sm"
+                          className="border-red-500/50 hover:bg-red-500/10"
+                        >
+                          <X className="h-4 w-4 mr-2" />
+                          Revoke
+                        </Button>
+                      </div>
+                    </div>
+
+                    {/* Revoke All Button */}
+                    <div className="pt-4 border-t border-border/30">
+                      <Button 
+                        variant="outline" 
+                        className="w-full border-red-500/50 hover:bg-red-500/10"
+                      >
+                        <Shield className="h-4 w-4 mr-2" />
+                        Revoke All Other Sessions
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                {/* Security Info */}
+                <Card className="border-border/50 bg-card/50 backdrop-blur">
+                  <CardContent className="pt-6">
+                    <div className="flex items-start gap-3">
+                      <Shield className="h-5 w-5 text-amber-400 mt-0.5" />
+                      <div className="flex-1">
+                        <p className="font-medium mb-1">Security Tip</p>
+                        <p className="text-sm text-muted-foreground">
+                          If you see a session you don't recognize, revoke it immediately and change your password. 
+                          Sessions expire after 30 days of inactivity.
+                        </p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
               </TabsContent>
 
               {/* Settings Tab */}
