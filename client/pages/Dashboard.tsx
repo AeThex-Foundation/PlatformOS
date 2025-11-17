@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import Layout from "@/components/Layout";
 import SEO from "@/components/SEO";
@@ -8,6 +8,8 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import OAuthConnections from "@/components/settings/OAuthConnections";
 import {
   Shield,
   BookOpen,
@@ -21,16 +23,26 @@ import {
   TrendingUp,
   Calendar,
   ExternalLink,
+  Link2,
+  Settings,
+  LayoutDashboard,
 } from "lucide-react";
 
 export default function Dashboard() {
-  const { user, profile } = useAuth();
+  const { user, profile, linkedProviders, linkProvider, unlinkProvider } = useAuth();
+  const [searchParams, setSearchParams] = useSearchParams();
   const [currentTime, setCurrentTime] = useState(new Date());
+  
+  const activeTab = searchParams.get("tab") || "overview";
 
   useEffect(() => {
     const timer = setInterval(() => setCurrentTime(new Date()), 60000);
     return () => clearInterval(timer);
   }, []);
+  
+  const handleTabChange = (value: string) => {
+    setSearchParams({ tab: value });
+  };
 
   const getGreeting = () => {
     const hour = currentTime.getHours();
@@ -147,7 +159,26 @@ export default function Dashboard() {
               <Separator className="bg-gradient-to-r from-transparent via-red-500/20 to-transparent" />
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            {/* Tabs */}
+            <Tabs value={activeTab} onValueChange={handleTabChange} className="space-y-6">
+              <TabsList className="grid w-full grid-cols-3 max-w-md">
+                <TabsTrigger value="overview" className="gap-2">
+                  <LayoutDashboard className="h-4 w-4" />
+                  Overview
+                </TabsTrigger>
+                <TabsTrigger value="connections" className="gap-2">
+                  <Link2 className="h-4 w-4" />
+                  Connections
+                </TabsTrigger>
+                <TabsTrigger value="settings" className="gap-2">
+                  <Settings className="h-4 w-4" />
+                  Settings
+                </TabsTrigger>
+              </TabsList>
+
+              {/* Overview Tab */}
+              <TabsContent value="overview" className="space-y-6">
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
               {/* Main Content Area - 2 columns */}
               <div className="lg:col-span-2 space-y-6">
                 {/* Quick Links */}
@@ -371,6 +402,99 @@ export default function Dashboard() {
                 </Card>
               </div>
             </div>
+              </TabsContent>
+
+              {/* Connections Tab */}
+              <TabsContent value="connections" className="space-y-6">
+                <OAuthConnections
+                  providers={[
+                    {
+                      provider: "discord",
+                      name: "Discord",
+                      description: "Link your Discord account for community access and role management",
+                      Icon: ({ className }: { className?: string }) => (
+                        <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+                          <path d="M20.317 4.3671a19.8062 19.8062 0 0 0-4.8851-1.5152.074.074 0 0 0-.0784.0371c-.211.3754-.444.8635-.607 1.2491-1.798-.2704-3.5915-.2704-5.3719 0-.163-.3856-.405-.8737-.62-1.2491a.077.077 0 0 0-.0784-.037 19.7363 19.7363 0 0 0-4.888 1.5152.07.07 0 0 0-.0325.0277C1.618 8.443.134 12.4693 1.981 16.4267a.0842.0842 0 0 0 .0313.0355c1.555.8679 3.064 1.3975 4.555 1.7031a.083.083 0 0 0 .09-.0395c.23-.4354.435-.8888.607-1.3518a.083.083 0 0 0-.046-.1159c-.606-.2324-1.184-.5255-1.738-.8614a.084.084 0 0 1-.008-.1404c.117-.0877.234-.1783.346-.2716a.083.083 0 0 1 .088-.0105c3.646 1.6956 7.596 1.6956 11.182 0a.083.083 0 0 1 .088.009c.112.0933.23.1839.347.2717a.083.083 0 0 1-.006.1404c-.557.3359-1.135.6291-1.742.8615a.084.084 0 0 0-.046.1159c.173.4647.377.9189.607 1.3518a.083.083 0 0 0 .09.0395c1.494-.3066 3.003-.8352 4.555-1.7031a.083.083 0 0 0 .035-.0355c2.0037-4.0016.6248-8.0511-2.607-11.3586a.06.06 0 0 0-.031-.0277ZM8.02 13.3328c-.983 0-1.79-.9015-1.79-2.0074 0-1.1059.795-2.0074 1.79-2.0074 1.001 0 1.799.9039 1.79 2.0074 0 1.1059-.795 2.0074-1.79 2.0074Zm7.975 0c-.984 0-1.79-.9015-1.79-2.0074 0-1.1059.795-2.0074 1.79-2.0074.999 0 1.799.9039 1.789 2.0074 0 1.1059-.79 2.0074-1.789 2.0074Z" />
+                        </svg>
+                      ),
+                      gradient: "from-indigo-600 to-purple-600",
+                    },
+                    {
+                      provider: "github",
+                      name: "GitHub",
+                      description: "Connect your GitHub account for developer verification",
+                      Icon: ({ className }: { className?: string }) => (
+                        <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+                          <path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.167 22 16.418 22 12c0-5.523-4.477-10-10-10z" />
+                        </svg>
+                      ),
+                      gradient: "from-gray-700 to-gray-900",
+                    },
+                    {
+                      provider: "google",
+                      name: "Google",
+                      description: "Link your Google account for easy sign-in",
+                      Icon: ({ className }: { className?: string }) => (
+                        <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+                          <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+                          <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+                          <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+                          <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+                        </svg>
+                      ),
+                      gradient: "from-blue-600 to-red-600",
+                    },
+                  ]}
+                  linkedProviderMap={linkedProviders.reduce((acc, lp) => {
+                    acc[lp.provider] = lp;
+                    return acc;
+                  }, {} as Record<string, typeof linkedProviders[0]>)}
+                  connectionAction="link"
+                  onLink={linkProvider}
+                  onUnlink={unlinkProvider}
+                />
+              </TabsContent>
+
+              {/* Settings Tab */}
+              <TabsContent value="settings" className="space-y-6">
+                <Card className="border-border/50 bg-card/50 backdrop-blur">
+                  <CardHeader>
+                    <CardTitle>Profile Settings</CardTitle>
+                    <CardDescription>Manage your account preferences</CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-4">
+                      <div className="flex items-center justify-between p-4 border border-border/50 rounded-lg">
+                        <div>
+                          <p className="font-medium">Full Name</p>
+                          <p className="text-sm text-muted-foreground">{profile?.full_name || "Not set"}</p>
+                        </div>
+                      </div>
+                      <div className="flex items-center justify-between p-4 border border-border/50 rounded-lg">
+                        <div>
+                          <p className="font-medium">Username</p>
+                          <p className="text-sm text-muted-foreground">@{profile?.username || "Not set"}</p>
+                        </div>
+                      </div>
+                      <div className="flex items-center justify-between p-4 border border-border/50 rounded-lg">
+                        <div>
+                          <p className="font-medium">Email</p>
+                          <p className="text-sm text-muted-foreground">{user?.email || "Not set"}</p>
+                        </div>
+                      </div>
+                      <div className="mt-6">
+                        <Button asChild variant="outline" className="w-full border-red-500/50 hover:bg-red-500/10">
+                          <Link to="/profile/settings">
+                            <Settings className="h-4 w-4 mr-2" />
+                            Advanced Settings
+                          </Link>
+                        </Button>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </TabsContent>
+            </Tabs>
           </div>
         </div>
       </Layout>

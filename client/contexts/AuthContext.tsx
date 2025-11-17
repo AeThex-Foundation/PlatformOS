@@ -12,7 +12,6 @@ import { supabase, isSupabaseConfigured } from "@/lib/supabase";
 import { UserProfile } from "@/lib/database.types";
 import { aethexToast } from "@/lib/aethex-toast";
 
-const API_BASE = import.meta.env.VITE_API_BASE || "";
 import {
   aethexUserService,
   aethexRoleService,
@@ -38,12 +37,12 @@ interface AuthContextType {
   loading: boolean;
   profileComplete: boolean;
   linkedProviders: LinkedProvider[];
-  signIn: (email: string, password: string) => Promise<void>;
+  signIn: (email: string, password: string) => Promise<{ user: User | null }>;
   signUp: (
     email: string,
     password: string,
     userData?: Partial<AethexUserProfile>,
-  ) => Promise<void>;
+  ) => Promise<{ readonly emailSent: boolean; readonly verificationUrl: string | undefined }>;
   signInWithOAuth: (provider: SupportedOAuthProvider) => Promise<void>;
   linkProvider: (provider: SupportedOAuthProvider) => Promise<void>;
   unlinkProvider: (provider: SupportedOAuthProvider) => Promise<void>;
@@ -281,26 +280,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
         }, 50);
       }
 
-      // Handle token refresh failures specifically
-      if (event === "TOKEN_REFRESH_FAILED") {
-        console.warn("Token refresh failed - clearing local session");
-        try {
-          clearClientAuthState();
-        } catch (e) {
-          /* ignore */
-        }
-        try {
-          aethexToast.error({
-            title: "Session expired",
-            description:
-              "Your session could not be refreshed and has been cleared. Please sign in again.",
-          });
-        } catch (e) {
-          /* ignore */
-        }
-        return;
-      }
-
       // Show toast notifications for auth events
       if (event === "SIGNED_IN") {
         aethexToast.success({
@@ -521,7 +500,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
         try {
           // Check if this email is linked to another account
           const response = await fetch(
-            `${API_BASE}/api/user/resolve-linked-email`,
+            `/api/user/resolve-linked-email`,
             {
               method: "POST",
               headers: { "Content-Type": "application/json" },
@@ -643,7 +622,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
         try {
           // Try to send via custom SMTP server
           const verifyResponse = await fetch(
-            `${API_BASE}/api/auth/send-verification-email`,
+            `/api/auth/send-verification-email`,
             {
               method: "POST",
               headers: { "Content-Type": "application/json" },
@@ -776,7 +755,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
 
           // Create temporary linking session
           const sessionRes = await fetch(
-            `${API_BASE}/api/discord/create-linking-session`,
+            `/api/discord/create-linking-session`,
             {
               method: "POST",
               headers: {
@@ -811,7 +790,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
 
           console.log("[Discord Link] Redirecting to Discord OAuth...");
 
-          const u = new URL("/api/discord/oauth/start", apiBase);
+          const u = new URL("/api/discord/oauth/start", window.location.origin);
           u.searchParams.set(
             "state",
             encodeURIComponent(
@@ -839,7 +818,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
       try {
         const { data, error } = (await supabase.auth.linkIdentity({
           provider,
-          redirectTo: `${window.location.origin}/dashboard?tab=connections`,
         })) as any;
         if (error) throw error;
         const linkUrl = data?.url;
@@ -900,10 +878,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
         return;
       }
       try {
-        const { error } = (await supabase.auth.unlinkIdentity({
-          identity_id: identity.identity_id,
-          provider,
-        })) as any;
+        const { error } = (await supabase.auth.unlinkIdentity(identity)) as any;
         if (error) throw error;
         await refreshAuthState();
         aethexToast.success({
