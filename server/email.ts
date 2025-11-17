@@ -162,4 +162,22 @@ export const emailService = {
       headers: { "X-AeThex-Email": "invite" },
     });
   },
+
+  async sendEmail(params: {
+    to: string;
+    subject: string;
+    text: string;
+    html?: string;
+  }) {
+    const transporter = getTransporter();
+    const { to, subject, text, html } = params;
+
+    await transporter.sendMail({
+      from: fromEmail,
+      to,
+      subject,
+      text,
+      html: html || text,
+    });
+  },
 };

@@ -73,7 +73,7 @@ export function createServer() {
   return app;
 }
 
-const PORT = process.env.PORT || 5000;
+const PORT = parseInt(process.env.PORT || "5000", 10);
 
 if (import.meta.url === `file://${process.argv[1]}`) {
   const server = createServer();
