@@ -122,110 +122,11 @@ export default function CodeLayout({ children, hideFooter }: LayoutProps) {
               to="/"
               className="hover-glow group inline-block hidden sm:block"
             >
-              <svg
-                className="h-10 w-10 transition-all duration-300 group-hover:scale-110"
-                viewBox="0 0 64 64"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <defs>
-                  <linearGradient
-                    id="osGradient"
-                    x1="0%"
-                    y1="0%"
-                    x2="100%"
-                    y2="100%"
-                  >
-                    <stop offset="0%" stopColor="#a78bfa" />
-                    <stop offset="100%" stopColor="#60a5fa" />
-                  </linearGradient>
-                  <filter id="glow">
-                    <feGaussianBlur stdDeviation="1.5" result="coloredBlur" />
-                    <feMerge>
-                      <feMergeNode in="coloredBlur" />
-                      <feMergeNode in="SourceGraphic" />
-                    </feMerge>
-                  </filter>
-                </defs>
-
-                {/* OS Window Frame */}
-                <rect
-                  x="6"
-                  y="6"
-                  width="52"
-                  height="52"
-                  rx="6"
-                  fill="none"
-                  stroke="url(#osGradient)"
-                  strokeWidth="2"
-                  opacity="0.8"
-                />
-
-                {/* Title Bar */}
-                <rect
-                  x="6"
-                  y="6"
-                  width="52"
-                  height="12"
-                  rx="6"
-                  fill="url(#osGradient)"
-                  opacity="0.15"
-                />
-                <line
-                  x1="6"
-                  y1="18"
-                  x2="58"
-                  y2="18"
-                  stroke="url(#osGradient)"
-                  strokeWidth="1"
-                  opacity="0.3"
-                />
-
-                {/* System Dots (Traffic Light Style) */}
-                <circle cx="12" cy="12" r="1.5" fill="#a78bfa" opacity="0.7" />
-                <circle cx="18" cy="12" r="1.5" fill="#60a5fa" opacity="0.7" />
-                <circle cx="24" cy="12" r="1.5" fill="#c4b5fd" opacity="0.7" />
-
-                {/* Central OS Symbol - Abstract "A" */}
-                <g transform="translate(32, 35)">
-                  {/* Left diagonal */}
-                  <line
-                    x1="-6"
-                    y1="6"
-                    x2="0"
-                    y2="-8"
-                    stroke="url(#osGradient)"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    filter="url(#glow)"
-                  />
-                  {/* Right diagonal */}
-                  <line
-                    x1="6"
-                    y1="6"
-                    x2="0"
-                    y2="-8"
-                    stroke="url(#osGradient)"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    filter="url(#glow)"
-                  />
-                  {/* Crossbar */}
-                  <line
-                    x1="-3"
-                    y1="0"
-                    x2="3"
-                    y2="0"
-                    stroke="url(#osGradient)"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    filter="url(#glow)"
-                  />
-                  {/* Bottom connecting */}
-                  <circle cx="-6" cy="6" r="1.5" fill="#a78bfa" opacity="0.9" />
-                  <circle cx="6" cy="6" r="1.5" fill="#60a5fa" opacity="0.9" />
-                </g>
-              </svg>
+              <img 
+                src="/foundation-logo.png" 
+                alt="AeThex Foundation" 
+                className="h-12 w-12 transition-all duration-300 group-hover:scale-110 group-hover:drop-shadow-[0_0_8px_rgba(239,68,68,0.5)]"
+              />
             </Link>
 
             {/* Mobile - Spinning Logo Button */}
