@@ -9,6 +9,7 @@ import { randomUUID } from "crypto";
 import blogIndexHandler from "../api/blog/index";
 import blogSlugHandler from "../api/blog/[slug]";
 import oauthRoutes from "./oauth/oauth-routes";
+import passportRoutes from "./api/passport";
 import { authMiddleware } from "./middleware/auth";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -43,6 +44,9 @@ export function createServer() {
 
   // OAuth 2.0 Provider Endpoints (Foundation Passport SSO)
   app.use("/api/oauth", oauthRoutes);
+
+  // Passport Public Profile Endpoint
+  app.use("/api/passport", passportRoutes);
 
   app.post("/api/contact", async (req, res) => {
     try {
