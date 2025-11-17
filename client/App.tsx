@@ -25,6 +25,12 @@ import Passport from "./pages/Passport";
 import DiscordVerify from "./pages/DiscordVerify";
 import FourOhFourPage from "./pages/404";
 import GameForge from "./pages/GameForge";
+import GameForgeAbout from "./pages/gameforge/GameForgeAbout";
+import GameForgeJoinGameForge from "./pages/gameforge/GameForgeJoinGameForge";
+import GameForgePricing from "./pages/gameforge/GameForgePricing";
+import GameForgeStartBuilding from "./pages/gameforge/GameForgeStartBuilding";
+import GameForgeTeams from "./pages/gameforge/GameForgeTeams";
+import GameForgeViewPortfolio from "./pages/gameforge/GameForgeViewPortfolio";
 
 import Hub from "./pages/hub/Hub";
 import Protocol from "./pages/hub/Protocol";
@@ -106,6 +112,12 @@ const App = () => (
                     
                     {/* GameForge */}
                     <Route path="/gameforge" element={<GameForge />} />
+                    <Route path="/gameforge/about" element={<GameForgeAbout />} />
+                    <Route path="/gameforge/join-gameforge" element={<GameForgeJoinGameForge />} />
+                    <Route path="/gameforge/pricing" element={<GameForgePricing />} />
+                    <Route path="/gameforge/start-building" element={<GameForgeStartBuilding />} />
+                    <Route path="/gameforge/teams" element={<GameForgeTeams />} />
+                    <Route path="/gameforge/view-portfolio" element={<GameForgeViewPortfolio />} />
                     
                     {/* Admin Routes */}
                     <Route path="/admin" element={<Admin />} />
