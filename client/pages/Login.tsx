@@ -133,30 +133,55 @@ export default function Login() {
 
       const params = new URLSearchParams(location.search);
       const next = params.get("next");
+      const returnTo = params.get("return_to"); // OAuth flow return URL
 
       // Check if there's an OAuth redirect destination stored (e.g., from staff login)
       const oauthRedirect = sessionStorage.getItem("oauth_redirect_to");
 
       // NEW USERS WITHOUT USERNAME: Redirect to onboarding
       if (!profile.username || profile.username.trim() === "") {
+        // Preserve OAuth return_to for after onboarding completion
+        if (returnTo) {
+          // Decode once to validate, but store the original encoded value
+          const decodedReturnTo = decodeURIComponent(returnTo);
+          // Security: Only allow relative paths (no absolute URLs)
+          if (decodedReturnTo.startsWith("/")) {
+            // Store the original encoded value to avoid double-decode issues
+            sessionStorage.setItem("oauth_redirect_to", returnTo);
+          }
+        }
         navigate("/onboarding", { replace: true });
         return;
       }
 
       // EXISTING USERS: Redirect to intended destination
-      const redirectDest =
-        (next && next.startsWith("/") ? next : null) ||
-        oauthRedirect ||
-        "/hub";
+      // Priority: return_to (OAuth) > next (general) > oauthRedirect > /hub
+      let redirectDest = oauthRedirect || "/hub";
+
+      if (returnTo) {
+        const decodedReturnTo = decodeURIComponent(returnTo);
+        // Security: Only allow relative paths starting with "/" (no absolute URLs)
+        if (decodedReturnTo.startsWith("/")) {
+          redirectDest = decodedReturnTo;
+        }
+      } else if (next && next.startsWith("/")) {
+        redirectDest = next;
+      }
 
       // Clear the stored redirect after using it
       if (oauthRedirect) {
         sessionStorage.removeItem("oauth_redirect_to");
       }
 
-      navigate(redirectDest, {
-        replace: true,
-      });
+      // For OAuth flows (server-side routes), use window.location
+      // For client-side routes, use React Router navigate
+      if (redirectDest.startsWith("/api/")) {
+        window.location.href = redirectDest;
+      } else {
+        navigate(redirectDest, {
+          replace: true,
+        });
+      }
     }
   }, [user, profile, loading, navigate, location.search]);
 

@@ -105,13 +105,13 @@ router.get('/authorize', async (req: Request, res: Response) => {
     }
 
     // Check if user is authenticated via Supabase session
-    const authHeader = req.headers.authorization;
-    const userId = (req as any).user?.id; // Assumes auth middleware sets req.user
+    const userId = req.user?.id;
 
     if (!userId) {
       // Redirect to Foundation login with return URL
+      // Store OAuth parameters in query string so they're preserved after login
       const returnUrl = encodeURIComponent(req.originalUrl);
-      return res.redirect(`/login?redirect=/api/oauth/authorize&state=${returnUrl}`);
+      return res.redirect(`/login?return_to=${returnUrl}`);
     }
 
     // For trusted clients, auto-approve (skip consent screen)
