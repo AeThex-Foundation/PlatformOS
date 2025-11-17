@@ -1,7 +1,9 @@
 # Discord OAuth Integration - Migration Complete! 🎉
 
 **Date:** November 17, 2025  
-**Status:** Core Code Migrated ✅ | Integration Incomplete ⚠️ | Database Migration Pending ⏳
+**Status:** Core Code Migrated ✅ | Database Ready ✅ | Integration Incomplete ⚠️
+
+**✅ SHARED DATABASE:** You're using the same Supabase database as mainsite, so Discord tables already exist!
 
 **⚠️ IMPORTANT:** This is a PARTIAL migration. Core Discord OAuth code has been copied from mainsite, but it's NOT yet wired into AuthContext or Dashboard. You'll need to complete the integration before it's functional.
 
@@ -54,21 +56,11 @@ Creates the following tables:
 
 ## ⏳ What You Need To Do
 
-### Step 1: Run Database Migration in Supabase
+### Step 1: ~~Run Database Migration~~ ✅ **ALREADY DONE!**
 
-**Option A: Supabase Dashboard (Recommended)**
-1. Go to https://supabase.com/dashboard
-2. Select your project
-3. Go to **SQL Editor**
-4. Click **+ New query**
-5. Copy the contents of `supabase/migrations/20250107_add_discord_integration.sql`
-6. Paste into the SQL editor
-7. Click **Run**
+**You're using the same Supabase database as the mainsite, so the Discord tables already exist!**
 
-**Option B: Supabase CLI**
-```bash
-supabase db push
-```
+No migration needed - skip to Step 2!
 
 ### Step 2: Update Discord OAuth App Settings
 
