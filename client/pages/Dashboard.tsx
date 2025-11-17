@@ -120,7 +120,7 @@ export default function Dashboard() {
   return (
     <>
       <SEO
-        title="Dashboard - Guardian's Hub"
+        pageTitle="Dashboard - Guardian's Hub"
         description="Your Gateway to the AeThex Foundation"
       />
       <Layout>

@@ -256,9 +256,8 @@ export default function Login() {
   return (
     <>
       <SEO
-        title="Sign In to AeThex"
+        pageTitle="Sign In to AeThex"
         description="Create or access your AeThex creator account"
-        image={window.location.href ? window.location.href : (undefined as any)}
       />
       <Layout>
         <div className="min-h-screen bg-aethex-gradient py-12 flex items-center justify-center">
