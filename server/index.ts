@@ -25,9 +25,6 @@ export function createServer() {
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
 
-  // Authentication middleware - validates Supabase sessions
-  app.use(authMiddleware);
-
   app.use((req, res, next) => {
     res.setHeader("X-Frame-Options", "SAMEORIGIN");
     res.setHeader("Access-Control-Allow-Origin", "*");
@@ -42,6 +39,10 @@ export function createServer() {
     next();
   });
 
+  // ============================================================
+  // PUBLIC ROUTES (No Authentication Required)
+  // ============================================================
+
   app.get("/api/blog", blogIndexHandler);
   app.get("/api/blog/:slug", blogSlugHandler);
 
@@ -51,14 +52,8 @@ export function createServer() {
   // Passport Public Profile Endpoint
   app.use("/api/passport", passportRoutes);
 
-  // Discord OAuth Integration
-  app.use("/api/discord", discordRoutes);
-
-  // Creator Directory (Foundation "Hall of Fame")
+  // Creator Directory (Foundation "Hall of Fame" - Public)
   app.use("/api/creators", creatorsRoutes);
-
-  // Profile Management
-  app.use("/api/profile", profileRoutes);
 
   app.post("/api/contact", async (req, res) => {
     try {
@@ -98,6 +93,19 @@ export function createServer() {
   app.get("/api/health", (req, res) => {
     res.json({ status: "ok", service: "Guardian's Hub API" });
   });
+
+  // ============================================================
+  // PROTECTED ROUTES (Authentication Required)
+  // ============================================================
+
+  // Authentication middleware - validates Supabase sessions
+  app.use(authMiddleware);
+
+  // Discord OAuth Integration (requires auth)
+  app.use("/api/discord", discordRoutes);
+
+  // Profile Management (requires auth)
+  app.use("/api/profile", profileRoutes);
 
   // Serve static files in production
   if (process.env.NODE_ENV === "production") {
