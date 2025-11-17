@@ -561,18 +561,18 @@ export default function CodeLayout({ children, hideFooter }: LayoutProps) {
                 </div>
               </div>
 
-              {/* Services */}
+              {/* Foundation Programs */}
               <div
                 className="space-y-4 animate-slide-up"
                 style={{ animationDelay: "0.1s" }}
               >
                 <h3 className="font-semibold text-foreground hover:text-gradient transition-all duration-300">
-                  Services
+                  Foundation Programs
                 </h3>
                 <ul className="space-y-2 text-sm text-muted-foreground">
                   <li>
                     <Link
-                      to="/gameforge"
+                      to="/login"
                       onClick={scrollToTop}
                       className="transition-all duration-300 hover:translate-x-1 inline-block"
                       style={{
@@ -585,12 +585,12 @@ export default function CodeLayout({ children, hideFooter }: LayoutProps) {
                         (e.currentTarget.style.color = "inherit")
                       }
                     >
-                      Game Development
+                      AeThex Passport
                     </Link>
                   </li>
                   <li>
                     <Link
-                      to="/corp"
+                      to="/about"
                       onClick={scrollToTop}
                       className="transition-all duration-300 hover:translate-x-1 inline-block"
                       style={{
@@ -603,12 +603,12 @@ export default function CodeLayout({ children, hideFooter }: LayoutProps) {
                         (e.currentTarget.style.color = "inherit")
                       }
                     >
-                      Development Consulting
+                      OAuth Provider
                     </Link>
                   </li>
                   <li>
                     <Link
-                      to="/mentorship"
+                      to="/foundation"
                       onClick={scrollToTop}
                       className="transition-all duration-300 hover:translate-x-1 inline-block"
                       style={{
@@ -621,12 +621,12 @@ export default function CodeLayout({ children, hideFooter }: LayoutProps) {
                         (e.currentTarget.style.color = "inherit")
                       }
                     >
-                      Mentorship Programs
+                      Open Source Projects
                     </Link>
                   </li>
                   <li>
                     <Link
-                      to="/research"
+                      to="/foundation"
                       onClick={scrollToTop}
                       className="transition-all duration-300 hover:translate-x-1 inline-block"
                       style={{
@@ -639,19 +639,19 @@ export default function CodeLayout({ children, hideFooter }: LayoutProps) {
                         (e.currentTarget.style.color = "inherit")
                       }
                     >
-                      Research & Labs
+                      Workshops & Learning
                     </Link>
                   </li>
                 </ul>
               </div>
 
-              {/* Company */}
+              {/* About Foundation */}
               <div
                 className="space-y-4 animate-slide-up"
                 style={{ animationDelay: "0.2s" }}
               >
                 <h3 className="font-semibold text-foreground hover:text-gradient transition-all duration-300">
-                  Company
+                  About Foundation
                 </h3>
                 <ul className="space-y-2 text-sm text-muted-foreground">
                   <li>
@@ -667,12 +667,12 @@ export default function CodeLayout({ children, hideFooter }: LayoutProps) {
                         (e.currentTarget.style.color = "inherit")
                       }
                     >
-                      About AeThex
+                      Our Mission
                     </Link>
                   </li>
                   <li>
                     <Link
-                      to="/opportunities"
+                      to="/ethics-council"
                       onClick={scrollToTop}
                       className="transition-all duration-300 hover:translate-x-1 inline-block"
                       style={{ color: "inherit" }}
@@ -683,12 +683,12 @@ export default function CodeLayout({ children, hideFooter }: LayoutProps) {
                         (e.currentTarget.style.color = "inherit")
                       }
                     >
-                      Opportunities
+                      Ethics Council
                     </Link>
                   </li>
                   <li>
                     <Link
-                      to="/community"
+                      to="/contact"
                       onClick={scrollToTop}
                       className="transition-all duration-300 hover:translate-x-1 inline-block"
                       style={{ color: "inherit" }}
@@ -699,12 +699,12 @@ export default function CodeLayout({ children, hideFooter }: LayoutProps) {
                         (e.currentTarget.style.color = "inherit")
                       }
                     >
-                      Community Hub
+                      Contact Us
                     </Link>
                   </li>
                   <li>
                     <Link
-                      to="/changelog"
+                      to="/hub/governance"
                       onClick={scrollToTop}
                       className="transition-all duration-300 hover:translate-x-1 inline-block"
                       style={{ color: "inherit" }}
@@ -715,12 +715,12 @@ export default function CodeLayout({ children, hideFooter }: LayoutProps) {
                         (e.currentTarget.style.color = "inherit")
                       }
                     >
-                      Changelog
+                      Governance & DAO
                     </Link>
                   </li>
                   <li>
                     <Link
-                      to="/status"
+                      to="/foundation"
                       onClick={scrollToTop}
                       className="transition-all duration-300 hover:translate-x-1 inline-block"
                       style={{ color: "inherit" }}
@@ -731,12 +731,12 @@ export default function CodeLayout({ children, hideFooter }: LayoutProps) {
                         (e.currentTarget.style.color = "inherit")
                       }
                     >
-                      System Status
+                      Foundation Info
                     </Link>
                   </li>
                   <li>
                     <Link
-                      to="/investors"
+                      to="/hub/community"
                       onClick={scrollToTop}
                       className="transition-all duration-300 hover:translate-x-1 inline-block"
                       style={{ color: "inherit" }}
@@ -747,24 +747,24 @@ export default function CodeLayout({ children, hideFooter }: LayoutProps) {
                         (e.currentTarget.style.color = "inherit")
                       }
                     >
-                      Investors
+                      Community
                     </Link>
                   </li>
                 </ul>
               </div>
 
-              {/* Resources */}
+              {/* Developer Resources */}
               <div
                 className="space-y-4 animate-slide-up"
                 style={{ animationDelay: "0.3s" }}
               >
                 <h3 className="font-semibold text-foreground hover:text-gradient transition-all duration-300">
-                  Resources
+                  Developer Resources
                 </h3>
                 <ul className="space-y-2 text-sm text-muted-foreground">
                   <li>
                     <Link
-                      to="/docs"
+                      to="/hub/protocol"
                       onClick={scrollToTop}
                       className="transition-all duration-300 hover:translate-x-1 inline-block"
                       style={{ color: "inherit" }}
@@ -775,12 +775,79 @@ export default function CodeLayout({ children, hideFooter }: LayoutProps) {
                         (e.currentTarget.style.color = "inherit")
                       }
                     >
-                      Documentation
+                      Protocol Documentation
+                    </Link>
+                  </li>
+                  <li>
+                    <a
+                      href="https://github.com/AeThex"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="transition-all duration-300 hover:translate-x-1 inline-block"
+                      style={{ color: "inherit" }}
+                      onMouseEnter={(e) =>
+                        (e.currentTarget.style.color = theme.accentHex)
+                      }
+                      onMouseLeave={(e) =>
+                        (e.currentTarget.style.color = "inherit")
+                      }
+                    >
+                      OAuth Integration Guide
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="https://github.com/AeThex"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="transition-all duration-300 hover:translate-x-1 inline-block"
+                      style={{ color: "inherit" }}
+                      onMouseEnter={(e) =>
+                        (e.currentTarget.style.color = theme.accentHex)
+                      }
+                      onMouseLeave={(e) =>
+                        (e.currentTarget.style.color = "inherit")
+                      }
+                    >
+                      Passport API Reference
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="https://github.com/AeThex"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="transition-all duration-300 hover:translate-x-1 inline-block"
+                      style={{ color: "inherit" }}
+                      onMouseEnter={(e) =>
+                        (e.currentTarget.style.color = theme.accentHex)
+                      }
+                      onMouseLeave={(e) =>
+                        (e.currentTarget.style.color = "inherit")
+                      }
+                    >
+                      GitHub Repositories
+                    </a>
+                  </li>
+                  <li>
+                    <Link
+                      to="/hub/protocol"
+                      onClick={scrollToTop}
+                      className="transition-all duration-300 hover:translate-x-1 inline-block"
+                      style={{ color: "inherit" }}
+                      onMouseEnter={(e) =>
+                        (e.currentTarget.style.color = theme.accentHex)
+                      }
+                      onMouseLeave={(e) =>
+                        (e.currentTarget.style.color = "inherit")
+                      }
+                    >
+                      Technical Whitepaper
                     </Link>
                   </li>
                   <li>
                     <Link
-                      to="/tutorials"
+                      to="/contact"
                       onClick={scrollToTop}
                       className="transition-all duration-300 hover:translate-x-1 inline-block"
                       style={{ color: "inherit" }}
@@ -791,71 +858,7 @@ export default function CodeLayout({ children, hideFooter }: LayoutProps) {
                         (e.currentTarget.style.color = "inherit")
                       }
                     >
-                      Tutorials
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      to="/blog"
-                      onClick={scrollToTop}
-                      className="transition-all duration-300 hover:translate-x-1 inline-block"
-                      style={{ color: "inherit" }}
-                      onMouseEnter={(e) =>
-                        (e.currentTarget.style.color = theme.accentHex)
-                      }
-                      onMouseLeave={(e) =>
-                        (e.currentTarget.style.color = "inherit")
-                      }
-                    >
-                      Blog
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      to="/support"
-                      onClick={scrollToTop}
-                      className="transition-all duration-300 hover:translate-x-1 inline-block"
-                      style={{ color: "inherit" }}
-                      onMouseEnter={(e) =>
-                        (e.currentTarget.style.color = theme.accentHex)
-                      }
-                      onMouseLeave={(e) =>
-                        (e.currentTarget.style.color = "inherit")
-                      }
-                    >
-                      Support Center
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      to="/trust"
-                      onClick={scrollToTop}
-                      className="transition-all duration-300 hover:translate-x-1 inline-block"
-                      style={{ color: "inherit" }}
-                      onMouseEnter={(e) =>
-                        (e.currentTarget.style.color = theme.accentHex)
-                      }
-                      onMouseLeave={(e) =>
-                        (e.currentTarget.style.color = "inherit")
-                      }
-                    >
-                      Transparency
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      to="/press"
-                      onClick={scrollToTop}
-                      className="transition-all duration-300 hover:translate-x-1 inline-block"
-                      style={{ color: "inherit" }}
-                      onMouseEnter={(e) =>
-                        (e.currentTarget.style.color = theme.accentHex)
-                      }
-                      onMouseLeave={(e) =>
-                        (e.currentTarget.style.color = "inherit")
-                      }
-                    >
-                      Press Kit
+                      Developer Support
                     </Link>
                   </li>
                 </ul>
@@ -871,7 +874,7 @@ export default function CodeLayout({ children, hideFooter }: LayoutProps) {
               }}
             >
               <p className="text-xs text-muted-foreground transition-colors">
-                © 2024 AeThex Corporation. All rights reserved.
+                © 2024 AeThex Foundation. All rights reserved.
               </p>
               <div className="flex items-center space-x-4 mt-4 sm:mt-0">
                 <Link
