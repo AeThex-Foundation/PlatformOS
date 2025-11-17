@@ -30,11 +30,7 @@ outputType = "webview"
 localPort = 5000
 externalPort = 80
 
-[[ports]]
-localPort = 34291
-externalPort = 3001
-
 [deployment]
-run = ["sh", "-c", "npm run build"]
+run = ["sh", "-c", "npm start"]
 deploymentTarget = "autoscale"
 build = ["npm", "run", "build"]
