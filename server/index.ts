@@ -11,6 +11,7 @@ import blogSlugHandler from "../api/blog/[slug]";
 import oauthRoutes from "./oauth/oauth-routes";
 import passportRoutes from "./api/passport";
 import discordRoutes from "./discord/discord-routes";
+import creatorsRoutes from "./routes/creators-routes";
 import { authMiddleware } from "./middleware/auth";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -51,6 +52,9 @@ export function createServer() {
 
   // Discord OAuth Integration
   app.use("/api/discord", discordRoutes);
+
+  // Creator Directory (Foundation "Hall of Fame")
+  app.use("/api/creators", creatorsRoutes);
 
   app.post("/api/contact", async (req, res) => {
     try {
