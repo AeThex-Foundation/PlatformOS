@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import { useAethexToast } from "@/hooks/use-aethex-toast";
@@ -15,6 +15,12 @@ export default function ProfileSettings() {
   const { user, profile, updateProfile, loading } = useAuth();
   const { success: toastSuccess, error: toastError } = useAethexToast();
   const [isSaving, setIsSaving] = useState(false);
+
+  useEffect(() => {
+    if (!loading && !user) {
+      navigate("/login");
+    }
+  }, [loading, user, navigate]);
 
   const handleSave = async (updates: Partial<AethexUserProfile>) => {
     if (!user?.id) {
@@ -39,8 +45,7 @@ export default function ProfileSettings() {
   }
 
   if (!user) {
-    navigate("/login");
-    return null;
+    return <LoadingScreen />;
   }
 
   if (!profile) {
