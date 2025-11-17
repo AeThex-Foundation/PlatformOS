@@ -4,7 +4,9 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import SupabaseStatus from "./SupabaseStatus";
 import { useAuth } from "@/contexts/AuthContext";
+import { useArmTheme } from "@/contexts/ArmThemeContext";
 import NotificationBell from "@/components/notifications/NotificationBell";
+import ArmSwitcher from "@/components/ArmSwitcher";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -42,13 +44,15 @@ export default function CodeLayout({ children, hideFooter }: LayoutProps) {
   const location = useLocation();
   const navigate = useNavigate();
   const { user, profile, signOut, loading, profileComplete } = useAuth();
+  const { theme, currentArm } = useArmTheme();
 
-  const theme = {
-    accentHex: "#EF4444",
-    wallpaperClass: "",
-  };
-
-  const publicNavigation = [
+  const publicNavigation = currentArm === "gameforge" ? [
+    { name: "Home", href: "/gameforge" },
+    { name: "About", href: "/gameforge/about" },
+    { name: "Join", href: "/gameforge/join" },
+    { name: "Pricing", href: "/gameforge/pricing" },
+    { name: "Teams", href: "/gameforge/teams" },
+  ] : [
     { name: "Home", href: "/" },
     { name: "About", href: "/about" },
     { name: "Foundation", href: "/foundation" },
@@ -58,7 +62,14 @@ export default function CodeLayout({ children, hideFooter }: LayoutProps) {
     { name: "Documentation", href: "/docs" },
   ];
 
-  const userNavigation = [
+  const userNavigation = currentArm === "gameforge" ? [
+    { name: "Dashboard", href: "/gameforge" },
+    { name: "Start Building", href: "/gameforge/start-building" },
+    { name: "View Portfolio", href: "/gameforge/view-portfolio" },
+    { name: "Teams", href: "/gameforge/teams" },
+    { name: "Pricing", href: "/gameforge/pricing" },
+    { name: "About", href: "/gameforge/about" },
+  ] : [
     { name: "Hub", href: "/hub" },
     { name: "Protocol", href: "/hub/protocol" },
     { name: "Governance", href: "/hub/governance" },
@@ -120,31 +131,39 @@ export default function CodeLayout({ children, hideFooter }: LayoutProps) {
           <div className="flex items-center shrink-0 relative">
             {/* Desktop - Regular Link */}
             <Link
-              to="/"
+              to={currentArm === "gameforge" ? "/gameforge" : "/"}
               className="hover-glow group inline-block hidden sm:block"
             >
               <img 
-                src="/foundation-logo.png" 
-                alt="AeThex Foundation" 
-                className="h-12 w-12 transition-all duration-300 group-hover:scale-110 group-hover:drop-shadow-[0_0_8px_rgba(239,68,68,0.5)]"
+                src={theme.logoUrl} 
+                alt={`AeThex ${theme.displayName}`}
+                className="h-12 w-12 transition-all duration-300 group-hover:scale-110"
+                style={{
+                  filter: `drop-shadow(0 0 8px ${theme.accentHex}80)`
+                }}
               />
             </Link>
 
             {/* Mobile - Logo Button */}
             <Link
-              to="/"
+              to={currentArm === "gameforge" ? "/gameforge" : "/"}
               className="hover-glow group inline-block sm:hidden"
             >
               <img 
-                src="/foundation-logo.png" 
-                alt="AeThex Foundation" 
-                className="h-10 w-10 transition-all duration-300 group-hover:scale-110 group-hover:drop-shadow-[0_0_8px_rgba(239,68,68,0.5)]"
+                src={theme.logoUrl} 
+                alt={`AeThex ${theme.displayName}`}
+                className="h-10 w-10 transition-all duration-300 group-hover:scale-110"
+                style={{
+                  filter: `drop-shadow(0 0 8px ${theme.accentHex}80)`
+                }}
               />
             </Link>
           </div>
 
-          {/* Navigation */}
-          <nav className="hidden md:flex items-center mx-3" />
+          {/* ARM Switcher */}
+          <nav className="hidden md:flex items-center mx-3">
+            <ArmSwitcher />
+          </nav>
 
           {/* Auth Section */}
           <div className="flex items-center gap-1 md:gap-3 animate-slide-left shrink-0 overflow-visible">
