@@ -49,7 +49,7 @@ export default function CodeLayout({ children, hideFooter }: LayoutProps) {
   const publicNavigation = currentArm === "gameforge" ? [
     { name: "Home", href: "/gameforge" },
     { name: "About", href: "/gameforge/about" },
-    { name: "Join", href: "/gameforge/join" },
+    { name: "Join", href: "/gameforge/join-gameforge" },
     { name: "Pricing", href: "/gameforge/pricing" },
     { name: "Teams", href: "/gameforge/teams" },
   ] : [
