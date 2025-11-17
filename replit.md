@@ -1,10 +1,12 @@
 # Guardian's Hub (AeThex Foundation)
 
-**Last Updated:** November 16, 2025
+**Last Updated:** November 17, 2025
 
 ## Project Overview
 
 Guardian's Hub is the official AeThex Foundation website featuring a public "Trust Billboard" (home, about, ethics council, contact) and a logged-in "Hub" experience (protocol docs, governance/DAO, community bounty board). The site uses a red and gold color scheme exclusively.
+
+**Authentication Flow:** Guardian's Hub provides login-only functionality. Account creation and onboarding are handled by the main AeThex site at https://aethex.dev/onboarding.
 
 ## Technology Stack
 
@@ -93,6 +95,18 @@ The following environment variables can be configured:
 - `SUPABASE_URL` - Supabase project URL (server-side)
 - `SUPABASE_SERVICE_ROLE` - Supabase service role key for admin operations
 - Email service credentials for nodemailer (SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS)
+
+## Recent Changes
+
+### November 17, 2025 - Signup Flow Removed, Redirect to Main Site
+- **Removed Signup Functionality**: Guardian's Hub now provides login-only access
+- **Updated Login Page**:
+  - Removed signup toggle and form fields (full name, password requirements)
+  - Removed `isSignUp` state and signup handling logic
+  - Added external redirect link to https://aethex.dev/onboarding for account creation
+  - Simplified handleSubmit to only handle sign-in
+  - Removed unused imports (User icon, aethexUserService)
+- **Result**: Clean login-only experience; all signup and onboarding handled by main AeThex site
 
 ## Recent Changes
 
