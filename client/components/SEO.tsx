@@ -30,7 +30,7 @@ export default function SEO({
   noIndex,
 }: SEOProps) {
   useEffect(() => {
-    const title = `AeThex | ${pageTitle}`;
+    const title = `AeThex Foundation | ${pageTitle}`;
     document.title = title;
 
     if (canonical) {
@@ -68,16 +68,15 @@ export default function SEO({
       content: title,
     });
 
-    if (image) {
-      upsertMeta('meta[property="og:image"]', {
-        property: "og:image",
-        content: image,
-      });
-      upsertMeta('meta[name="twitter:image"]', {
-        name: "twitter:image",
-        content: image,
-      });
-    }
+    const finalImage = image || "/foundation-logo.png";
+    upsertMeta('meta[property="og:image"]', {
+      property: "og:image",
+      content: finalImage,
+    });
+    upsertMeta('meta[name="twitter:image"]', {
+      name: "twitter:image",
+      content: finalImage,
+    });
 
     if (noIndex) {
       upsertMeta('meta[name="robots"]', {
