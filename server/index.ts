@@ -77,7 +77,7 @@ export function createServer() {
 
   // Serve static files in production
   if (process.env.NODE_ENV === "production") {
-    const distPath = path.join(__dirname, "../dist");
+    const distPath = path.join(__dirname, "../dist/spa");
     app.use(express.static(distPath));
     
     // SPA fallback - serve index.html for all non-API routes
