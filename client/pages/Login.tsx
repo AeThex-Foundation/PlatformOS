@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
 
 const API_BASE = import.meta.env.VITE_API_BASE || "";
-import { useNavigate, Link, useLocation } from "react-router-dom";
-import { aethexUserService } from "@/lib/aethex-database-adapter";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import { useAethexToast } from "@/hooks/use-aethex-toast";
 import Layout from "@/components/Layout";
@@ -28,7 +27,6 @@ import {
   Github,
   Mail,
   Lock,
-  User,
   Info,
   Wallet,
 } from "lucide-react";
@@ -56,13 +54,8 @@ import {
 
 export default function Login() {
   const [isLoading, setIsLoading] = useState(false);
-  const [isSignUp, setIsSignUp] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [fullName, setFullName] = useState("");
-  const [manualVerificationLink, setManualVerificationLink] = useState<
-    string | null
-  >(null);
   const [showReset, setShowReset] = useState(false);
   const [resetEmail, setResetEmail] = useState("");
   const [errorFromUrl, setErrorFromUrl] = useState<string | null>(null);
@@ -73,7 +66,6 @@ export default function Login() {
   const location = useLocation();
   const {
     signIn,
-    signUp,
     signInWithOAuth,
     user,
     profile,
@@ -164,42 +156,21 @@ export default function Login() {
     setIsLoading(true);
 
     try {
-      if (isSignUp) {
-        const result = await signUp(email, password, {
-          data: {
-            full_name: fullName,
-          },
+      // Sign in with email/password
+      const result = await signIn(email, password);
+      if (result?.user) {
+        // Don't navigate immediately - let Auth context update and the useEffect below handle redirect
+        // This ensures profile data is fetched and profileComplete is properly calculated
+        toastInfo({
+          title: "Signing you in",
+          description: "Redirecting...",
         });
-        if (result?.user) {
-          toastInfo({
-            title: "Account created",
-            description:
-              result?.identities?.length === 0
-                ? "Please verify your email to log in"
-                : "Redirecting to onboarding...",
-          });
-          await aethexUserService.ensureUserProfile(result.user);
-          navigate("/onboarding", { replace: true });
-        }
-      } else {
-        // Sign in with email/password
-        const result = await signIn(email, password);
-        if (result?.user) {
-          // Don't navigate immediately - let Auth context update and the useEffect below handle redirect
-          // This ensures profile data is fetched and profileComplete is properly calculated
-          toastInfo({
-            title: "Signing you in",
-            description: "Redirecting...",
-          });
-        }
       }
     } catch (error: any) {
       console.error("Auth error:", error);
-      const message =
-        error?.message ||
-        (isSignUp ? "Failed to create account" : "Failed to sign in");
+      const message = error?.message || "Failed to sign in";
       toastError({
-        title: isSignUp ? "Signup failed" : "Login failed",
+        title: "Login failed",
         description: message,
       });
     } finally {
@@ -317,12 +288,10 @@ export default function Login() {
                 </div>
                 <div className="space-y-3">
                   <CardTitle className="text-3xl font-bold bg-gradient-to-r from-aethex-300 via-neon-blue to-aethex-400 bg-clip-text text-transparent">
-                    {isSignUp ? "Create Account" : "Welcome Back"}
+                    Welcome Back
                   </CardTitle>
                   <CardDescription className="text-base">
-                    {isSignUp
-                      ? "Join AeThex and unlock your creative potential"
-                      : "Access your dashboard and continue your journey"}
+                    Access your dashboard and continue your journey
                   </CardDescription>
                 </div>
                 <div className="flex justify-center gap-2 pt-2">
@@ -348,36 +317,6 @@ export default function Login() {
                     <Info className="h-4 w-4 text-red-400" />
                     <AlertTitle>Error</AlertTitle>
                     <AlertDescription>{errorFromUrl}</AlertDescription>
-                  </Alert>
-                ) : null}
-                {manualVerificationLink ? (
-                  <Alert className="border-aethex-400/30 bg-aethex-500/10 text-foreground">
-                    <Info className="h-4 w-4 text-aethex-300" />
-                    <AlertTitle>Manual verification required</AlertTitle>
-                    <AlertDescription>
-                      <p>
-                        We couldn't send the verification email automatically.
-                        Use the link below to confirm your account:
-                      </p>
-                      <p className="mt-2 break-all rounded bg-background/60 px-3 py-2 font-mono text-xs text-foreground/90">
-                        {manualVerificationLink}
-                      </p>
-                      <Button
-                        type="button"
-                        size="sm"
-                        variant="outline"
-                        className="mt-3 border-aethex-400/40"
-                        onClick={() =>
-                          window.open(
-                            manualVerificationLink,
-                            "_blank",
-                            "noopener",
-                          )
-                        }
-                      >
-                        Open verification link
-                      </Button>
-                    </AlertDescription>
                   </Alert>
                 ) : null}
                 {/* Social Login Buttons */}
@@ -456,26 +395,6 @@ export default function Login() {
 
                 {/* Email/Password Form */}
                 <form onSubmit={handleSubmit} className="space-y-4 mt-6">
-                  {isSignUp && (
-                    <div className="space-y-2">
-                      <Label htmlFor="fullName" className="text-sm font-medium">
-                        Full Name
-                      </Label>
-                      <div className="relative">
-                        <User className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                        <Input
-                          id="fullName"
-                          type="text"
-                          value={fullName}
-                          onChange={(e) => setFullName(e.target.value)}
-                          placeholder="Enter your full name"
-                          className="pl-10 bg-background/50 border-border/50 focus:border-aethex-400"
-                          required={isSignUp}
-                        />
-                      </div>
-                    </div>
-                  )}
-
                   <div className="space-y-2">
                     <Label htmlFor="email" className="text-sm font-medium">
                       Email Address
@@ -505,23 +424,14 @@ export default function Login() {
                         type="password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
-                        placeholder={
-                          isSignUp ? "Create a password" : "Enter your password"
-                        }
+                        placeholder="Enter your password"
                         className="pl-10 bg-background/50 border-border/50 focus:border-aethex-400"
                         required
-                        minLength={isSignUp ? 6 : undefined}
                       />
                     </div>
-                    {isSignUp && (
-                      <p className="text-xs text-muted-foreground">
-                        Password must be at least 6 characters long
-                      </p>
-                    )}
                   </div>
 
-                  {!isSignUp && (
-                    <div className="flex items-center justify-between text-sm">
+                  <div className="flex items-center justify-between text-sm">
                       <label className="flex items-center space-x-2 cursor-pointer">
                         <input
                           type="checkbox"
@@ -542,38 +452,29 @@ export default function Login() {
                         Forgot password?
                       </button>
                     </div>
-                  )}
 
                   <Button
                     type="submit"
                     className="w-full bg-gradient-to-r from-aethex-500 to-neon-blue hover:from-aethex-600 hover:to-neon-blue/90 hover-lift interactive-scale glow-blue"
-                    disabled={
-                      !email ||
-                      !password ||
-                      (isSignUp && !fullName) ||
-                      isLoading
-                    }
+                    disabled={!email || !password || isLoading}
                   >
                     <LogIn className="h-4 w-4 mr-2" />
-                    {isSignUp ? "Create Account" : "Sign In"}
+                    Sign In
                     <ArrowRight className="h-4 w-4 ml-2" />
                   </Button>
                 </form>
 
                 <div className="text-center pt-4">
                   <p className="text-sm text-muted-foreground">
-                    {isSignUp
-                      ? "Already have an account?"
-                      : "Don't have an account?"}{" "}
-                    <button
-                      onClick={() => {
-                        setIsSignUp((prev) => !prev);
-                        setManualVerificationLink(null);
-                      }}
+                    Don't have an account?{" "}
+                    <a
+                      href="https://aethex.dev/onboarding"
                       className="text-aethex-400 hover:underline font-medium"
+                      target="_blank"
+                      rel="noopener noreferrer"
                     >
-                      {isSignUp ? "Sign In" : "Join AeThex"}
-                    </button>
+                      Create account on AeThex
+                    </a>
                   </p>
                 </div>
               </CardContent>
