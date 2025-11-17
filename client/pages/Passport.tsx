@@ -6,8 +6,8 @@
 
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { Layout } from "@/components/Layout";
-import { SEO } from "@/components/SEO";
+import Layout from "@/components/Layout";
+import SEO from "@/components/SEO";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
