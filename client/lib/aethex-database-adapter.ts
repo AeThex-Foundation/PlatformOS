@@ -241,7 +241,11 @@ export const aethexUserService = {
     const {
       data: { user },
     } = await supabase.auth.getUser();
-    if (!user) return null;
+    console.log("[Profile] Auth user:", user?.email, user?.id);
+    if (!user) {
+      console.warn("[Profile] No authenticated user");
+      return null;
+    }
 
     const { data, error } = await supabase
       .from("user_profiles")
@@ -249,8 +253,16 @@ export const aethexUserService = {
       .eq("id", user.id)
       .single();
 
+    console.log("[Profile] Query result:", { 
+      hasData: !!data, 
+      username: data?.username,
+      full_name: data?.full_name,
+      error: error?.message 
+    });
+
     if (error) {
       if ((error as any)?.code === "PGRST116") {
+        console.log("[Profile] No profile found, creating initial profile");
         return await this.createInitialProfile(
           user.id,
           {
@@ -267,10 +279,12 @@ export const aethexUserService = {
         );
       }
 
+      console.error("[Profile] Fetch error:", error);
       throw error;
     }
 
     if (!data || Object.keys(data || {}).length === 0) {
+      console.log("[Profile] Empty data, creating initial profile");
       return await this.createInitialProfile(
         user.id,
         {
@@ -282,6 +296,11 @@ export const aethexUserService = {
     }
 
     const normalized = normalizeProfile(data, user.email);
+    console.log("[Profile] Normalized profile:", { 
+      username: normalized.username,
+      full_name: normalized.full_name,
+      email: normalized.email
+    });
 
     // Auto-populate username for mrpiglr if empty
     if (
@@ -289,6 +308,7 @@ export const aethexUserService = {
       user.email === "mrpiglr@gmail.com" &&
       !normalized.username
     ) {
+      console.log("[Profile] Auto-populating mrpiglr username");
       await this.updateProfile(user.id, {
         username: "mrpiglr",
       }).catch((err) => {
