@@ -98,15 +98,27 @@ The following environment variables can be configured:
 
 ## Recent Changes
 
-### November 17, 2025 - Signup Flow Removed, Redirect to Main Site
-- **Removed Signup Functionality**: Guardian's Hub now provides login-only access
-- **Updated Login Page**:
+### November 17, 2025 - Dashboard & Navigation Updates
+- **Created Dashboard Page** (`/dashboard`):
+  - Personalized greeting with user's name and time-based salutation
+  - Quick Access cards to all Foundation areas (Protocol, Governance, Community, Curriculum, Achievements, Downloads)
+  - Community Activity feed showing recent bounties, proposals, discussions, and events
+  - Upcoming Events sidebar with Foundation calendar
+  - Your Stats tracking (bounties completed, proposals voted, achievements earned)
+  - Resources section with Foundation links
+  - Red & gold theme throughout matching Foundation branding
+- **Updated Navigation**:
+  - Changed "Join AeThex" button to "Access Hub" routing to `/login` (mobile & desktop)
+  - Removed separate "Sign In" link (consolidated to single "Access Hub" CTA)
+  - Updated Layout.tsx navigation for cleaner UX
+- **Updated Login Flow**:
   - Removed signup toggle and form fields (full name, password requirements)
   - Removed `isSignUp` state and signup handling logic
   - Added external redirect link to https://aethex.dev/onboarding for account creation
   - Simplified handleSubmit to only handle sign-in
   - Removed unused imports (User icon, aethexUserService)
-- **Result**: Clean login-only experience; all signup and onboarding handled by main AeThex site
+  - Logged-in users redirect to `/dashboard` instead of `/onboarding`
+- **Result**: Clean login-only experience with dedicated community dashboard for logged-in Guardians
 
 ## Recent Changes
 
