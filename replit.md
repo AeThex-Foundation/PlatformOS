@@ -2,7 +2,19 @@
 
 ## Overview
 
-Guardian's Hub is the official AeThex Foundation website, designed to operate as a standalone platform. It features a public-facing "Trust Billboard" with information about the Foundation, and a private "Hub" experience for logged-in users, offering access to protocol documentation, governance features, and a community bounty board. The project's vision is to provide a dedicated, secure, and branded online presence for the AeThex Foundation.
+Guardian's Hub is the **AeThex Passport Authentication Provider** and official Foundation website. It serves as the "Government" that issues and manages all AeThex identities.
+
+**Critical Architecture:**
+- **Foundation = The "Government"**: Owns and governs the Passport system
+- **Foundation OWNS**: The master Supabase `user_profiles` database (the only app with write access)
+- **Foundation IS**: The authentication provider for all AeThex properties (aethex.dev, aethex.sbs, etc.)
+- **Foundation HANDLES**: All signup, onboarding, and identity management
+- **Foundation HOSTS**: aethex.foundation, aethex.me, aethex.space, and .aethex domains
+
+**The "Axiom Model" (Separation of Powers):**
+- The Corp (aethex.dev) is a "client" that must request authentication from the Foundation
+- The Corp has a revocable license to use the Passport SSO system
+- This creates the ultimate "leash" - the Foundation can revoke access if the Corp "goes evil"
 
 ## User Preferences
 
@@ -27,19 +39,33 @@ The Guardian's Hub is a Single Page Application (SPA) built with React 18, TypeS
 - **Frontend:** React 18, React Router 6, TypeScript, Vite, TailwindCSS 3.
 - **Backend:** Express server, integrated with Vite.
 - **Testing:** Vitest.
-- **Authentication:** Supabase for user authentication; account creation and onboarding are handled externally by `https://aethex.dev/onboarding`.
+- **Authentication:** Supabase authentication with Foundation as the SOLE owner of user_profiles database.
+- **Passport System:** This application IS the AeThex Passport (SSO) authentication provider.
+- **OAuth Provider:** Exposes OAuth 2.0 endpoints for client applications (aethex.dev, etc.) to consume.
 - **Email Functionality:** Nodemailer for email services.
 - **Routing:**
     - **Public Pages (Trust Billboard):**
         - `/` - Foundation homepage
         - `/about` - Foundation mission & Axiom Model
+        - `/foundation` - Foundation info, projects, workshops
         - `/ethics-council` - Ethics Council roster
         - `/contact` - Contact form
+    - **Authentication Pages (Passport System):**
+        - `/login` - User login (SSO provider)
+        - `/signup` - User registration (creates Passport)
+        - `/onboarding` - New user onboarding flow
+        - `/profile/settings` - User profile management
+    - **OAuth Provider Endpoints:**
+        - `/api/oauth/authorize` - OAuth authorization endpoint
+        - `/api/oauth/token` - OAuth token endpoint
+        - `/api/oauth/userinfo` - OAuth user info endpoint
     - **Hub Pages (Logged-in Experience):**
         - `/hub` - Community dashboard landing page
         - `/hub/protocol` - Protocol documentation & whitepaper
         - `/hub/governance` - DAO governance integration (Tally.xyz)
         - `/hub/community` - Community bounty board & collaboration
+    - **Passport Pages:**
+        - `/:username.aethex.me` - User passport profile (wildcard routing)
 
 ### System Design Choices
 - **Monorepo Structure (Initial):** Though now a standalone repository, the project was initially part of a larger monorepo, leading to a focus on clear separation of concerns.
@@ -55,19 +81,28 @@ The Guardian's Hub is a Single Page Application (SPA) built with React 18, TypeS
 
 ## Recent Changes
 
-### November 17, 2025 - Removed Onboarding Logic & Made Foundation Page Accessible
-- **Removed All Onboarding Logic**:
-  - Removed onboarding redirects from Login.tsx (now redirects to /dashboard only)
-  - Cleaned up AuthContext.tsx - removed localStorage onboarding flags
-  - Removed profile completion synchronization with localStorage
-  - Login flow now redirects authenticated users directly to /dashboard
-  - OAuth and Web3 login flows updated to redirect to /dashboard
-- **Made /foundation Page Accessible**:
-  - Added "Foundation" link to public navigation menu
-  - Page displays Foundation mission, open-source projects, workshops, and resources
-  - Visible to all visitors (not hidden behind authentication)
-- **Context**: Guardian's Hub is login-only. All account creation and onboarding handled by main AeThex site (https://aethex.dev/onboarding)
-- **Result**: Cleaner authentication flow, no duplicate onboarding logic, Foundation info easily accessible
+### November 17, 2025 - CRITICAL ARCHITECTURE PIVOT: Foundation as Auth Provider
+- **The "Axiom" Identity Pivot**:
+  - Foundation (Guardian's Hub) is NOW the authentication provider for all AeThex properties
+  - Foundation OWNS the Supabase user_profiles database (sole write access)
+  - Foundation handles ALL signup, onboarding, and identity management
+  - aethex.dev becomes a CLIENT that requests auth from Foundation via OAuth
+- **Phase 1: Documentation Updated** (COMPLETED):
+  - Updated all architecture documentation to reflect Foundation as "Government"
+  - Clarified Foundation owns Passport system and user database
+  - Documented OAuth provider endpoints Foundation will expose
+- **Phase 2: IN PROGRESS - Restore Auth System**:
+  - Need to restore signup/onboarding flow
+  - Need to build /login, /signup, /onboarding pages
+  - Need to implement Passport wildcard routing (aethex.me)
+- **Phase 3: PENDING - OAuth Provider**:
+  - Build OAuth 2.0 endpoints for client apps to consume
+  - Enable aethex.dev to authenticate via Foundation
+
+### November 17, 2025 - Made Foundation Page Accessible
+- Added "Foundation" link to public navigation menu
+- Page displays Foundation mission, open-source projects, workshops, and resources
+- Visible to all visitors (not hidden behind authentication)
 
 ### November 17, 2025 - Foundation Branding & Metadata Updates
 - **Updated All Icons & Social Cards**:
