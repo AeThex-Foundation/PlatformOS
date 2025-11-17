@@ -73,6 +73,10 @@ export default function SEO({
       property: "og:image",
       content: finalImage,
     });
+    upsertMeta('meta[name="twitter:card"]', {
+      name: "twitter:card",
+      content: "summary_large_image",
+    });
     upsertMeta('meta[name="twitter:image"]', {
       name: "twitter:image",
       content: finalImage,

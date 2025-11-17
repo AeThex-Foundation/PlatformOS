@@ -133,6 +133,7 @@ export default function Passport() {
         pageTitle={`${profile.full_name} (@${profile.username})`}
         description={profile.bio || `${profile.full_name}'s Foundation Passport profile`}
         image={profile.avatar_url || undefined}
+        canonical={`${window.location.origin}/${profile.username}`}
       />
       <Layout>
         <div className="min-h-screen bg-aethex-gradient py-12">
