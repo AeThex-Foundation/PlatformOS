@@ -7,6 +7,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider } from "./contexts/AuthContext";
+import { ArmThemeProvider } from "./contexts/ArmThemeContext";
 import PageTransition from "./components/PageTransition";
 import SkipAgentController from "./components/SkipAgentController";
 
@@ -63,8 +64,9 @@ const App = () => (
         <Toaster />
         <Analytics />
         <BrowserRouter>
-          <SkipAgentController />
-          <PageTransition>
+          <ArmThemeProvider>
+            <SkipAgentController />
+            <PageTransition>
                 <Routes>
                     {/* Foundation Homepage */}
                     <Route path="/" element={<Index />} />
@@ -136,7 +138,8 @@ const App = () => (
                     {/* 404 Not Found */}
                     <Route path="*" element={<FourOhFourPage />} />
                   </Routes>
-          </PageTransition>
+            </PageTransition>
+          </ArmThemeProvider>
         </BrowserRouter>
       </TooltipProvider>
     </AuthProvider>
