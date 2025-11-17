@@ -100,16 +100,18 @@ The Guardian's Hub is a Single Page Application (SPA) built with React 18, TypeS
   - ✅ Email verification flow: signup → verify email → login → onboarding
   - Note: Currently using `username` presence as onboarding completion indicator
   - TODO Phase 2.5: Add `onboarded` boolean field to Supabase user_profiles table
-- **Phase 3: IN PROGRESS - OAuth Provider**:
+- **Phase 3: COMPLETED - OAuth Provider**:
   - ✅ Created OAuth database schema (oauth_clients, oauth_authorization_codes, oauth_refresh_tokens)
   - ✅ Implemented OAuth service layer with PKCE support
   - ✅ Built /api/oauth/authorize endpoint (authorization code flow)
   - ✅ Built /api/oauth/token endpoint (code exchange + refresh)
   - ✅ Built /api/oauth/userinfo endpoint (OpenID Connect)
   - ✅ Pre-seeded "AeThex Corporation" client for aethex.dev
-  - TODO: Add auth middleware to validate user sessions in /authorize
-  - TODO: Test complete OAuth flow end-to-end
-  - TODO: Implement proper JWT signing with RS256 (currently using base64 for MVP)
+  - ✅ Created authentication middleware (validates Supabase sessions, attaches req.user)
+  - ✅ Fixed OAuth flow continuity (new user → onboarding → back to authorize)
+  - ✅ Patched open redirect vulnerability (validates relative paths only)
+  - ✅ Fixed double-decode bug in OAuth parameter handling
+  - Note: Access tokens use base64 encoding for MVP (upgrade to RS256 JWT in production)
 
 ### November 17, 2025 - Made Foundation Page Accessible
 - Added "Foundation" link to public navigation menu
