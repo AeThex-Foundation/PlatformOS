@@ -120,8 +120,6 @@ The following environment variables can be configured:
   - Logged-in users redirect to `/dashboard` instead of `/onboarding`
 - **Result**: Clean login-only experience with dedicated community dashboard for logged-in Guardians
 
-## Recent Changes
-
 ### November 16, 2025 - Complete Discord Integration Removal  
 - **Removed Discord Bot**: Deleted entire `discord-bot/` directory (managed by main site)
 - **Removed Discord API**: Deleted `api/discord/` folder with all OAuth, webhooks, interactions, and role sync endpoints
