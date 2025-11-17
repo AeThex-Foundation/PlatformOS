@@ -91,10 +91,15 @@ The Guardian's Hub is a Single Page Application (SPA) built with React 18, TypeS
   - Updated all architecture documentation to reflect Foundation as "Government"
   - Clarified Foundation owns Passport system and user database
   - Documented OAuth provider endpoints Foundation will expose
-- **Phase 2: IN PROGRESS - Restore Auth System**:
-  - Need to restore signup/onboarding flow
-  - Need to build /login, /signup, /onboarding pages
-  - Need to implement Passport wildcard routing (aethex.me)
+- **Phase 2: COMPLETED - Restored Auth System**:
+  - ✅ Created /signup page with email/password and OAuth options
+  - ✅ Created /onboarding page with 3-step flow (username, profile, review)
+  - ✅ Implemented username availability checking (real-time Supabase validation)
+  - ✅ Updated Login to redirect new users (no username) to /onboarding
+  - ✅ OAuth flows properly redirect to /onboarding via sessionStorage
+  - ✅ Email verification flow: signup → verify email → login → onboarding
+  - Note: Currently using `username` presence as onboarding completion indicator
+  - TODO Phase 2.5: Add `onboarded` boolean field to Supabase user_profiles table
 - **Phase 3: PENDING - OAuth Provider**:
   - Build OAuth 2.0 endpoints for client apps to consume
   - Enable aethex.dev to authenticate via Foundation

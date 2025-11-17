@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
 const API_BASE = import.meta.env.VITE_API_BASE || "";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import { useAethexToast } from "@/hooks/use-aethex-toast";
 import Layout from "@/components/Layout";
@@ -82,6 +82,15 @@ export default function Login() {
     const errorMessage = params.get("message");
     const discordLinked = params.get("discord_linked");
     const discordEmail = params.get("email");
+    const verifiedStatus = params.get("verified");
+
+    // Handle email verification pending
+    if (verifiedStatus === "pending") {
+      toastInfo({
+        title: "Check your email",
+        description: "Please verify your email address before signing in.",
+      });
+    }
 
     // Handle Discord linking success
     if (discordLinked === "true" && discordEmail) {
@@ -116,20 +125,29 @@ export default function Login() {
     }
   }, [location.search, toastError, toastInfo]);
 
-  // After auth resolves and a user exists, navigate to next path or dashboard
+  // After auth resolves and a user exists, navigate to next path, onboarding, or dashboard
   useEffect(() => {
     if (!loading && user) {
+      // If profile hasn't loaded yet, wait for it
+      if (!profile) return;
+
       const params = new URLSearchParams(location.search);
       const next = params.get("next");
 
       // Check if there's an OAuth redirect destination stored (e.g., from staff login)
       const oauthRedirect = sessionStorage.getItem("oauth_redirect_to");
 
-      // Redirect to Dashboard or next path (no onboarding - handled by main AeThex site)
+      // NEW USERS WITHOUT USERNAME: Redirect to onboarding
+      if (!profile.username || profile.username.trim() === "") {
+        navigate("/onboarding", { replace: true });
+        return;
+      }
+
+      // EXISTING USERS: Redirect to intended destination
       const redirectDest =
         (next && next.startsWith("/") ? next : null) ||
         oauthRedirect ||
-        "/dashboard";
+        "/hub";
 
       // Clear the stored redirect after using it
       if (oauthRedirect) {
@@ -155,15 +173,13 @@ export default function Login() {
 
     try {
       // Sign in with email/password
-      const result = await signIn(email, password);
-      if (result?.user) {
-        // Don't navigate immediately - let Auth context update and the useEffect below handle redirect
-        // This ensures profile data is fetched and profileComplete is properly calculated
-        toastInfo({
-          title: "Signing you in",
-          description: "Redirecting...",
-        });
-      }
+      await signIn(email, password);
+      // Don't navigate immediately - let Auth context update and the useEffect below handle redirect
+      // This ensures profile data is fetched and profileComplete is properly calculated
+      toastInfo({
+        title: "Signing you in",
+        description: "Redirecting...",
+      });
     } catch (error: any) {
       console.error("Auth error:", error);
       const message = error?.message || "Failed to sign in";
@@ -176,7 +192,7 @@ export default function Login() {
     }
   };
 
-  const handleSocialLogin = async (provider: string) => {
+  const handleSocialLogin = async (provider: "github" | "google" | "discord") => {
     try {
       await signInWithOAuth(provider);
     } catch (error) {
@@ -462,15 +478,13 @@ export default function Login() {
 
                 <div className="text-center pt-4">
                   <p className="text-sm text-muted-foreground">
-                    Don't have an account?{" "}
-                    <a
-                      href="https://aethex.dev/onboarding"
+                    Don't have a Passport?{" "}
+                    <Link
+                      to="/signup"
                       className="text-aethex-400 hover:underline font-medium"
-                      target="_blank"
-                      rel="noopener noreferrer"
                     >
-                      Create account on AeThex
-                    </a>
+                      Create your Passport
+                    </Link>
                   </p>
                 </div>
               </CardContent>
