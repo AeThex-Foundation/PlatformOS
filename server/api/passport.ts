@@ -143,7 +143,7 @@ router.get('/:username', async (req: Request, res: Response) => {
 
     // Build public profile response
     const publicProfile: PublicPassportProfile = {
-      id: profile.id,
+      id: profile.id as string,
       username: profile.username as string,
       full_name: profile.full_name as string,
       avatar_url: profile.avatar_url as string | null,

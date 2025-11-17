@@ -40,6 +40,7 @@ import FoundationAchievements from "./pages/foundation/FoundationAchievements";
 import FoundationDownloadCenter from "./pages/FoundationDownloadCenter";
 import Creators from "./pages/Creators";
 import Leaderboard from "./pages/Leaderboard";
+import Admin from "./pages/Admin";
 import { Analytics } from "@vercel/analytics/react";
 
 const queryClient = new QueryClient();
@@ -94,6 +95,9 @@ const App = () => (
                     <Route path="/signup" element={<Signup />} />
                     <Route path="/onboarding" element={<Onboarding />} />
                     <Route path="/dashboard" element={<Dashboard />} />
+                    
+                    {/* Admin Routes */}
+                    <Route path="/admin" element={<Admin />} />
 
                     {/* Discord OAuth */}
                     <Route path="/discord-verify" element={<DiscordVerify />} />
