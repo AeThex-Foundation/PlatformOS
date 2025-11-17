@@ -1,11 +1,16 @@
 import "dotenv/config";
 import express from "express";
 import cors from "cors";
+import path from "path";
+import { fileURLToPath } from "url";
 import { adminSupabase } from "./supabase";
 import { emailService } from "./email";
 import { randomUUID } from "crypto";
 import blogIndexHandler from "../api/blog/index";
 import blogSlugHandler from "../api/blog/[slug]";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 export function createServer() {
   const app = express();
@@ -69,6 +74,17 @@ export function createServer() {
   app.get("/api/health", (req, res) => {
     res.json({ status: "ok", service: "Guardian's Hub API" });
   });
+
+  // Serve static files in production
+  if (process.env.NODE_ENV === "production") {
+    const distPath = path.join(__dirname, "../dist");
+    app.use(express.static(distPath));
+    
+    // SPA fallback - serve index.html for all non-API routes
+    app.get("*", (req, res) => {
+      res.sendFile(path.join(distPath, "index.html"));
+    });
+  }
 
   return app;
 }
