@@ -48,81 +48,52 @@ export default function Workshops() {
   const [registeredWorkshops, setRegisteredWorkshops] = useState<Set<string>>(new Set());
 
   useEffect(() => {
-    // TODO: Replace with real API endpoint
-    const mockWorkshops: Workshop[] = [
-      {
-        id: "1",
-        title: "Introduction to Game AI: Behavior Trees",
-        description: "Learn the fundamentals of AI behavior trees and how to implement them in your games. We'll cover decision-making, state management, and practical examples.",
-        instructor: "Dr. Sarah Chen",
-        date: "2025-11-20",
-        time: "14:00",
-        duration: 120,
-        capacity: 50,
-        registered: 32,
-        level: "Beginner",
-        category: "Game Development",
-        tags: ["AI", "Programming", "Unity"],
-        status: "upcoming",
-      },
-      {
-        id: "2",
-        title: "Advanced Shader Programming in GLSL",
-        description: "Deep dive into shader programming with OpenGL Shading Language. Create stunning visual effects and optimize rendering performance.",
-        instructor: "Marcus Rodriguez",
-        date: "2025-11-22",
-        time: "16:00",
-        duration: 180,
-        capacity: 30,
-        registered: 28,
-        level: "Advanced",
-        category: "Graphics",
-        tags: ["Shaders", "GLSL", "Graphics"],
-        status: "upcoming",
-      },
-      {
-        id: "3",
-        title: "Building Multiplayer Games with WebSockets",
-        description: "Learn how to build real-time multiplayer experiences using WebSockets and Node.js. We'll build a complete multiplayer game from scratch.",
-        instructor: "Alex Kim",
-        date: "2025-11-18",
-        time: "18:00",
-        duration: 90,
-        capacity: 40,
-        registered: 40,
-        level: "Intermediate",
-        category: "Networking",
-        tags: ["Multiplayer", "WebSockets", "Node.js"],
-        status: "live",
-      },
-      {
-        id: "4",
-        title: "Game Design Fundamentals",
-        description: "Core principles of game design including player engagement, progression systems, and balancing. Includes hands-on exercises and feedback sessions.",
-        instructor: "Jamie Patterson",
-        date: "2025-11-10",
-        time: "15:00",
-        duration: 120,
-        capacity: 60,
-        registered: 54,
-        level: "Beginner",
-        category: "Game Design",
-        tags: ["Design", "Theory", "Workshop"],
-        status: "completed",
-        recordingUrl: "/recordings/game-design-fundamentals",
-        materialsUrl: "/materials/game-design-fundamentals.pdf",
-      },
-    ];
+    const fetchWorkshops = async () => {
+      setLoading(true);
+      try {
+        const res = await fetch('/api/workshops');
+        if (res.ok) {
+          const data = await res.json();
+          const mapped: Workshop[] = data.workshops.map((w: any) => ({
+            id: w.id,
+            title: w.title,
+            description: w.description,
+            instructor: w.instructor_name,
+            date: new Date(w.start_time).toISOString().split('T')[0],
+            time: new Date(w.start_time).toTimeString().slice(0, 5),
+            duration: Math.round((new Date(w.end_time).getTime() - new Date(w.start_time).getTime()) / 60000),
+            capacity: w.capacity,
+            registered: w.registered_count,
+            level: "Beginner" as const,
+            category: w.tags[0] || "Workshop",
+            tags: w.tags || [],
+            status: w.status,
+            recordingUrl: w.recording_url,
+          }));
+          setWorkshops(mapped);
+        }
+      } catch (error) {
+        console.error('Failed to fetch workshops:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-    setTimeout(() => {
-      setWorkshops(mockWorkshops);
-      setLoading(false);
-    }, 500);
+    fetchWorkshops();
   }, []);
 
-  const handleRegister = (workshopId: string) => {
-    // TODO: Implement API call
-    setRegisteredWorkshops(prev => new Set(prev).add(workshopId));
+  const handleRegister = async (workshopId: string) => {
+    try {
+      const res = await fetch(`/api/workshops/${workshopId}/register`, {
+        method: 'POST',
+        credentials: 'include',
+      });
+      if (res.ok) {
+        setRegisteredWorkshops(prev => new Set(prev).add(workshopId));
+      }
+    } catch (error) {
+      console.error('Failed to register for workshop:', error);
+    }
   };
 
   const getLevelColor = (level: string) => {

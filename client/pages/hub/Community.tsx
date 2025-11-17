@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import Layout from "@/components/Layout";
@@ -10,17 +10,51 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Code, DollarSign, Clock, Users, Star, ArrowRight, Target, Trophy, Zap, GitFork, MessageSquare } from "lucide-react";
 
+interface Bounty {
+  id: string;
+  bounty_id: string;
+  title: string;
+  description: string;
+  reward_usd: number;
+  xp_reward: number;
+  difficulty: string;
+  skills: string[];
+  applicant_count: number;
+  time_estimate: string;
+  posted_by_username: string;
+  project: string;
+}
+
 export default function Community() {
   const { user } = useAuth();
   const navigate = useNavigate();
+  const [bounties, setBounties] = useState<Bounty[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (!user) {
       navigate("/login?redirect=/hub/community");
+      return;
     }
+
+    const fetchBounties = async () => {
+      try {
+        const res = await fetch('/api/bounties');
+        if (res.ok) {
+          const data = await res.json();
+          setBounties(data.bounties);
+        }
+      } catch (error) {
+        console.error('Failed to fetch bounties:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchBounties();
   }, [user, navigate]);
 
-  const bounties = [
+  const mockBountiesOld = [
     {
       id: "BNT-042",
       title: "Implement WebGL Shader Support",
@@ -168,18 +202,18 @@ export default function Community() {
                         <div className="space-y-3 flex-1">
                           <div className="flex items-center gap-2 flex-wrap">
                             <Badge variant="outline" className="border-aethex-400/30">
-                              {bounty.id}
+                              {bounty.bounty_id}
                             </Badge>
                             <Badge variant="outline" className={getDifficultyColor(bounty.difficulty)}>
                               {bounty.difficulty}
                             </Badge>
                             <Badge className="bg-gold-500/10 text-gold-400 border-gold-400/30">
                               <DollarSign className="h-3 w-3 mr-1" />
-                              ${bounty.reward}
+                              ${bounty.reward_usd}
                             </Badge>
                             <Badge className="bg-amber-500/10 text-amber-400 border-amber-400/30">
                               <Zap className="h-3 w-3 mr-1" />
-                              +{bounty.xpReward} XP
+                              +{bounty.xp_reward} XP
                             </Badge>
                             <Badge variant="outline" className="text-xs">
                               <Target className="h-3 w-3 mr-1" />
@@ -202,14 +236,14 @@ export default function Community() {
                       <div className="flex items-center gap-6 text-sm text-muted-foreground">
                         <div className="flex items-center gap-1">
                           <Users className="h-4 w-4 text-aethex-400" />
-                          <span>{bounty.applicants} applicants</span>
+                          <span>{bounty.applicant_count} applicants</span>
                         </div>
                         <div className="flex items-center gap-1">
                           <Clock className="h-4 w-4 text-aethex-400" />
-                          <span>{bounty.timeEstimate}</span>
+                          <span>{bounty.time_estimate}</span>
                         </div>
                         <div className="text-xs">
-                          Posted by @{bounty.postedBy}
+                          Posted by @{bounty.posted_by_username}
                         </div>
                       </div>
                       <div className="flex items-center gap-2 pt-4 border-t border-border/30">

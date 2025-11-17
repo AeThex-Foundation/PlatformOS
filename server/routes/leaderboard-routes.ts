@@ -24,14 +24,54 @@ router.get('/', async (req: Request, res: Response) => {
     const { type = 'xp', limit = '50' } = req.query;
     const maxLimit = Math.min(parseInt(limit as string, 10) || 50, 100);
 
+    if (type === 'badges') {
+      const { data, error } = await supabaseAdmin
+        .from('user_profiles')
+        .select('id, username, full_name, avatar_url, total_xp, level, streak_days')
+        .not('username', 'is', null);
+
+      if (error) {
+        console.error('[Leaderboard API] Error fetching profiles:', error);
+        return res.status(500).json({ error: 'Failed to fetch leaderboard' });
+      }
+
+      const profilesWithBadges = await Promise.all(
+        (data || []).map(async (profile) => {
+          const { count } = await supabaseAdmin
+            .from('user_achievements')
+            .select('id', { count: 'exact', head: true })
+            .eq('user_id', profile.id);
+
+          return {
+            username: profile.username,
+            full_name: profile.full_name,
+            avatar_url: profile.avatar_url,
+            total_xp: profile.total_xp || 0,
+            level: profile.level || 1,
+            badge_count: count || 0,
+            streak_days: profile.streak_days || 0,
+          };
+        })
+      );
+
+      const sorted = profilesWithBadges
+        .sort((a, b) => b.badge_count - a.badge_count)
+        .slice(0, maxLimit);
+
+      const leaderboard: LeaderboardEntry[] = sorted.map((profile, index) => ({
+        rank: index + 1,
+        ...profile,
+      }));
+
+      res.set('Cache-Control', 'public, max-age=60');
+      return res.json({ leaderboard, type });
+    }
+
     let orderBy: { column: string; ascending: boolean };
     
     switch (type) {
       case 'streaks':
         orderBy = { column: 'streak_days', ascending: false };
-        break;
-      case 'badges':
-        orderBy = { column: 'badge_count', ascending: false };
         break;
       case 'xp':
       default:
@@ -40,7 +80,7 @@ router.get('/', async (req: Request, res: Response) => {
 
     const { data, error } = await supabaseAdmin
       .from('user_profiles')
-      .select('username, full_name, avatar_url, total_xp, level, streak_days')
+      .select('id, username, full_name, avatar_url, total_xp, level, streak_days')
       .not('username', 'is', null)
       .order(orderBy.column, { ascending: orderBy.ascending })
       .limit(maxLimit);
@@ -50,37 +90,28 @@ router.get('/', async (req: Request, res: Response) => {
       return res.status(500).json({ error: 'Failed to fetch leaderboard' });
     }
 
-    const profiles = data || [];
-
     const profilesWithBadges = await Promise.all(
-      profiles.map(async (profile) => {
-        const userProfile = await supabaseAdmin
-          .from('user_profiles')
-          .select('id')
-          .eq('username', profile.username)
-          .single();
-
+      (data || []).map(async (profile) => {
         const { count } = await supabaseAdmin
           .from('user_achievements')
           .select('id', { count: 'exact', head: true })
-          .eq('user_id', userProfile.data?.id || '');
+          .eq('user_id', profile.id);
 
         return {
-          ...profile,
+          username: profile.username,
+          full_name: profile.full_name,
+          avatar_url: profile.avatar_url,
+          total_xp: profile.total_xp || 0,
+          level: profile.level || 1,
           badge_count: count || 0,
+          streak_days: profile.streak_days || 0,
         };
       })
     );
 
     const leaderboard: LeaderboardEntry[] = profilesWithBadges.map((profile, index) => ({
       rank: index + 1,
-      username: profile.username,
-      full_name: profile.full_name,
-      avatar_url: profile.avatar_url,
-      total_xp: profile.total_xp || 0,
-      level: profile.level || 1,
-      badge_count: profile.badge_count,
-      streak_days: profile.streak_days || 0,
+      ...profile,
     }));
 
     res.set('Cache-Control', 'public, max-age=60');
