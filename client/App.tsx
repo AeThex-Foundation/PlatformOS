@@ -15,6 +15,7 @@ import About from "./pages/About";
 import EthicsCouncil from "./pages/EthicsCouncil";
 import Contact from "./pages/Contact";
 import Login from "./pages/Login";
+import Dashboard from "./pages/Dashboard";
 import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
 import FourOhFourPage from "./pages/404";
@@ -82,6 +83,7 @@ const App = () => (
 
                     {/* Auth Routes */}
                     <Route path="/login" element={<Login />} />
+                    <Route path="/dashboard" element={<Dashboard />} />
 
                     {/* Legal */}
                     <Route path="/privacy" element={<Privacy />} />
