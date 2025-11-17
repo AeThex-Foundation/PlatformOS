@@ -65,7 +65,8 @@ The Guardian's Hub is a Single Page Application (SPA) built with React 18, TypeS
         - `/hub/governance` - DAO governance integration (Tally.xyz)
         - `/hub/community` - Community bounty board & collaboration
     - **Passport Pages:**
-        - `/:username.aethex.me` - User passport profile (wildcard routing)
+        - `/:username` - Public user passport profile (wildcard routing)
+        - `/api/passport/:username` - Public profile API endpoint
 
 ### System Design Choices
 - **Monorepo Structure (Initial):** Though now a standalone repository, the project was initially part of a larger monorepo, leading to a focus on clear separation of concerns.
@@ -133,3 +134,30 @@ The Guardian's Hub is a Single Page Application (SPA) built with React 18, TypeS
   - Configured deployment with build command (`npm run build`) and run command (`npm start`)
   - Set deployment target to `autoscale` for stateless web app scaling
 - **Result**: All browser tabs, social shares, and app icons now display Foundation red/gold branding
+
+### November 17, 2025 - Phase 4: COMPLETED - Passport Wildcard Routing & Public Profiles
+- **Public Passport Profiles**:
+  - ✅ Created `/api/passport/:username` endpoint for public profile data
+  - ✅ Implemented username validation with regex (`/^[a-z0-9_-]{3,30}$/`)
+  - ✅ Reserved username blocking (foundation, login, signup, hub, admin, api, auth, oauth, etc.)
+  - ✅ Public fields only: username, full_name, avatar_url, bio, location, social links, stats
+  - ✅ Achievement count fetched from `user_achievements` table (accurate badge counts)
+  - ✅ Response caching (5 minutes) for performance
+- **Passport React Component**:
+  - ✅ Built Passport profile page with Foundation red/gold branding
+  - ✅ Displays avatar, name, username, bio, stats (level, XP, badges)
+  - ✅ Shows location, join date, social links (website, GitHub, Twitter, LinkedIn)
+  - ✅ Loading states and 404 error handling
+  - ✅ Responsive Card-based design
+- **Wildcard Routing**:
+  - ✅ Added `/:username` route to React Router (positioned before 404, after specific routes)
+  - ✅ Integrated with Express server at `/api/passport`
+  - ✅ Prevents route conflicts with reserved usernames
+- **SEO & Social Sharing**:
+  - ✅ Enhanced SEO component with Twitter Card support (`twitter:card: summary_large_image`)
+  - ✅ Dynamic OpenGraph tags (og:title, og:description, og:image, og:url)
+  - ✅ Canonical URLs for proper SEO
+  - ✅ Personalized meta tags: "{full_name} (@{username})" with bio and avatar
+  - ✅ Foundation logo fallback for profiles without avatars
+  - ✅ Proper social media previews on Twitter, Facebook, LinkedIn
+- **Result**: Public Passport profiles now accessible at `aethex.foundation/{username}` with full SEO/social sharing support
