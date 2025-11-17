@@ -12,6 +12,7 @@ import oauthRoutes from "./oauth/oauth-routes";
 import passportRoutes from "./api/passport";
 import discordRoutes from "./discord/discord-routes";
 import creatorsRoutes from "./routes/creators-routes";
+import profileRoutes from "./routes/profile-routes";
 import { authMiddleware } from "./middleware/auth";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -55,6 +56,9 @@ export function createServer() {
 
   // Creator Directory (Foundation "Hall of Fame")
   app.use("/api/creators", creatorsRoutes);
+
+  // Profile Management
+  app.use("/api/profile", profileRoutes);
 
   app.post("/api/contact", async (req, res) => {
     try {

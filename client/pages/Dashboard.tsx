@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
+import { supabase } from "@/lib/supabase";
 import Layout from "@/components/Layout";
 import SEO from "@/components/SEO";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -9,6 +10,8 @@ import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Switch } from "@/components/ui/switch";
+import { useToast } from "@/hooks/use-toast";
 import OAuthConnections from "@/components/settings/OAuthConnections";
 import {
   Shield,
@@ -26,14 +29,24 @@ import {
   Link2,
   Settings,
   LayoutDashboard,
+  Eye,
+  EyeOff,
 } from "lucide-react";
 
 export default function Dashboard() {
-  const { user, profile, linkedProviders, linkProvider, unlinkProvider } = useAuth();
+  const { user, profile, linkedProviders, linkProvider, unlinkProvider, refreshProfile } = useAuth();
   const [searchParams, setSearchParams] = useSearchParams();
   const [currentTime, setCurrentTime] = useState(new Date());
+  const [showInDirectory, setShowInDirectory] = useState(profile?.show_in_creator_directory || false);
+  const { toast } = useToast();
   
   const activeTab = searchParams.get("tab") || "overview";
+
+  useEffect(() => {
+    if (profile) {
+      setShowInDirectory(profile.show_in_creator_directory || false);
+    }
+  }, [profile]);
 
   useEffect(() => {
     const timer = setInterval(() => setCurrentTime(new Date()), 60000);
@@ -42,6 +55,64 @@ export default function Dashboard() {
   
   const handleTabChange = (value: string) => {
     setSearchParams({ tab: value });
+  };
+
+  const handleDirectoryToggle = async (enabled: boolean) => {
+    if (!profile || !user) return;
+
+    // Check if profile is complete (avatar, username, bio required)
+    const isProfileComplete = !!(profile.avatar_url && profile.username && profile.bio);
+    
+    if (enabled && !isProfileComplete) {
+      toast({
+        title: "Incomplete Profile",
+        description: "To appear in the Creator Directory, you need an avatar, username, and bio. Complete your profile first.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    try {
+      setShowInDirectory(enabled);
+
+      // Get current session for auth token
+      const { data: sessionData } = await supabase.auth.getSession();
+      const token = sessionData?.session?.access_token;
+
+      if (!token) {
+        throw new Error('No auth token available');
+      }
+
+      const response = await fetch('/api/profile/creator-directory', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        },
+        body: JSON.stringify({ show_in_directory: enabled }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to update directory settings');
+      }
+
+      await refreshProfile();
+
+      toast({
+        title: enabled ? "You're now visible!" : "Profile hidden",
+        description: enabled 
+          ? "Your profile will appear in the public Creator Directory."
+          : "Your profile has been removed from the public Creator Directory.",
+      });
+    } catch (error) {
+      console.error('Error updating directory settings:', error);
+      setShowInDirectory(!enabled); // Revert on error
+      toast({
+        title: "Error",
+        description: "Failed to update directory settings. Please try again.",
+        variant: "destructive",
+      });
+    }
   };
 
   const getGreeting = () => {
@@ -482,6 +553,49 @@ export default function Dashboard() {
                           <p className="text-sm text-muted-foreground">{user?.email || "Not set"}</p>
                         </div>
                       </div>
+                      
+                      {/* Creator Directory Opt-In */}
+                      <Separator className="my-6" />
+                      <div className="space-y-4">
+                        <div>
+                          <h3 className="text-sm font-semibold mb-1">Public Visibility</h3>
+                          <p className="text-xs text-muted-foreground">Control how your profile appears to the community</p>
+                        </div>
+                        <div className="flex items-start justify-between p-4 border border-border/50 rounded-lg bg-card/30">
+                          <div className="flex-1 space-y-1">
+                            <div className="flex items-center gap-2">
+                              {showInDirectory ? (
+                                <Eye className="h-4 w-4 text-green-500" />
+                              ) : (
+                                <EyeOff className="h-4 w-4 text-muted-foreground" />
+                              )}
+                              <p className="font-medium text-sm">Show in Creator Directory</p>
+                              {showInDirectory && (
+                                <Badge variant="outline" className="ml-2 text-xs border-green-500/30 text-green-400">
+                                  Visible
+                                </Badge>
+                              )}
+                            </div>
+                            <p className="text-xs text-muted-foreground">
+                              Display your profile in the public Foundation Creator Directory.
+                              {!profile?.avatar_url || !profile?.username || !profile?.bio ? (
+                                <span className="text-amber-500"> Requires: avatar, username, and bio.</span>
+                              ) : null}
+                            </p>
+                            {showInDirectory && (
+                              <Link to="/creators" className="text-xs text-blue-400 hover:underline inline-block mt-1">
+                                View Creator Directory →
+                              </Link>
+                            )}
+                          </div>
+                          <Switch 
+                            checked={showInDirectory}
+                            onCheckedChange={handleDirectoryToggle}
+                            aria-label="Toggle Creator Directory visibility"
+                          />
+                        </div>
+                      </div>
+
                       <div className="mt-6">
                         <Button asChild variant="outline" className="w-full border-red-500/50 hover:bg-red-500/10">
                           <Link to="/profile/settings">
