@@ -80,65 +80,101 @@ export default function Admin() {
       return;
     }
 
-    // TODO: Replace with real API endpoint
-    // Mock data for now
-    const mockUsers: User[] = [
-      {
-        id: "1",
-        username: "mrpiglr",
-        full_name: "Mr. PigLR",
-        email: "mrpiglr@gmail.com",
-        avatar_url: null,
-        level: 12,
-        total_xp: 5420,
-        badge_count: 8,
-        created_at: "2024-01-15T00:00:00Z",
-        arms: ["FOUNDATION", "LABS"],
-        roles: ["Architect"],
-      },
-      {
-        id: "2",
-        username: "andersongladney",
-        full_name: "Anderson Gladney",
-        email: "anderson@example.com",
-        avatar_url: null,
-        level: 10,
-        total_xp: 4200,
-        badge_count: 6,
-        created_at: "2024-02-01T00:00:00Z",
-        arms: ["GAMEFORGE"],
-        roles: ["Community Member"],
-      },
-    ];
+    const fetchUsers = async () => {
+      setLoading(true);
+      try {
+        const res = await fetch('/api/admin/users?limit=100', {
+          credentials: 'include',
+        });
+        if (res.ok) {
+          const data = await res.json();
+          const mapped: User[] = data.users.map((u: any) => ({
+            id: u.id,
+            username: u.username,
+            full_name: u.full_name,
+            email: u.email,
+            avatar_url: u.avatar_url,
+            level: u.level,
+            total_xp: u.total_xp,
+            badge_count: 0,
+            created_at: u.created_at,
+            arms: u.arms || [],
+            roles: u.roles || [],
+          }));
+          setUsers(mapped);
+        }
+      } catch (error) {
+        console.error('Failed to fetch users:', error);
+        toast({
+          title: "Error",
+          description: "Failed to load users",
+          variant: "destructive",
+        });
+      } finally {
+        setLoading(false);
+      }
+    };
 
-    setTimeout(() => {
-      setUsers(mockUsers);
-      setLoading(false);
-    }, 500);
+    fetchUsers();
   }, [user, isAdmin, navigate, toast]);
 
   const handleRoleUpdate = async (userId: string, newRoles: string[]) => {
-    // TODO: Implement API call
-    toast({
-      title: "Roles Updated",
-      description: `User roles have been updated successfully`,
-    });
+    try {
+      const res = await fetch(`/api/admin/users/${userId}`, {
+        method: 'PATCH',
+        credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ roles: newRoles }),
+      });
+      if (res.ok) {
+        toast({
+          title: "Roles Updated",
+          description: `User roles have been updated successfully`,
+        });
+        setUsers(users.map(u => u.id === userId ? { ...u, roles: newRoles } : u));
+      }
+    } catch (error) {
+      console.error('Failed to update roles:', error);
+    }
   };
 
   const handleArmUpdate = async (userId: string, newArms: string[]) => {
-    // TODO: Implement API call
-    toast({
-      title: "Arms Updated",
-      description: `User arm affiliations have been updated`,
-    });
+    try {
+      const res = await fetch(`/api/admin/users/${userId}`, {
+        method: 'PATCH',
+        credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ arms: newArms }),
+      });
+      if (res.ok) {
+        toast({
+          title: "Arms Updated",
+          description: `User arm affiliations have been updated`,
+        });
+        setUsers(users.map(u => u.id === userId ? { ...u, arms: newArms } : u));
+      }
+    } catch (error) {
+      console.error('Failed to update arms:', error);
+    }
   };
 
   const handleGrantAchievement = async (userId: string, achievementId: string) => {
-    // TODO: Implement API call
-    toast({
-      title: "Achievement Granted",
-      description: `Badge has been awarded successfully`,
-    });
+    try {
+      const res = await fetch('/api/achievements/grant', {
+        method: 'POST',
+        credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ user_id: userId, achievement_id: achievementId }),
+      });
+      if (res.ok) {
+        toast({
+          title: "Achievement Granted",
+          description: `Badge has been awarded successfully`,
+        });
+      }
+    } catch (error) {
+      console.error('Failed to grant achievement:', error);
+    }
   };
 
   const filteredUsers = users.filter((u) =>

@@ -34,54 +34,67 @@ export default function Leaderboard() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // TODO: Replace with real API endpoint
-    // For now, using mock data
-    const mockLeaders: LeaderboardEntry[] = [
-      {
-        id: "1",
-        username: "mrpiglr",
-        full_name: "Mr. PigLR",
-        avatar_url: null,
-        total_xp: 5420,
-        level: 12,
-        badge_count: 8,
-        current_streak: 15,
-        longest_streak: 30,
-        rank: 1,
-      },
-      {
-        id: "2",
-        username: "andersongladney",
-        full_name: "Anderson Gladney",
-        avatar_url: null,
-        total_xp: 4200,
-        level: 10,
-        badge_count: 6,
-        current_streak: 8,
-        longest_streak: 25,
-        rank: 2,
-      },
-      {
-        id: "3",
-        username: "manchestergaming321",
-        full_name: "Manchester Gaming",
-        avatar_url: null,
-        total_xp: 3800,
-        level: 9,
-        badge_count: 5,
-        current_streak: 12,
-        longest_streak: 20,
-        rank: 3,
-      },
-    ];
+    const fetchLeaderboards = async () => {
+      setLoading(true);
+      try {
+        const [xpRes, streaksRes, badgesRes] = await Promise.all([
+          fetch('/api/leaderboard?type=xp&limit=50'),
+          fetch('/api/leaderboard?type=streaks&limit=50'),
+          fetch('/api/leaderboard?type=badges&limit=50'),
+        ]);
 
-    // Simulate API delay
-    setTimeout(() => {
-      setXpLeaders([...mockLeaders].sort((a, b) => b.total_xp - a.total_xp));
-      setStreakLeaders([...mockLeaders].sort((a, b) => (b.current_streak || 0) - (a.current_streak || 0)));
-      setBadgeLeaders([...mockLeaders].sort((a, b) => b.badge_count - a.badge_count));
-      setLoading(false);
-    }, 500);
+        if (xpRes.ok && streaksRes.ok && badgesRes.ok) {
+          const xpData = await xpRes.json();
+          const streaksData = await streaksRes.json();
+          const badgesData = await badgesRes.json();
+
+          setXpLeaders(xpData.leaderboard.map((entry: any) => ({
+            id: entry.username,
+            username: entry.username,
+            full_name: entry.full_name,
+            avatar_url: entry.avatar_url,
+            total_xp: entry.total_xp,
+            level: entry.level,
+            badge_count: entry.badge_count,
+            current_streak: entry.streak_days,
+            longest_streak: entry.streak_days,
+            rank: entry.rank,
+          })));
+
+          setStreakLeaders(streaksData.leaderboard.map((entry: any) => ({
+            id: entry.username,
+            username: entry.username,
+            full_name: entry.full_name,
+            avatar_url: entry.avatar_url,
+            total_xp: entry.total_xp,
+            level: entry.level,
+            badge_count: entry.badge_count,
+            current_streak: entry.streak_days,
+            longest_streak: entry.streak_days,
+            rank: entry.rank,
+          })));
+
+          setBadgeLeaders(badgesData.leaderboard.map((entry: any) => ({
+            id: entry.username,
+            username: entry.username,
+            full_name: entry.full_name,
+            avatar_url: entry.avatar_url,
+            total_xp: entry.total_xp,
+            level: entry.level,
+            badge_count: entry.badge_count,
+            current_streak: entry.streak_days,
+            longest_streak: entry.streak_days,
+            rank: entry.rank,
+          })));
+        }
+      } catch (error) {
+        console.error('Failed to fetch leaderboard:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchLeaderboards();
   }, []);
 
   const getRankIcon = (rank: number) => {
