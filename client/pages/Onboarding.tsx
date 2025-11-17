@@ -143,7 +143,29 @@ export default function Onboarding() {
         description: "Welcome to the AeThex Foundation.",
       });
 
-      navigate("/hub");
+      // Check for OAuth redirect (e.g., from third-party app authentication)
+      const oauthRedirect = sessionStorage.getItem("oauth_redirect_to");
+      if (oauthRedirect) {
+        sessionStorage.removeItem("oauth_redirect_to");
+        
+        // Decode and validate the redirect URL
+        const decodedRedirect = decodeURIComponent(oauthRedirect);
+        
+        // Security: Only allow relative paths (no absolute URLs)
+        if (decodedRedirect.startsWith("/")) {
+          // For server-side OAuth endpoints, use window.location
+          if (decodedRedirect.startsWith("/api/")) {
+            window.location.href = decodedRedirect;
+          } else {
+            navigate(decodedRedirect);
+          }
+        } else {
+          // Invalid redirect - fall back to Hub
+          navigate("/hub");
+        }
+      } else {
+        navigate("/hub");
+      }
     } catch (error: any) {
       console.error("Onboarding error:", error);
       toastError({

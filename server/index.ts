@@ -9,6 +9,7 @@ import { randomUUID } from "crypto";
 import blogIndexHandler from "../api/blog/index";
 import blogSlugHandler from "../api/blog/[slug]";
 import oauthRoutes from "./oauth/oauth-routes";
+import { authMiddleware } from "./middleware/auth";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -19,6 +20,9 @@ export function createServer() {
   app.use(cors());
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
+
+  // Authentication middleware - validates Supabase sessions
+  app.use(authMiddleware);
 
   app.use((req, res, next) => {
     res.setHeader("X-Frame-Options", "SAMEORIGIN");
