@@ -179,3 +179,42 @@ The Guardian's Hub is a Single Page Application (SPA) built with React 18, TypeS
   - ✅ Updated copyright to "AeThex Foundation" (from "AeThex Corporation")
   - **Result**: Footer now reflects Foundation's role as authentication provider and governance body
 - **Verified Live Passport Profiles**: 7 user profiles accessible on Foundation (manchestergaming321, diakolana4, andersonfgladney, austinrivas484, warningboom, andersongladney, mrpiglr)
+
+### November 17, 2025 - Creator Directory "Hall of Fame" Implementation
+- **Privacy-First Opt-In System**:
+  - ✅ Created `/creators` public page (Foundation "Hall of Fame")
+  - ✅ Privacy-first design: **opt-out by default** (users must explicitly enable visibility)
+  - ✅ Profile completeness validation (requires avatar, username, bio)
+  - ✅ Featured Architects section (horizontal scroll, Architect-only)
+  - ✅ Full Community Directory grid with filterable search
+- **Backend API Endpoints**:
+  - ✅ `GET /api/creators` - Public endpoint (no auth required) with filtering (arm, role) and sorting
+  - ✅ `POST /api/profile/creator-directory` - Protected endpoint for opt-in/opt-out toggle
+  - ✅ Response caching (5 minutes) for performance
+  - ✅ Security: Only exposes public fields (no email, no OAuth tokens)
+  - ✅ Fixed authentication: Moved public routes BEFORE authMiddleware
+- **Dashboard Integration**:
+  - ✅ Added "Show in Creator Directory" toggle in Settings tab
+  - ✅ Real-time profile completeness validation
+  - ✅ Optimistic UI updates with toast notifications
+  - ✅ Green "Visible" badge when enabled
+  - ✅ Link to Creator Directory when profile is visible
+- **Database Schema** (Requires Manual Migration):
+  - ✅ Added `show_in_creator_directory` boolean field (default: FALSE)
+  - ✅ Added `arms` text[] field (multi-affiliation: GAMEFORGE, ETHOS, LABS, FOUNDATION)
+  - ✅ Added `roles` text[] field (Architect, Mentor, Community Member)
+  - ✅ Added `last_active_at` timestamp (for "Recently Active" sorting)
+  - ✅ Created index: `idx_user_profiles_directory` for performance
+  - ❗ **Action Required**: Run `SUPABASE-ADD-CREATOR-FIELDS.sql` in Supabase Dashboard
+- **UI/UX Features**:
+  - ✅ Color-coded Arm tags (blue=GAMEFORGE, purple=ETHOS, green=LABS, red=FOUNDATION)
+  - ✅ Architect badge (🛡️) for senior contributors
+  - ✅ Sortable: "Recently Active" vs "Newest Members"
+  - ✅ Filterable: Multi-select by Arm and Role
+  - ✅ Creator Cards: Avatar, name, username, bio, stats (level, XP, badges), social links
+  - ✅ "View Profile" links to `/:username` Passport profiles
+- **Documentation**:
+  - ✅ Created `CREATOR-DIRECTORY-IMPLEMENTATION.md` (full feature documentation)
+  - ✅ Created `DEPLOYMENT-CHECKLIST.md` (step-by-step migration guide)
+  - ✅ Updated TypeScript types (`AethexUserProfile` interface)
+- **Result**: Privacy-first Creator Directory ready to deploy once database migration is run
