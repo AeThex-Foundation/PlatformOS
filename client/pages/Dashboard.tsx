@@ -13,6 +13,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Switch } from "@/components/ui/switch";
 import { useToast } from "@/hooks/use-toast";
 import OAuthConnections from "@/components/settings/OAuthConnections";
+import AchievementBadges from "@/components/AchievementBadges";
 import {
   Shield,
   BookOpen,
@@ -31,6 +32,7 @@ import {
   LayoutDashboard,
   Eye,
   EyeOff,
+  Award,
 } from "lucide-react";
 
 export default function Dashboard() {
@@ -232,10 +234,14 @@ export default function Dashboard() {
 
             {/* Tabs */}
             <Tabs value={activeTab} onValueChange={handleTabChange} className="space-y-6">
-              <TabsList className="grid w-full grid-cols-3 max-w-md">
+              <TabsList className="grid w-full grid-cols-4 max-w-2xl">
                 <TabsTrigger value="overview" className="gap-2">
                   <LayoutDashboard className="h-4 w-4" />
                   Overview
+                </TabsTrigger>
+                <TabsTrigger value="achievements" className="gap-2">
+                  <Award className="h-4 w-4" />
+                  Achievements
                 </TabsTrigger>
                 <TabsTrigger value="connections" className="gap-2">
                   <Link2 className="h-4 w-4" />
@@ -473,6 +479,66 @@ export default function Dashboard() {
                 </Card>
               </div>
             </div>
+              </TabsContent>
+
+              {/* Achievements Tab */}
+              <TabsContent value="achievements" className="space-y-6">
+                <Card className="border-border/30">
+                  <CardHeader>
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <CardTitle className="flex items-center gap-2">
+                          <Trophy className="h-5 w-5 text-gold-400" />
+                          Your Achievements
+                        </CardTitle>
+                        <CardDescription>
+                          Badges and rewards you've earned through contributions and participation
+                        </CardDescription>
+                      </div>
+                      <Badge variant="outline" className="border-gold-400/30 text-gold-400">
+                        {profile?.badge_count || 0} Earned
+                      </Badge>
+                    </div>
+                  </CardHeader>
+                  <CardContent>
+                    {user && <AchievementBadges userId={user.id} variant="grid" />}
+                  </CardContent>
+                </Card>
+
+                <Card className="border-border/30 bg-gradient-to-br from-aethex-500/5 to-gold-500/5">
+                  <CardHeader>
+                    <CardTitle className="text-lg">Earn More Achievements</CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-3">
+                    <div className="flex items-start gap-3 text-sm">
+                      <div className="w-8 h-8 rounded-full bg-aethex-500/20 flex items-center justify-center flex-shrink-0">
+                        <BookOpen className="h-4 w-4 text-aethex-400" />
+                      </div>
+                      <div>
+                        <p className="font-medium">Complete Protocol Documentation</p>
+                        <p className="text-xs text-muted-foreground">Read all sections of the whitepaper</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start gap-3 text-sm">
+                      <div className="w-8 h-8 rounded-full bg-gold-500/20 flex items-center justify-center flex-shrink-0">
+                        <Vote className="h-4 w-4 text-gold-400" />
+                      </div>
+                      <div>
+                        <p className="font-medium">Participate in Governance</p>
+                        <p className="text-xs text-muted-foreground">Vote on your first DAO proposal</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start gap-3 text-sm">
+                      <div className="w-8 h-8 rounded-full bg-amber-500/20 flex items-center justify-center flex-shrink-0">
+                        <Users className="h-4 w-4 text-amber-400" />
+                      </div>
+                      <div>
+                        <p className="font-medium">Join the Community</p>
+                        <p className="text-xs text-muted-foreground">Complete your first bounty or collaboration</p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
               </TabsContent>
 
               {/* Connections Tab */}

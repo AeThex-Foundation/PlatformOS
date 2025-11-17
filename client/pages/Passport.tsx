@@ -22,11 +22,14 @@ import {
   Linkedin,
   Award,
   Zap,
-  ArrowLeft
+  ArrowLeft,
+  Trophy
 } from "lucide-react";
 import LoadingScreen from "@/components/LoadingScreen";
+import AchievementBadges from "@/components/AchievementBadges";
 
 interface PublicPassportProfile {
+  id: string;
   username: string;
   full_name: string;
   avatar_url: string | null;
@@ -294,6 +297,26 @@ export default function Passport() {
                 </div>
               </CardContent>
             </Card>
+
+            {/* Achievements Section */}
+            {profile.badge_count && profile.badge_count > 0 && (
+              <Card className="bg-card/50 backdrop-blur-sm border border-border/50 shadow-2xl">
+                <CardHeader>
+                  <div className="flex items-center justify-between">
+                    <h2 className="text-2xl font-bold flex items-center gap-2">
+                      <Trophy className="h-6 w-6 text-gold-400" />
+                      Achievements
+                    </h2>
+                    <Badge variant="outline" className="border-gold-400/30 text-gold-400">
+                      {profile.badge_count} Earned
+                    </Badge>
+                  </div>
+                </CardHeader>
+                <CardContent>
+                  <AchievementBadges userId={profile.id} variant="compact" maxDisplay={8} />
+                </CardContent>
+              </Card>
+            )}
 
             {/* Back Button */}
             <div className="text-center">
