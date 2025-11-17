@@ -146,13 +146,13 @@ export default function ArmSwitcher() {
         ))}
       </div>
 
-      {/* Mobile Version - Compact Grid */}
-      <div className="flex md:hidden items-center gap-1.5">
-        {ARMS.slice(0, 4).map((arm) => (
+      {/* Mobile Version - Compact Grid showing all ARMs */}
+      <div className="flex md:hidden items-center gap-1 flex-wrap max-w-[200px]">
+        {ARMS.map((arm) => (
           <button
             key={arm.id}
             onClick={() => handleArmClick(arm)}
-            className={`group relative h-8 w-8 flex items-center justify-center rounded-md hover:scale-105 transition-all duration-200 flex-shrink-0 ${
+            className={`group relative h-7 w-7 flex items-center justify-center rounded-md hover:scale-105 transition-all duration-200 flex-shrink-0 ${
               currentArm === arm.id ? "ring-1 ring-current" : ""
             }`}
             title={arm.name}
@@ -160,7 +160,7 @@ export default function ArmSwitcher() {
             <img
               src={arm.logoUrl}
               alt={arm.label}
-              className="relative h-6 w-6 object-contain"
+              className="relative h-5 w-5 object-contain"
             />
           </button>
         ))}
