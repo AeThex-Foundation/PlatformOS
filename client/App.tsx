@@ -18,11 +18,13 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Onboarding from "./pages/Onboarding";
 import Dashboard from "./pages/Dashboard";
+import ProfileSettings from "./pages/ProfileSettings";
 import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
 import Passport from "./pages/Passport";
 import DiscordVerify from "./pages/DiscordVerify";
 import FourOhFourPage from "./pages/404";
+import GameForge from "./pages/GameForge";
 
 import Hub from "./pages/hub/Hub";
 import Protocol from "./pages/hub/Protocol";
@@ -100,6 +102,10 @@ const App = () => (
                     <Route path="/signup" element={<Signup />} />
                     <Route path="/onboarding" element={<Onboarding />} />
                     <Route path="/dashboard" element={<Dashboard />} />
+                    <Route path="/profile/settings" element={<ProfileSettings />} />
+                    
+                    {/* GameForge */}
+                    <Route path="/gameforge" element={<GameForge />} />
                     
                     {/* Admin Routes */}
                     <Route path="/admin" element={<Admin />} />
