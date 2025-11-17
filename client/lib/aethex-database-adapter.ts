@@ -161,34 +161,20 @@ export function checkProfileComplete(
     return true;
   }
 
+  // Foundation Passport system: username is REQUIRED for onboarding completion
+  // This ensures all users go through the Foundation's onboarding flow
   if ((p as any).onboarded === true) {
     return true;
   }
 
-  const hasIdentity =
-    isNonEmptyString(p.username) || isNonEmptyString(p.full_name);
-  const hasProfileCore =
-    isNonEmptyString(p.full_name) &&
-    isNonEmptyString((p as any).user_type) &&
-    isNonEmptyString((p as any).experience_level);
-  const hasStory = isNonEmptyString(p.bio) || isNonEmptyString(p.location);
-  const hasPresence =
-    isNonEmptyString(p.avatar_url) ||
-    isNonEmptyString((p as any).banner_url) ||
-    isNonEmptyString((p as any).website_url) ||
-    isNonEmptyString(p.github_url) ||
-    isNonEmptyString(p.linkedin_url) ||
-    isNonEmptyString(p.twitter_url);
-
-  if (hasIdentity && hasProfileCore) {
-    return true;
+  // CRITICAL: Username is mandatory for Foundation Passport - no exceptions
+  if (!isNonEmptyString(p.username)) {
+    return false;
   }
 
-  if (hasIdentity && hasStory && hasPresence) {
-    return true;
-  }
-
-  return false;
+  // Once username is set, profile is considered complete (minimal onboarding)
+  // Additional fields (bio, user_type, etc.) are optional enhancements
+  return true;
 }
 
 export interface AethexProject {

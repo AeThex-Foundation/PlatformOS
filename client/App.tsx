@@ -15,6 +15,8 @@ import About from "./pages/About";
 import EthicsCouncil from "./pages/EthicsCouncil";
 import Contact from "./pages/Contact";
 import Login from "./pages/Login";
+import Signup from "./pages/Signup";
+import Onboarding from "./pages/Onboarding";
 import Dashboard from "./pages/Dashboard";
 import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
@@ -83,6 +85,8 @@ const App = () => (
 
                     {/* Auth Routes */}
                     <Route path="/login" element={<Login />} />
+                    <Route path="/signup" element={<Signup />} />
+                    <Route path="/onboarding" element={<Onboarding />} />
                     <Route path="/dashboard" element={<Dashboard />} />
 
                     {/* Legal */}
