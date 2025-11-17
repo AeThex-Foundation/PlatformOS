@@ -210,20 +210,11 @@ export default function CodeLayout({ children, hideFooter }: LayoutProps) {
                       <>
                         <SheetClose asChild>
                           <Link
-                            to="/onboarding"
+                            to="/login"
                             onClick={scrollToTop}
                             className="block rounded-md bg-gradient-to-r from-aethex-500 to-neon-blue px-2.5 py-1.5 text-xs font-semibold text-white"
                           >
-                            Join AeThex
-                          </Link>
-                        </SheetClose>
-                        <SheetClose asChild>
-                          <Link
-                            to="/login"
-                            onClick={scrollToTop}
-                            className="block rounded-md px-2.5 py-1.5 text-xs font-medium text-gray-400 hover:text-white hover:bg-gray-800/50 transition-colors"
-                          >
-                            Sign In
+                            Access Hub
                           </Link>
                         </SheetClose>
                       </>
@@ -356,20 +347,13 @@ export default function CodeLayout({ children, hideFooter }: LayoutProps) {
                     )}
                   </div>
                 ) : (
-                  // Not logged in - show sign in/join buttons
+                  // Not logged in - show access button
                   <>
-                    <Button
-                      asChild
-                      variant="outline"
-                      className="hidden sm:inline-flex hover-lift interactive-scale"
-                    >
-                      <Link to="/login">Sign In</Link>
-                    </Button>
                     <Button
                       asChild
                       className="bg-gradient-to-r from-aethex-500 to-neon-blue hover:from-aethex-600 hover:to-neon-blue/90 hover-lift interactive-scale glow-blue"
                     >
-                      <Link to="/onboarding">Join AeThex</Link>
+                      <Link to="/login">Access Hub</Link>
                     </Button>
                   </>
                 )}
