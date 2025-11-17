@@ -108,11 +108,14 @@ The Guardian's Hub is a Single Page Application (SPA) built with React 18, TypeS
   - ✅ Built /api/oauth/token endpoint (code exchange + refresh)
   - ✅ Built /api/oauth/userinfo endpoint (OpenID Connect)
   - ✅ Pre-seeded "AeThex Corporation" client for aethex.dev
+  - ✅ Generated secure client_secret for AeThex Corporation client (confidential client mode)
   - ✅ Created authentication middleware (validates Supabase sessions, attaches req.user)
   - ✅ Fixed OAuth flow continuity (new user → onboarding → back to authorize)
   - ✅ Patched open redirect vulnerability (validates relative paths only)
   - ✅ Fixed double-decode bug in OAuth parameter handling
+  - ✅ Discord OAuth Dashboard Integration: Added Connections tab to Dashboard with link/unlink functionality
   - Note: Access tokens use base64 encoding for MVP (upgrade to RS256 JWT in production)
+  - **OAuth Client Credentials:** Documented in CORP-OAUTH-CREDENTIALS.md for aethex.dev integration
 
 ### November 17, 2025 - Made Foundation Page Accessible
 - Added "Foundation" link to public navigation menu
