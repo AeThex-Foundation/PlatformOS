@@ -10,6 +10,7 @@ import blogIndexHandler from "../api/blog/index";
 import blogSlugHandler from "../api/blog/[slug]";
 import oauthRoutes from "./oauth/oauth-routes";
 import passportRoutes from "./api/passport";
+import discordRoutes from "./discord/discord-routes";
 import { authMiddleware } from "./middleware/auth";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -47,6 +48,9 @@ export function createServer() {
 
   // Passport Public Profile Endpoint
   app.use("/api/passport", passportRoutes);
+
+  // Discord OAuth Integration
+  app.use("/api/discord", discordRoutes);
 
   app.post("/api/contact", async (req, res) => {
     try {

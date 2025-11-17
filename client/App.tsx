@@ -21,6 +21,7 @@ import Dashboard from "./pages/Dashboard";
 import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
 import Passport from "./pages/Passport";
+import DiscordVerify from "./pages/DiscordVerify";
 import FourOhFourPage from "./pages/404";
 
 import Hub from "./pages/hub/Hub";
@@ -89,6 +90,9 @@ const App = () => (
                     <Route path="/signup" element={<Signup />} />
                     <Route path="/onboarding" element={<Onboarding />} />
                     <Route path="/dashboard" element={<Dashboard />} />
+
+                    {/* Discord OAuth */}
+                    <Route path="/discord-verify" element={<DiscordVerify />} />
 
                     {/* Legal */}
                     <Route path="/privacy" element={<Privacy />} />
