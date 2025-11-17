@@ -20,6 +20,7 @@ import Onboarding from "./pages/Onboarding";
 import Dashboard from "./pages/Dashboard";
 import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
+import Passport from "./pages/Passport";
 import FourOhFourPage from "./pages/404";
 
 import Hub from "./pages/hub/Hub";
@@ -92,6 +93,9 @@ const App = () => (
                     {/* Legal */}
                     <Route path="/privacy" element={<Privacy />} />
                     <Route path="/terms" element={<Terms />} />
+
+                    {/* Passport Profile (Wildcard - must be before 404) */}
+                    <Route path="/:username" element={<Passport />} />
 
                     {/* 404 Not Found */}
                     <Route path="*" element={<FourOhFourPage />} />
