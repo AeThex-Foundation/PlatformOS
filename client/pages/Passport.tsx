@@ -24,7 +24,7 @@ import {
   Zap,
   ArrowLeft
 } from "lucide-react";
-import { LoadingScreen } from "@/components/LoadingScreen";
+import LoadingScreen from "@/components/LoadingScreen";
 
 interface PublicPassportProfile {
   username: string;
