@@ -4,7 +4,9 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import SupabaseStatus from "./SupabaseStatus";
 import { useAuth } from "@/contexts/AuthContext";
+import { useArmTheme } from "@/contexts/ArmThemeContext";
 import NotificationBell from "@/components/notifications/NotificationBell";
+import ArmSwitcher from "@/components/ArmSwitcher";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -42,32 +44,43 @@ export default function CodeLayout({ children, hideFooter }: LayoutProps) {
   const location = useLocation();
   const navigate = useNavigate();
   const { user, profile, signOut, loading, profileComplete } = useAuth();
+  const { theme, currentArm } = useArmTheme();
 
-  const labsLogoUrl = "/labs-logo.png";
-  const labsAccentHex = "#FBBF24";
-
-  const publicNavigation = [
+  const publicNavigation = currentArm === "gameforge" ? [
+    { name: "Home", href: "/gameforge" },
+    { name: "About", href: "/gameforge/about" },
+    { name: "Join", href: "/gameforge/join-gameforge" },
+    { name: "Pricing", href: "/gameforge/pricing" },
+    { name: "Teams", href: "/gameforge/teams" },
+  ] : [
     { name: "Home", href: "/" },
     { name: "About", href: "/about" },
-    { name: "Labs", href: "/labs" },
-    { name: "Research", href: "/research" },
+    { name: "Foundation", href: "/foundation" },
+    { name: "Ethics Council", href: "/ethics-council" },
     { name: "Contact", href: "/contact" },
-    { name: "Community", href: "/community" },
+    { name: "Community", href: "/foundation/community" },
     { name: "Documentation", href: "/docs" },
   ];
 
-  const userNavigation = [
+  const userNavigation = currentArm === "gameforge" ? [
+    { name: "Dashboard", href: "/gameforge" },
+    { name: "Start Building", href: "/gameforge/start-building" },
+    { name: "View Portfolio", href: "/gameforge/view-portfolio" },
+    { name: "Teams", href: "/gameforge/teams" },
+    { name: "Pricing", href: "/gameforge/pricing" },
+    { name: "About", href: "/gameforge/about" },
+  ] : [
     { name: "Hub", href: "/hub" },
     { name: "Protocol", href: "/hub/protocol" },
     { name: "Governance", href: "/hub/governance" },
     { name: "Community", href: "/hub/community" },
-    { name: "Curriculum", href: "/labs/curriculum" },
-    { name: "Achievements", href: "/labs/achievements" },
-    { name: "Downloads", href: "/labs/downloads" },
-    { name: "Developers", href: "/labs/community/developers" },
+    { name: "Curriculum", href: "/foundation/curriculum" },
+    { name: "Achievements", href: "/foundation/achievements" },
+    { name: "Downloads", href: "/foundation/downloads" },
+    { name: "Developers", href: "/foundation/community/developers" },
     { name: "My Profile", href: "/profile/me" },
     { name: "About", href: "/about" },
-    { name: "Research", href: "/research" },
+    { name: "Ethics Council", href: "/ethics-council" },
     { name: "Contact", href: "/contact" },
   ];
 
@@ -100,14 +113,17 @@ export default function CodeLayout({ children, hideFooter }: LayoutProps) {
 
   return (
     <div
-      className="min-h-screen transition-all duration-200 wallpaper-labs"
+      className={cn(
+        "min-h-screen transition-all duration-200",
+        theme.wallpaperClass,
+      )}
     >
       <header
         className="sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 animate-slide-down overflow-hidden transition-all duration-200"
         style={{
-          borderBottomColor: labsAccentHex,
+          borderBottomColor: theme.accentHex,
           borderBottomWidth: "2px",
-          boxShadow: `0 8px 32px ${labsAccentHex}15`,
+          boxShadow: `0 8px 32px ${theme.accentHex}15`,
         }}
       >
         <div className="container mx-auto max-w-7xl flex min-h-16 h-auto items-center justify-between px-3 md:px-4 py-2 gap-1 md:gap-3 lg:gap-4 min-w-0 overflow-hidden">
@@ -115,34 +131,39 @@ export default function CodeLayout({ children, hideFooter }: LayoutProps) {
           <div className="flex items-center shrink-0 relative">
             {/* Desktop - Regular Link */}
             <Link
-              to="/"
+              to={currentArm === "gameforge" ? "/gameforge" : "/"}
               className="hover-glow group inline-block hidden sm:block"
             >
               <img 
-                src={labsLogoUrl} 
-                alt="AeThex Labs"
+                src={theme.logoUrl} 
+                alt={`AeThex ${theme.displayName}`}
                 className="h-12 w-12 transition-all duration-300 group-hover:scale-110"
                 style={{
-                  filter: `drop-shadow(0 0 8px ${labsAccentHex}80)`
+                  filter: `drop-shadow(0 0 8px ${theme.accentHex}80)`
                 }}
               />
             </Link>
 
             {/* Mobile - Logo Button */}
             <Link
-              to="/"
+              to={currentArm === "gameforge" ? "/gameforge" : "/"}
               className="hover-glow group inline-block sm:hidden"
             >
               <img 
-                src={labsLogoUrl} 
-                alt="AeThex Labs"
+                src={theme.logoUrl} 
+                alt={`AeThex ${theme.displayName}`}
                 className="h-10 w-10 transition-all duration-300 group-hover:scale-110"
                 style={{
-                  filter: `drop-shadow(0 0 8px ${labsAccentHex}80)`
+                  filter: `drop-shadow(0 0 8px ${theme.accentHex}80)`
                 }}
               />
             </Link>
           </div>
+
+          {/* ARM Switcher */}
+          <nav className="hidden md:flex items-center mx-3">
+            <ArmSwitcher />
+          </nav>
 
           {/* Auth Section */}
           <div className="flex items-center gap-1 md:gap-3 animate-slide-left shrink-0 overflow-visible">
@@ -368,9 +389,9 @@ export default function CodeLayout({ children, hideFooter }: LayoutProps) {
         <footer
           className="bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 animate-slide-up transition-all duration-200"
           style={{
-            borderTopColor: labsAccentHex,
+            borderTopColor: theme.accentHex,
             borderTopWidth: "1px",
-            boxShadow: `inset 0 1px 0 ${labsAccentHex}20`,
+            boxShadow: `inset 0 1px 0 ${theme.accentHex}20`,
           }}
         >
           <div className="container mx-auto max-w-7xl px-4 py-12">
@@ -523,14 +544,14 @@ export default function CodeLayout({ children, hideFooter }: LayoutProps) {
                   <p className="flex items-center gap-2">
                     <span
                       className="h-1.5 w-1.5 rounded-full"
-                      style={{ backgroundColor: `${labsAccentHex}B3` }}
+                      style={{ backgroundColor: `${theme.accentHex}B3` }}
                     />
                     Queen Creek, Arizona
                   </p>
                   <p className="flex items-center gap-2">
                     <span
                       className="h-1.5 w-1.5 rounded-full"
-                      style={{ backgroundColor: `${labsAccentHex}B3` }}
+                      style={{ backgroundColor: `${theme.accentHex}B3` }}
                     />
                     <a
                       href="mailto:info@aethex.biz"
@@ -539,7 +560,7 @@ export default function CodeLayout({ children, hideFooter }: LayoutProps) {
                         color: "var(--muted-foreground)",
                       }}
                       onMouseEnter={(e) =>
-                        (e.currentTarget.style.color = labsAccentHex)
+                        (e.currentTarget.style.color = theme.accentHex)
                       }
                       onMouseLeave={(e) =>
                         (e.currentTarget.style.color =
@@ -552,7 +573,7 @@ export default function CodeLayout({ children, hideFooter }: LayoutProps) {
                   <p className="flex items-center gap-2">
                     <span
                       className="h-1.5 w-1.5 rounded-full"
-                      style={{ backgroundColor: `${labsAccentHex}B3` }}
+                      style={{ backgroundColor: `${theme.accentHex}B3` }}
                     />
                     (346) 556-7100
                   </p>
@@ -577,7 +598,7 @@ export default function CodeLayout({ children, hideFooter }: LayoutProps) {
                         color: "inherit",
                       }}
                       onMouseEnter={(e) =>
-                        (e.currentTarget.style.color = labsAccentHex)
+                        (e.currentTarget.style.color = theme.accentHex)
                       }
                       onMouseLeave={(e) =>
                         (e.currentTarget.style.color = "inherit")
@@ -595,7 +616,7 @@ export default function CodeLayout({ children, hideFooter }: LayoutProps) {
                         color: "inherit",
                       }}
                       onMouseEnter={(e) =>
-                        (e.currentTarget.style.color = labsAccentHex)
+                        (e.currentTarget.style.color = theme.accentHex)
                       }
                       onMouseLeave={(e) =>
                         (e.currentTarget.style.color = "inherit")
@@ -613,7 +634,7 @@ export default function CodeLayout({ children, hideFooter }: LayoutProps) {
                         color: "inherit",
                       }}
                       onMouseEnter={(e) =>
-                        (e.currentTarget.style.color = labsAccentHex)
+                        (e.currentTarget.style.color = theme.accentHex)
                       }
                       onMouseLeave={(e) =>
                         (e.currentTarget.style.color = "inherit")
@@ -631,7 +652,7 @@ export default function CodeLayout({ children, hideFooter }: LayoutProps) {
                         color: "inherit",
                       }}
                       onMouseEnter={(e) =>
-                        (e.currentTarget.style.color = labsAccentHex)
+                        (e.currentTarget.style.color = theme.accentHex)
                       }
                       onMouseLeave={(e) =>
                         (e.currentTarget.style.color = "inherit")
@@ -659,7 +680,7 @@ export default function CodeLayout({ children, hideFooter }: LayoutProps) {
                       className="transition-all duration-300 hover:translate-x-1 inline-block"
                       style={{ color: "inherit" }}
                       onMouseEnter={(e) =>
-                        (e.currentTarget.style.color = labsAccentHex)
+                        (e.currentTarget.style.color = theme.accentHex)
                       }
                       onMouseLeave={(e) =>
                         (e.currentTarget.style.color = "inherit")
@@ -675,7 +696,7 @@ export default function CodeLayout({ children, hideFooter }: LayoutProps) {
                       className="transition-all duration-300 hover:translate-x-1 inline-block"
                       style={{ color: "inherit" }}
                       onMouseEnter={(e) =>
-                        (e.currentTarget.style.color = labsAccentHex)
+                        (e.currentTarget.style.color = theme.accentHex)
                       }
                       onMouseLeave={(e) =>
                         (e.currentTarget.style.color = "inherit")
@@ -691,7 +712,7 @@ export default function CodeLayout({ children, hideFooter }: LayoutProps) {
                       className="transition-all duration-300 hover:translate-x-1 inline-block"
                       style={{ color: "inherit" }}
                       onMouseEnter={(e) =>
-                        (e.currentTarget.style.color = labsAccentHex)
+                        (e.currentTarget.style.color = theme.accentHex)
                       }
                       onMouseLeave={(e) =>
                         (e.currentTarget.style.color = "inherit")
@@ -707,7 +728,7 @@ export default function CodeLayout({ children, hideFooter }: LayoutProps) {
                       className="transition-all duration-300 hover:translate-x-1 inline-block"
                       style={{ color: "inherit" }}
                       onMouseEnter={(e) =>
-                        (e.currentTarget.style.color = labsAccentHex)
+                        (e.currentTarget.style.color = theme.accentHex)
                       }
                       onMouseLeave={(e) =>
                         (e.currentTarget.style.color = "inherit")
@@ -723,7 +744,7 @@ export default function CodeLayout({ children, hideFooter }: LayoutProps) {
                       className="transition-all duration-300 hover:translate-x-1 inline-block"
                       style={{ color: "inherit" }}
                       onMouseEnter={(e) =>
-                        (e.currentTarget.style.color = labsAccentHex)
+                        (e.currentTarget.style.color = theme.accentHex)
                       }
                       onMouseLeave={(e) =>
                         (e.currentTarget.style.color = "inherit")
@@ -739,7 +760,7 @@ export default function CodeLayout({ children, hideFooter }: LayoutProps) {
                       className="transition-all duration-300 hover:translate-x-1 inline-block"
                       style={{ color: "inherit" }}
                       onMouseEnter={(e) =>
-                        (e.currentTarget.style.color = labsAccentHex)
+                        (e.currentTarget.style.color = theme.accentHex)
                       }
                       onMouseLeave={(e) =>
                         (e.currentTarget.style.color = "inherit")
@@ -767,7 +788,7 @@ export default function CodeLayout({ children, hideFooter }: LayoutProps) {
                       className="transition-all duration-300 hover:translate-x-1 inline-block"
                       style={{ color: "inherit" }}
                       onMouseEnter={(e) =>
-                        (e.currentTarget.style.color = labsAccentHex)
+                        (e.currentTarget.style.color = theme.accentHex)
                       }
                       onMouseLeave={(e) =>
                         (e.currentTarget.style.color = "inherit")
@@ -784,7 +805,7 @@ export default function CodeLayout({ children, hideFooter }: LayoutProps) {
                       className="transition-all duration-300 hover:translate-x-1 inline-block"
                       style={{ color: "inherit" }}
                       onMouseEnter={(e) =>
-                        (e.currentTarget.style.color = labsAccentHex)
+                        (e.currentTarget.style.color = theme.accentHex)
                       }
                       onMouseLeave={(e) =>
                         (e.currentTarget.style.color = "inherit")
@@ -801,7 +822,7 @@ export default function CodeLayout({ children, hideFooter }: LayoutProps) {
                       className="transition-all duration-300 hover:translate-x-1 inline-block"
                       style={{ color: "inherit" }}
                       onMouseEnter={(e) =>
-                        (e.currentTarget.style.color = labsAccentHex)
+                        (e.currentTarget.style.color = theme.accentHex)
                       }
                       onMouseLeave={(e) =>
                         (e.currentTarget.style.color = "inherit")
@@ -818,7 +839,7 @@ export default function CodeLayout({ children, hideFooter }: LayoutProps) {
                       className="transition-all duration-300 hover:translate-x-1 inline-block"
                       style={{ color: "inherit" }}
                       onMouseEnter={(e) =>
-                        (e.currentTarget.style.color = labsAccentHex)
+                        (e.currentTarget.style.color = theme.accentHex)
                       }
                       onMouseLeave={(e) =>
                         (e.currentTarget.style.color = "inherit")
@@ -834,7 +855,7 @@ export default function CodeLayout({ children, hideFooter }: LayoutProps) {
                       className="transition-all duration-300 hover:translate-x-1 inline-block"
                       style={{ color: "inherit" }}
                       onMouseEnter={(e) =>
-                        (e.currentTarget.style.color = labsAccentHex)
+                        (e.currentTarget.style.color = theme.accentHex)
                       }
                       onMouseLeave={(e) =>
                         (e.currentTarget.style.color = "inherit")
@@ -850,7 +871,7 @@ export default function CodeLayout({ children, hideFooter }: LayoutProps) {
                       className="transition-all duration-300 hover:translate-x-1 inline-block"
                       style={{ color: "inherit" }}
                       onMouseEnter={(e) =>
-                        (e.currentTarget.style.color = labsAccentHex)
+                        (e.currentTarget.style.color = theme.accentHex)
                       }
                       onMouseLeave={(e) =>
                         (e.currentTarget.style.color = "inherit")
@@ -867,7 +888,7 @@ export default function CodeLayout({ children, hideFooter }: LayoutProps) {
               className="mt-8 pt-8 flex flex-col sm:flex-row justify-between items-center animate-fade-in transition-all duration-200"
               style={{
                 animationDelay: "0.4s",
-                borderTopColor: labsAccentHex,
+                borderTopColor: theme.accentHex,
                 borderTopWidth: "1px",
               }}
             >
@@ -881,7 +902,7 @@ export default function CodeLayout({ children, hideFooter }: LayoutProps) {
                   className="text-xs text-muted-foreground transition-all duration-300 hover:scale-105"
                   style={{ color: "inherit" }}
                   onMouseEnter={(e) =>
-                    (e.currentTarget.style.color = labsAccentHex)
+                    (e.currentTarget.style.color = theme.accentHex)
                   }
                   onMouseLeave={(e) =>
                     (e.currentTarget.style.color = "inherit")
@@ -895,7 +916,7 @@ export default function CodeLayout({ children, hideFooter }: LayoutProps) {
                   className="text-xs text-muted-foreground transition-all duration-300 hover:scale-105"
                   style={{ color: "inherit" }}
                   onMouseEnter={(e) =>
-                    (e.currentTarget.style.color = labsAccentHex)
+                    (e.currentTarget.style.color = theme.accentHex)
                   }
                   onMouseLeave={(e) =>
                     (e.currentTarget.style.color = "inherit")

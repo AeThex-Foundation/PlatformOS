@@ -1,8 +1,8 @@
-# AeThex Labs
+# Guardian's Hub (AeThex Foundation)
 
 ## Overview
 
-AeThex Labs is the AeThex Passport Authentication Provider and the official Labs research platform. It acts as the "Government" responsible for issuing and managing all AeThex identities. Its core purpose is to serve as the authentication provider for all AeThex properties, handle user onboarding and identity management, and host various AeThex domains. A key architectural principle, the "Axiom Model," establishes Labs as the governing body for the Passport system, owning the master Supabase `user_profiles` database and providing authentication services to client applications.
+Guardian's Hub is the AeThex Passport Authentication Provider and the official Foundation website. It acts as the "Government" responsible for issuing and managing all AeThex identities. Its core purpose is to serve as the authentication provider for all AeThex properties, handle user onboarding and identity management, and host various AeThex domains. A key architectural principle, the "Axiom Model," establishes the Foundation as the governing body for the Passport system, owning the master Supabase `user_profiles` database and providing authentication services to client applications like AeThex Corp.
 
 ## User Preferences
 
@@ -11,35 +11,35 @@ AeThex Labs is the AeThex Passport Authentication Provider and the official Labs
 - The user wants detailed explanations.
 - The user prefers clean, functional code.
 - The user wants the agent to use simple and clear language.
-- The user wants the agent to strictly adhere to the yellow color scheme.
+- The user wants the agent to strictly adhere to the red and gold color scheme.
 
 ## System Architecture
 
-AeThex Labs is a Single Page Application (SPA) built with React 18, TypeScript, Vite, and TailwindCSS 3 for the frontend, with an Express server integrated for the backend.
+The Guardian's Hub is a Single Page Application (SPA) built with React 18, TypeScript, Vite, and TailwindCSS 3 for the frontend, with an Express server integrated for the backend.
 
 ### UI/UX Decisions
-- **Color Scheme:** Exclusively uses a yellow theme (#FBBF24 for yellow accent).
+- **Color Scheme:** Exclusively uses a red and gold theme (#EF4444 for red accent).
 - **Component Library:** Radix UI for components, styled with TailwindCSS 3.
 - **Iconography:** Lucide React icons.
-- **Design Approach:** Public research pages and private "Hub" pages post-login.
+- **Design Approach:** Public "Trust Billboard" pages and private "Hub" pages post-login.
 
 ### Technical Implementations
 - **Frontend:** React 18, React Router 6, TypeScript, Vite, TailwindCSS 3.
 - **Backend:** Express server, integrated with Vite, utilizing `tsx` for TypeScript execution in production.
-- **Authentication:** Supabase authentication, with Labs as the sole owner of the `user_profiles` database.
+- **Authentication:** Supabase authentication, with Foundation as the sole owner of the `user_profiles` database.
 - **Passport System:** Functions as the AeThex Passport (SSO) authentication provider.
 - **OAuth Provider:** Exposes OAuth 2.0 endpoints (`/api/oauth/authorize`, `/api/oauth/token`, `/api/oauth/userinfo`) with PKCE support for client applications.
 - **Email Functionality:** Nodemailer for email services.
 - **Routing:**
-    - **Public Pages:** `/`, `/about`, `/research`, `/experiments`, `/contact`.
+    - **Public Pages:** `/`, `/about`, `/foundation`, `/ethics-council`, `/contact`.
     - **Authentication Pages:** `/login`, `/signup`, `/onboarding`, `/profile/settings`.
     - **Hub Pages (Logged-in):** `/hub`, `/hub/protocol`, `/hub/governance`, `/hub/community`.
     - **Passport Pages:** `/:username` (public profile), `/api/passport/:username` (public profile API).
     - **Creator Directory:** `/creators` (public directory with opt-in visibility).
     - **Admin Pages:** `/admin` (admin-only user management).
     - **Leaderboard:** `/leaderboard` (displays XP, streaks, badges).
-    - **Workshops:** `/workshops` (upcoming research workshops and registration).
-    - **Resources:** `/resources` (Labs research guides, tools).
+    - **Workshops:** `/workshops` (upcoming workshops and registration).
+    - **Resources:** `/resources` (Foundation guides, tools).
     - **User Sessions:** `/api/sessions` (active sessions).
     - **OAuth Clients:** `/api/oauth-clients` (manage authorized apps).
 
