@@ -43,7 +43,7 @@ export default function CodeLayout({ children, hideFooter }: LayoutProps) {
   const navigate = useNavigate();
   const { user, profile, signOut, loading, profileComplete } = useAuth();
 
-  const labsLogoUrl = "https://cdn.builder.io/api/v1/image/assets%2F9e2d722ce33b43fb82fef3c9ff87f2fb%2F8e68c2d3e68f4aa599086799e39bd53e";
+  const labsLogoUrl = "/labs-logo.png";
   const labsAccentHex = "#FBBF24";
 
   const publicNavigation = [
