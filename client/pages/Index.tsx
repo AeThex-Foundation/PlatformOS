@@ -52,111 +52,111 @@ export default function Index() {
     tags?: string[];
   };
 
-  const labsNav = [
+  const foundationNav = [
     {
-      title: "Research",
-      description: "Explore cutting-edge research and breakthrough discoveries",
+      title: "Curriculum",
+      description: "Learn game development with workshops, courses, and hands-on projects",
       icon: GraduationCap,
-      color: "from-yellow-400 to-yellow-600",
-      link: "/research",
+      color: "from-aethex-500 to-red-600",
+      link: "/foundation/curriculum",
       audience: "All skill levels",
     },
     {
-      title: "Experiments",
-      description: "Innovative tools and experimental frameworks",
+      title: "Open Source",
+      description: "Tools, frameworks, and libraries for building better games",
       icon: Code,
-      color: "from-yellow-500 to-amber-500",
-      link: "/experiments",
+      color: "from-red-500 to-gold-500",
+      link: "/hub/community",
       audience: "Developers",
     },
     {
       title: "Community",
-      description: "Connect with researchers and collaborate on projects",
+      description: "Connect with developers, join teams, and collaborate on projects",
       icon: Users,
-      color: "from-amber-400 to-yellow-500",
-      link: "/community",
+      color: "from-gold-500 to-amber-500",
+      link: "/foundation/community",
       audience: "Everyone",
     },
     {
       title: "Achievements",
-      description: "Build your research portfolio and showcase breakthroughs",
+      description: "Build your portfolio and showcase your skills with badges",
       icon: Award,
-      color: "from-yellow-400 to-amber-600",
-      link: "/achievements",
+      color: "from-amber-500 to-aethex-600",
+      link: "/foundation/achievements",
       audience: "Contributors",
     },
   ];
 
   const platformFeatures: FeatureCard[] = [
     {
-      title: "Research Hub",
-      description: "Your experiments, progress, and discoveries in one place",
+      title: "Learning Hub",
+      description: "Your courses, progress, and certifications in one place",
       icon: BookOpen,
-      color: "from-yellow-400 to-yellow-600",
+      color: "from-aethex-500 to-red-600",
       link: "/hub",
-      tags: ["Research", "Progress"],
+      tags: ["Courses", "Progress"],
     },
     {
       title: "Project Showcase",
-      description: "Explore and contribute to experimental research tools",
+      description: "Explore and contribute to open source game dev tools",
       icon: Code,
-      color: "from-yellow-500 to-amber-500",
+      color: "from-red-500 to-gold-500",
       link: "/hub/community",
       tags: ["Tools", "Libraries"],
     },
     {
-      title: "Researcher Profile",
-      description: "Public portfolio with verifiable breakthroughs and contributions",
+      title: "Developer Profile",
+      description: "Public portfolio with verifiable achievements and contributions",
       icon: Award,
-      color: "from-amber-400 to-yellow-500",
+      color: "from-gold-500 to-amber-500",
       link: "/profile/me",
       tags: ["Portfolio", "Badges"],
     },
     {
       title: "Resource Center",
-      description: "Download research tools, templates, and datasets",
+      description: "Download tools, templates, and assets for your projects",
       icon: Download,
-      color: "from-yellow-400 to-amber-600",
-      link: "/downloads",
+      color: "from-amber-500 to-aethex-600",
+      link: "/foundation/downloads",
       tags: ["Tools", "Assets"],
     },
   ];
 
   const showcaseImpact = [
     {
-      title: "Researchers Connected",
+      title: "Developers Trained",
       metric: "5,000+",
-      description: "Through experiments and research programs",
-      color: "bg-yellow-500/10 border-yellow-400/30",
+      description: "Through workshops and online courses",
+      color: "bg-aethex-500/10 border-aethex-400/30",
     },
     {
-      title: "Research Projects",
+      title: "Open Source Tools",
       metric: "25+",
-      description: "Active experiments and breakthroughs",
-      color: "bg-yellow-400/10 border-yellow-400/30",
+      description: "Active projects and libraries maintained",
+      color: "bg-red-500/10 border-red-400/30",
     },
     {
       title: "Community Members",
       metric: "10,000+",
-      description: "Active researchers in our network",
-      color: "bg-amber-500/10 border-amber-400/30",
+      description: "Active developers in our network",
+      color: "bg-gold-500/10 border-gold-400/30",
     },
     {
       title: "Resources Shared",
       metric: "100+",
-      description: "Free research papers, guides, and datasets",
-      color: "bg-yellow-400/10 border-yellow-400/30",
+      description: "Free tutorials, guides, and templates",
+      color: "bg-amber-500/10 border-amber-400/30",
     },
   ];
 
   if (isLoading) {
     return (
       <LoadingScreen
-        message="Connecting Labs Network..."
+        message="Connecting Foundation Network..."
         showProgress={true}
         duration={1200}
-        accentColor="from-yellow-400 to-yellow-600"
-        armLogo="https://cdn.builder.io/api/v1/image/assets%2F9e2d722ce33b43fb82fef3c9ff87f2fb%2F8e68c2d3e68f4aa599086799e39bd53e"
+        accentColor="from-aethex-500 to-red-600"
+        armLogo="https://cdn.builder.io/api/v1/image/assets%2Ffc53d607e21d497595ac97e0637001a1%2Fc02cb1bf5056479bbb3ea4bd91f0d472?format=webp&width=800"
       />
     );
   }
@@ -164,8 +164,8 @@ export default function Index() {
   return (
     <>
       <SEO
-        pageTitle="Labs"
-        description="AeThex Labs: Discover. Innovate. Transform. Cutting-edge research and breakthrough discoveries."
+        pageTitle="Foundation"
+        description="AeThex Foundation: Learn. Build. Connect. Open-source tools, education, and community for game developers."
         canonical={
           typeof window !== "undefined"
             ? window.location.href
@@ -175,13 +175,13 @@ export default function Index() {
       <Layout hideFooter>
         <section className="relative min-h-screen flex items-start justify-center overflow-hidden pt-24 sm:pt-36">
           <div className="absolute inset-0">
-            <div className="absolute inset-0 bg-gradient-to-br from-yellow-900/50 via-background to-amber-900/30" />
+            <div className="absolute inset-0 bg-gradient-to-br from-aethex-900/50 via-background to-red-900/30" />
             <div className="absolute inset-0">
               <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
                 <div className="relative w-96 h-96 opacity-5">
                   <img
-                    src="https://cdn.builder.io/api/v1/image/assets%2F9e2d722ce33b43fb82fef3c9ff87f2fb%2F8e68c2d3e68f4aa599086799e39bd53e"
-                    alt="Labs Logo"
+                    src="https://cdn.builder.io/api/v1/image/assets%2Ffc53d607e21d497595ac97e0637001a1%2Fc02cb1bf5056479bbb3ea4bd91f0d472?format=webp&width=800"
+                    alt="Foundation Logo"
                     className="w-full h-full animate-float"
                   />
                 </div>
@@ -190,7 +190,7 @@ export default function Index() {
               {[...Array(20)].map((_, i) => (
                 <div
                   key={i}
-                  className="absolute bg-yellow-400/20 animate-float"
+                  className="absolute bg-aethex-400/20 animate-float"
                   style={{
                     width: `${10 + Math.random() * 20}px`,
                     height: `${10 + Math.random() * 20}px`,
@@ -209,22 +209,22 @@ export default function Index() {
             <div className="text-center space-y-12">
               <div className="space-y-6 animate-scale-in">
                 <div className="space-y-4">
-                  <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold font-labs">
-                    <span className="text-gradient bg-gradient-to-r from-yellow-400 via-yellow-500 to-amber-500 bg-clip-text text-transparent">
-                      AeThex Labs
+                  <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold">
+                    <span className="text-gradient bg-gradient-to-r from-aethex-500 via-red-500 to-gold-500 bg-clip-text text-transparent">
+                      AeThex Foundation
                     </span>
                   </h1>
-                  <h2 className="text-2xl lg:text-3xl text-gradient animate-fade-in bg-gradient-to-r from-yellow-400 to-amber-400 bg-clip-text text-transparent font-labs">
-                    Discover. Innovate. Transform.
+                  <h2 className="text-2xl lg:text-3xl text-gradient animate-fade-in bg-gradient-to-r from-red-400 to-gold-400 bg-clip-text text-transparent">
+                    Learn. Build. Connect.
                   </h2>
                   <p className="text-lg text-muted-foreground max-w-3xl mx-auto animate-slide-up">
-                    Pushing the boundaries of technology through cutting-edge research and breakthrough discoveries. Join Labs and shape the future.
+                    Open-source tools, educational workshops, and a thriving community for game developers. Join the Foundation and build your future.
                   </p>
                 </div>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto animate-slide-up">
-                {labsNav.map((item, index) => {
+                {foundationNav.map((item, index) => {
                   const Icon = item.icon;
                   return (
                     <Link
@@ -232,10 +232,10 @@ export default function Index() {
                       to={item.link}
                       className="group"
                     >
-                      <Card className="relative overflow-hidden rounded-xl border border-border/30 hover:border-yellow-400/50 bg-card/60 backdrop-blur-sm hover:translate-y-[-4px] hover:shadow-[0_12px_40px_rgba(251,191,36,0.3)] transition-all duration-300 h-full cursor-pointer"
+                      <Card className="relative overflow-hidden rounded-xl border border-border/30 hover:border-aethex-400/50 bg-card/60 backdrop-blur-sm hover:translate-y-[-4px] hover:shadow-[0_12px_40px_rgba(217,55,55,0.3)] transition-all duration-300 h-full cursor-pointer"
                         style={{ animationDelay: `${index * 0.1}s` }}
                       >
-                        <div className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-yellow-500/10 via-transparent to-amber-500/10" />
+                        <div className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-aethex-500/10 via-transparent to-gold-500/10" />
                         <CardContent className="p-6 flex flex-col items-center text-center gap-4 h-full justify-between">
                           <div
                             className={`relative w-14 h-14 rounded-lg bg-gradient-to-r ${item.color} grid place-items-center shadow-inner`}
