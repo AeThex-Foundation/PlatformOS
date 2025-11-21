@@ -81,12 +81,14 @@ const ProfileView = () => {
     return <LoadingScreen message="Loading profile..." showProgress />;
   }
 
-  // If trying to access /profile/me without auth, redirect to login
+  // If trying to access /profile/me without auth, redirect to login (must check before error/profile checks)
   if (username === "me" && !user) {
-    return <Navigate to="/login" replace />;
+    window.location.href = "/login";
+    return <LoadingScreen message="Redirecting to login..." showProgress />;
   }
 
-  if (error || !profile) {
+  // Only show error if NOT trying to access /profile/me without auth
+  if (error || (!profile && username !== "me")) {
     return (
       <Layout>
         <div className="min-h-screen flex items-center justify-center">

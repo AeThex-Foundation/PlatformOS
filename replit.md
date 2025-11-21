@@ -56,7 +56,7 @@ The Guardian's Hub is a Single Page Application (SPA) built with React 18, TypeS
 
 ### Profile System Implementation
 - **New Pages Created:**
-  - `ProfileView.tsx`: Displays user profiles at `/profile/me` and `/profile/:username` with comprehensive information display including stats, skills, work experience, and portfolio items.
+  - `ProfileView.tsx`: Displays user profiles at `/profile/me` and `/profile/:username` with comprehensive information display including stats, skills, work experience, and portfolio items. Includes authentication redirect for `/profile/me` route.
   - `ProfileEdit.tsx`: Allows users to edit their profile information at `/profile/edit` with form validation and real-time updates.
 
 - **Backend API Enhancements:**
@@ -68,9 +68,16 @@ The Guardian's Hub is a Single Page Application (SPA) built with React 18, TypeS
   - Fixed role selection options to match database enum values: `client`, `game_developer`, `community_member`, `customer`, `staff`.
 
 - **Routes Added:**
-  - `/profile/me`: View own profile (requires authentication).
+  - `/profile/me`: View own profile (requires authentication, redirects to `/login` if not authenticated).
   - `/profile/:username`: View any user's public profile.
   - `/profile/edit`: Edit own profile (requires authentication).
+
+### Community Routes Fixed
+- **New Page Created:**
+  - `FoundationCommunity.tsx`: Landing page for `/foundation/community` that provides navigation to teams, about, leaderboard, and creator directory sections.
+
+- **Routes Added:**
+  - `/foundation/community`: Public community landing page with links to all community resources.
 
 ## External Dependencies
 
