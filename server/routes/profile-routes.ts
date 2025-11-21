@@ -19,6 +19,96 @@ const supabaseAdmin = createClient(supabaseUrl, supabaseServiceKey, {
 });
 
 /**
+ * GET /api/profile/:username
+ * 
+ * Get a user's public profile by username
+ * Returns profile data for public viewing
+ */
+router.get('/:username', async (req: Request, res: Response) => {
+  try {
+    const { username } = req.params;
+
+    if (!username) {
+      return res.status(400).json({ error: 'Username is required' });
+    }
+
+    const { data: profile, error: fetchError } = await supabaseAdmin
+      .from('user_profiles')
+      .select('*')
+      .eq('username', username)
+      .single();
+
+    if (fetchError || !profile) {
+      return res.status(404).json({ error: 'Profile not found' });
+    }
+
+    return res.json(profile);
+  } catch (err) {
+    console.error('Error fetching profile:', err);
+    return res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+/**
+ * PUT /api/profile
+ * 
+ * Update the authenticated user's profile
+ * Requires authentication
+ */
+router.put('/', async (req: Request, res: Response) => {
+  try {
+    // @ts-ignore - req.user is set by authMiddleware
+    const user = req.user;
+
+    if (!user) {
+      return res.status(401).json({ error: 'Unauthorized' });
+    }
+
+    const allowedFields = [
+      'full_name',
+      'bio',
+      'location',
+      'user_type',
+      'experience_level',
+      'github_url',
+      'linkedin_url',
+      'twitter_url',
+      'portfolio_url',
+      'youtube_url',
+      'twitch_url',
+      'skills_detailed',
+      'languages',
+      'work_experience',
+      'portfolio_items',
+    ];
+
+    const updates: any = {};
+    for (const field of allowedFields) {
+      if (req.body[field] !== undefined) {
+        updates[field] = req.body[field];
+      }
+    }
+
+    updates.updated_at = new Date().toISOString();
+
+    const { error: updateError } = await supabaseAdmin
+      .from('user_profiles')
+      .update(updates)
+      .eq('id', user.id);
+
+    if (updateError) {
+      console.error('Error updating profile:', updateError);
+      return res.status(500).json({ error: 'Failed to update profile' });
+    }
+
+    return res.json({ success: true, message: 'Profile updated successfully' });
+  } catch (err) {
+    console.error('Profile update error:', err);
+    return res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+/**
  * POST /api/profile/creator-directory
  * 
  * Update user's Creator Directory visibility preference
