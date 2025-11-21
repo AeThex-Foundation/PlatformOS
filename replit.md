@@ -2,7 +2,7 @@
 
 ## Overview
 
-Guardian's Hub is the AeThex Passport Authentication Provider and the official Foundation website. It acts as the "Government" responsible for issuing and managing all AeThex identities. Its core purpose is to serve as the authentication provider for all AeThex properties, handle user onboarding and identity management, and host various AeThex domains. A key architectural principle, the "Axiom Model," establishes the Foundation as the governing body for the Passport system, owning the master Supabase `user_profiles` database and providing authentication services to client applications like AeThex Corp.
+Guardian's Hub is the AeThex Passport Authentication Provider and the official Foundation website. It acts as the "Government" responsible for issuing and managing all AeThex identities. Its core purpose is to serve as the authentication provider for all AeThex properties, handle user onboarding and identity management, and host various AeThex domains. A key architectural principle establishes Labs as the governing body for the Passport system, owning the master Supabase `user_profiles` database and providing authentication services to client applications.
 
 ## User Preferences
 
