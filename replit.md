@@ -42,14 +42,35 @@ The Guardian's Hub is a Single Page Application (SPA) built with React 18, TypeS
     - **Resources:** `/resources` (Foundation guides, tools).
     - **User Sessions:** `/api/sessions` (active sessions).
     - **OAuth Clients:** `/api/oauth-clients` (manage authorized apps).
+    - **Profile System:** `/profile/me` (user's own profile), `/profile/:username` (other user profiles), `/profile/edit` (edit profile).
 
 ### System Design Choices
 - **Type Safety:** TypeScript for type-safe communication across client, server, and shared interfaces.
 - **Development Environment:** Single-port development with Vite + Express integration, hot reload.
 - **Production Readiness:** Dedicated build and run commands for production deployment with `autoscale` target.
-- **Data Model:** Comprehensive Supabase schema including tables for `achievements`, `user_achievements`, `workshops`, `workshop_registrations`, `resources`, `resource_downloads`, `bounties`, and `bounty_applications`, all with RLS policies and indexes.
+- **Data Model:** Comprehensive Supabase schema including tables for `achievements`, `user_achievements`, `workshops`, `workshop_registrations`, `resources`, `resource_downloads`, `bounties`, and `bounty_applications`, all with RLS policies and indexes. Extended profile fields include `skills_detailed`, `languages`, `work_experience`, `portfolio_items`, and `arm_affiliations` for rich user profiles.
 - **Security:** Global `authMiddleware` applied to authenticated routes, explicit role checks for admin endpoints, and service-role Supabase client used only after identity verification.
 - **Monorepo Structure:** Initially part of a monorepo, fostering clear separation of concerns.
+
+## Recent Changes (November 21, 2025)
+
+### Profile System Implementation
+- **New Pages Created:**
+  - `ProfileView.tsx`: Displays user profiles at `/profile/me` and `/profile/:username` with comprehensive information display including stats, skills, work experience, and portfolio items.
+  - `ProfileEdit.tsx`: Allows users to edit their profile information at `/profile/edit` with form validation and real-time updates.
+
+- **Backend API Enhancements:**
+  - `GET /api/profile/:username`: Public endpoint to retrieve any user's profile by username.
+  - `PUT /api/profile`: Authenticated endpoint for users to update their own profile information.
+
+- **Type System Updates:**
+  - Extended `AethexUserProfile` interface in `aethex-database-adapter.ts` to include `skills_detailed`, `languages`, `work_experience`, `portfolio_items`, and `arm_affiliations` fields.
+  - Fixed role selection options to match database enum values: `client`, `game_developer`, `community_member`, `customer`, `staff`.
+
+- **Routes Added:**
+  - `/profile/me`: View own profile (requires authentication).
+  - `/profile/:username`: View any user's public profile.
+  - `/profile/edit`: Edit own profile (requires authentication).
 
 ## External Dependencies
 
