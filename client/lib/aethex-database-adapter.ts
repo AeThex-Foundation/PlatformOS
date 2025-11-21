@@ -16,7 +16,6 @@ export interface AethexUserProfile extends UserProfile {
   onboarded?: boolean;
   role?: string;
   loyalty_points?: number;
-  current_streak?: number | null;
   longest_streak?: number | null;
   last_streak_at?: string | null;
   social_links?: any;
@@ -27,6 +26,12 @@ export interface AethexUserProfile extends UserProfile {
   roles?: string[];
   last_active_at?: string;
   badge_count?: number;
+  // Extended profile fields from database schema
+  skills_detailed?: any;
+  languages?: any;
+  work_experience?: any;
+  portfolio_items?: any;
+  arm_affiliations?: string[] | null;
 }
 
 const isNonEmptyString = (value: unknown): value is string =>
