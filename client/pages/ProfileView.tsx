@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useParams, useNavigate } from "react-router-dom";
+import { Link, useParams, useNavigate, Navigate } from "react-router-dom";
 import Layout from "@/components/Layout";
 import LoadingScreen from "@/components/LoadingScreen";
 import { useAuth } from "@/contexts/AuthContext";
@@ -15,7 +15,7 @@ import { supabase } from "@/lib/supabase";
 const ProfileView = () => {
   const { username } = useParams<{ username: string }>();
   const navigate = useNavigate();
-  const { user, profile: currentUserProfile } = useAuth();
+  const { user, profile: currentUserProfile, loading: authLoading } = useAuth();
   const [profile, setProfile] = useState<AethexUserProfile | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -24,47 +24,66 @@ const ProfileView = () => {
 
   useEffect(() => {
     const loadProfile = async () => {
+      // Wait for auth to finish loading before checking
+      if (authLoading) {
+        return;
+      }
+
+      // If "me", check authentication
+      if (username === "me") {
+        if (!user) {
+          // Don't set error, just let the render handle the redirect
+          setLoading(false);
+          return;
+        }
+        
+        if (currentUserProfile) {
+          setProfile(currentUserProfile);
+          setLoading(false);
+        } else {
+          setError("Profile not found");
+          setLoading(false);
+        }
+        return;
+      }
+
+      // Load other user's profile by username
       setLoading(true);
       setError(null);
 
       try {
-        // If "me", use current user's profile
-        if (username === "me") {
-          if (!user) {
-            navigate("/login");
-            return;
-          }
-          if (currentUserProfile) {
-            setProfile(currentUserProfile as any);
-          }
-        } else {
-          // Load other user's profile by username
-          const { data, error: fetchError } = await supabase
-            .from("user_profiles")
-            .select("*")
-            .eq("username", username)
-            .single();
+        const { data, error: fetchError } = await supabase
+          .from("user_profiles")
+          .select("*")
+          .eq("username", username)
+          .single();
 
-          if (fetchError || !data) {
-            setError("Profile not found");
-            return;
-          }
-
-          setProfile(data);
+        if (fetchError || !data) {
+          setError("Profile not found");
+          setLoading(false);
+          return;
         }
+
+        setProfile(data);
+        setLoading(false);
       } catch (err) {
         console.error("Error loading profile:", err);
         setError("Failed to load profile");
-      } finally {
         setLoading(false);
       }
     };
 
     loadProfile();
-  }, [username, user, currentUserProfile, navigate]);
+  }, [username, user, currentUserProfile, navigate, authLoading]);
 
-  if (loading) {
+  // Show loading while auth is initializing OR while profile is loading
+  if (authLoading || loading) {
     return <LoadingScreen message="Loading profile..." showProgress />;
+  }
+
+  // If trying to access /profile/me without auth, redirect to login
+  if (username === "me" && !user) {
+    return <Navigate to="/login" replace />;
   }
 
   if (error || !profile) {
