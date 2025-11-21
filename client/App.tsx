@@ -47,6 +47,7 @@ import FoundationGetInvolved from "./pages/foundation/FoundationGetInvolved";
 import FoundationCurriculum from "./pages/foundation/FoundationCurriculum";
 import FoundationAchievements from "./pages/foundation/FoundationAchievements";
 import FoundationDownloadCenter from "./pages/FoundationDownloadCenter";
+import FoundationCommunity from "./pages/foundation/FoundationCommunity";
 import Creators from "./pages/Creators";
 import Leaderboard from "./pages/Leaderboard";
 import Admin from "./pages/Admin";
@@ -98,6 +99,7 @@ const App = () => (
                     <Route path="/foundation/downloads" element={<FoundationDownloadCenter />} />
 
                     {/* Foundation Community */}
+                    <Route path="/foundation/community" element={<FoundationCommunity />} />
                     <Route path="/foundation/community/teams" element={<FoundationTeams />} />
                     <Route path="/foundation/community/about" element={<FoundationAbout />} />
 
