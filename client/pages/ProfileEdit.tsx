@@ -178,14 +178,11 @@ const ProfileEdit = () => {
                       <SelectValue placeholder="Select your role" />
                     </SelectTrigger>
                     <SelectContent>
+                      <SelectItem value="client">Client</SelectItem>
                       <SelectItem value="game_developer">Game Developer</SelectItem>
-                      <SelectItem value="programmer">Programmer</SelectItem>
-                      <SelectItem value="artist">Artist</SelectItem>
-                      <SelectItem value="designer">Designer</SelectItem>
-                      <SelectItem value="sound_designer">Sound Designer</SelectItem>
-                      <SelectItem value="producer">Producer</SelectItem>
-                      <SelectItem value="student">Student</SelectItem>
-                      <SelectItem value="hobbyist">Hobbyist</SelectItem>
+                      <SelectItem value="community_member">Community Member</SelectItem>
+                      <SelectItem value="customer">Customer</SelectItem>
+                      <SelectItem value="staff">Staff</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
