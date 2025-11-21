@@ -32,18 +32,16 @@ const ProfileView = () => {
       // If "me", check authentication
       if (username === "me") {
         if (!user) {
-          // Don't set error, just let the render handle the redirect
+          // Not authenticated - redirect will be handled in render
           setLoading(false);
           return;
         }
         
+        // User is authenticated, use their profile
         if (currentUserProfile) {
           setProfile(currentUserProfile);
-          setLoading(false);
-        } else {
-          setError("Profile not found");
-          setLoading(false);
         }
+        setLoading(false);
         return;
       }
 
@@ -81,8 +79,12 @@ const ProfileView = () => {
     return <LoadingScreen message="Loading profile..." showProgress />;
   }
 
+  // Debug logging
+  console.log("ProfileView render:", { username, user: !!user, profile: !!profile, error, authLoading, loading });
+
   // If trying to access /profile/me without auth, redirect to login (must check before error/profile checks)
   if (username === "me" && !user) {
+    console.log("Redirecting to login...");
     window.location.href = "/login";
     return <LoadingScreen message="Redirecting to login..." showProgress />;
   }
