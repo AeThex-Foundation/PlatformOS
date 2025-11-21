@@ -3,6 +3,7 @@ import { Link, useParams, useNavigate } from "react-router-dom";
 import Layout from "@/components/Layout";
 import LoadingScreen from "@/components/LoadingScreen";
 import { useAuth } from "@/contexts/AuthContext";
+import type { AethexUserProfile } from "@/lib/aethex-database-adapter";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -11,36 +12,11 @@ import { Separator } from "@/components/ui/separator";
 import { CalendarClock, Edit, MapPin, Rocket, Shield, Trophy, UserCircle, Globe, Github, Linkedin, Twitter } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 
-interface UserProfile {
-  id: string;
-  username: string;
-  full_name: string | null;
-  avatar_url: string | null;
-  bio: string | null;
-  user_type: string | null;
-  experience_level: string | null;
-  location: string | null;
-  github_url: string | null;
-  linkedin_url: string | null;
-  twitter_url: string | null;
-  portfolio_url: string | null;
-  skills_detailed: any;
-  languages: string[] | null;
-  work_experience: any;
-  portfolio_items: any;
-  arm_affiliations: string[] | null;
-  level: number;
-  total_xp: number;
-  current_streak: number;
-  created_at: string;
-  updated_at: string;
-}
-
 const ProfileView = () => {
   const { username } = useParams<{ username: string }>();
   const navigate = useNavigate();
   const { user, profile: currentUserProfile } = useAuth();
-  const [profile, setProfile] = useState<UserProfile | null>(null);
+  const [profile, setProfile] = useState<AethexUserProfile | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -74,7 +50,7 @@ const ProfileView = () => {
             return;
           }
 
-          setProfile(data as UserProfile);
+          setProfile(data);
         }
       } catch (err) {
         console.error("Error loading profile:", err);
@@ -115,7 +91,7 @@ const ProfileView = () => {
     { label: "GitHub", url: profile.github_url, icon: Github },
     { label: "LinkedIn", url: profile.linkedin_url, icon: Linkedin },
     { label: "Twitter", url: profile.twitter_url, icon: Twitter },
-    { label: "Portfolio", url: profile.portfolio_url, icon: Globe },
+    { label: "Portfolio", url: profile.website_url, icon: Globe },
   ].filter((link) => link.url);
 
   return (
@@ -262,19 +238,19 @@ const ProfileView = () => {
           </div>
 
           {/* Skills & Languages */}
-          {((profile.skills_detailed && profile.skills_detailed.length > 0) ||
-            (profile.languages && profile.languages.length > 0)) && (
+          {((profile.skills_detailed && (profile.skills_detailed as any[]).length > 0) ||
+            (profile.languages && (profile.languages as any[]).length > 0)) && (
             <Card>
               <CardHeader>
                 <CardTitle>Skills & Languages</CardTitle>
                 <CardDescription>Technical expertise and languages spoken</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
-                {profile.skills_detailed && profile.skills_detailed.length > 0 && (
+                {profile.skills_detailed && (profile.skills_detailed as any[]).length > 0 && (
                   <div>
                     <p className="text-sm font-medium mb-2">Technical Skills</p>
                     <div className="flex flex-wrap gap-2">
-                      {profile.skills_detailed.map((skill: any, idx: number) => (
+                      {(profile.skills_detailed as any[]).map((skill: any, idx: number) => (
                         <Badge key={idx} variant="outline">
                           {skill.name}{" "}
                           <span className="text-xs ml-1 opacity-70">• {skill.level}</span>
@@ -283,11 +259,11 @@ const ProfileView = () => {
                     </div>
                   </div>
                 )}
-                {profile.languages && profile.languages.length > 0 && (
+                {profile.languages && (profile.languages as any[]).length > 0 && (
                   <div>
                     <p className="text-sm font-medium mb-2">Languages</p>
                     <div className="flex flex-wrap gap-2">
-                      {profile.languages.map((lang: string, idx: number) => (
+                      {(profile.languages as any[]).map((lang: string, idx: number) => (
                         <Badge key={idx} variant="secondary">
                           {lang}
                         </Badge>
@@ -300,14 +276,14 @@ const ProfileView = () => {
           )}
 
           {/* Work Experience */}
-          {profile.work_experience && profile.work_experience.length > 0 && (
+          {profile.work_experience && (profile.work_experience as any[]).length > 0 && (
             <Card>
               <CardHeader>
                 <CardTitle>Work Experience</CardTitle>
                 <CardDescription>Professional background and experience</CardDescription>
               </CardHeader>
               <CardContent className="space-y-3">
-                {profile.work_experience.map((exp: any, idx: number) => (
+                {(profile.work_experience as any[]).map((exp: any, idx: number) => (
                   <div key={idx} className="rounded-lg border p-4">
                     <div className="flex items-start justify-between">
                       <div>
@@ -326,14 +302,14 @@ const ProfileView = () => {
           )}
 
           {/* Portfolio */}
-          {profile.portfolio_items && profile.portfolio_items.length > 0 && (
+          {profile.portfolio_items && (profile.portfolio_items as any[]).length > 0 && (
             <Card>
               <CardHeader>
                 <CardTitle>Portfolio</CardTitle>
                 <CardDescription>Featured projects and work samples</CardDescription>
               </CardHeader>
               <CardContent className="space-y-3">
-                {profile.portfolio_items.map((item: any, idx: number) => (
+                {(profile.portfolio_items as any[]).map((item: any, idx: number) => (
                   <a
                     key={idx}
                     href={item.url}

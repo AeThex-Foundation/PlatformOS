@@ -53,6 +53,8 @@ import Admin from "./pages/Admin";
 import Workshops from "./pages/Workshops";
 import Resources from "./pages/Resources";
 import OAuthClients from "./pages/OAuthClients";
+import ProfileView from "./pages/ProfileView";
+import ProfileEdit from "./pages/ProfileEdit";
 import { Analytics } from "@vercel/analytics/react";
 
 const queryClient = new QueryClient();
@@ -111,6 +113,11 @@ const App = () => (
                     <Route path="/onboarding" element={<Onboarding />} />
                     <Route path="/dashboard" element={<Dashboard />} />
                     <Route path="/profile/settings" element={<ProfileSettings />} />
+                    
+                    {/* Profile Routes */}
+                    <Route path="/profile/me" element={<ProfileView />} />
+                    <Route path="/profile/edit" element={<ProfileEdit />} />
+                    <Route path="/profile/:username" element={<ProfileView />} />
                     
                     {/* GameForge */}
                     <Route path="/gameforge" element={<GameForge />} />

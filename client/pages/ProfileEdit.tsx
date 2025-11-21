@@ -22,12 +22,12 @@ const ProfileEdit = () => {
     full_name: "",
     bio: "",
     location: "",
-    user_type: "",
-    experience_level: "",
+    user_type: "" as "client" | "game_developer" | "community_member" | "customer" | "staff" | "",
+    experience_level: "" as "beginner" | "intermediate" | "advanced" | "expert" | "",
     github_url: "",
     linkedin_url: "",
     twitter_url: "",
-    portfolio_url: "",
+    website_url: "",
   });
 
   useEffect(() => {
@@ -47,7 +47,7 @@ const ProfileEdit = () => {
         github_url: profile.github_url || "",
         linkedin_url: profile.linkedin_url || "",
         twitter_url: profile.twitter_url || "",
-        portfolio_url: profile.portfolio_url || "",
+        website_url: profile.website_url || "",
       });
     }
   }, [profile]);
@@ -78,7 +78,7 @@ const ProfileEdit = () => {
           github_url: formData.github_url || null,
           linkedin_url: formData.linkedin_url || null,
           twitter_url: formData.twitter_url || null,
-          portfolio_url: formData.portfolio_url || null,
+          website_url: formData.website_url || null,
           updated_at: new Date().toISOString(),
         })
         .eq("id", user.id);
@@ -251,12 +251,12 @@ const ProfileEdit = () => {
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="portfolio_url">Portfolio Website</Label>
+                  <Label htmlFor="website_url">Portfolio Website</Label>
                   <Input
-                    id="portfolio_url"
+                    id="website_url"
                     type="url"
-                    value={formData.portfolio_url}
-                    onChange={(e) => handleInputChange("portfolio_url", e.target.value)}
+                    value={formData.website_url}
+                    onChange={(e) => handleInputChange("website_url", e.target.value)}
                     placeholder="https://yourportfolio.com"
                   />
                 </div>
