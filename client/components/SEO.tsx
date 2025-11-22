@@ -30,7 +30,7 @@ export default function SEO({
   noIndex,
 }: SEOProps) {
   useEffect(() => {
-    const title = `AeThex Foundation | ${pageTitle}`;
+    const title = `AeThex | ${pageTitle}`;
     document.title = title;
 
     if (canonical) {
