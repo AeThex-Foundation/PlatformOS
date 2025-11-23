@@ -30,6 +30,10 @@ outputType = "webview"
 localPort = 5000
 externalPort = 80
 
+[[ports]]
+localPort = 45359
+externalPort = 3000
+
 [deployment]
 run = ["sh", "-c", "npm start"]
 deploymentTarget = "autoscale"
@@ -38,3 +42,8 @@ build = ["npm", "run", "build"]
 [nix]
 channel = "stable-25_05"
 packages = ["unzip"]
+
+[userenv]
+
+[userenv.shared]
+POLYGONSCAN_API_KEY = "U9KNTHSFK2T9YECQAIRNKKYAAU7BFMESR2"
