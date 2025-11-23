@@ -26,3 +26,9 @@ dist-ssr
 .config/
 discord-bot/.env
 !.env
+
+# Hardhat
+cache
+artifacts
+deployments/*.json
+typechain-types

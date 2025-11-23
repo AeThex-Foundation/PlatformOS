@@ -1,6 +1,8 @@
-import { ethers } from "hardhat";
+import hre from "hardhat";
 import * as fs from "fs";
 import * as path from "path";
+
+const { ethers } = hre;
 
 async function main() {
   const [deployer] = await ethers.getSigners();
@@ -51,10 +53,13 @@ async function main() {
   console.log("   - Granting CANCELLER_ROLE to Governor...");
   await timelock.grantRole(CANCELLER_ROLE, governorAddress);
   
+  console.log("   - Granting DEFAULT_ADMIN_ROLE to Timelock itself (for future governance)...");
+  await timelock.grantRole(DEFAULT_ADMIN_ROLE, timelockAddress);
+  
   console.log("   - Revoking deployer admin role...");
   await timelock.revokeRole(DEFAULT_ADMIN_ROLE, deployer.address);
   
-  console.log("✅ Roles configured successfully");
+  console.log("✅ Roles configured successfully (Timelock now self-administers via governance)");
 
   const deploymentInfo = {
     network: (await ethers.provider.getNetwork()).name,
