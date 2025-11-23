@@ -1,6 +1,8 @@
-import { run } from "hardhat";
+import hre from "hardhat";
 import * as fs from "fs";
 import * as path from "path";
+
+const { run } = hre;
 
 async function main() {
   const deploymentsDir = path.join(__dirname, "..", "deployments");
