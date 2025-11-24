@@ -52,6 +52,19 @@ The Guardian's Hub is a Single Page Application (SPA) built with React 18, TypeS
 - **Security:** Global `authMiddleware` applied to authenticated routes, explicit role checks for admin endpoints, and service-role Supabase client used only after identity verification.
 - **Monorepo Structure:** Initially part of a monorepo, fostering clear separation of concerns.
 
+### Blockchain Governance System
+- **Smart Contract Infrastructure:** Hardhat 2 development environment with Solidity 0.8.24 and Cancun EVM.
+- **DAO Architecture:** OpenZeppelin Governor standard implementation with three core contracts:
+  - `AethexToken.sol`: ERC20 governance token (AETH) with voting and permit capabilities.
+  - `AethexTimelock.sol`: 2-day execution delay for approved proposals.
+  - `AethexGovernor.sol`: On-chain governance with 1-day voting delay, 1-week voting period, 4% quorum.
+- **Deployment:** Live on Ethereum Sepolia testnet (November 24, 2025):
+  - Token: `0xf846380e25b34B71474543fdB28258F8477E2Cf1`
+  - Timelock: `0xDA8B4b2125B8837cAaa147265B401056b636F1D5`
+  - Governor: `0x6660344dA659aAcA0a7733dd70499be7ffa9F4Fa`
+  - All contracts verified on Sepolia Etherscan.
+- **Governance Integration:** Designed for Tally.xyz integration for proposal creation, voting, and treasury management.
+
 ## Recent Changes (November 21, 2025)
 
 ### Profile System Implementation
