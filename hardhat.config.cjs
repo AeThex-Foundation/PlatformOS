@@ -15,6 +15,13 @@ module.exports = {
     },
   },
   networks: {
+    sepolia: {
+      url: process.env.ALCHEMY_API_KEY 
+        ? `https://eth-sepolia.g.alchemy.com/v2/${process.env.ALCHEMY_API_KEY}`
+        : "https://rpc.sepolia.org",
+      accounts: process.env.POLYGON_PRIVATE_KEY ? [process.env.POLYGON_PRIVATE_KEY.replace(/^0x/, '')] : [],
+      chainId: 11155111,
+    },
     polygon: {
       url: process.env.POLYGON_RPC_URL || "https://polygon-rpc.com",
       accounts: process.env.POLYGON_PRIVATE_KEY ? [process.env.POLYGON_PRIVATE_KEY.replace(/^0x/, '')] : [],
@@ -27,7 +34,11 @@ module.exports = {
     },
   },
   etherscan: {
-    apiKey: process.env.POLYGONSCAN_API_KEY || process.env.ETHERSCAN_API_KEY || "",
+    apiKey: {
+      sepolia: process.env.ETHERSCAN_API_KEY || "",
+      polygon: process.env.POLYGONSCAN_API_KEY || "",
+      polygonAmoy: process.env.POLYGONSCAN_API_KEY || "",
+    },
     customChains: [
       {
         network: "polygon",
