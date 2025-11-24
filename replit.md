@@ -69,6 +69,7 @@ The Guardian's Hub is a Single Page Application (SPA) built with React 18, TypeS
   - Voting interface (For, Against, Abstain) with transaction handling
   - Real-time contract interaction and error handling
   - Foundation red/gold themed governance dashboard at `/hub/governance`
+- **Tally Integration:** DAO registered on Tally.xyz at `https://www.tally.xyz/gov/aethex` for full proposal history, governance analytics, and community participation. Governance page includes prominent links to Tally dashboard.
 
 ## Recent Changes (November 21, 2025)
 

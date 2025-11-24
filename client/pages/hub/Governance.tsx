@@ -61,13 +61,42 @@ export default function Governance() {
             </div>
           </section>
 
+          {/* Tally Integration Banner */}
+          <Card className="p-8 border-red-900/30 bg-gradient-to-br from-red-950/30 via-yellow-950/10 to-black/20">
+            <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+              <div className="space-y-3 flex-1">
+                <div className="flex items-center gap-3">
+                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-red-600 to-yellow-600 flex items-center justify-center">
+                    <Users className="h-6 w-6 text-white" />
+                  </div>
+                  <div>
+                    <h2 className="text-2xl font-bold text-white">AeThex DAO on Tally</h2>
+                    <p className="text-sm text-gray-400">Full governance dashboard with proposal history</p>
+                  </div>
+                </div>
+                <p className="text-gray-300">
+                  View all proposals, voting history, and detailed governance analytics on Tally's professional DAO interface.
+                </p>
+              </div>
+              <Button
+                size="lg"
+                className="bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 shrink-0"
+                asChild
+              >
+                <a href="https://www.tally.xyz/gov/aethex" target="_blank" rel="noopener noreferrer">
+                  <ExternalLink className="h-4 w-4 mr-2" />
+                  Open on Tally
+                </a>
+              </Button>
+            </div>
+          </Card>
+
           {/* DAO Info */}
           <Card className="p-6 border-red-900/30 bg-gradient-to-br from-red-950/20 to-black/20">
             <div className="flex items-start justify-between gap-6">
               <div className="space-y-3 flex-1">
-                <h2 className="text-2xl font-bold text-white flex items-center gap-2">
-                  <Users className="h-6 w-6 text-yellow-500" />
-                  AeThex DAO
+                <h2 className="text-xl font-bold text-white flex items-center gap-2">
+                  Contract Information
                 </h2>
                 <div className="space-y-2 text-sm">
                   <div className="flex gap-2">
@@ -181,31 +210,58 @@ export default function Governance() {
             </>
           )}
 
-          {/* Etherscan Link */}
-          <Card className="p-6 border-red-900/30 bg-gradient-to-r from-red-950/20 to-yellow-950/10">
-            <div className="flex items-center justify-between">
-              <div className="space-y-1">
-                <h3 className="font-semibold text-white">Verified On-Chain</h3>
-                <p className="text-sm text-gray-400">
-                  All governance contracts are verified on Sepolia Etherscan
-                </p>
-              </div>
-              <Button
-                variant="outline"
-                className="border-red-900/50 hover:bg-red-950/50"
-                asChild
-              >
-                <a
-                  href="https://sepolia.etherscan.io/address/0x6660344dA659aAcA0a7733dd70499be7ffa9F4Fa#code"
-                  target="_blank"
-                  rel="noopener noreferrer"
+          {/* Quick Links */}
+          <div className="grid md:grid-cols-2 gap-4">
+            <Card className="p-6 border-red-900/30 bg-gradient-to-r from-red-950/20 to-yellow-950/10">
+              <div className="flex items-center justify-between">
+                <div className="space-y-1">
+                  <h3 className="font-semibold text-white">View on Tally</h3>
+                  <p className="text-sm text-gray-400">
+                    Full governance dashboard and proposal history
+                  </p>
+                </div>
+                <Button
+                  variant="outline"
+                  className="border-red-900/50 hover:bg-red-950/50"
+                  asChild
                 >
-                  <ExternalLink className="h-4 w-4 mr-2" />
-                  View on Etherscan
-                </a>
-              </Button>
-            </div>
-          </Card>
+                  <a
+                    href="https://www.tally.xyz/gov/aethex"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <ExternalLink className="h-4 w-4 mr-2" />
+                    Open Tally
+                  </a>
+                </Button>
+              </div>
+            </Card>
+
+            <Card className="p-6 border-red-900/30 bg-gradient-to-r from-red-950/20 to-yellow-950/10">
+              <div className="flex items-center justify-between">
+                <div className="space-y-1">
+                  <h3 className="font-semibold text-white">Verified On-Chain</h3>
+                  <p className="text-sm text-gray-400">
+                    All contracts verified on Sepolia Etherscan
+                  </p>
+                </div>
+                <Button
+                  variant="outline"
+                  className="border-red-900/50 hover:bg-red-950/50"
+                  asChild
+                >
+                  <a
+                    href="https://sepolia.etherscan.io/address/0x6660344dA659aAcA0a7733dd70499be7ffa9F4Fa#code"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <ExternalLink className="h-4 w-4 mr-2" />
+                    Etherscan
+                  </a>
+                </Button>
+              </div>
+            </Card>
+          </div>
         </div>
       </Layout>
 
