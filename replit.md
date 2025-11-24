@@ -63,7 +63,12 @@ The Guardian's Hub is a Single Page Application (SPA) built with React 18, TypeS
   - Timelock: `0xDA8B4b2125B8837cAaa147265B401056b636F1D5`
   - Governor: `0x6660344dA659aAcA0a7733dd70499be7ffa9F4Fa`
   - All contracts verified on Sepolia Etherscan.
-- **Governance Integration:** Designed for Tally.xyz integration for proposal creation, voting, and treasury management.
+- **Web3 Integration:** Custom governance UI built with Wagmi v2 and Viem:
+  - Wallet connection (MetaMask, WalletConnect) via RainbowKit
+  - On-chain proposal creation with transaction confirmation
+  - Voting interface (For, Against, Abstain) with transaction handling
+  - Real-time contract interaction and error handling
+  - Foundation red/gold themed governance dashboard at `/hub/governance`
 
 ## Recent Changes (November 21, 2025)
 

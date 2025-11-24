@@ -57,19 +57,21 @@ import OAuthClients from "./pages/OAuthClients";
 import ProfileView from "./pages/ProfileView";
 import ProfileEdit from "./pages/ProfileEdit";
 import { Analytics } from "@vercel/analytics/react";
+import { Web3Provider } from "./components/Web3Provider";
 
 const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <AuthProvider>
-      <TooltipProvider>
-        <Toaster />
-        <Analytics />
-        <BrowserRouter>
-          <ArmThemeProvider>
-            <SkipAgentController />
-            <PageTransition>
+    <Web3Provider>
+      <AuthProvider>
+        <TooltipProvider>
+          <Toaster />
+          <Analytics />
+          <BrowserRouter>
+            <ArmThemeProvider>
+              <SkipAgentController />
+              <PageTransition>
                 <Routes>
                     {/* Foundation Homepage */}
                     <Route path="/" element={<Index />} />
@@ -152,6 +154,7 @@ const App = () => (
         </BrowserRouter>
       </TooltipProvider>
     </AuthProvider>
+    </Web3Provider>
   </QueryClientProvider>
 );
 
