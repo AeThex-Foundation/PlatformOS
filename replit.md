@@ -71,9 +71,13 @@ The Guardian's Hub is a Single Page Application (SPA) built with React 18, TypeS
   - Foundation red/gold themed governance dashboard at `/hub/governance`
 - **Tally Integration:** DAO registered on Tally.xyz at `https://www.tally.xyz/gov/aethex` for full proposal history, governance analytics, and community participation. Governance page includes prominent links to Tally dashboard.
 
-## Recent Changes (November 21, 2025)
+## Recent Changes
 
-### Profile System Implementation
+### Deployment Fix (November 24, 2025)
+- **Production Deployment:** Fixed production build failure by moving `tsx` from devDependencies to dependencies, ensuring TypeScript server execution is available in production environment.
+- **Build Process:** Simplified build script to `vite build` (client only), with production server using `tsx server/index.ts` directly.
+
+### Profile System Implementation (November 21, 2025)
 - **New Pages Created:**
   - `ProfileView.tsx`: Displays user profiles at `/profile/me` and `/profile/:username` with comprehensive information display including stats, skills, work experience, and portfolio items. Includes authentication redirect for `/profile/me` route.
   - `ProfileEdit.tsx`: Allows users to edit their profile information at `/profile/edit` with form validation and real-time updates.
