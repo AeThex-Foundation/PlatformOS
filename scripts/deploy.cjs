@@ -35,11 +35,7 @@ async function main() {
   const AethexGovernor = await hre.ethers.getContractFactory("AethexGovernor");
   const governor = await AethexGovernor.deploy(
     tokenAddress,
-    timelockAddress,
-    votingDelay,
-    votingPeriod,
-    proposalThreshold,
-    quorumPercentage
+    timelockAddress
   );
   await governor.waitForDeployment();
   const governorAddress = await governor.getAddress();
