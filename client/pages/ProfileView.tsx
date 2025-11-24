@@ -37,11 +37,14 @@ const ProfileView = () => {
           return;
         }
         
-        // User is authenticated, use their profile
+        // User is authenticated, wait for their profile to load
         if (currentUserProfile) {
           setProfile(currentUserProfile);
+          setLoading(false);
+        } else {
+          // Keep loading until currentUserProfile is available
+          setLoading(true);
         }
-        setLoading(false);
         return;
       }
 
@@ -80,7 +83,7 @@ const ProfileView = () => {
   }
 
   // Debug logging
-  console.log("ProfileView render:", { username, user: !!user, profile: !!profile, error, authLoading, loading });
+  console.log("ProfileView render:", { username, user: !!user, profile: !!profile, currentUserProfile: !!currentUserProfile, error, authLoading, loading });
 
   // If trying to access /profile/me without auth, redirect to login (must check before error/profile checks)
   if (username === "me" && !user) {

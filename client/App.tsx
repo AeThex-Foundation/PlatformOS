@@ -20,6 +20,7 @@ import Signup from "./pages/Signup";
 import Onboarding from "./pages/Onboarding";
 import Dashboard from "./pages/Dashboard";
 import ProfileSettings from "./pages/ProfileSettings";
+import Profile from "./pages/Profile";
 import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
 import Passport from "./pages/Passport";
@@ -119,6 +120,7 @@ const App = () => (
                     <Route path="/profile/settings" element={<ProfileSettings />} />
                     
                     {/* Profile Routes */}
+                    <Route path="/profile" element={<Profile />} />
                     <Route path="/profile/me" element={<ProfileView />} />
                     <Route path="/profile/edit" element={<ProfileEdit />} />
                     <Route path="/profile/:username" element={<ProfileView />} />
