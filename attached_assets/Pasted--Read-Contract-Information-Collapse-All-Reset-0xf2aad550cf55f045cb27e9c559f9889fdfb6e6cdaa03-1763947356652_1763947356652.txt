@@ -1,0 +1,86 @@
+ Read Contract Information
+
+[Collapse All] [Reset]
+0xf2aad550cf55f045cb27e9c559f9889fdfb6e6cdaa032301d6ea397784ae51d7 bytes32
+mode=blocknumber&from=default string
+support=bravo&quorum=for,abstain string
+0x3e83946653575f9a39005e1545185629e92736b7528ab20ca3816f315424a811 bytes32
+9693408 uint48
+ fields bytes1, name string, version string, chainId uint256, verifyingContract address, salt bytes32, extensions uint256[]
+targets (address[])
+   targets (address[])
+values (uint256[])
+   values (uint256[])
+calldatas (bytes[])
+   calldatas (bytes[])
+descriptionHash (bytes32)
+   descriptionHash (bytes32)
+ uint256
+account (address)
+   account (address)
+timepoint (uint256)
+   timepoint (uint256)
+ uint256
+account (address)
+   account (address)
+timepoint (uint256)
+   timepoint (uint256)
+params (bytes)
+   params (bytes)
+ uint256
+proposalId (uint256)
+   proposalId (uint256)
+account (address)
+   account (address)
+ bool
+targets (address[])
+   targets (address[])
+values (uint256[])
+   values (uint256[])
+calldatas (bytes[])
+   calldatas (bytes[])
+descriptionHash (bytes32)
+   descriptionHash (bytes32)
+ uint256
+AeThex Governor string
+owner (address)
+   owner (address)
+ uint256
+proposalId (uint256)
+   proposalId (uint256)
+ uint256
+proposalId (uint256)
+   proposalId (uint256)
+ uint256
+proposalId (uint256)
+   proposalId (uint256)
+ bool
+proposalId (uint256)
+   proposalId (uint256)
+ address
+proposalId (uint256)
+   proposalId (uint256)
+ uint256
+1000000000000000000000 uint256
+proposalId (uint256)
+   proposalId (uint256)
+ againstVotes uint256, forVotes uint256, abstainVotes uint256
+blockNumber (uint256)
+   blockNumber (uint256)
+ uint256
+100 uint256
+timepoint (uint256)
+   timepoint (uint256)
+ uint256
+4 uint256
+proposalId (uint256)
+   proposalId (uint256)
+ uint8
+interfaceId (bytes4)
+   interfaceId (bytes4)
+ bool
+0xDA8B4b2125B8837cAaa147265B401056b636F1D5 address
+0xf846380e25b34B71474543fdB28258F8477E2Cf1 address
+1 string
+86400 uint256
+604800 uint256
