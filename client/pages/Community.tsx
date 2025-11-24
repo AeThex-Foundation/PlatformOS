@@ -1490,7 +1490,7 @@ export default function Community() {
       recentContribution:
         "Rolled out the Adaptive Matchmaking toolkit for Season 4.",
       reputation: "4.9/5 player rating",
-      profileUrl: "/passport/alex-developer",
+      profileUrl: "/alex-developer",
     },
     {
       name: "Sarah Coder",
@@ -1504,7 +1504,7 @@ export default function Community() {
       recentContribution:
         "Launched the multiplayer onboarding walkthrough in seven languages.",
       reputation: "4.8/5 creator rating",
-      profileUrl: "/passport/sarah-coder",
+      profileUrl: "/sarah-coder",
     },
     {
       name: "Jordan AI",
@@ -1518,7 +1518,7 @@ export default function Community() {
       recentContribution:
         "Released the Procedural Dialogue orchestrator adopted by 40+ teams.",
       reputation: "4.9/5 mentor rating",
-      profileUrl: "/passport/jordan-ai",
+      profileUrl: "/jordan-ai",
     },
   ];
 
