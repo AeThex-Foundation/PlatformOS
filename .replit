@@ -31,8 +31,8 @@ localPort = 5000
 externalPort = 80
 
 [[ports]]
-localPort = 38067
-externalPort = 3000
+localPort = 45407
+externalPort = 3001
 
 [deployment]
 run = ["sh", "-c", "npm start"]
