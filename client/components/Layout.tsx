@@ -88,8 +88,8 @@ export default function CodeLayout({ children, hideFooter }: LayoutProps) {
   const passportHref = isSubdomainHost
     ? "/"
     : profile?.username
-      ? `/passport/${profile.username}`
-      : "/passport/me";
+      ? `/${profile.username}`
+      : "/profile/me";
 
   const navItems: { name: string; href: string }[] = [];
 

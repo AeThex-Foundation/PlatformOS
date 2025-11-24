@@ -67,7 +67,7 @@ const Profile = () => {
   const [loadingAchievements, setLoadingAchievements] = useState(false);
 
   const username = profile?.username || user?.email?.split("@")[0] || "creator";
-  const passportHref = `/passport/${encodeURIComponent(username)}`;
+  const passportHref = `/${encodeURIComponent(username)}`;
   const dashboardSettingsHref = "/dashboard?tab=profile#settings";
 
   useEffect(() => {
