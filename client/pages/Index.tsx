@@ -5,9 +5,6 @@ import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import LoadingScreen from "@/components/LoadingScreen";
@@ -20,10 +17,14 @@ import {
   Users,
   Award,
   Download,
-  Shield,
-  Heart,
   GraduationCap,
 } from "lucide-react";
+import { AnimatedCounter } from "@/components/home/AnimatedCounter";
+import { TestimonialsSection } from "@/components/home/TestimonialsSection";
+import { FeaturedProjectsSection } from "@/components/home/FeaturedProjectsSection";
+import { ValuesSection } from "@/components/home/ValuesSection";
+import { LatestUpdatesSection } from "@/components/home/LatestUpdatesSection";
+import { CTASection } from "@/components/home/CTASection";
 
 export default function Index() {
   const [isLoading, setIsLoading] = useState(true);
@@ -125,25 +126,29 @@ export default function Index() {
   const showcaseImpact = [
     {
       title: "Developers Trained",
-      metric: "5,000+",
+      metric: 5000,
+      suffix: "+",
       description: "Through workshops and online courses",
       color: "bg-aethex-500/10 border-aethex-400/30",
     },
     {
       title: "Open Source Tools",
-      metric: "25+",
+      metric: 25,
+      suffix: "+",
       description: "Active projects and libraries maintained",
       color: "bg-red-500/10 border-red-400/30",
     },
     {
       title: "Community Members",
-      metric: "10,000+",
+      metric: 10000,
+      suffix: "+",
       description: "Active developers in our network",
       color: "bg-gold-500/10 border-gold-400/30",
     },
     {
       title: "Resources Shared",
-      metric: "100+",
+      metric: 100,
+      suffix: "+",
       description: "Free tutorials, guides, and templates",
       color: "bg-amber-500/10 border-amber-400/30",
     },
@@ -172,7 +177,7 @@ export default function Index() {
             : (undefined as any)
         }
       />
-      <Layout hideFooter>
+      <Layout>
         <section className="relative min-h-screen flex items-start justify-center overflow-hidden pt-24 sm:pt-36">
           <div className="absolute inset-0">
             <div className="absolute inset-0 bg-gradient-to-br from-aethex-900/50 via-background to-red-900/30" />
@@ -271,7 +276,7 @@ export default function Index() {
                       <CardContent className="pt-6">
                         <h4 className="font-semibold text-sm mb-2">{item.title}</h4>
                         <p className="text-2xl font-bold text-aethex-400 mb-2">
-                          {item.metric}
+                          <AnimatedCounter end={item.metric} suffix={item.suffix} />
                         </p>
                         <p className="text-xs text-muted-foreground">
                           {item.description}
@@ -370,6 +375,12 @@ export default function Index() {
             </div>
           </div>
         </section>
+
+        <LatestUpdatesSection />
+        <FeaturedProjectsSection />
+        <TestimonialsSection />
+        <ValuesSection />
+        <CTASection />
       </Layout>
     </>
   );
