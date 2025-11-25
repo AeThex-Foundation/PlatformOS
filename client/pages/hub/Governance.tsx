@@ -14,6 +14,9 @@ import { ProposalList } from "@/components/governance/ProposalList";
 import { CreateProposal } from "@/components/governance/CreateProposal";
 import { VoteModal } from "@/components/governance/VoteModal";
 import { ProposalDetails } from "@/components/governance/ProposalDetails";
+import { VotingStats } from "@/components/hub/VotingStats";
+import { DelegateProfiles } from "@/components/hub/DelegateProfiles";
+import { governanceStats, delegateProfiles } from "@/lib/content";
 
 export default function Governance() {
   const { user } = useAuth();
@@ -209,6 +212,12 @@ export default function Governance() {
               )}
             </>
           )}
+
+          {/* Voting Stats & Delegates */}
+          <div className="grid lg:grid-cols-2 gap-6">
+            <VotingStats stats={governanceStats} />
+            <DelegateProfiles delegates={delegateProfiles} />
+          </div>
 
           {/* Quick Links */}
           <div className="grid md:grid-cols-2 gap-4">

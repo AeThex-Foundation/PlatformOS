@@ -20,8 +20,13 @@ import {
   Search,
   Star,
   Eye,
-  ArrowDownToLine
+  ArrowDownToLine,
+  Folder,
+  Video,
+  BookOpen,
+  TrendingUp
 } from "lucide-react";
+import { resourceCategories, featuredResources as featuredResourcesData } from "@/lib/content";
 
 interface Resource {
   id: string;
@@ -256,6 +261,81 @@ export default function Resources() {
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="pl-10 h-12"
               />
+            </div>
+          </section>
+
+          {/* Categories */}
+          <section>
+            <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
+              <Folder className="h-6 w-6 text-aethex-400" />
+              Browse by Category
+            </h2>
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+              {resourceCategories.map((category) => {
+                const getCategoryIcon = () => {
+                  switch (category.icon) {
+                    case "book": return BookOpen;
+                    case "code": return Code;
+                    case "folder": return Folder;
+                    case "file": return FileText;
+                    case "image": return ImageIcon;
+                    case "video": return Video;
+                    default: return Package;
+                  }
+                };
+                const CategoryIcon = getCategoryIcon();
+                const colorClass = category.color === "red" 
+                  ? "from-red-500/20 to-red-600/20 border-red-500/30 hover:border-red-400/50" 
+                  : category.color === "gold"
+                  ? "from-gold-500/20 to-gold-600/20 border-gold-500/30 hover:border-gold-400/50"
+                  : "from-amber-500/20 to-amber-600/20 border-amber-500/30 hover:border-amber-400/50";
+                const iconColor = category.color === "red" ? "text-red-400" 
+                  : category.color === "gold" ? "text-gold-400" : "text-amber-400";
+
+                return (
+                  <Card 
+                    key={category.id} 
+                    className={`border bg-gradient-to-br ${colorClass} hover:scale-105 transition-all cursor-pointer`}
+                  >
+                    <CardContent className="pt-6 text-center">
+                      <CategoryIcon className={`h-8 w-8 ${iconColor} mx-auto mb-2`} />
+                      <p className="font-semibold text-sm mb-1">{category.name}</p>
+                      <p className="text-xs text-muted-foreground">{category.count} items</p>
+                    </CardContent>
+                  </Card>
+                );
+              })}
+            </div>
+          </section>
+
+          {/* Featured Resources Banner */}
+          <section className="bg-gradient-to-r from-red-950/30 to-gold-950/30 rounded-xl p-6 border border-red-500/20">
+            <div className="flex items-center gap-3 mb-4">
+              <TrendingUp className="h-6 w-6 text-gold-400" />
+              <h2 className="text-xl font-bold">Popular This Month</h2>
+            </div>
+            <div className="grid md:grid-cols-3 gap-4">
+              {featuredResourcesData.map((resource) => (
+                <Card key={resource.id} className="border-border/30 bg-black/20">
+                  <CardContent className="pt-4">
+                    <Badge className="bg-gold-500/20 text-gold-400 border-gold-500/30 mb-2">
+                      {resource.type}
+                    </Badge>
+                    <h3 className="font-semibold text-sm mb-1">{resource.title}</h3>
+                    <p className="text-xs text-muted-foreground mb-3 line-clamp-2">{resource.description}</p>
+                    <div className="flex items-center justify-between text-xs">
+                      <span className="flex items-center gap-1 text-muted-foreground">
+                        <ArrowDownToLine className="h-3 w-3" />
+                        {resource.downloads.toLocaleString()}
+                      </span>
+                      <span className="flex items-center gap-1 text-gold-400">
+                        <Star className="h-3 w-3 fill-gold-400" />
+                        {resource.rating}
+                      </span>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
             </div>
           </section>
 
