@@ -8,7 +8,11 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Code, DollarSign, Clock, Users, Star, ArrowRight, Target, Trophy, Zap, GitFork, MessageSquare } from "lucide-react";
+import { Code, DollarSign, Clock, Users, Star, ArrowRight, Target, Trophy, Zap, GitFork, MessageSquare, Calendar } from "lucide-react";
+import { FeaturedContributors } from "@/components/hub/FeaturedContributors";
+import { DiscussionPreview } from "@/components/hub/DiscussionPreview";
+import { UpcomingEvents } from "@/components/hub/UpcomingEvents";
+import { hubStats, featuredContributors, recentDiscussions, upcomingHubEvents } from "@/lib/content";
 
 interface Bounty {
   id: string;
@@ -157,22 +161,22 @@ export default function Community() {
             <Card className="border-border/30">
               <CardContent className="pt-6">
                 <Code className="h-8 w-8 text-aethex-400 mb-3" />
-                <p className="text-3xl font-bold mb-1">42</p>
-                <p className="text-sm text-muted-foreground">Active Bounties</p>
+                <p className="text-3xl font-bold mb-1">{hubStats.activeBounties.value}</p>
+                <p className="text-sm text-muted-foreground">{hubStats.activeBounties.label}</p>
               </CardContent>
             </Card>
             <Card className="border-border/30">
               <CardContent className="pt-6">
                 <Users className="h-8 w-8 text-gold-400 mb-3" />
-                <p className="text-3xl font-bold mb-1">128</p>
-                <p className="text-sm text-muted-foreground">Contributors</p>
+                <p className="text-3xl font-bold mb-1">{hubStats.contributors.value}</p>
+                <p className="text-sm text-muted-foreground">{hubStats.contributors.label}</p>
               </CardContent>
             </Card>
             <Card className="border-border/30">
               <CardContent className="pt-6">
                 <DollarSign className="h-8 w-8 text-amber-400 mb-3" />
-                <p className="text-3xl font-bold mb-1">$24K</p>
-                <p className="text-sm text-muted-foreground">Total Rewards</p>
+                <p className="text-3xl font-bold mb-1">{hubStats.totalRewards.prefix}{hubStats.totalRewards.value.toLocaleString()}</p>
+                <p className="text-sm text-muted-foreground">{hubStats.totalRewards.label}</p>
               </CardContent>
             </Card>
           </section>
@@ -288,6 +292,15 @@ export default function Community() {
               ))}
             </div>
           </section>
+
+          <section>
+            <FeaturedContributors contributors={featuredContributors} />
+          </section>
+
+          <div className="grid lg:grid-cols-2 gap-6">
+            <DiscussionPreview discussions={recentDiscussions} />
+            <UpcomingEvents events={upcomingHubEvents} />
+          </div>
         </div>
       </Layout>
     </>

@@ -206,6 +206,257 @@ export const learningResources = [
   },
 ];
 
+export const hubStats = {
+  activeBounties: { value: 42, label: "Active Bounties" },
+  contributors: { value: 128, label: "Contributors" },
+  activeProposals: { value: 15, label: "Active Proposals" },
+  totalRewards: { value: 24000, label: "Total Rewards", prefix: "$" },
+  toolsReleased: { value: 25, suffix: "+", label: "Open Source Tools" },
+};
+
+export const featuredContributors = [
+  {
+    username: "cryptodev",
+    displayName: "Alex Chen",
+    avatar: "AC",
+    role: "Core Contributor",
+    xp: 12500,
+    bounties: 24,
+    badge: "Diamond",
+    gradient: "from-red-500 to-gold-500",
+  },
+  {
+    username: "gamebuilder",
+    displayName: "Maya Johnson",
+    avatar: "MJ",
+    role: "Workshop Lead",
+    xp: 9800,
+    bounties: 18,
+    badge: "Platinum",
+    gradient: "from-gold-500 to-amber-500",
+  },
+  {
+    username: "rustmaster",
+    displayName: "David Kim",
+    avatar: "DK",
+    role: "Engine Developer",
+    xp: 8500,
+    bounties: 15,
+    badge: "Gold",
+    gradient: "from-amber-500 to-red-500",
+  },
+  {
+    username: "luaengineer",
+    displayName: "Emma Wright",
+    avatar: "EW",
+    role: "Roblox Specialist",
+    xp: 7200,
+    bounties: 12,
+    badge: "Gold",
+    gradient: "from-red-400 to-red-600",
+  },
+];
+
+export const upcomingHubEvents = [
+  {
+    id: "evt-1",
+    title: "Weekly Developer Standup",
+    date: "Tomorrow, 2:00 PM UTC",
+    type: "Virtual Meeting",
+    attendees: 45,
+    icon: "users",
+  },
+  {
+    id: "evt-2",
+    title: "Q1 2026 Governance Vote",
+    date: "Jan 25, 2026",
+    type: "Voting Period",
+    attendees: 0,
+    icon: "vote",
+  },
+  {
+    id: "evt-3",
+    title: "Foundation Community AMA",
+    date: "Feb 1, 2026",
+    type: "Live Event",
+    attendees: 234,
+    icon: "message",
+  },
+  {
+    id: "evt-4",
+    title: "Roblox Workshop: Monetization",
+    date: "Feb 8, 2026",
+    type: "Workshop",
+    attendees: 120,
+    icon: "book",
+  },
+];
+
+export const recentDiscussions = [
+  {
+    id: "disc-1",
+    title: "Best practices for game monetization in Web3",
+    author: "cryptodev",
+    authorBadge: "Diamond",
+    replies: 23,
+    views: 456,
+    lastActive: "2 hours ago",
+    tags: ["Web3", "Monetization", "Strategy"],
+  },
+  {
+    id: "disc-2",
+    title: "Optimizing Roblox performance for mobile devices",
+    author: "luaengineer",
+    authorBadge: "Gold",
+    replies: 18,
+    views: 342,
+    lastActive: "5 hours ago",
+    tags: ["Roblox", "Performance", "Mobile"],
+  },
+  {
+    id: "disc-3",
+    title: "Community feedback: New governance proposal format",
+    author: "foundation",
+    authorBadge: "Staff",
+    replies: 45,
+    views: 892,
+    lastActive: "1 day ago",
+    tags: ["Governance", "Community", "Feedback"],
+  },
+];
+
+export const governanceStats = {
+  totalProposals: 47,
+  passedProposals: 38,
+  activeVoters: 1250,
+  totalVotesCast: 15840,
+  averageParticipation: "68%",
+  treasuryBalance: "2.5M AETH",
+};
+
+export const delegateProfiles = [
+  {
+    address: "0x1234...5678",
+    ensName: "foundationcouncil.eth",
+    displayName: "Foundation Council",
+    votingPower: "15%",
+    proposalsCreated: 12,
+    votesParticipated: 47,
+    bio: "Official Foundation governance delegate representing core team decisions.",
+    gradient: "from-red-500 to-red-600",
+  },
+  {
+    address: "0xabcd...efgh",
+    ensName: "communityvoice.eth",
+    displayName: "Community Voice",
+    votingPower: "8%",
+    proposalsCreated: 5,
+    votesParticipated: 45,
+    bio: "Community-elected delegate focusing on developer experience improvements.",
+    gradient: "from-gold-500 to-amber-500",
+  },
+  {
+    address: "0x9876...5432",
+    ensName: "techcouncil.eth",
+    displayName: "Technical Council",
+    votingPower: "6%",
+    proposalsCreated: 8,
+    votesParticipated: 42,
+    bio: "Technical advisory group for protocol and infrastructure decisions.",
+    gradient: "from-amber-500 to-red-500",
+  },
+];
+
+export const resourceCategories = [
+  {
+    id: "tutorials",
+    name: "Tutorials",
+    description: "Step-by-step guides for all skill levels",
+    count: 45,
+    icon: "book",
+    color: "red",
+  },
+  {
+    id: "tools",
+    name: "Developer Tools",
+    description: "CLI tools, plugins, and extensions",
+    count: 22,
+    icon: "code",
+    color: "gold",
+  },
+  {
+    id: "templates",
+    name: "Project Templates",
+    description: "Starter projects and boilerplates",
+    count: 18,
+    icon: "folder",
+    color: "amber",
+  },
+  {
+    id: "documentation",
+    name: "Documentation",
+    description: "API references and technical docs",
+    count: 35,
+    icon: "file",
+    color: "red",
+  },
+  {
+    id: "assets",
+    name: "Game Assets",
+    description: "Free sprites, sounds, and 3D models",
+    count: 150,
+    icon: "image",
+    color: "gold",
+  },
+  {
+    id: "courses",
+    name: "Video Courses",
+    description: "In-depth learning series",
+    count: 12,
+    icon: "video",
+    color: "amber",
+  },
+];
+
+export const featuredResources = [
+  {
+    id: "res-1",
+    title: "Complete Roblox Development Course",
+    type: "Video Course",
+    category: "courses",
+    description: "From zero to publishing your first Roblox game",
+    duration: "20 hours",
+    downloads: 4500,
+    rating: 4.9,
+    author: "Sarah Mitchell",
+    featured: true,
+  },
+  {
+    id: "res-2",
+    title: "AeThex Game Engine Starter Kit",
+    type: "Template",
+    category: "templates",
+    description: "Pre-configured project template with best practices",
+    size: "15 MB",
+    downloads: 2800,
+    rating: 4.8,
+    author: "David Okonkwo",
+    featured: true,
+  },
+  {
+    id: "res-3",
+    title: "Multiplayer Networking Guide",
+    type: "Documentation",
+    category: "documentation",
+    description: "Comprehensive guide to real-time multiplayer implementation",
+    pages: 85,
+    downloads: 1900,
+    rating: 4.7,
+    author: "James Park",
+    featured: true,
+  },
+];
+
 export const foundationMilestones = [
   {
     year: "2019",
