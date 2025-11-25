@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=VT323&family=Press+Start+2P&family=Merriweather:wght@400;700;900&family=Inter:wght@300;400;500;600;700&family=Roboto+Mono:wght@300;400;500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=VT323&family=Press+Start+2P&family=Merriweather:wght@400;700&family=Roboto+Mono:wght@300;400;500&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -145,25 +145,6 @@
     font-family: "Merriweather", "Georgia", serif;
     font-weight: 700;
     letter-spacing: -0.02em;
-  }
-
-  .font-inter {
-    font-family: "Inter", "-apple-system", "BlinkMacSystemFont", "Segoe UI", sans-serif;
-    font-weight: 400;
-  }
-
-  .font-heading {
-    font-family: "Merriweather", "Georgia", serif;
-    font-weight: 900;
-    letter-spacing: -0.02em;
-  }
-
-  .bg-institutional {
-    background-color: #0B0A0F;
-  }
-
-  .bg-institutional-gradient {
-    background: linear-gradient(180deg, #0B0A0F 0%, #0f0d14 50%, #0B0A0F 100%);
   }
 
   .font-devlink {
