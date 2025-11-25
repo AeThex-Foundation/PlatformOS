@@ -73,6 +73,29 @@ The Guardian's Hub is a Single Page Application (SPA) built with React 18, TypeS
 
 ## Recent Changes
 
+### Phase 2 Hub Enhancements (November 25, 2025)
+- **Extended Content Management:** Added Hub-specific data to `client/lib/content.ts`:
+  - Hub statistics (active bounties, contributors, proposals, total rewards)
+  - Featured contributors with XP and bounty stats
+  - Upcoming Hub events with types and attendees
+  - Recent discussion threads with metadata
+  - Governance statistics (proposals, pass rate, participation)
+  - Delegate profiles with voting power metrics
+  - Resource categories with item counts
+  - Featured/popular resources
+
+- **New Hub Components (client/components/hub/):**
+  - `FeaturedContributors.tsx`: Contributor spotlight cards with XP, bounties, and badges
+  - `DiscussionPreview.tsx`: Recent discussion threads with author, replies, views
+  - `UpcomingEvents.tsx`: Event cards with type icons, dates, and attendee counts
+  - `VotingStats.tsx`: Governance analytics with proposal counts and pass rate visualization
+  - `DelegateProfiles.tsx`: Top delegate cards with voting power and participation rates
+
+- **Enhanced Hub Pages:**
+  - **Community Hub:** Integrated FeaturedContributors, DiscussionPreview, and UpcomingEvents sections with centralized data
+  - **Governance Page:** Added VotingStats and DelegateProfiles sections with live governance metrics
+  - **Resources Page:** Added category cards grid (Tutorials, Developer Tools, Templates, Documentation, Game Assets, Video Courses) and "Popular This Month" featured resources banner
+
 ### Phase 1 Content Depth Enhancement (November 25, 2025)
 - **Centralized Content Management:** Created `client/lib/content.ts` as single source of truth for all Foundation content:
   - Foundation statistics (developers trained, open source projects, countries reached, workshop hours)
