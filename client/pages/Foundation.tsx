@@ -10,10 +10,28 @@ import {
   Zap,
   ArrowRight,
   GraduationCap,
+  Flag,
+  Award,
+  Globe,
+  Star,
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import LoadingScreen from "@/components/LoadingScreen";
+import { TeamSection } from "@/components/foundation/TeamSection";
+import { MilestonesSection, type Milestone } from "@/components/foundation/MilestonesSection";
+import { OriginStorySection } from "@/components/foundation/OriginStorySection";
+import { teamMembers, foundationMilestones, openSourceProjects, workshops, learningResources } from "@/lib/content";
+
+const milestoneIcons: Record<string, typeof Flag> = {
+  "2019": Flag,
+  "2020": Code,
+  "2021": Users,
+  "2022": Award,
+  "2023": Globe,
+  "2024": Star,
+  "2025": Zap,
+};
 
 export default function Foundation() {
   const navigate = useNavigate();
@@ -23,6 +41,13 @@ export default function Foundation() {
     accentHex: "#EF4444",
     wallpaperClass: "",
   };
+
+  const milestones: Milestone[] = useMemo(() => 
+    foundationMilestones.map(m => ({
+      ...m,
+      icon: milestoneIcons[m.year] || Flag,
+    })), 
+  []);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -43,106 +68,6 @@ export default function Foundation() {
       />
     );
   }
-
-  const openSourceProjects = [
-    {
-      name: "AeThex Game Engine",
-      description:
-        "Lightweight, performant game engine optimized for web and native platforms",
-      stars: "2.5K",
-      language: "Rust",
-      link: "github.com/aethex/game-engine",
-    },
-    {
-      name: "Roblox Toolkit",
-      description:
-        "Comprehensive library for building professional Roblox experiences",
-      stars: "1.8K",
-      language: "Lua",
-      link: "github.com/aethex/roblox-toolkit",
-    },
-    {
-      name: "Developer CLI",
-      description:
-        "Command-line tools for streamlined game development workflow",
-      stars: "1.2K",
-      language: "Go",
-      link: "github.com/aethex/dev-cli",
-    },
-    {
-      name: "Multiplayer Framework",
-      description: "Drop-in networking layer for real-time multiplayer games",
-      stars: "980",
-      language: "TypeScript",
-      link: "github.com/aethex/multiplayer",
-    },
-    {
-      name: "Asset Pipeline",
-      description:
-        "Automated asset processing and optimization for game development",
-      stars: "750",
-      language: "Python",
-      link: "github.com/aethex/asset-pipeline",
-    },
-    {
-      name: "Education Platform",
-      description: "Open-source learning platform for game development courses",
-      stars: "640",
-      language: "JavaScript",
-      link: "github.com/aethex/education",
-    },
-  ];
-
-  const workshops = [
-    {
-      title: "Intro to Roblox Development",
-      date: "Every Saturday",
-      duration: "2 hours",
-      level: "Beginner",
-      attendees: "150+/month",
-    },
-    {
-      title: "Advanced Game Architecture",
-      date: "Monthly",
-      duration: "4 hours",
-      level: "Advanced",
-      attendees: "50+/month",
-    },
-    {
-      title: "Multiplayer Game Design",
-      date: "Bi-weekly",
-      duration: "2 hours",
-      level: "Intermediate",
-      attendees: "100+/month",
-    },
-  ];
-
-  const resources = [
-    {
-      title: "Game Development Fundamentals",
-      type: "Video Course",
-      lessons: 50,
-      duration: "20 hours",
-    },
-    {
-      title: "Roblox Best Practices Guide",
-      type: "Written Guide",
-      pages: 120,
-      downloads: "10K+",
-    },
-    {
-      title: "Architecture Patterns for Games",
-      type: "Interactive Tutorial",
-      modules: 8,
-      projects: 4,
-    },
-    {
-      title: "Performance Optimization Handbook",
-      type: "Technical Reference",
-      chapters: 15,
-      code_samples: "100+",
-    },
-  ];
 
   return (
     <Layout>
@@ -171,7 +96,7 @@ export default function Foundation() {
               </Badge>
 
               <div className="space-y-6 mb-12">
-                <h1 className={`text-5xl lg:text-7xl font-black text-red-300 leading-tight ${theme.fontClass}`}>
+                <h1 className="text-5xl lg:text-7xl font-black text-red-300 leading-tight">
                   Community Impact & Talent Pipeline
                 </h1>
                 <p className="text-xl text-red-100/70 max-w-3xl">
@@ -333,7 +258,7 @@ export default function Foundation() {
                 Free Learning Resources
               </h2>
               <div className="grid md:grid-cols-2 gap-6">
-                {resources.map((resource, idx) => (
+                {learningResources.map((resource, idx) => (
                   <Card key={idx} className="bg-red-950/20 border-red-400/30">
                     <CardContent className="pt-6">
                       <div className="space-y-3">
@@ -472,6 +397,15 @@ export default function Foundation() {
               </div>
             </div>
           </section>
+
+          {/* Origin Story */}
+          <OriginStorySection theme="red" />
+
+          {/* Team */}
+          <TeamSection theme="red" members={teamMembers} />
+
+          {/* Milestones */}
+          <MilestonesSection theme="red" milestones={milestones} />
 
           {/* CTA */}
           <section className="py-16 border-t border-red-400/10">
