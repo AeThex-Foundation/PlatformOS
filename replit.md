@@ -73,6 +73,17 @@ The Guardian's Hub is a Single Page Application (SPA) built with React 18, TypeS
 
 ## Recent Changes
 
+### Homepage Redesign - Trust Billboard (November 25, 2025)
+- **Visual Overhaul:** Completely redesigned homepage to match Arbitrum Foundation's "Institutional Tech" aesthetic.
+- **Color Scheme:** Deep black/grey background (#0B0A0F) with gold/red accents.
+- **Typography:** Merriweather serif font for headings (font-heading class), Inter sans-serif for body text (font-inter class).
+- **New Structure:**
+  - **Hero Section:** "Welcome to the Future of Ethical AI" with dual CTAs (Apply for Grant primary, Join the DAO secondary).
+  - **3 Pillars Section:** Sovereignty (Shield), Transparency (Eye), Accountability (Gavel).
+  - **3 Action Cards:** BUILD (→nexus.aethex.dev), GOVERN (→tally.xyz/gov/aethex), LEARN (→aethex.dev/gameforge).
+  - **Comprehensive Footer:** Ecosystem links, Resources, and Social links.
+- **External Links:** BUILD points to nexus.aethex.dev, GOVERN to Tally DAO, LEARN to aethex.dev/gameforge.
+
 ### Deployment Fix (November 24, 2025)
 - **Production Deployment:** Fixed production build failure by moving `tsx` from devDependencies to dependencies, ensuring TypeScript server execution is available in production environment.
 - **Build Process:** Simplified build script to `vite build` (client only), with production server using `tsx server/index.ts` directly.
