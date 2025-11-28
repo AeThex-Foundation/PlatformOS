@@ -6,7 +6,7 @@ import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Permit.sol";
 import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Votes.sol";
 
 contract AethexToken is ERC20, ERC20Permit, ERC20Votes {
-    constructor() ERC20("AeThex Governance", "AETH") ERC20Permit("AeThex Governance") {
+    constructor() ERC20("AeThex | Token", "AETHEX") ERC20Permit("AeThex | Token") {
         _mint(msg.sender, 1000000 * 10 ** decimals());
     }
 
