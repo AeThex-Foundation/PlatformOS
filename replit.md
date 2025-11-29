@@ -31,18 +31,15 @@ The Guardian's Hub is a Single Page Application (SPA) built with React 18, TypeS
 - **OAuth Provider:** Exposes OAuth 2.0 endpoints (`/api/oauth/authorize`, `/api/oauth/token`, `/api/oauth/userinfo`) with PKCE support for client applications.
 - **Email Functionality:** Nodemailer for email services.
 - **Routing:**
-    - **Public Pages:** `/`, `/about`, `/foundation`, `/ethics-council`, `/contact`.
+    - **Public Pages:** `/`, `/about`, `/programs`, `/achievements`, `/community`, `/trust`, `/resources`, `/contact`.
     - **Authentication Pages:** `/login`, `/signup`, `/onboarding`, `/profile/settings`.
     - **Hub Pages (Logged-in):** `/hub`, `/hub/protocol`, `/hub/governance`, `/hub/community`.
     - **Passport Pages:** `/:username` (public profile), `/api/passport/:username` (public profile API).
-    - **Creator Directory:** `/creators` (public directory with opt-in visibility).
     - **Admin Pages:** `/admin` (admin-only user management).
-    - **Leaderboard:** `/leaderboard` (displays XP, streaks, badges).
-    - **Workshops:** `/workshops` (upcoming workshops and registration).
-    - **Resources:** `/resources` (Foundation guides, tools).
     - **User Sessions:** `/api/sessions` (active sessions).
     - **OAuth Clients:** `/api/oauth-clients` (manage authorized apps).
     - **Profile System:** `/profile/me` (user's own profile), `/profile/:username` (other user profiles), `/profile/edit` (edit profile).
+    - **Legacy Redirects:** `/foundation/*` routes redirect to their new root-level equivalents.
 
 ### System Design Choices
 - **Type Safety:** TypeScript for type-safe communication across client, server, and shared interfaces.

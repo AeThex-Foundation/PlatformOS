@@ -20,7 +20,7 @@ const updates = [
     title: "New Certification Path",
     description: "Game Audio Design certification now available with industry recognition",
     date: "Nov 28, 2025",
-    link: "/foundation/achievements",
+    link: "/achievements",
     color: "bg-gold-500/20 text-gold-400 border-gold-500/30",
   },
   {

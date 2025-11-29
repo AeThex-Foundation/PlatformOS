@@ -78,8 +78,8 @@ export function CTASection() {
               size="lg"
               className="border-white/20 hover:border-aethex-400 text-lg px-8 py-6"
             >
-              <Link to="/foundation/curriculum">
-                Explore Curriculum
+              <Link to="/programs">
+                Explore Programs
               </Link>
             </Button>
           </div>

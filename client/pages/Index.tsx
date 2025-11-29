@@ -55,11 +55,11 @@ export default function Index() {
 
   const foundationNav = [
     {
-      title: "Curriculum",
+      title: "Programs",
       description: "Learn game development with workshops, courses, and hands-on projects",
       icon: GraduationCap,
       color: "from-aethex-500 to-red-600",
-      link: "/foundation/curriculum",
+      link: "/programs",
       audience: "All skill levels",
     },
     {
@@ -75,7 +75,7 @@ export default function Index() {
       description: "Connect with developers, join teams, and collaborate on projects",
       icon: Users,
       color: "from-gold-500 to-amber-500",
-      link: "/foundation/community",
+      link: "/community",
       audience: "Everyone",
     },
     {
@@ -83,7 +83,7 @@ export default function Index() {
       description: "Build your portfolio and showcase your skills with badges",
       icon: Award,
       color: "from-amber-500 to-aethex-600",
-      link: "/foundation/achievements",
+      link: "/achievements",
       audience: "Contributors",
     },
   ];
@@ -118,7 +118,7 @@ export default function Index() {
       description: "Download tools, templates, and assets for your projects",
       icon: Download,
       color: "from-amber-500 to-aethex-600",
-      link: "/foundation/downloads",
+      link: "/resources",
       tags: ["Tools", "Assets"],
     },
   ];
