@@ -1,0 +1,52 @@
+{
+  "name": "@aethex/passport-sdk",
+  "version": "1.0.0",
+  "description": "AeThex Passport SDK - OAuth 2.0 client for AeThex Foundation SSO",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./react": {
+      "import": "./dist/react.mjs",
+      "require": "./dist/react.js",
+      "types": "./dist/react.d.ts"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsup index.ts react.tsx --format cjs,esm --dts",
+    "dev": "tsup index.ts react.tsx --format cjs,esm --dts --watch"
+  },
+  "peerDependencies": {
+    "react": ">=17.0.0"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    }
+  },
+  "keywords": [
+    "aethex",
+    "passport",
+    "sso",
+    "oauth",
+    "oauth2",
+    "authentication",
+    "identity"
+  ],
+  "author": "AeThex Foundation",
+  "license": "MIT",
+  "homepage": "https://aethex.foundation",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aethex/passport-sdk"
+  }
+}

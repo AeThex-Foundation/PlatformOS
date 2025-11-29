@@ -7,7 +7,26 @@
  */
 
 import crypto from 'crypto';
+import jwt from 'jsonwebtoken';
 import { createClient } from '@supabase/supabase-js';
+
+const JWT_ISSUER = 'https://aethex.foundation';
+const ACCESS_TOKEN_EXPIRY = '1h';
+const ID_TOKEN_EXPIRY = '24h';
+
+function getJWTSecret(): string {
+  const secret = process.env.JWT_SECRET;
+  if (!secret) {
+    if (process.env.NODE_ENV === 'production') {
+      throw new Error('JWT_SECRET environment variable is required in production');
+    }
+    console.warn('[OAuth] JWT_SECRET not set - using development fallback. DO NOT USE IN PRODUCTION.');
+    return 'dev_jwt_secret_for_testing_only_do_not_use_in_production_12345';
+  }
+  return secret;
+}
+
+const JWT_SECRET = getJWTSecret();
 
 const supabaseUrl = process.env.SUPABASE_URL!;
 const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE!;
@@ -292,45 +311,88 @@ export async function validateRefreshToken(
 }
 
 /**
- * Generates a JWT access token
- * Contains user ID, client ID, scopes, and expiration
+ * JWT Access Token Payload
+ */
+export interface AccessTokenPayload {
+  sub: string;           // User ID
+  client_id: string;     // OAuth Client ID
+  scope: string;         // Granted scopes
+  iss: string;           // Issuer (aethex.foundation)
+  aud: string;           // Audience (client_id)
+  iat: number;           // Issued at
+  exp: number;           // Expiration
+  jti: string;           // Unique token ID
+}
+
+/**
+ * Generates a signed JWT access token
+ * Uses HS256 algorithm with server-side secret
  */
 export function generateAccessToken(params: {
   userId: string;
   clientId: string;
   scope: string;
 }): string {
-  // For production: Use proper JWT library (jsonwebtoken)
-  // For MVP: Use base64-encoded payload (NOT SECURE - REPLACE IN PRODUCTION)
-  const payload = {
+  const payload: Omit<AccessTokenPayload, 'iat' | 'exp'> = {
     sub: params.userId,
     client_id: params.clientId,
     scope: params.scope,
-    iss: 'https://aethex.foundation',
-    iat: Math.floor(Date.now() / 1000),
-    exp: Math.floor(Date.now() / 1000) + (60 * 60), // 1 hour
+    iss: JWT_ISSUER,
+    aud: params.clientId,
+    jti: crypto.randomUUID(),
   };
 
-  // TODO: Replace with proper JWT signing using RS256
-  return Buffer.from(JSON.stringify(payload)).toString('base64url');
+  return jwt.sign(payload, JWT_SECRET, {
+    algorithm: 'HS256',
+    expiresIn: ACCESS_TOKEN_EXPIRY,
+  });
+}
+
+/**
+ * Generates a signed ID token (OpenID Connect)
+ * Contains additional user claims
+ */
+export function generateIdToken(params: {
+  userId: string;
+  clientId: string;
+  email?: string;
+  name?: string;
+  picture?: string;
+}): string {
+  const payload = {
+    sub: params.userId,
+    iss: JWT_ISSUER,
+    aud: params.clientId,
+    email: params.email,
+    name: params.name,
+    picture: params.picture,
+    jti: crypto.randomUUID(),
+  };
+
+  return jwt.sign(payload, JWT_SECRET, {
+    algorithm: 'HS256',
+    expiresIn: ID_TOKEN_EXPIRY,
+  });
 }
 
 /**
  * Validates and decodes an access token
- * Returns null if invalid or expired
+ * Returns null if invalid, expired, or signature doesn't match
  */
-export function validateAccessToken(token: string): any | null {
+export function validateAccessToken(token: string): AccessTokenPayload | null {
   try {
-    // TODO: Replace with proper JWT verification using RS256
-    const payload = JSON.parse(Buffer.from(token, 'base64url').toString());
+    const decoded = jwt.verify(token, JWT_SECRET, {
+      algorithms: ['HS256'],
+      issuer: JWT_ISSUER,
+    });
     
-    // Check expiration
-    if (payload.exp < Math.floor(Date.now() / 1000)) {
-      return null;
+    return decoded as AccessTokenPayload;
+  } catch (error) {
+    if (error instanceof jwt.TokenExpiredError) {
+      console.warn('Access token expired');
+    } else if (error instanceof jwt.JsonWebTokenError) {
+      console.warn('Invalid access token:', error.message);
     }
-    
-    return payload;
-  } catch {
     return null;
   }
 }

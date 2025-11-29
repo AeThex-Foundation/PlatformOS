@@ -381,6 +381,38 @@ router.get('/userinfo', async (req: Request, res: Response) => {
 });
 
 /**
+ * GET /.well-known/openid-configuration
+ * 
+ * OpenID Connect Discovery endpoint
+ * Returns provider metadata for client auto-configuration
+ */
+router.get('/.well-known/openid-configuration', (req: Request, res: Response) => {
+  const baseUrl = 'https://aethex.foundation';
+  
+  res.json({
+    issuer: baseUrl,
+    authorization_endpoint: `${baseUrl}/api/oauth/authorize`,
+    token_endpoint: `${baseUrl}/api/oauth/token`,
+    userinfo_endpoint: `${baseUrl}/api/oauth/userinfo`,
+    registration_endpoint: null,
+    scopes_supported: ['openid', 'profile', 'email', 'achievements', 'projects'],
+    response_types_supported: ['code'],
+    response_modes_supported: ['query'],
+    grant_types_supported: ['authorization_code', 'refresh_token'],
+    subject_types_supported: ['public'],
+    id_token_signing_alg_values_supported: ['HS256'],
+    token_endpoint_auth_methods_supported: ['client_secret_post', 'none'],
+    claims_supported: [
+      'sub', 'iss', 'aud', 'exp', 'iat',
+      'name', 'email', 'picture', 'profile',
+      'username', 'bio', 'github', 'twitter', 'linkedin'
+    ],
+    code_challenge_methods_supported: ['S256', 'plain'],
+    service_documentation: 'https://aethex.foundation/docs/passport',
+  });
+});
+
+/**
  * Helper: Redirect with OAuth error
  */
 function redirectWithError(

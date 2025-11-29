@@ -73,6 +73,35 @@ The Guardian's Hub is a Single Page Application (SPA) built with React 18, TypeS
 
 ## Recent Changes
 
+### Cross-Domain SSO Infrastructure (November 29, 2025)
+- **AeThex Passport SDK (`shared/passport-sdk/`):**
+  - Lightweight OAuth 2.0 client library for client site integration
+  - Full PKCE support (S256 code challenge) for secure authorization
+  - React integration with `PassportProvider`, `usePassport` hook, `LoginButton`, `LogoutButton`, `ProtectedRoute`
+  - Automatic token refresh and secure storage management
+  - Typed user profile with sub, username, name, email, picture, bio, and social links
+
+- **JWT Token Security:**
+  - Access tokens now use proper HS256 JWT signing via `jsonwebtoken`
+  - Tokens include: sub, client_id, scope, iss, aud, iat, exp, jti claims
+  - 1-hour access token expiry, 90-day refresh token expiry
+  - ID tokens available for OpenID Connect compliance
+
+- **OAuth Client Registry:**
+  - `aethex_corp` (aethex.dev) - Developer platform
+  - `aethex_studio` (aethex.studio) - Creative/gaming platform
+  - Both registered as trusted Foundation clients with openid, profile, email, achievements, projects scopes
+
+- **CORS Configuration:**
+  - Explicit allowed origins: aethex.foundation, aethex.dev, aethex.studio
+  - Development localhost support (3000, 3001, 5000, 5173)
+  - Replit preview domain passthrough
+  - Credentials enabled for cross-origin cookie support
+
+- **OpenID Connect Discovery:**
+  - `.well-known/openid-configuration` endpoint at `/api/oauth/.well-known/openid-configuration`
+  - Standard provider metadata for client auto-configuration
+
 ### Admin System & Content Enhancements (November 29, 2025)
 - **Admin OAuth Client Management:**
   - New backend API at `/api/admin/oauth-clients` with full CRUD operations
