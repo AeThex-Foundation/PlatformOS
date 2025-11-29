@@ -73,6 +73,40 @@ The Guardian's Hub is a Single Page Application (SPA) built with React 18, TypeS
 
 ## Recent Changes
 
+### Admin System & Content Enhancements (November 29, 2025)
+- **Admin OAuth Client Management:**
+  - New backend API at `/api/admin/oauth-clients` with full CRUD operations
+  - Role-based access control (owner/admin/founder/staff)
+  - Frontend OAuthClients page wired to real API endpoints
+  - Proper redirect_uris array normalization for consistent data handling
+
+- **Session Management:**
+  - Implemented session revocation via Supabase admin.signOut()
+  - Users can terminate active sessions from dashboard
+
+- **Protocol Documentation Enhancements:**
+  - Added "Governance" tab with comprehensive DAO documentation
+  - $AETHEX token information and contract addresses
+  - Governance parameters (voting delay, period, quorum, timelock)
+  - Link to Tally DAO dashboard
+
+- **Resource Library Expansion:**
+  - Added 9 new downloadable resources:
+    - AeThex DAO Governance Guide
+    - OAuth 2.0 Integration Starter Kit
+    - Pixel Art Sprite Pack - Fantasy (300+ sprites)
+    - Game Audio Toolkit (250+ SFX, 10 music tracks)
+    - Inventory System (Unity)
+    - Game Monetization Playbook
+    - Dialogue System Framework
+    - 3D Low Poly Environment Kit
+    - Smart Contract Security Checklist
+
+- **Discord Integration:**
+  - Verified complete implementation with AuthContext
+  - OAuthConnections component in Dashboard with full link/unlink support
+  - Backend Discord routes for OAuth flow and verification
+
 ### Phase 2 Hub Enhancements (November 25, 2025)
 - **Extended Content Management:** Added Hub-specific data to `client/lib/content.ts`:
   - Hub statistics (active bounties, contributors, proposals, total rewards)
