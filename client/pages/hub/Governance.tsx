@@ -152,7 +152,7 @@ export default function Governance() {
                 className="bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 shrink-0"
                 asChild
               >
-                <a href="https://www.tally.xyz/gov/aethex" target="_blank" rel="noopener noreferrer">
+                <a href="https://www.tally.xyz/gov/aethex-collective" target="_blank" rel="noopener noreferrer">
                   <ExternalLink className="h-4 w-4 mr-2" />
                   Open on Tally
                 </a>
