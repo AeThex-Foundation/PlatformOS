@@ -103,8 +103,9 @@ export default function Protocol() {
 
           <section>
             <Tabs defaultValue="whitepaper" className="space-y-6">
-            <TabsList className="grid w-full grid-cols-4 max-w-2xl">
+            <TabsList className="grid w-full grid-cols-5 max-w-3xl">
               <TabsTrigger value="whitepaper">Whitepaper</TabsTrigger>
+              <TabsTrigger value="governance">Governance</TabsTrigger>
               <TabsTrigger value="oauth">OAuth 2.0</TabsTrigger>
               <TabsTrigger value="passport">Passport API</TabsTrigger>
               <TabsTrigger value="architecture">Architecture</TabsTrigger>
@@ -136,6 +137,91 @@ export default function Protocol() {
                     <Download className="h-4 w-4 mr-2" />
                     Download Full Whitepaper
                   </Button>
+                </CardContent>
+              </Card>
+            </TabsContent>
+
+            <TabsContent value="governance" className="space-y-6">
+              <Card className="border-border/30">
+                <CardHeader>
+                  <CardTitle>On-Chain Governance</CardTitle>
+                  <CardDescription>AeThex DAO smart contracts and governance parameters</CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-6">
+                  <div className="bg-gradient-to-r from-gold-500/10 to-aethex-500/10 border border-gold-500/30 rounded-lg p-4">
+                    <h4 className="font-semibold mb-2 text-gold-400">$AETHEX Governance Token</h4>
+                    <p className="text-sm text-muted-foreground">
+                      The AeThex | Token ($AETHEX) is an ERC20 governance token with voting and delegation capabilities.
+                      Token holders can create proposals, vote, and participate in Foundation governance.
+                    </p>
+                  </div>
+
+                  <div>
+                    <h3 className="text-lg font-semibold mb-3">Deployed Contracts</h3>
+                    <div className="space-y-3">
+                      <div className="bg-muted/50 p-4 rounded-lg">
+                        <p className="text-xs font-semibold text-muted-foreground mb-1">AeThex Token (Sepolia Testnet)</p>
+                        <code className="text-xs font-mono text-aethex-400 break-all">
+                          0xf846380e25b34B71474543fdB28258F8477E2Cf1
+                        </code>
+                      </div>
+                      <div className="bg-muted/50 p-4 rounded-lg">
+                        <p className="text-xs font-semibold text-muted-foreground mb-1">Timelock Controller (Sepolia Testnet)</p>
+                        <code className="text-xs font-mono text-aethex-400 break-all">
+                          0xDA8B4b2125B8837cAaa147265B401056b636F1D5
+                        </code>
+                      </div>
+                      <div className="bg-muted/50 p-4 rounded-lg">
+                        <p className="text-xs font-semibold text-muted-foreground mb-1">Governor (Sepolia Testnet)</p>
+                        <code className="text-xs font-mono text-aethex-400 break-all">
+                          0x6660344dA659aAcA0a7733dd70499be7ffa9F4Fa
+                        </code>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div>
+                    <h3 className="text-lg font-semibold mb-3">Governance Parameters</h3>
+                    <div className="grid grid-cols-2 gap-4">
+                      <div className="bg-muted/30 p-3 rounded-lg">
+                        <p className="text-xs text-muted-foreground">Voting Delay</p>
+                        <p className="font-semibold">1 Day</p>
+                      </div>
+                      <div className="bg-muted/30 p-3 rounded-lg">
+                        <p className="text-xs text-muted-foreground">Voting Period</p>
+                        <p className="font-semibold">1 Week</p>
+                      </div>
+                      <div className="bg-muted/30 p-3 rounded-lg">
+                        <p className="text-xs text-muted-foreground">Proposal Threshold</p>
+                        <p className="font-semibold">0 Tokens</p>
+                      </div>
+                      <div className="bg-muted/30 p-3 rounded-lg">
+                        <p className="text-xs text-muted-foreground">Quorum</p>
+                        <p className="font-semibold">4% of Total Supply</p>
+                      </div>
+                      <div className="bg-muted/30 p-3 rounded-lg">
+                        <p className="text-xs text-muted-foreground">Timelock Delay</p>
+                        <p className="font-semibold">2 Days</p>
+                      </div>
+                      <div className="bg-muted/30 p-3 rounded-lg">
+                        <p className="text-xs text-muted-foreground">Total Supply</p>
+                        <p className="font-semibold">1,000,000 $AETHEX</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="bg-blue-500/5 border border-blue-500/30 rounded-lg p-4">
+                    <h4 className="font-semibold mb-2 text-blue-400">Tally DAO Dashboard</h4>
+                    <p className="text-sm text-muted-foreground mb-3">
+                      View full proposal history, delegate voting power, and participate in governance on Tally.
+                    </p>
+                    <Button variant="outline" className="border-blue-500/50" asChild>
+                      <a href="https://www.tally.xyz/gov/aethex" target="_blank" rel="noopener noreferrer">
+                        <ExternalLink className="h-4 w-4 mr-2" />
+                        Open Tally Dashboard
+                      </a>
+                    </Button>
+                  </div>
                 </CardContent>
               </Card>
             </TabsContent>
