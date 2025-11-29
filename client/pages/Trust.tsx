@@ -200,7 +200,7 @@ export default function Trust() {
                         </Link>
                       </Button>
                       <Button asChild variant="outline" className="border-aethex-400/30">
-                        <a href="https://www.tally.xyz/gov/aethex" target="_blank" rel="noopener noreferrer">
+                        <a href="https://www.tally.xyz/gov/aethex-collective" target="_blank" rel="noopener noreferrer">
                           Tally Dashboard
                           <ExternalLink className="h-4 w-4 ml-2" />
                         </a>
@@ -235,7 +235,7 @@ export default function Trust() {
                       </div>
                       <div className="p-4 rounded-lg bg-aethex-500/10 border border-aethex-500/20">
                         <p className="text-sm text-center text-muted-foreground">
-                          Currently deployed on <span className="text-aethex-400 font-medium">Ethereum Sepolia</span> testnet
+                          Live on <span className="text-aethex-400 font-medium">Polygon Mainnet</span>
                         </p>
                       </div>
                     </CardContent>

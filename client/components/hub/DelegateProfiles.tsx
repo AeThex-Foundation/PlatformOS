@@ -76,7 +76,7 @@ export function DelegateProfiles({
           asChild
         >
           <a
-            href="https://www.tally.xyz/gov/aethex/delegates"
+            href="https://www.tally.xyz/gov/aethex-collective/delegates"
             target="_blank"
             rel="noopener noreferrer"
           >

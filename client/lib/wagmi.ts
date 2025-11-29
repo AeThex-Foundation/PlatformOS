@@ -41,7 +41,7 @@ export const NETWORK_CONTRACTS: Record<SupportedNetwork, NetworkContracts> = {
     explorerName: 'Etherscan',
     chainId: 11155111,
     networkName: 'Ethereum Sepolia',
-    tallyUrl: 'https://www.tally.xyz/gov/aethex',
+    tallyUrl: 'https://www.tally.xyz/gov/aethex-collective',
     isTestnet: true,
   },
   polygon: {
@@ -54,7 +54,7 @@ export const NETWORK_CONTRACTS: Record<SupportedNetwork, NetworkContracts> = {
     explorerName: 'Polygonscan',
     chainId: 137,
     networkName: 'Polygon',
-    tallyUrl: 'https://www.tally.xyz/gov/aethex-polygon',
+    tallyUrl: 'https://www.tally.xyz/gov/aethex-collective',
     isTestnet: false,
   },
 }

@@ -216,7 +216,7 @@ export default function Protocol() {
                       View full proposal history, delegate voting power, and participate in governance on Tally.
                     </p>
                     <Button variant="outline" className="border-blue-500/50" asChild>
-                      <a href="https://www.tally.xyz/gov/aethex" target="_blank" rel="noopener noreferrer">
+                      <a href="https://www.tally.xyz/gov/aethex-collective" target="_blank" rel="noopener noreferrer">
                         <ExternalLink className="h-4 w-4 mr-2" />
                         Open Tally Dashboard
                       </a>
