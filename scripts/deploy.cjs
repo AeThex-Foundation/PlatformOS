@@ -62,6 +62,17 @@ async function main() {
   await tx.wait();
   console.log("✅ Revoked DEFAULT_ADMIN_ROLE from deployer");
 
+  // Transfer all tokens to Ledger address
+  const LEDGER_ADDRESS = "0x9A58610d3ad7A7399a4b9c5Dad440dA67FDE4DeF";
+  const tokenBalance = await token.balanceOf(deployer.address);
+  console.log("\n💰 Transferring tokens to Ledger...");
+  console.log("   Ledger address:", LEDGER_ADDRESS);
+  console.log("   Amount:", hre.ethers.formatEther(tokenBalance), "AETHEX");
+  
+  tx = await token.transfer(LEDGER_ADDRESS, tokenBalance);
+  await tx.wait();
+  console.log("✅ All AETHEX tokens transferred to Ledger!");
+
   const deploymentInfo = {
     network: "polygon",
     chainId: 137,

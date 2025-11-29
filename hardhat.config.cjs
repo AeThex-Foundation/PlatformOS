@@ -23,7 +23,9 @@ module.exports = {
       chainId: 11155111,
     },
     polygon: {
-      url: process.env.POLYGON_RPC_URL || "https://polygon-rpc.com",
+      url: process.env.ALCHEMY_API_KEY 
+        ? `https://polygon-mainnet.g.alchemy.com/v2/${process.env.ALCHEMY_API_KEY}`
+        : "https://polygon-rpc.com",
       accounts: process.env.POLYGON_PRIVATE_KEY ? [process.env.POLYGON_PRIVATE_KEY.replace(/^0x/, '')] : [],
       chainId: 137,
     },
