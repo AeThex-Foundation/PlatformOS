@@ -419,7 +419,7 @@ export function validateAccessToken(token: string): AccessTokenPayload | null {
 export async function getUserProfile(userId: string) {
   const { data, error } = await supabaseAdmin
     .from('user_profiles')
-    .select('id, username, full_name, avatar_url, bio, email, github_url, twitter_url, linkedin_url')
+    .select('id, username, full_name, avatar_url, bio, email, github_url, twitter_url, linkedin_url, aethex_domain, wallet_address')
     .eq('id', userId)
     .single();
 

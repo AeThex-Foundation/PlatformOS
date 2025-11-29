@@ -37,6 +37,7 @@ import Hub from "./pages/hub/Hub";
 import Protocol from "./pages/hub/Protocol";
 import Governance from "./pages/hub/Governance";
 import CommunityHub from "./pages/hub/Community";
+import HubPassport from "./pages/hub/Passport";
 
 import Programs from "./pages/Programs";
 import Achievements from "./pages/Achievements";
@@ -82,6 +83,7 @@ const App = () => (
                   <Route path="/hub/protocol" element={<Protocol />} />
                   <Route path="/hub/governance" element={<Governance />} />
                   <Route path="/hub/community" element={<CommunityHub />} />
+                  <Route path="/hub/passport" element={<HubPassport />} />
 
                   {/* Auth Routes */}
                   <Route path="/login" element={<Login />} />

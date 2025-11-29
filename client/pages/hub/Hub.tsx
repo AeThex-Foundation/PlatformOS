@@ -14,6 +14,7 @@ import {
   Award,
   ArrowRight,
   Sparkles,
+  Shield,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 
@@ -59,6 +60,14 @@ export default function Hub() {
       color: "from-amber-500 to-aethex-600",
       link: "/curriculum",
       badge: "Learn",
+    },
+    {
+      title: "Passport",
+      description: "Claim your .aethex domain - your on-chain identity",
+      icon: Shield,
+      color: "from-purple-500 to-pink-500",
+      link: "/hub/passport",
+      badge: "Identity",
     },
   ];
 

@@ -22,6 +22,7 @@ import bountiesRoutes from "./routes/bounties-routes";
 import sessionsRoutes from "./routes/sessions-routes";
 import oauthClientsRoutes from "./routes/oauth-clients-routes";
 import adminOauthClientsRoutes from "./routes/admin-oauth-clients-routes";
+import domainsRoutes from "./routes/domains-routes";
 import { authMiddleware } from "./middleware/auth";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -111,6 +112,9 @@ export function createServer() {
 
   // Bounties (Public read, handlers check auth for apply)
   app.use("/api/bounties", bountiesRoutes);
+
+  // AeThex Domains (.aethex) - Public resolution, auth for claiming
+  app.use("/api/domains", domainsRoutes);
 
   app.post("/api/contact", async (req, res) => {
     try {

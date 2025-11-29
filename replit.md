@@ -2,7 +2,7 @@
 
 ## Overview
 
-Guardian's Hub is the AeThex Passport Authentication Provider and the official Foundation website. It acts as the "Government" responsible for issuing and managing all AeThex identities. Its core purpose is to serve as the authentication provider for all AeThex properties, handle user onboarding and identity management, and host various AeThex domains. A key architectural principle establishes Labs as the governing body for the Passport system, owning the master Supabase `user_profiles` database and providing authentication services to client applications.
+Guardian's Hub is the AeThex Passport Authentication Provider and the official Foundation website. It serves as the "Government" for issuing and managing all AeThex identities, handling user onboarding, identity management, and hosting various AeThex domains. It provides authentication services for all AeThex properties, with Labs owning the master Supabase `user_profiles` database. The project also incorporates a blockchain-based governance system and a .aethex Passport Domain System.
 
 ## User Preferences
 
@@ -26,196 +26,29 @@ The Guardian's Hub is a Single Page Application (SPA) built with React 18, TypeS
 ### Technical Implementations
 - **Frontend:** React 18, React Router 6, TypeScript, Vite, TailwindCSS 3.
 - **Backend:** Express server, integrated with Vite, utilizing `tsx` for TypeScript execution in production.
-- **Authentication:** Supabase authentication, with Foundation as the sole owner of the `user_profiles` database.
-- **Passport System:** Functions as the AeThex Passport (SSO) authentication provider.
-- **OAuth Provider:** Exposes OAuth 2.0 endpoints (`/api/oauth/authorize`, `/api/oauth/token`, `/api/oauth/userinfo`) with PKCE support for client applications.
+- **Authentication:** Supabase authentication, serving as the AeThex Passport (SSO) authentication provider with OAuth 2.0 endpoints (with PKCE support).
 - **Email Functionality:** Nodemailer for email services.
-- **Routing:**
-    - **Public Pages:** `/`, `/about`, `/programs`, `/achievements`, `/community`, `/trust`, `/resources`, `/contact`.
-    - **Authentication Pages:** `/login`, `/signup`, `/onboarding`, `/profile/settings`.
-    - **Hub Pages (Logged-in):** `/hub`, `/hub/protocol`, `/hub/governance`, `/hub/community`.
-    - **Passport Pages:** `/:username` (public profile), `/api/passport/:username` (public profile API).
-    - **Admin Pages:** `/admin` (admin-only user management).
-    - **User Sessions:** `/api/sessions` (active sessions).
-    - **OAuth Clients:** `/api/oauth-clients` (manage authorized apps).
-    - **Profile System:** `/profile/me` (user's own profile), `/profile/:username` (other user profiles), `/profile/edit` (edit profile).
-    - **Legacy Redirects:** `/foundation/*` routes redirect to their new root-level equivalents.
+- **Routing:** Comprehensive routing for public, authentication, logged-in hub, passport, admin, user session, and OAuth client management pages, including profile management and legacy redirects.
+- **Blockchain Governance System:** Hardhat development environment with Solidity 0.8.24, utilizing OpenZeppelin Governor for DAO architecture (AethexToken, AethexTimelock, AethexGovernor). Integrates with Polygon Mainnet and Sepolia Testnet.
+- **Web3 Integration:** Custom governance UI built with Wagmi v2 and Viem for wallet connection, network selection, proposal creation, and voting.
+- **.aethex Passport Domain System:** Token-gated blockchain domain claiming (`username.aethex`) with Freename integration for subdomain minting and resolution. Includes API endpoints for domain checks, balance verification, claiming, and resolution.
+- **Cross-Domain SSO:** AeThex Passport SDK for client site integration with full PKCE support, React integration, automatic token refresh, and secure storage. Uses HS256 JWT for access tokens and provides OpenID Connect discovery.
+- **Admin System:** CRUD operations for OAuth clients with role-based access control and session management.
+- **Content Management:** Centralized content management for Foundation and Hub-specific data, including statistics, team members, milestones, resources, and governance details.
 
 ### System Design Choices
-- **Type Safety:** TypeScript for type-safe communication across client, server, and shared interfaces.
-- **Development Environment:** Single-port development with Vite + Express integration, hot reload.
-- **Production Readiness:** Dedicated build and run commands for production deployment with `autoscale` target.
-- **Data Model:** Comprehensive Supabase schema including tables for `achievements`, `user_achievements`, `workshops`, `workshop_registrations`, `resources`, `resource_downloads`, `bounties`, and `bounty_applications`, all with RLS policies and indexes. Extended profile fields include `skills_detailed`, `languages`, `work_experience`, `portfolio_items`, and `arm_affiliations` for rich user profiles.
-- **Security:** Global `authMiddleware` applied to authenticated routes, explicit role checks for admin endpoints, and service-role Supabase client used only after identity verification.
-- **Monorepo Structure:** Initially part of a monorepo, fostering clear separation of concerns.
-
-### Blockchain Governance System
-- **Smart Contract Infrastructure:** Hardhat 2 development environment with Solidity 0.8.24 and Cancun EVM.
-- **DAO Architecture:** OpenZeppelin Governor standard implementation with three core contracts:
-  - `AethexToken.sol`: ERC20 governance token (AETHEX) with voting and permit capabilities.
-  - `AethexTimelock.sol`: 2-day execution delay for approved proposals.
-  - `AethexGovernor.sol`: On-chain governance with 1-day voting delay, 1-week voting period, 4% quorum.
-- **Deployment - Polygon Mainnet (November 29, 2025):**
-  - Token: `0xf846380e25b34B71474543fdB28258F8477E2Cf1`
-  - Timelock: `0xDA8B4b2125B8837cAaa147265B401056b636F1D5`
-  - Governor: `0x6660344dA659aAcA0a7733dd70499be7ffa9F4Fa`
-  - All contracts verified on Sourcify.
-  - 1,000,000 AETHEX tokens transferred to Ledger: `0x9A58610d3ad7A7399a4b9c5Dad440dA67FDE4DeF`
-- **Deployment - Sepolia Testnet (November 24, 2025):**
-  - Token: `0xf846380e25b34B71474543fdB28258F8477E2Cf1`
-  - Timelock: `0xDA8B4b2125B8837cAaa147265B401056b636F1D5`
-  - Governor: `0x6660344dA659aAcA0a7733dd70499be7ffa9F4Fa`
-  - All contracts verified on Sepolia Etherscan.
-- **Web3 Integration:** Custom governance UI built with Wagmi v2 and Viem:
-  - Wallet connection (MetaMask, WalletConnect) via injected connector
-  - Network selector for Polygon mainnet and Sepolia testnet
-  - On-chain proposal creation with transaction confirmation
-  - Voting interface (For, Against, Abstain) with transaction handling
-  - Real-time contract interaction and error handling
-  - Foundation red/gold themed governance dashboard at `/hub/governance`
-- **Tally Integration:** DAO registered on Tally.xyz at `https://www.tally.xyz/gov/aethex-collective` for full proposal history, governance analytics, and community participation. Governance page includes prominent links to Tally dashboard.
-
-## Recent Changes
-
-### Cross-Domain SSO Infrastructure (November 29, 2025)
-- **AeThex Passport SDK (`shared/passport-sdk/`):**
-  - Lightweight OAuth 2.0 client library for client site integration
-  - Full PKCE support (S256 code challenge) for secure authorization
-  - React integration with `PassportProvider`, `usePassport` hook, `LoginButton`, `LogoutButton`, `ProtectedRoute`
-  - Automatic token refresh and secure storage management
-  - Typed user profile with sub, username, name, email, picture, bio, and social links
-
-- **JWT Token Security:**
-  - Access tokens now use proper HS256 JWT signing via `jsonwebtoken`
-  - Tokens include: sub, client_id, scope, iss, aud, iat, exp, jti claims
-  - 1-hour access token expiry, 90-day refresh token expiry
-  - ID tokens available for OpenID Connect compliance
-
-- **OAuth Client Registry:**
-  - `aethex_corp` (aethex.dev) - Developer platform
-  - `aethex_studio` (aethex.studio) - Creative/gaming platform
-  - Both registered as trusted Foundation clients with openid, profile, email, achievements, projects scopes
-
-- **CORS Configuration:**
-  - Explicit allowed origins: aethex.foundation, aethex.dev, aethex.studio
-  - Development localhost support (3000, 3001, 5000, 5173)
-  - Replit preview domain passthrough
-  - Credentials enabled for cross-origin cookie support
-
-- **OpenID Connect Discovery:**
-  - `.well-known/openid-configuration` endpoint at `/api/oauth/.well-known/openid-configuration`
-  - Standard provider metadata for client auto-configuration
-
-### Admin System & Content Enhancements (November 29, 2025)
-- **Admin OAuth Client Management:**
-  - New backend API at `/api/admin/oauth-clients` with full CRUD operations
-  - Role-based access control (owner/admin/founder/staff)
-  - Frontend OAuthClients page wired to real API endpoints
-  - Proper redirect_uris array normalization for consistent data handling
-
-- **Session Management:**
-  - Implemented session revocation via Supabase admin.signOut()
-  - Users can terminate active sessions from dashboard
-
-- **Protocol Documentation Enhancements:**
-  - Added "Governance" tab with comprehensive DAO documentation
-  - $AETHEX token information and contract addresses
-  - Governance parameters (voting delay, period, quorum, timelock)
-  - Link to Tally DAO dashboard
-
-- **Resource Library Expansion:**
-  - Added 9 new downloadable resources:
-    - AeThex DAO Governance Guide
-    - OAuth 2.0 Integration Starter Kit
-    - Pixel Art Sprite Pack - Fantasy (300+ sprites)
-    - Game Audio Toolkit (250+ SFX, 10 music tracks)
-    - Inventory System (Unity)
-    - Game Monetization Playbook
-    - Dialogue System Framework
-    - 3D Low Poly Environment Kit
-    - Smart Contract Security Checklist
-
-- **Discord Integration:**
-  - Verified complete implementation with AuthContext
-  - OAuthConnections component in Dashboard with full link/unlink support
-  - Backend Discord routes for OAuth flow and verification
-
-### Phase 2 Hub Enhancements (November 25, 2025)
-- **Extended Content Management:** Added Hub-specific data to `client/lib/content.ts`:
-  - Hub statistics (active bounties, contributors, proposals, total rewards)
-  - Featured contributors with XP and bounty stats
-  - Upcoming Hub events with types and attendees
-  - Recent discussion threads with metadata
-  - Governance statistics (proposals, pass rate, participation)
-  - Delegate profiles with voting power metrics
-  - Resource categories with item counts
-  - Featured/popular resources
-
-- **New Hub Components (client/components/hub/):**
-  - `FeaturedContributors.tsx`: Contributor spotlight cards with XP, bounties, and badges
-  - `DiscussionPreview.tsx`: Recent discussion threads with author, replies, views
-  - `UpcomingEvents.tsx`: Event cards with type icons, dates, and attendee counts
-  - `VotingStats.tsx`: Governance analytics with proposal counts and pass rate visualization
-  - `DelegateProfiles.tsx`: Top delegate cards with voting power and participation rates
-
-- **Enhanced Hub Pages:**
-  - **Community Hub:** Integrated FeaturedContributors, DiscussionPreview, and UpcomingEvents sections with centralized data
-  - **Governance Page:** Added VotingStats and DelegateProfiles sections with live governance metrics
-  - **Resources Page:** Added category cards grid (Tutorials, Developer Tools, Templates, Documentation, Game Assets, Video Courses) and "Popular This Month" featured resources banner
-
-### Phase 1 Content Depth Enhancement (November 25, 2025)
-- **Centralized Content Management:** Created `client/lib/content.ts` as single source of truth for all Foundation content:
-  - Foundation statistics (developers trained, open source projects, countries reached, workshop hours)
-  - Mission and vision statements
-  - Axiom principles and core values
-  - Team member profiles
-  - Foundation milestones timeline
-  - Open source project catalog
-  - Workshop schedules
-  - Learning resources catalog
-
-- **Enhanced Public Pages:**
-  - **About Page:** Added animated stat counters, mission/vision cards, Axiom principles with icons, core values grid, and founder quote section
-  - **Foundation Page:** Integrated team member profiles with role badges, milestones timeline with year-based icons, open source projects grid with GitHub links, workshop schedule, and learning resources catalog
-  - **Curriculum Page:** Created with course catalog, learning paths, and search/filter functionality with fallback sample data
-
-- **Reusable Components:**
-  - `TeamSection.tsx`: Team member grid with avatar, name, role, and optional social links
-  - `MilestonesSection.tsx`: Timeline component with year-based icons and descriptions
-  - `OriginStorySection.tsx`: Origin story display with title, paragraphs, and founder attribution
-  - `AnimatedCounter.tsx`: Number animation from 0 to target value
-
-### Deployment Fix (November 24, 2025)
-- **Production Deployment:** Fixed production build failure by moving `tsx` from devDependencies to dependencies, ensuring TypeScript server execution is available in production environment.
-- **Build Process:** Simplified build script to `vite build` (client only), with production server using `tsx server/index.ts` directly.
-
-### Profile System Implementation (November 21, 2025)
-- **New Pages Created:**
-  - `ProfileView.tsx`: Displays user profiles at `/profile/me` and `/profile/:username` with comprehensive information display including stats, skills, work experience, and portfolio items. Includes authentication redirect for `/profile/me` route.
-  - `ProfileEdit.tsx`: Allows users to edit their profile information at `/profile/edit` with form validation and real-time updates.
-
-- **Backend API Enhancements:**
-  - `GET /api/profile/:username`: Public endpoint to retrieve any user's profile by username.
-  - `PUT /api/profile`: Authenticated endpoint for users to update their own profile information.
-
-- **Type System Updates:**
-  - Extended `AethexUserProfile` interface in `aethex-database-adapter.ts` to include `skills_detailed`, `languages`, `work_experience`, `portfolio_items`, and `arm_affiliations` fields.
-  - Fixed role selection options to match database enum values: `client`, `game_developer`, `community_member`, `customer`, `staff`.
-
-- **Routes Added:**
-  - `/profile/me`: View own profile (requires authentication, redirects to `/login` if not authenticated).
-  - `/profile/:username`: View any user's public profile.
-  - `/profile/edit`: Edit own profile (requires authentication).
-
-### Community Routes Fixed
-- **New Page Created:**
-  - `FoundationCommunity.tsx`: Landing page for `/foundation/community` that provides navigation to teams, about, leaderboard, and creator directory sections.
-
-- **Routes Added:**
-  - `/foundation/community`: Public community landing page with links to all community resources.
+- **Type Safety:** TypeScript for type-safe communication.
+- **Development Environment:** Single-port development with Vite + Express integration.
+- **Production Readiness:** Dedicated build and run commands for production deployment.
+- **Data Model:** Comprehensive Supabase schema with RLS policies and indexes, including extended profile fields.
+- **Security:** Global `authMiddleware`, explicit role checks, and service-role Supabase client usage after identity verification.
+- **Monorepo Structure:** Clear separation of concerns, originally part of a monorepo.
+- **OAuth Client Registry:** Pre-registered trusted clients like `aethex_corp` and `aethex_studio`.
+- **CORS Configuration:** Explicit allowed origins for production and development, with credentials enabled.
 
 ## External Dependencies
 
-- **Supabase:** Used for user authentication, database management (including OAuth tables), and backend services.
-- **Nodemailer:** Utilized for sending emails (e.g., verification emails).
-- **Tally.xyz:** Integrated for DAO governance functionalities within the `/hub/governance` section.
+- **Supabase:** User authentication, database management, and backend services.
+- **Nodemailer:** Email sending functionality.
+- **Tally.xyz:** Integrated for DAO governance functionalities and analytics.
+- **Freename:** API for .aethex subdomain minting and resolution.
