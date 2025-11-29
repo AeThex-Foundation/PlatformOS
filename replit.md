@@ -52,21 +52,28 @@ The Guardian's Hub is a Single Page Application (SPA) built with React 18, TypeS
 ### Blockchain Governance System
 - **Smart Contract Infrastructure:** Hardhat 2 development environment with Solidity 0.8.24 and Cancun EVM.
 - **DAO Architecture:** OpenZeppelin Governor standard implementation with three core contracts:
-  - `AethexToken.sol`: ERC20 governance token (AETH) with voting and permit capabilities.
+  - `AethexToken.sol`: ERC20 governance token (AETHEX) with voting and permit capabilities.
   - `AethexTimelock.sol`: 2-day execution delay for approved proposals.
   - `AethexGovernor.sol`: On-chain governance with 1-day voting delay, 1-week voting period, 4% quorum.
-- **Deployment:** Live on Ethereum Sepolia testnet (November 24, 2025):
+- **Deployment - Polygon Mainnet (November 29, 2025):**
+  - Token: `0xf846380e25b34B71474543fdB28258F8477E2Cf1`
+  - Timelock: `0xDA8B4b2125B8837cAaa147265B401056b636F1D5`
+  - Governor: `0x6660344dA659aAcA0a7733dd70499be7ffa9F4Fa`
+  - All contracts verified on Sourcify.
+  - 1,000,000 AETHEX tokens transferred to Ledger: `0x9A58610d3ad7A7399a4b9c5Dad440dA67FDE4DeF`
+- **Deployment - Sepolia Testnet (November 24, 2025):**
   - Token: `0xf846380e25b34B71474543fdB28258F8477E2Cf1`
   - Timelock: `0xDA8B4b2125B8837cAaa147265B401056b636F1D5`
   - Governor: `0x6660344dA659aAcA0a7733dd70499be7ffa9F4Fa`
   - All contracts verified on Sepolia Etherscan.
 - **Web3 Integration:** Custom governance UI built with Wagmi v2 and Viem:
-  - Wallet connection (MetaMask, WalletConnect) via RainbowKit
+  - Wallet connection (MetaMask, WalletConnect) via injected connector
+  - Network selector for Polygon mainnet and Sepolia testnet
   - On-chain proposal creation with transaction confirmation
   - Voting interface (For, Against, Abstain) with transaction handling
   - Real-time contract interaction and error handling
   - Foundation red/gold themed governance dashboard at `/hub/governance`
-- **Tally Integration:** DAO registered on Tally.xyz at `https://www.tally.xyz/gov/aethex` for full proposal history, governance analytics, and community participation. Governance page includes prominent links to Tally dashboard.
+- **Tally Integration:** DAO registered on Tally.xyz for full proposal history, governance analytics, and community participation. Governance page includes prominent links to Tally dashboard.
 
 ## Recent Changes
 
