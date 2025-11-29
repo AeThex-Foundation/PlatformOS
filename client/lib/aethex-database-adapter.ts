@@ -21,6 +21,7 @@ export interface AethexUserProfile extends UserProfile {
   social_links?: any;
   skills?: string[];
   wallet_address?: string | null;
+  aethex_domain?: string | null;
   show_in_creator_directory?: boolean;
   arms?: string[];
   roles?: string[];
