@@ -21,6 +21,7 @@ import resourcesRoutes from "./routes/resources-routes";
 import bountiesRoutes from "./routes/bounties-routes";
 import sessionsRoutes from "./routes/sessions-routes";
 import oauthClientsRoutes from "./routes/oauth-clients-routes";
+import adminOauthClientsRoutes from "./routes/admin-oauth-clients-routes";
 import { authMiddleware } from "./middleware/auth";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -133,6 +134,9 @@ export function createServer() {
 
   // Admin Dashboard (requires auth + admin role)
   app.use("/api/admin", adminRoutes);
+
+  // Admin OAuth Client Management (requires auth + admin role)
+  app.use("/api/admin/oauth-clients", adminOauthClientsRoutes);
 
   // OAuth Client Management (requires auth)
   app.use("/api/oauth-clients", oauthClientsRoutes);

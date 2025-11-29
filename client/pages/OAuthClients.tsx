@@ -67,6 +67,31 @@ export default function OAuthClients() {
     ["owner", "admin", "founder"].includes(role.toLowerCase())
   );
 
+  const fetchClients = async () => {
+    try {
+      setLoading(true);
+      const response = await fetch('/api/admin/oauth-clients', {
+        credentials: 'include',
+      });
+      
+      if (!response.ok) {
+        throw new Error('Failed to fetch clients');
+      }
+      
+      const data = await response.json();
+      setClients(data.clients || []);
+    } catch (error) {
+      console.error('Error fetching OAuth clients:', error);
+      toast({
+        title: "Error",
+        description: "Failed to load OAuth clients",
+        variant: "destructive",
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
     if (!user) {
       navigate("/login?redirect=/admin/oauth-clients");
@@ -83,79 +108,64 @@ export default function OAuthClients() {
       return;
     }
 
-    // TODO: Replace with real API endpoint
-    const mockClients: OAuthClient[] = [
-      {
-        id: "1",
-        client_id: "aethex_corp_prod",
-        client_secret: "sk_live_********************",
-        name: "AeThex Corporation",
-        description: "Official AeThex Corporation website and services",
-        redirect_uris: ["https://aethex.dev/auth/callback"],
-        website: "https://aethex.dev",
-        approved: true,
-        created_at: "2025-11-01T00:00:00Z",
-        created_by: "Foundation",
-        total_users: 1247,
-        total_logins: 8932,
-      },
-      {
-        id: "2",
-        client_id: "aethex_gameforge",
-        client_secret: "sk_live_********************",
-        name: "GameForge Platform",
-        description: "GameForge game development and publishing platform",
-        redirect_uris: ["https://gameforge.aethex.dev/auth/callback"],
-        website: "https://gameforge.aethex.dev",
-        approved: true,
-        created_at: "2025-11-05T00:00:00Z",
-        created_by: "Foundation",
-        total_users: 523,
-        total_logins: 2341,
-      },
-      {
-        id: "3",
-        client_id: "third_party_app",
-        client_secret: "sk_test_********************",
-        name: "Third-Party Game Studio",
-        description: "External developer requesting Passport integration",
-        redirect_uris: ["https://example-studio.com/auth/callback"],
-        website: "https://example-studio.com",
-        approved: false,
-        created_at: "2025-11-15T00:00:00Z",
-        created_by: "external_user_id",
-        total_users: 0,
-        total_logins: 0,
-      },
-    ];
-
-    setTimeout(() => {
-      setClients(mockClients);
-      setLoading(false);
-    }, 500);
+    fetchClients();
   }, [user, isAdmin, navigate, toast]);
 
-  const handleApprove = (clientId: string) => {
-    // TODO: Implement API call
-    setClients(clients.map(c => 
-      c.id === clientId ? { ...c, approved: true } : c
-    ));
-    toast({
-      title: "Client Approved",
-      description: "OAuth client has been approved and can now authenticate users",
-    });
+  const handleApprove = async (clientId: string) => {
+    try {
+      const response = await fetch(`/api/admin/oauth-clients/${clientId}/approve`, {
+        method: 'PUT',
+        credentials: 'include',
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to approve client');
+      }
+
+      setClients(clients.map(c => 
+        c.id === clientId ? { ...c, approved: true } : c
+      ));
+      toast({
+        title: "Client Approved",
+        description: "OAuth client has been approved and can now authenticate users",
+      });
+    } catch (error) {
+      console.error('Error approving client:', error);
+      toast({
+        title: "Error",
+        description: "Failed to approve OAuth client",
+        variant: "destructive",
+      });
+    }
   };
 
-  const handleRevoke = (clientId: string) => {
-    // TODO: Implement API call
-    setClients(clients.map(c => 
-      c.id === clientId ? { ...c, approved: false } : c
-    ));
-    toast({
-      title: "Client Revoked",
-      description: "OAuth client access has been revoked",
-      variant: "destructive",
-    });
+  const handleRevoke = async (clientId: string) => {
+    try {
+      const response = await fetch(`/api/admin/oauth-clients/${clientId}/revoke`, {
+        method: 'PUT',
+        credentials: 'include',
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to revoke client');
+      }
+
+      setClients(clients.map(c => 
+        c.id === clientId ? { ...c, approved: false } : c
+      ));
+      toast({
+        title: "Client Revoked",
+        description: "OAuth client access has been revoked",
+        variant: "destructive",
+      });
+    } catch (error) {
+      console.error('Error revoking client:', error);
+      toast({
+        title: "Error",
+        description: "Failed to revoke OAuth client",
+        variant: "destructive",
+      });
+    }
   };
 
   const toggleSecretVisibility = (clientId: string) => {

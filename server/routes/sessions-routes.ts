@@ -53,14 +53,22 @@ router.delete('/:sessionId', async (req: Request, res: Response) => {
       return res.status(401).json({ error: 'Authentication required' });
     }
 
-    if (sessionId !== 'current-session') {
+    if (sessionId === 'current-session') {
+      const { error } = await supabaseAdmin.auth.admin.signOut(userId);
+      
+      if (error) {
+        console.error('[Sessions API] Error revoking session:', error);
+        return res.status(500).json({ error: 'Failed to revoke session' });
+      }
+
+      res.json({
+        success: true,
+        message: 'Session revoked successfully. Please log in again.',
+        requiresRelogin: true,
+      });
+    } else {
       return res.status(404).json({ error: 'Session not found' });
     }
-
-    res.json({
-      success: true,
-      message: 'Session revocation not implemented (use logout from frontend)',
-    });
   } catch (error) {
     console.error('[Sessions API] Unexpected error:', error);
     res.status(500).json({ error: 'Internal server error' });

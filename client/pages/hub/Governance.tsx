@@ -1,14 +1,15 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
-import { useAccount } from "wagmi";
+import { useAccount, useChainId, useSwitchChain } from "wagmi";
 import Layout from "@/components/Layout";
 import SEO from "@/components/SEO";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Users, ExternalLink, Plus } from "lucide-react";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Users, ExternalLink, Plus, AlertTriangle, Globe } from "lucide-react";
 import { WalletConnect } from "@/components/WalletConnect";
 import { ProposalList } from "@/components/governance/ProposalList";
 import { CreateProposal } from "@/components/governance/CreateProposal";
@@ -17,14 +18,34 @@ import { ProposalDetails } from "@/components/governance/ProposalDetails";
 import { VotingStats } from "@/components/hub/VotingStats";
 import { DelegateProfiles } from "@/components/hub/DelegateProfiles";
 import { governanceStats, delegateProfiles } from "@/lib/content";
+import { NETWORK_CONTRACTS, getContractsForChain, type SupportedNetwork } from "@/lib/wagmi";
 
 export default function Governance() {
   const { user } = useAuth();
   const { isConnected } = useAccount();
+  const chainId = useChainId();
+  const { switchChain } = useSwitchChain();
   const navigate = useNavigate();
   const [showCreateProposal, setShowCreateProposal] = useState(false);
   const [selectedProposal, setSelectedProposal] = useState<bigint | null>(null);
   const [showVoteModal, setShowVoteModal] = useState(false);
+  const [selectedNetwork, setSelectedNetwork] = useState<SupportedNetwork>('sepolia');
+
+  const currentContracts = NETWORK_CONTRACTS[selectedNetwork];
+  const connectedContracts = chainId ? getContractsForChain(chainId) : null;
+  const isCorrectNetwork = connectedContracts && connectedContracts.chainId === currentContracts.chainId;
+  const isPolygonDeployed = NETWORK_CONTRACTS.polygon.governor !== '0x0000000000000000000000000000000000000000';
+
+  const handleNetworkChange = (network: SupportedNetwork) => {
+    setSelectedNetwork(network);
+    if (isConnected && switchChain) {
+      switchChain({ chainId: NETWORK_CONTRACTS[network].chainId });
+    }
+  };
+
+  const shortenAddress = (address: string) => {
+    return `${address.slice(0, 6)}...${address.slice(-4)}`;
+  };
 
   useEffect(() => {
     if (!user) {
@@ -48,21 +69,66 @@ export default function Governance() {
           <section className="space-y-4">
             <div className="flex items-start justify-between gap-4">
               <div className="space-y-4 flex-1">
-                <Badge variant="outline" className="border-red-500/50 text-red-500">
-                  On-Chain Governance
-                </Badge>
+                <div className="flex items-center gap-3">
+                  <Badge variant="outline" className="border-red-500/50 text-red-500">
+                    On-Chain Governance
+                  </Badge>
+                  <Select value={selectedNetwork} onValueChange={(v) => handleNetworkChange(v as SupportedNetwork)}>
+                    <SelectTrigger className="w-[180px] border-red-900/30 bg-black/30">
+                      <Globe className="w-4 h-4 mr-2 text-red-400" />
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="sepolia">
+                        <div className="flex items-center gap-2">
+                          <div className="w-2 h-2 rounded-full bg-yellow-500" />
+                          Sepolia (Testnet)
+                        </div>
+                      </SelectItem>
+                      <SelectItem value="polygon" disabled={!isPolygonDeployed}>
+                        <div className="flex items-center gap-2">
+                          <div className="w-2 h-2 rounded-full bg-purple-500" />
+                          Polygon {!isPolygonDeployed && "(Coming Soon)"}
+                        </div>
+                      </SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
                 <h1 className="text-4xl font-bold">
                   <span className="bg-gradient-to-r from-red-500 to-yellow-500 bg-clip-text text-transparent">
                     DAO Governance
                   </span>
                 </h1>
                 <p className="text-xl text-gray-400 max-w-3xl">
-                  Participate in on-chain governance. Create proposals, vote with AETH tokens, and shape the future of the Foundation.
+                  Participate in on-chain governance. Create proposals, vote with {currentContracts.tokenSymbol} tokens, and shape the future of the Foundation.
                 </p>
               </div>
               <WalletConnect />
             </div>
           </section>
+
+          {/* Network Mismatch Warning */}
+          {isConnected && !isCorrectNetwork && (
+            <Card className="p-4 border-yellow-500/50 bg-yellow-950/20">
+              <div className="flex items-center gap-3">
+                <AlertTriangle className="w-5 h-5 text-yellow-500" />
+                <div className="flex-1">
+                  <p className="text-yellow-200 font-medium">Wrong Network</p>
+                  <p className="text-sm text-yellow-400/70">
+                    Please switch to {currentContracts.networkName} to interact with governance.
+                  </p>
+                </div>
+                <Button 
+                  size="sm" 
+                  variant="outline" 
+                  className="border-yellow-500/50 text-yellow-300 hover:bg-yellow-950/50"
+                  onClick={() => switchChain?.({ chainId: currentContracts.chainId })}
+                >
+                  Switch Network
+                </Button>
+              </div>
+            </Card>
+          )}
 
           {/* Tally Integration Banner */}
           <Card className="p-8 border-red-900/30 bg-gradient-to-br from-red-950/30 via-yellow-950/10 to-black/20">
@@ -100,35 +166,48 @@ export default function Governance() {
               <div className="space-y-3 flex-1">
                 <h2 className="text-xl font-bold text-white flex items-center gap-2">
                   Contract Information
+                  {currentContracts.isTestnet && (
+                    <Badge variant="outline" className="border-yellow-500/50 text-yellow-500 text-xs">
+                      Testnet
+                    </Badge>
+                  )}
                 </h2>
                 <div className="space-y-2 text-sm">
                   <div className="flex gap-2">
                     <span className="text-gray-500">Network:</span>
-                    <span className="text-white font-mono">Ethereum Sepolia</span>
+                    <span className="text-white font-mono">{currentContracts.networkName}</span>
                   </div>
                   <div className="flex gap-2">
                     <span className="text-gray-500">Governor:</span>
-                    <a
-                      href="https://sepolia.etherscan.io/address/0x6660344dA659aAcA0a7733dd70499be7ffa9F4Fa"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-red-400 hover:text-red-300 font-mono text-xs flex items-center gap-1"
-                    >
-                      0x6660...9F4Fa
-                      <ExternalLink className="w-3 h-3" />
-                    </a>
+                    {currentContracts.governor !== '0x0000000000000000000000000000000000000000' ? (
+                      <a
+                        href={`${currentContracts.explorerUrl}/address/${currentContracts.governor}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-red-400 hover:text-red-300 font-mono text-xs flex items-center gap-1"
+                      >
+                        {shortenAddress(currentContracts.governor)}
+                        <ExternalLink className="w-3 h-3" />
+                      </a>
+                    ) : (
+                      <span className="text-gray-500 text-xs">Not deployed yet</span>
+                    )}
                   </div>
                   <div className="flex gap-2">
-                    <span className="text-gray-500">Token (AETH):</span>
-                    <a
-                      href="https://sepolia.etherscan.io/address/0xf846380e25b34B71474543fdB28258F8477E2Cf1"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-red-400 hover:text-red-300 font-mono text-xs flex items-center gap-1"
-                    >
-                      0xf846...2Cf1
-                      <ExternalLink className="w-3 h-3" />
-                    </a>
+                    <span className="text-gray-500">Token ({currentContracts.tokenSymbol}):</span>
+                    {currentContracts.token !== '0x0000000000000000000000000000000000000000' ? (
+                      <a
+                        href={`${currentContracts.explorerUrl}/address/${currentContracts.token}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-red-400 hover:text-red-300 font-mono text-xs flex items-center gap-1"
+                      >
+                        {shortenAddress(currentContracts.token)}
+                        <ExternalLink className="w-3 h-3" />
+                      </a>
+                    ) : (
+                      <span className="text-gray-500 text-xs">Not deployed yet</span>
+                    )}
                   </div>
                 </div>
               </div>
@@ -149,7 +228,7 @@ export default function Governance() {
                   </div>
                   <div className="flex gap-2">
                     <span className="text-gray-500">Proposal Threshold:</span>
-                    <span className="text-white">1000 AETH</span>
+                    <span className="text-white">1000 {currentContracts.tokenSymbol}</span>
                   </div>
                 </div>
               </div>
@@ -221,51 +300,54 @@ export default function Governance() {
 
           {/* Quick Links */}
           <div className="grid md:grid-cols-2 gap-4">
-            <Card className="p-6 border-red-900/30 bg-gradient-to-r from-red-950/20 to-yellow-950/10">
-              <div className="flex items-center justify-between">
-                <div className="space-y-1">
-                  <h3 className="font-semibold text-white">View on Tally</h3>
-                  <p className="text-sm text-gray-400">
-                    Full governance dashboard and proposal history
-                  </p>
-                </div>
-                <Button
-                  variant="outline"
-                  className="border-red-900/50 hover:bg-red-950/50"
-                  asChild
-                >
-                  <a
-                    href="https://www.tally.xyz/gov/aethex"
-                    target="_blank"
-                    rel="noopener noreferrer"
+            {currentContracts.tallyUrl && (
+              <Card className="p-6 border-red-900/30 bg-gradient-to-r from-red-950/20 to-yellow-950/10">
+                <div className="flex items-center justify-between">
+                  <div className="space-y-1">
+                    <h3 className="font-semibold text-white">View on Tally</h3>
+                    <p className="text-sm text-gray-400">
+                      Full governance dashboard and proposal history
+                    </p>
+                  </div>
+                  <Button
+                    variant="outline"
+                    className="border-red-900/50 hover:bg-red-950/50"
+                    asChild
                   >
-                    <ExternalLink className="h-4 w-4 mr-2" />
-                    Open Tally
-                  </a>
-                </Button>
-              </div>
-            </Card>
+                    <a
+                      href={currentContracts.tallyUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <ExternalLink className="h-4 w-4 mr-2" />
+                      Open Tally
+                    </a>
+                  </Button>
+                </div>
+              </Card>
+            )}
 
             <Card className="p-6 border-red-900/30 bg-gradient-to-r from-red-950/20 to-yellow-950/10">
               <div className="flex items-center justify-between">
                 <div className="space-y-1">
                   <h3 className="font-semibold text-white">Verified On-Chain</h3>
                   <p className="text-sm text-gray-400">
-                    All contracts verified on Sepolia Etherscan
+                    All contracts verified on {currentContracts.explorerName}
                   </p>
                 </div>
                 <Button
                   variant="outline"
                   className="border-red-900/50 hover:bg-red-950/50"
                   asChild
+                  disabled={currentContracts.governor === '0x0000000000000000000000000000000000000000'}
                 >
                   <a
-                    href="https://sepolia.etherscan.io/address/0x6660344dA659aAcA0a7733dd70499be7ffa9F4Fa#code"
+                    href={`${currentContracts.explorerUrl}/address/${currentContracts.governor}#code`}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
                     <ExternalLink className="h-4 w-4 mr-2" />
-                    Etherscan
+                    {currentContracts.explorerName}
                   </a>
                 </Button>
               </div>
