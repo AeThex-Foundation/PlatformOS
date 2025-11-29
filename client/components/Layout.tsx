@@ -49,11 +49,11 @@ export default function CodeLayout({ children, hideFooter }: LayoutProps) {
   const publicNavigation = [
     { name: "Home", href: "/" },
     { name: "About", href: "/about" },
-    { name: "Labs", href: "/labs" },
-    { name: "Research", href: "/research" },
-    { name: "Contact", href: "/contact" },
+    { name: "Programs", href: "/programs" },
     { name: "Community", href: "/community" },
-    { name: "Documentation", href: "/docs" },
+    { name: "Resources", href: "/resources" },
+    { name: "Trust", href: "/trust" },
+    { name: "Contact", href: "/contact" },
   ];
 
   const userNavigation = [
@@ -61,13 +61,10 @@ export default function CodeLayout({ children, hideFooter }: LayoutProps) {
     { name: "Protocol", href: "/hub/protocol" },
     { name: "Governance", href: "/hub/governance" },
     { name: "Community", href: "/hub/community" },
-    { name: "Curriculum", href: "/curriculum" },
+    { name: "Programs", href: "/programs" },
     { name: "Achievements", href: "/achievements" },
-    { name: "Downloads", href: "/downloads" },
-    { name: "Developers", href: "/community/developers" },
+    { name: "Resources", href: "/resources" },
     { name: "My Profile", href: "/profile/me" },
-    { name: "About", href: "/about" },
-    { name: "Contact", href: "/contact" },
   ];
 
   const isSubdomainHost = (() => {
@@ -607,7 +604,7 @@ export default function CodeLayout({ children, hideFooter }: LayoutProps) {
                   </li>
                   <li>
                     <Link
-                      to="/foundation"
+                      to="/resources"
                       onClick={scrollToTop}
                       className="transition-all duration-300 hover:translate-x-1 inline-block"
                       style={{
@@ -625,7 +622,7 @@ export default function CodeLayout({ children, hideFooter }: LayoutProps) {
                   </li>
                   <li>
                     <Link
-                      to="/foundation"
+                      to="/programs"
                       onClick={scrollToTop}
                       className="transition-all duration-300 hover:translate-x-1 inline-block"
                       style={{
@@ -671,7 +668,7 @@ export default function CodeLayout({ children, hideFooter }: LayoutProps) {
                   </li>
                   <li>
                     <Link
-                      to="/ethics-council"
+                      to="/trust"
                       onClick={scrollToTop}
                       className="transition-all duration-300 hover:translate-x-1 inline-block"
                       style={{ color: "inherit" }}
@@ -682,7 +679,7 @@ export default function CodeLayout({ children, hideFooter }: LayoutProps) {
                         (e.currentTarget.style.color = "inherit")
                       }
                     >
-                      Ethics Council
+                      Trust & Governance
                     </Link>
                   </li>
                   <li>
@@ -719,7 +716,7 @@ export default function CodeLayout({ children, hideFooter }: LayoutProps) {
                   </li>
                   <li>
                     <Link
-                      to="/foundation"
+                      to="/about"
                       onClick={scrollToTop}
                       className="transition-all duration-300 hover:translate-x-1 inline-block"
                       style={{ color: "inherit" }}
@@ -730,7 +727,7 @@ export default function CodeLayout({ children, hideFooter }: LayoutProps) {
                         (e.currentTarget.style.color = "inherit")
                       }
                     >
-                      Foundation Info
+                      About the Foundation
                     </Link>
                   </li>
                   <li>

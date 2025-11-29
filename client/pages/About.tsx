@@ -207,8 +207,8 @@ export default function About() {
                     </Link>
                   </Button>
                   <Button asChild variant="outline" size="lg" className="border-aethex-400/50 hover:border-aethex-400">
-                    <Link to="/foundation">
-                      Learn More About Foundation
+                    <Link to="/programs">
+                      Explore Programs
                     </Link>
                   </Button>
                 </div>

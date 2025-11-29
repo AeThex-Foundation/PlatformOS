@@ -133,9 +133,9 @@ export default function Dashboard() {
     { name: "Protocol Docs", href: "/hub/protocol", icon: BookOpen, description: "Technical documentation" },
     { name: "Governance", href: "/hub/governance", icon: Vote, description: "DAO proposals & voting" },
     { name: "Community Board", href: "/hub/community", icon: Users, description: "Bounties & collaboration" },
-    { name: "Curriculum", href: "/foundation/curriculum", icon: Shield, description: "Learning resources" },
-    { name: "Achievements", href: "/foundation/achievements", icon: Trophy, description: "Your badges" },
-    { name: "Downloads", href: "/foundation/downloads", icon: FileText, description: "Tools & resources" },
+    { name: "Programs", href: "/programs", icon: Shield, description: "Learning resources" },
+    { name: "Achievements", href: "/achievements", icon: Trophy, description: "Your badges" },
+    { name: "Resources", href: "/resources", icon: FileText, description: "Tools & resources" },
   ];
 
   const communityActivity = [
