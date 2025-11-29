@@ -27,24 +27,53 @@ import { authMiddleware } from "./middleware/auth";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+// Allowed origins for CORS (AeThex ecosystem)
+const ALLOWED_ORIGINS = [
+  'https://aethex.foundation',
+  'https://aethex.dev',
+  'https://aethex.studio',
+  // Development origins
+  'http://localhost:3000',
+  'http://localhost:3001',
+  'http://localhost:5000',
+  'http://localhost:5173',
+];
+
 export function createServer() {
   const app = express();
 
-  app.use(cors());
+  // Configure CORS with specific origins for OAuth security
+  app.use(cors({
+    origin: (origin, callback) => {
+      // Allow requests with no origin (like mobile apps or curl)
+      if (!origin) return callback(null, true);
+      
+      // Allow Replit preview domains
+      if (origin.includes('.replit.dev') || origin.includes('.repl.co')) {
+        return callback(null, true);
+      }
+      
+      if (ALLOWED_ORIGINS.includes(origin)) {
+        return callback(null, true);
+      }
+      
+      // In development, be more permissive
+      if (process.env.NODE_ENV !== 'production') {
+        return callback(null, true);
+      }
+      
+      callback(new Error('Not allowed by CORS'));
+    },
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
+  }));
+  
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
 
   app.use((req, res, next) => {
     res.setHeader("X-Frame-Options", "SAMEORIGIN");
-    res.setHeader("Access-Control-Allow-Origin", "*");
-    res.setHeader(
-      "Access-Control-Allow-Methods",
-      "GET, POST, PUT, DELETE, OPTIONS",
-    );
-    res.setHeader(
-      "Access-Control-Allow-Headers",
-      "Content-Type, Authorization",
-    );
     next();
   });
 
