@@ -31,6 +31,10 @@ const JWT_SECRET = getJWTSecret();
 const supabaseUrl = process.env.SUPABASE_URL!;
 const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE!;
 
+if (!supabaseUrl || !supabaseServiceKey) {
+  console.error('[OAuth] Missing Supabase credentials! URL:', !!supabaseUrl, 'Key:', !!supabaseServiceKey);
+}
+
 // Service role client for server-side OAuth operations
 export const supabaseAdmin = createClient(supabaseUrl, supabaseServiceKey, {
   auth: {
@@ -38,6 +42,8 @@ export const supabaseAdmin = createClient(supabaseUrl, supabaseServiceKey, {
     persistSession: false,
   },
 });
+
+console.log('[OAuth] Supabase client initialized for URL:', supabaseUrl?.substring(0, 30) + '...');
 
 // OAuth Error Codes (RFC 6749)
 export enum OAuthError {
@@ -133,6 +139,8 @@ export function verifyPKCE(codeVerifier: string, codeChallenge: string, method: 
  * Fetches an OAuth client by client_id
  */
 export async function getOAuthClient(clientId: string): Promise<OAuthClient | null> {
+  console.log('[OAuth] Looking up client:', clientId);
+  
   const { data, error } = await supabaseAdmin
     .from('oauth_clients')
     .select('*')
@@ -140,9 +148,17 @@ export async function getOAuthClient(clientId: string): Promise<OAuthClient | nu
     .eq('is_active', true)
     .single();
 
-  if (error || !data) {
+  if (error) {
+    console.error('[OAuth] Client lookup error:', error.message, error.code);
     return null;
   }
+  
+  if (!data) {
+    console.log('[OAuth] Client not found:', clientId);
+    return null;
+  }
+
+  console.log('[OAuth] Client found:', data.name);
 
   return {
     ...data,
