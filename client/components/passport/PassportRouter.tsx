@@ -68,7 +68,7 @@ export default function PassportRouter({ previewMode }: PassportRouterProps) {
 
   async function fetchCreatorData(slug: string) {
     try {
-      const response = await fetch(`/api/passport/${slug}`);
+      const response = await fetch(`/api/passport/subdomain-data/${slug}`);
       if (!response.ok) {
         if (response.status === 404) {
           setError("Creator not found");
@@ -78,7 +78,37 @@ export default function PassportRouter({ previewMode }: PassportRouterProps) {
         setRouteType("error");
         return;
       }
-      const data: CreatorPassport = await response.json();
+      const result = await response.json();
+      
+      // Map the subdomain-data response to CreatorPassport format
+      const user = result.user;
+      const data: CreatorPassport = {
+        id: 0,
+        slug: user.username,
+        displayName: user.full_name || user.username,
+        tagline: user.active_title || user.primary_role || "AeThex Creator",
+        bio: user.bio,
+        avatarUrl: user.avatar_url,
+        isVerified: user.is_verified || false,
+        badges: (user.skills || []).slice(0, 4).map((skill: string) => ({
+          icon: "Wrench",
+          label: skill
+        })),
+        links: [
+          user.github_url && { icon: "Github", title: "GitHub", href: user.github_url },
+          user.twitter_url && { icon: "Twitter", title: "Twitter", href: user.twitter_url },
+          user.linkedin_url && { icon: "Linkedin", title: "LinkedIn", href: user.linkedin_url },
+          user.website_url && { icon: "Globe", title: "Website", href: user.website_url },
+        ].filter(Boolean) as { icon: string; title: string; href: string }[],
+        nexusUrl: `https://nexus.aethex.dev/${user.username}`,
+        achievements: user.achievements || [],
+        projects: [],
+        followStats: { followers: 0, following: 0 },
+        armAffiliations: user.arm_affiliations || [],
+        interests: user.interests || [],
+        ethosProfile: null,
+      };
+      
       setCreatorData(data);
       setRouteType("creator");
     } catch (err) {
@@ -89,7 +119,7 @@ export default function PassportRouter({ previewMode }: PassportRouterProps) {
 
   async function fetchProjectData(slug: string) {
     try {
-      const response = await fetch(`/api/projects/${slug}`);
+      const response = await fetch(`/api/passport/project-data/${slug}`);
       if (!response.ok) {
         if (response.status === 404) {
           setError("Project not found");
@@ -99,7 +129,34 @@ export default function PassportRouter({ previewMode }: PassportRouterProps) {
         setRouteType("error");
         return;
       }
-      const data: ProjectWithTeam = await response.json();
+      const result = await response.json();
+      
+      // Map the project-data response to ProjectWithTeam format
+      const group = result.group;
+      const data: ProjectWithTeam = {
+        id: 0,
+        slug: group.slug || slug,
+        title: group.name,
+        tagline: group.description?.substring(0, 100) || "An AeThex Project",
+        description: group.description || "",
+        heroImageUrl: group.banner_url,
+        genre: "Project",
+        platform: "Web",
+        status: "In Development",
+        timeline: null,
+        features: [],
+        playUrl: group.website,
+        teamMembers: (group.members || []).map((m: any, index: number) => ({
+          id: index + 1,
+          projectId: 0,
+          creatorId: null,
+          name: m.user?.full_name || m.user?.username || "Team Member",
+          role: m.role || "Member",
+          avatarUrl: m.user?.avatar_url || null,
+          profileUrl: m.user?.username ? `https://${m.user.username}.aethex.me` : null,
+        })),
+      };
+      
       setProjectData(data);
       setRouteType("project");
     } catch (err) {

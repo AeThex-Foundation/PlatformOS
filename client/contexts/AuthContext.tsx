@@ -218,6 +218,23 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
       );
     };
 
+    // Session bridge: Sync Supabase access token to cookie for server-side auth
+    // This enables the server-side auth middleware to read the session for OAuth SSO
+    const syncSessionToCookie = (sess: Session | null) => {
+      const isSecure = window.location.protocol === 'https:';
+      const secureFlag = isSecure ? '; Secure' : '';
+      
+      if (sess?.access_token) {
+        // Set cookie with access token for server-side auth middleware
+        // SameSite=Lax allows cookie to be sent on same-site navigations and top-level GET requests
+        // Secure flag added for HTTPS deployments
+        document.cookie = `sb-access-token=${sess.access_token}; path=/; max-age=${60 * 60}; SameSite=Lax${secureFlag}`;
+      } else {
+        // Clear cookie on logout
+        document.cookie = `sb-access-token=; path=/; max-age=0${secureFlag}`;
+      }
+    };
+
     // Get initial session with persistence recovery
     const initializeAuth = async () => {
       try {
@@ -234,11 +251,13 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
 
         if (session?.user) {
           sessionRestored = true;
+          syncSessionToCookie(session);
           setSession(session);
           setUser(session.user);
           await fetchUserProfile(session.user.id);
         } else {
           sessionRestored = true;
+          syncSessionToCookie(null);
           setLoading(false);
         }
       } catch (error) {
@@ -255,6 +274,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
       data: { subscription },
     } = supabase!.auth.onAuthStateChange(async (event, session) => {
       console.log("Auth state change:", event, !!session?.user);
+
+      // Sync session to cookie for server-side auth (OAuth SSO bridge)
+      syncSessionToCookie(session);
 
       sessionRestored = true;
       setSession(session);
