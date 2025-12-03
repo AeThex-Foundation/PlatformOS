@@ -130,7 +130,7 @@ router.get('/directory', async (req: Request, res: Response) => {
   try {
     const { data: profiles, error } = await supabaseAdmin
       .from('user_profiles')
-      .select('id, username, full_name, avatar_url, bio, is_verified, level, total_xp, primary_role, realm_alignment')
+      .select('id, username, full_name, avatar_url, bio, level, total_xp, primary_role, realm_alignment')
       .eq('show_in_creator_directory', true)
       .order('total_xp', { ascending: false })
       .limit(100);
@@ -190,7 +190,7 @@ router.get('/:slug', async (req: Request, res: Response) => {
       total_xp: profile.total_xp || 0,
       level: profile.level || 1,
       badge_count: badgeCount || 0,
-      verified: profile.is_verified || false,
+      verified: false,
     });
   } catch (error) {
     console.error("[Passport] Failed to fetch passport:", error);
