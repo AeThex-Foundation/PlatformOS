@@ -47,6 +47,41 @@ The Guardian's Hub is a Single Page Application (SPA) built with React 18, TypeS
 - **OAuth Client Registry:** Pre-registered trusted clients like `aethex_corp` and `aethex_studio`.
 - **CORS Configuration:** Explicit allowed origins for production and development, with credentials enabled.
 
+## Governance & Treasury
+
+### DAO Contracts (Polygon Mainnet)
+- **AethexToken ($AETHEX):** Deployed on Polygon mainnet
+- **AethexTimelock:** Controls execution of passed proposals
+- **AethexGovernor:** OpenZeppelin Governor implementation
+
+### Tally.xyz Integration
+The DAO is integrated with Tally.xyz for governance UI, analytics, and proposal management.
+
+### Ledger Wallet Setup for Tally Governance
+To participate in governance with a Ledger hardware wallet:
+
+1. **Connect Ledger to MetaMask:**
+   - Open MetaMask → Settings → Connect Hardware Wallet → Ledger
+   - Unlock Ledger and open Ethereum app
+   - Select account (Ledger address: `0x9A58610d3ad7A7399a4b9c5Dad440dA67FDE4DeF`)
+
+2. **Delegate Voting Power on Tally:**
+   - Go to tally.xyz and connect MetaMask (with Ledger)
+   - Navigate to AeThex DAO page
+   - Click "Delegate" and either self-delegate or delegate to another address
+   - Sign the delegation transaction on Ledger
+
+3. **Treasury Holdings:**
+   - 1,000,000 AETHEX tokens held in Ledger wallet
+   - Voting power requires delegation (self or to representative)
+
+## Cross-Domain SSO Bridge
+
+The OAuth session bridge syncs Supabase access tokens to cookies for server-side auth:
+- Cookie: `sb-access-token` with Path=/, SameSite=Lax, Secure (HTTPS), max-age 1h
+- Resolves cross-domain SSO login loops between aethex.foundation and client properties
+- Server-side auth middleware reads this cookie to validate OAuth flows
+
 ## External Dependencies
 
 - **Supabase:** User authentication, database management, and backend services.
