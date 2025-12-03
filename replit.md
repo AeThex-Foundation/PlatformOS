@@ -34,6 +34,13 @@ The Guardian's Hub is a Single Page Application (SPA) built with React 18, TypeS
 - **.aethex Passport Domain System:** Token-gated blockchain domain claiming (`username.aethex`) with Freename integration for subdomain minting and resolution. Includes API endpoints for domain checks, balance verification, claiming, and resolution.
 - **Passport Engine (Multi-Tenant Profiles):** Host-based routing for creator profiles (`*.aethex.me`) and project showcases (`*.aethex.space`). PassportRouter detects subdomain and renders appropriate view with dark/gameforge theme isolation. API endpoints at `/api/passport/:slug` and `/api/projects/:slug` fetch enriched data from Supabase including achievements, projects, follow stats, and team members.
 - **Rich Passport System:** Full-featured passport profile pages with realm alignment (Development Forge, Strategist Nexus, Innovation Commons, Experience Hub), XP/Level progression with visual progress bars, "GOD Mode" badge for level 100+ users, achievement badges with emoji icons, Ethos Guild integration for audio portfolio, projects section, arm affiliations display, follower/following stats, degree connections (1st/2nd/3rd+), and social links including Spotify for creators.
+- **Ethos Guild Integration:** Complete audio artist portfolio system with dedicated management pages:
+  - **API Endpoints:** `/api/ethos/artists` (profile management), `/api/ethos/tracks` (published tracks with filters), `/api/ethos/my-profile` (authenticated user's profile and all tracks)
+  - **Artist Settings (`/ethos/settings`):** Profile customization with skills selection (Mixing, Mastering, Sound Design, Composition, etc.), for-hire toggle, bio, portfolio URL, pricing settings (per track, SFX, scores), and turnaround time
+  - **Track Library (`/ethos/library`):** Track management with upload dialog (file, title, description, genres, license type, BPM), playback controls, visibility toggle (publish/unpublish), and delete functionality
+  - **Storage:** Uses Supabase bucket "ethos-tracks" for audio file storage with secure upload/download
+  - **Database Tables:** ethos_tracks, ethos_artist_profiles, ethos_guild_members, ethos_licensing_agreements
+  - **Security:** Authenticated-only access for unpublished tracks; ownership verification on update/delete operations
 - **Passport Hub (`/passport`):** Central management hub with 4 tabbed sections:
   - **Directory Tab:** Public searchable member directory with filters (All, Verified, Level 10+), displaying passport holders with realm badges, levels, and verification status.
   - **Claim Tab:** Authenticated user passport customization allowing updates to active title, bio, and realm alignment with live preview.
