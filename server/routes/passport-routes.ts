@@ -130,9 +130,9 @@ router.get('/directory', async (req: Request, res: Response) => {
   try {
     const { data: profiles, error } = await supabaseAdmin
       .from('user_profiles')
-      .select('id, username, full_name, avatar_url, bio, level, total_xp, primary_role, realm_alignment')
+      .select('id, username, full_name, avatar_url, bio, user_type, experience_level')
       .eq('show_in_creator_directory', true)
-      .order('total_xp', { ascending: false })
+      .order('created_at', { ascending: false })
       .limit(100);
     
     if (error) {
@@ -140,7 +140,16 @@ router.get('/directory', async (req: Request, res: Response) => {
       return res.status(500).json({ error: "Failed to fetch directory" });
     }
     
-    res.json({ members: profiles || [] });
+    // Map existing fields to passport display format
+    const members = (profiles || []).map(p => ({
+      ...p,
+      level: 1,
+      total_xp: 0,
+      realm_alignment: p.user_type || null,
+      is_verified: false,
+    }));
+    
+    res.json({ members });
   } catch (error) {
     console.error("[Passport] Failed to fetch directory:", error);
     res.status(500).json({ error: "Failed to fetch directory" });

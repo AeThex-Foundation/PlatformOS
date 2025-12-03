@@ -27,15 +27,15 @@ export default function PassportClaim() {
   const [loading, setLoading] = useState(false);
   
   const extProfile = profile as any;
-  const [activeTitle, setActiveTitle] = useState(extProfile?.active_title || "");
-  const [selectedRealm, setSelectedRealm] = useState(extProfile?.realm_alignment || "");
+  const [activeTitle, setActiveTitle] = useState(extProfile?.primary_role || "");
+  const [selectedRealm, setSelectedRealm] = useState(extProfile?.user_type || "");
   const [bio, setBio] = useState(profile?.bio || "");
 
   useEffect(() => {
     if (profile) {
       const ext = profile as any;
-      setActiveTitle(ext.active_title || "");
-      setSelectedRealm(ext.realm_alignment || "");
+      setActiveTitle(ext.primary_role || "");
+      setSelectedRealm(ext.user_type || "");
       setBio(profile.bio || "");
     }
   }, [profile]);
