@@ -124,18 +124,49 @@ router.get('/project-data/:slug', async (req: Request, res: Response) => {
 
 /**
  * GET /api/passport/:slug
- * Get creator passport by username slug (legacy/simple endpoint)
+ * Get creator passport by username slug (for aethex.foundation/:username route)
+ * Returns format expected by Passport.tsx component
  */
 router.get('/:slug', async (req: Request, res: Response) => {
   try {
     const { slug } = req.params;
-    const passport = await passportStorage.getCreatorPassport(slug);
     
-    if (!passport) {
-      return res.status(404).json({ error: "Creator not found", type: "creator" });
+    // Fetch profile directly from Supabase in the format Passport.tsx expects
+    const { data: profile, error } = await supabaseAdmin
+      .from('user_profiles')
+      .select('*')
+      .eq('username', slug.toLowerCase())
+      .single();
+    
+    if (error || !profile) {
+      console.log(`[Passport] User not found: ${slug}`);
+      return res.status(404).json({ error: "Profile not found" });
     }
     
-    res.json(passport);
+    // Fetch achievement count
+    const { count: badgeCount } = await supabaseAdmin
+      .from('user_achievements')
+      .select('*', { count: 'exact', head: true })
+      .eq('user_id', profile.id);
+    
+    // Return in the format Passport.tsx expects (PublicPassportProfile)
+    res.json({
+      id: profile.id,
+      username: profile.username,
+      full_name: profile.full_name || profile.username,
+      avatar_url: profile.avatar_url,
+      bio: profile.bio,
+      location: profile.location,
+      website_url: profile.website_url,
+      github_url: profile.github_url,
+      twitter_url: profile.twitter_url,
+      linkedin_url: profile.linkedin_url,
+      created_at: profile.created_at,
+      total_xp: profile.total_xp || 0,
+      level: profile.level || 1,
+      badge_count: badgeCount || 0,
+      verified: profile.is_verified || false,
+    });
   } catch (error) {
     console.error("[Passport] Failed to fetch passport:", error);
     res.status(500).json({ error: "Failed to fetch passport" });
