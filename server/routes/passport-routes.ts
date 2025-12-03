@@ -123,6 +123,31 @@ router.get('/project-data/:slug', async (req: Request, res: Response) => {
 });
 
 /**
+ * GET /api/passport/directory
+ * Get all passport holders for the directory page
+ */
+router.get('/directory', async (req: Request, res: Response) => {
+  try {
+    const { data: profiles, error } = await supabaseAdmin
+      .from('user_profiles')
+      .select('id, username, full_name, avatar_url, bio, is_verified, level, total_xp, primary_role, realm_alignment')
+      .eq('show_in_creator_directory', true)
+      .order('total_xp', { ascending: false })
+      .limit(100);
+    
+    if (error) {
+      console.error("[Passport] Failed to fetch directory:", error);
+      return res.status(500).json({ error: "Failed to fetch directory" });
+    }
+    
+    res.json({ members: profiles || [] });
+  } catch (error) {
+    console.error("[Passport] Failed to fetch directory:", error);
+    res.status(500).json({ error: "Failed to fetch directory" });
+  }
+});
+
+/**
  * GET /api/passport/:slug
  * Get creator passport by username slug (for aethex.foundation/:username route)
  * Returns format expected by Passport.tsx component

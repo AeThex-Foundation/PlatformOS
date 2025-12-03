@@ -117,4 +117,98 @@ router.patch('/users/:targetUserId', async (req: Request, res: Response) => {
   }
 });
 
+router.get('/passport/members', async (req: Request, res: Response) => {
+  try {
+    const userId = (req as any).user?.id;
+
+    if (!userId || !(await isAdmin(userId))) {
+      return res.status(403).json({ error: 'Unauthorized - Admin access required' });
+    }
+
+    const { data: profiles, error } = await supabaseAdmin
+      .from('user_profiles')
+      .select('id, username, email, full_name, avatar_url, is_verified, is_admin, level, total_xp, created_at')
+      .order('created_at', { ascending: false })
+      .limit(200);
+
+    if (error) {
+      console.error('[Admin API] Error fetching passport members:', error);
+      return res.status(500).json({ error: 'Failed to fetch members' });
+    }
+
+    res.json({ members: profiles || [] });
+  } catch (error) {
+    console.error('[Admin API] Unexpected error:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+router.get('/passport/stats', async (req: Request, res: Response) => {
+  try {
+    const userId = (req as any).user?.id;
+
+    if (!userId || !(await isAdmin(userId))) {
+      return res.status(403).json({ error: 'Unauthorized - Admin access required' });
+    }
+
+    const { count: totalUsers } = await supabaseAdmin
+      .from('user_profiles')
+      .select('*', { count: 'exact', head: true });
+
+    const { count: verifiedUsers } = await supabaseAdmin
+      .from('user_profiles')
+      .select('*', { count: 'exact', head: true })
+      .eq('is_verified', true);
+
+    const { data: xpData } = await supabaseAdmin
+      .from('user_profiles')
+      .select('total_xp, level');
+
+    const totalXp = (xpData || []).reduce((sum: number, u: any) => sum + (u.total_xp || 0), 0);
+    const avgLevel = xpData && xpData.length > 0
+      ? (xpData || []).reduce((sum: number, u: any) => sum + (u.level || 1), 0) / xpData.length
+      : 1;
+
+    res.json({
+      total_users: totalUsers || 0,
+      verified_users: verifiedUsers || 0,
+      total_xp: totalXp,
+      avg_level: avgLevel,
+    });
+  } catch (error) {
+    console.error('[Admin API] Unexpected error:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+router.post('/passport/verify', async (req: Request, res: Response) => {
+  try {
+    const userId = (req as any).user?.id;
+    const { userId: targetUserId, verified } = req.body;
+
+    if (!userId || !(await isAdmin(userId))) {
+      return res.status(403).json({ error: 'Unauthorized - Admin access required' });
+    }
+
+    if (!targetUserId) {
+      return res.status(400).json({ error: 'Target user ID is required' });
+    }
+
+    const { error } = await supabaseAdmin
+      .from('user_profiles')
+      .update({ is_verified: verified })
+      .eq('id', targetUserId);
+
+    if (error) {
+      console.error('[Admin API] Error updating verification:', error);
+      return res.status(500).json({ error: 'Failed to update verification' });
+    }
+
+    res.json({ success: true });
+  } catch (error) {
+    console.error('[Admin API] Unexpected error:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
 export default router;
