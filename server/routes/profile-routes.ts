@@ -114,6 +114,52 @@ router.put('/', async (req: Request, res: Response) => {
  * Update user's Creator Directory visibility preference
  * Privacy-First: Defaults to hidden, requires explicit opt-in
  */
+/**
+ * POST /api/profile/update
+ * 
+ * Update passport profile fields (bio, user_type for realm alignment)
+ * Note: active_title field not yet in database - stored as user_type temporarily
+ */
+router.post('/update', async (req: Request, res: Response) => {
+  try {
+    // @ts-ignore - req.user is set by authMiddleware
+    const user = req.user;
+
+    if (!user) {
+      return res.status(401).json({ error: 'Unauthorized' });
+    }
+
+    const { bio, realm_alignment } = req.body;
+
+    const updates: any = {
+      updated_at: new Date().toISOString(),
+    };
+
+    if (bio !== undefined) {
+      updates.bio = bio;
+    }
+
+    if (realm_alignment !== undefined) {
+      updates.user_type = realm_alignment;
+    }
+
+    const { error: updateError } = await supabaseAdmin
+      .from('user_profiles')
+      .update(updates)
+      .eq('id', user.id);
+
+    if (updateError) {
+      console.error('Error updating passport:', updateError);
+      return res.status(500).json({ error: 'Failed to update passport' });
+    }
+
+    return res.json({ success: true, message: 'Passport updated successfully' });
+  } catch (err) {
+    console.error('Passport update error:', err);
+    return res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
 router.post('/creator-directory', async (req: Request, res: Response) => {
   try {
     // @ts-ignore - req.user is set by authMiddleware
