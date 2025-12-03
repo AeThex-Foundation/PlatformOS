@@ -24,6 +24,7 @@ import sessionsRoutes from "./routes/sessions-routes";
 import oauthClientsRoutes from "./routes/oauth-clients-routes";
 import adminOauthClientsRoutes from "./routes/admin-oauth-clients-routes";
 import domainsRoutes from "./routes/domains-routes";
+import ethosRoutes from "./routes/ethos-routes";
 import { authMiddleware } from "./middleware/auth";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -103,6 +104,9 @@ export function createServer() {
 
   // Passport Public Profile Endpoint (*.aethex.me)
   app.use("/api/passport", passportRoutes);
+
+  // Ethos Guild Audio Portfolio
+  app.use("/api/ethos", ethosRoutes);
 
   // Project Showcase Endpoint (*.aethex.space)
   app.use("/api/projects", projectsRoutes);

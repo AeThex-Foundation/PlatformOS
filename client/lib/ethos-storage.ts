@@ -114,13 +114,10 @@ export const ethosStorage = {
    */
   async getFileMetadata(filePath: string) {
     try {
-      const { data, error } = await supabase.storage.from(BUCKET_NAME).info();
-
-      if (error) {
-        throw error;
-      }
-
-      return data;
+      const { data } = await supabase.storage.from(BUCKET_NAME).list(filePath.split('/').slice(0, -1).join('/'));
+      const fileName = filePath.split('/').pop();
+      const fileInfo = data?.find(f => f.name === fileName);
+      return fileInfo || null;
     } catch (error) {
       console.error("Failed to get file metadata:", error);
       throw error;

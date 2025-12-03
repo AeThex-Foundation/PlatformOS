@@ -41,6 +41,9 @@ import Governance from "./pages/hub/Governance";
 import CommunityHub from "./pages/hub/Community";
 import HubPassport from "./pages/hub/Passport";
 
+import EthosArtistSettings from "./pages/ethos/ArtistSettings";
+import EthosTrackLibrary from "./pages/ethos/TrackLibrary";
+
 import Programs from "./pages/Programs";
 import Achievements from "./pages/Achievements";
 import Community from "./pages/Community";
@@ -147,6 +150,10 @@ function AppContent() {
             <Route path="/creators" element={<Navigate to="/community" replace />} />
             <Route path="/leaderboard" element={<Navigate to="/community" replace />} />
             <Route path="/projects" element={<Navigate to="/hub/community" replace />} />
+
+            {/* Ethos Guild */}
+            <Route path="/ethos/settings" element={<EthosArtistSettings />} />
+            <Route path="/ethos/library" element={<EthosTrackLibrary />} />
 
             {/* Passport Hub */}
             <Route path="/passport" element={<PassportHub />} />
