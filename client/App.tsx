@@ -10,6 +10,7 @@ import { AuthProvider } from "./contexts/AuthContext";
 import { ArmThemeProvider } from "./contexts/ArmThemeContext";
 import PageTransition from "./components/PageTransition";
 import SkipAgentController from "./components/SkipAgentController";
+import PassportRouter from "./components/passport/PassportRouter";
 
 import Index from "./pages/Index";
 import About from "./pages/About";
@@ -54,6 +55,110 @@ import { Web3Provider } from "./components/Web3Provider";
 
 const queryClient = new QueryClient();
 
+function isPassportSubdomain(): "creator" | "project" | false {
+  const hostname = window.location.hostname;
+  if (hostname.endsWith(".aethex.me")) {
+    return "creator";
+  }
+  if (hostname.endsWith(".aethex.space")) {
+    return "project";
+  }
+  return false;
+}
+
+function AppContent() {
+  const passportType = isPassportSubdomain();
+  
+  if (passportType) {
+    return <PassportRouter />;
+  }
+  
+  return (
+    <BrowserRouter>
+      <ArmThemeProvider>
+        <SkipAgentController />
+        <PageTransition>
+          <Routes>
+            {/* Homepage */}
+            <Route path="/" element={<Index />} />
+
+            {/* Public Pages */}
+            <Route path="/about" element={<About />} />
+            <Route path="/programs" element={<Programs />} />
+            <Route path="/achievements" element={<Achievements />} />
+            <Route path="/community" element={<Community />} />
+            <Route path="/resources" element={<Resources />} />
+            <Route path="/trust" element={<Trust />} />
+            <Route path="/contact" element={<Contact />} />
+
+            {/* Hub (Authenticated Member Area) */}
+            <Route path="/hub" element={<Hub />} />
+            <Route path="/hub/protocol" element={<Protocol />} />
+            <Route path="/hub/governance" element={<Governance />} />
+            <Route path="/hub/community" element={<CommunityHub />} />
+            <Route path="/hub/passport" element={<HubPassport />} />
+
+            {/* Auth Routes */}
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/onboarding" element={<Onboarding />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/profile/settings" element={<ProfileSettings />} />
+            
+            {/* Profile Routes */}
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/profile/me" element={<ProfileView />} />
+            <Route path="/profile/edit" element={<ProfileEdit />} />
+            <Route path="/profile/:username" element={<ProfileView />} />
+            
+            {/* GameForge */}
+            <Route path="/gameforge" element={<GameForge />} />
+            <Route path="/gameforge/about" element={<GameForgeAbout />} />
+            <Route path="/gameforge/join-gameforge" element={<GameForgeJoinGameForge />} />
+            <Route path="/gameforge/pricing" element={<GameForgePricing />} />
+            <Route path="/gameforge/start-building" element={<GameForgeStartBuilding />} />
+            <Route path="/gameforge/teams" element={<GameForgeTeams />} />
+            <Route path="/gameforge/view-portfolio" element={<GameForgeViewPortfolio />} />
+            
+            {/* Admin Routes */}
+            <Route path="/admin" element={<Admin />} />
+            <Route path="/admin/oauth-clients" element={<OAuthClients />} />
+
+            {/* Discord OAuth */}
+            <Route path="/discord-verify" element={<DiscordVerify />} />
+
+            {/* Legal */}
+            <Route path="/privacy" element={<Privacy />} />
+            <Route path="/terms" element={<Terms />} />
+
+            {/* Legacy Redirects */}
+            <Route path="/foundation" element={<Navigate to="/about" replace />} />
+            <Route path="/foundation/curriculum" element={<Navigate to="/programs" replace />} />
+            <Route path="/foundation/achievements" element={<Navigate to="/achievements" replace />} />
+            <Route path="/foundation/downloads" element={<Navigate to="/resources" replace />} />
+            <Route path="/foundation/community" element={<Navigate to="/community" replace />} />
+            <Route path="/foundation/community/*" element={<Navigate to="/community" replace />} />
+            <Route path="/foundation/*" element={<Navigate to="/about" replace />} />
+            <Route path="/ethics-council" element={<Navigate to="/trust" replace />} />
+            <Route path="/curriculum" element={<Navigate to="/programs" replace />} />
+            <Route path="/downloads" element={<Navigate to="/resources" replace />} />
+            <Route path="/workshops" element={<Navigate to="/programs" replace />} />
+            <Route path="/creators" element={<Navigate to="/community" replace />} />
+            <Route path="/leaderboard" element={<Navigate to="/community" replace />} />
+            <Route path="/projects" element={<Navigate to="/hub/community" replace />} />
+
+            {/* Passport Profile (Wildcard - must be before 404) */}
+            <Route path="/:username" element={<Passport />} />
+
+            {/* 404 Not Found */}
+            <Route path="*" element={<FourOhFourPage />} />
+          </Routes>
+        </PageTransition>
+      </ArmThemeProvider>
+    </BrowserRouter>
+  );
+}
+
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <Web3Provider>
@@ -61,88 +166,7 @@ const App = () => (
         <TooltipProvider>
           <Toaster />
           <Analytics />
-          <BrowserRouter>
-            <ArmThemeProvider>
-              <SkipAgentController />
-              <PageTransition>
-                <Routes>
-                  {/* Homepage */}
-                  <Route path="/" element={<Index />} />
-
-                  {/* Public Pages */}
-                  <Route path="/about" element={<About />} />
-                  <Route path="/programs" element={<Programs />} />
-                  <Route path="/achievements" element={<Achievements />} />
-                  <Route path="/community" element={<Community />} />
-                  <Route path="/resources" element={<Resources />} />
-                  <Route path="/trust" element={<Trust />} />
-                  <Route path="/contact" element={<Contact />} />
-
-                  {/* Hub (Authenticated Member Area) */}
-                  <Route path="/hub" element={<Hub />} />
-                  <Route path="/hub/protocol" element={<Protocol />} />
-                  <Route path="/hub/governance" element={<Governance />} />
-                  <Route path="/hub/community" element={<CommunityHub />} />
-                  <Route path="/hub/passport" element={<HubPassport />} />
-
-                  {/* Auth Routes */}
-                  <Route path="/login" element={<Login />} />
-                  <Route path="/signup" element={<Signup />} />
-                  <Route path="/onboarding" element={<Onboarding />} />
-                  <Route path="/dashboard" element={<Dashboard />} />
-                  <Route path="/profile/settings" element={<ProfileSettings />} />
-                  
-                  {/* Profile Routes */}
-                  <Route path="/profile" element={<Profile />} />
-                  <Route path="/profile/me" element={<ProfileView />} />
-                  <Route path="/profile/edit" element={<ProfileEdit />} />
-                  <Route path="/profile/:username" element={<ProfileView />} />
-                  
-                  {/* GameForge */}
-                  <Route path="/gameforge" element={<GameForge />} />
-                  <Route path="/gameforge/about" element={<GameForgeAbout />} />
-                  <Route path="/gameforge/join-gameforge" element={<GameForgeJoinGameForge />} />
-                  <Route path="/gameforge/pricing" element={<GameForgePricing />} />
-                  <Route path="/gameforge/start-building" element={<GameForgeStartBuilding />} />
-                  <Route path="/gameforge/teams" element={<GameForgeTeams />} />
-                  <Route path="/gameforge/view-portfolio" element={<GameForgeViewPortfolio />} />
-                  
-                  {/* Admin Routes */}
-                  <Route path="/admin" element={<Admin />} />
-                  <Route path="/admin/oauth-clients" element={<OAuthClients />} />
-
-                  {/* Discord OAuth */}
-                  <Route path="/discord-verify" element={<DiscordVerify />} />
-
-                  {/* Legal */}
-                  <Route path="/privacy" element={<Privacy />} />
-                  <Route path="/terms" element={<Terms />} />
-
-                  {/* Legacy Redirects */}
-                  <Route path="/foundation" element={<Navigate to="/about" replace />} />
-                  <Route path="/foundation/curriculum" element={<Navigate to="/programs" replace />} />
-                  <Route path="/foundation/achievements" element={<Navigate to="/achievements" replace />} />
-                  <Route path="/foundation/downloads" element={<Navigate to="/resources" replace />} />
-                  <Route path="/foundation/community" element={<Navigate to="/community" replace />} />
-                  <Route path="/foundation/community/*" element={<Navigate to="/community" replace />} />
-                  <Route path="/foundation/*" element={<Navigate to="/about" replace />} />
-                  <Route path="/ethics-council" element={<Navigate to="/trust" replace />} />
-                  <Route path="/curriculum" element={<Navigate to="/programs" replace />} />
-                  <Route path="/downloads" element={<Navigate to="/resources" replace />} />
-                  <Route path="/workshops" element={<Navigate to="/programs" replace />} />
-                  <Route path="/creators" element={<Navigate to="/community" replace />} />
-                  <Route path="/leaderboard" element={<Navigate to="/community" replace />} />
-                  <Route path="/projects" element={<Navigate to="/hub/community" replace />} />
-
-                  {/* Passport Profile (Wildcard - must be before 404) */}
-                  <Route path="/:username" element={<Passport />} />
-
-                  {/* 404 Not Found */}
-                  <Route path="*" element={<FourOhFourPage />} />
-                </Routes>
-              </PageTransition>
-            </ArmThemeProvider>
-          </BrowserRouter>
+          <AppContent />
         </TooltipProvider>
       </AuthProvider>
     </Web3Provider>

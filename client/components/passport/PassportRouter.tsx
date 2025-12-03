@@ -1,26 +1,51 @@
 import { useState, useEffect } from "react";
 import CreatorProfile from "./CreatorProfile";
 import ProjectShowcase from "./ProjectShowcase";
-import { Gamepad2, Code2, Palette, Wrench, Trophy, Zap } from "lucide-react";
-import { Github, Twitter, Globe, Mail } from "lucide-react";
+import { 
+  Gamepad2, Code2, Palette, Wrench, Trophy, Zap,
+  Github, Twitter, Globe, Mail, Linkedin, Link as LinkIcon,
+  type LucideIcon
+} from "lucide-react";
 import maleAvatar from "@assets/generated_images/creator_profile_avatar_male.png";
-import femaleAvatar from "@assets/generated_images/creator_profile_avatar_female.png";
 import heroImage from "@assets/generated_images/gameforge_project_hero_image.png";
+import type { CreatorPassport, ProjectWithTeam } from "@/types/passport";
 
-type RouteType = "creator" | "project" | "unknown";
+type RouteType = "creator" | "project" | "unknown" | "loading" | "error";
 
 interface PassportRouterProps {
   previewMode?: "creator" | "project";
 }
 
+const iconMap: Record<string, LucideIcon> = {
+  Github: Github,
+  Twitter: Twitter,
+  Globe: Globe,
+  Mail: Mail,
+  Linkedin: Linkedin,
+  Link: LinkIcon,
+  Gamepad2: Gamepad2,
+  Code2: Code2,
+  Palette: Palette,
+  Wrench: Wrench,
+  Trophy: Trophy,
+  Zap: Zap,
+};
+
+function getIcon(name: string): LucideIcon {
+  return iconMap[name] || LinkIcon;
+}
+
 export default function PassportRouter({ previewMode }: PassportRouterProps) {
   const [routeType, setRouteType] = useState<RouteType>("unknown");
   const [subdomain, setSubdomain] = useState<string>("");
+  const [creatorData, setCreatorData] = useState<CreatorPassport | null>(null);
+  const [projectData, setProjectData] = useState<ProjectWithTeam | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     if (previewMode) {
       setRouteType(previewMode);
-      setSubdomain(previewMode === "creator" ? "andersongladney" : "chroma-shift");
+      setSubdomain(previewMode === "creator" ? "demo" : "demo-project");
       return;
     }
 
@@ -29,105 +54,197 @@ export default function PassportRouter({ previewMode }: PassportRouterProps) {
     if (hostname.endsWith(".aethex.me")) {
       const sub = hostname.replace(".aethex.me", "");
       setSubdomain(sub);
-      setRouteType("creator");
+      setRouteType("loading");
+      fetchCreatorData(sub);
     } else if (hostname.endsWith(".aethex.space")) {
       const sub = hostname.replace(".aethex.space", "");
       setSubdomain(sub);
-      setRouteType("project");
+      setRouteType("loading");
+      fetchProjectData(sub);
     } else {
       setRouteType("unknown");
     }
   }, [previewMode]);
 
+  async function fetchCreatorData(slug: string) {
+    try {
+      const response = await fetch(`/api/passport/${slug}`);
+      if (!response.ok) {
+        if (response.status === 404) {
+          setError("Creator not found");
+        } else {
+          setError("Failed to load profile");
+        }
+        setRouteType("error");
+        return;
+      }
+      const data: CreatorPassport = await response.json();
+      setCreatorData(data);
+      setRouteType("creator");
+    } catch (err) {
+      setError("Failed to load profile");
+      setRouteType("error");
+    }
+  }
+
+  async function fetchProjectData(slug: string) {
+    try {
+      const response = await fetch(`/api/projects/${slug}`);
+      if (!response.ok) {
+        if (response.status === 404) {
+          setError("Project not found");
+        } else {
+          setError("Failed to load project");
+        }
+        setRouteType("error");
+        return;
+      }
+      const data: ProjectWithTeam = await response.json();
+      setProjectData(data);
+      setRouteType("project");
+    } catch (err) {
+      setError("Failed to load project");
+      setRouteType("error");
+    }
+  }
+
+  if (routeType === "loading") {
+    return (
+      <div className="min-h-screen bg-slate-950 flex items-center justify-center">
+        <div className="text-center p-8">
+          <div className="w-12 h-12 border-4 border-purple-500 border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+          <p className="text-slate-400">Loading...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (routeType === "error") {
+    return (
+      <div className="min-h-screen bg-slate-950 flex items-center justify-center">
+        <div className="text-center p-8">
+          <h1 className="text-4xl font-bold text-white mb-4">Not Found</h1>
+          <p className="text-slate-400 mb-8">{error || "The requested page could not be found."}</p>
+          <a
+            href="https://aethex.foundation"
+            className="px-6 py-3 bg-purple-600 text-white rounded-lg font-medium hover:bg-purple-700 transition-colors"
+          >
+            Return to AeThex
+          </a>
+        </div>
+      </div>
+    );
+  }
+
   if (routeType === "creator") {
+    if (previewMode || !creatorData) {
+      return (
+        <CreatorProfile
+          username={subdomain}
+          displayName="Demo Creator"
+          tagline="Full-Stack Developer & Game Creator"
+          bio="This is a demo creator profile. In production, this will display real creator data from the AeThex Passport system."
+          avatarUrl={maleAvatar}
+          isVerified={true}
+          badges={[
+            { icon: Gamepad2, label: "GameForge" },
+            { icon: Code2, label: "Architect" },
+            { icon: Palette, label: "Designer" },
+          ]}
+          links={[
+            { icon: Github, title: "GitHub", href: "https://github.com" },
+            { icon: Twitter, title: "Twitter", href: "https://twitter.com" },
+          ]}
+        />
+      );
+    }
+
     return (
       <CreatorProfile
-        username={subdomain}
-        displayName="Anderson Gladney"
-        tagline="Full-Stack Developer & Game Creator"
-        bio="Passionate about building immersive digital experiences. Leading the charge at AeThex to create tools that empower creators worldwide. When I'm not coding, you'll find me exploring new game mechanics or mentoring the next generation of developers."
-        avatarUrl={maleAvatar}
-        isVerified={true}
-        badges={[
-          { icon: Gamepad2, label: "GameForge" },
-          { icon: Code2, label: "Architect" },
-          { icon: Palette, label: "Designer" },
-          { icon: Wrench, label: "Builder" },
-          { icon: Trophy, label: "Pioneer" },
-          { icon: Zap, label: "Innovator" },
-        ]}
-        links={[
-          { icon: Github, title: "GitHub", href: "https://github.com" },
-          { icon: Twitter, title: "Twitter", href: "https://twitter.com" },
-          { icon: Globe, title: "Portfolio", href: "https://example.com" },
-          { icon: Mail, title: "Contact", href: "mailto:hello@example.com" },
-        ]}
+        username={creatorData.slug}
+        displayName={creatorData.displayName}
+        tagline={creatorData.tagline}
+        bio={creatorData.bio || undefined}
+        avatarUrl={creatorData.avatarUrl || undefined}
+        isVerified={creatorData.isVerified}
+        badges={creatorData.badges.map(b => ({ icon: getIcon(b.icon), label: b.label }))}
+        links={creatorData.links.map(l => ({ icon: getIcon(l.icon), title: l.title, href: l.href }))}
+        achievements={creatorData.achievements}
+        projects={creatorData.projects}
+        followStats={creatorData.followStats}
+        armAffiliations={creatorData.armAffiliations}
+        interests={creatorData.interests}
+        nexusUrl={creatorData.nexusUrl || undefined}
       />
     );
   }
 
   if (routeType === "project") {
+    if (previewMode || !projectData) {
+      return (
+        <ProjectShowcase
+          slug={subdomain}
+          title="Demo Project"
+          tagline="A demonstration of the AeThex project showcase"
+          description="This is a demo project showcase. In production, this will display real project data from the AeThex ecosystem."
+          heroImageUrl={heroImage}
+          genre="Demo"
+          platform="Web"
+          status="In Development"
+          timeline="Coming Soon"
+          team={[
+            { name: "Demo Creator", role: "Lead Developer" },
+          ]}
+          features={[
+            "Feature-rich project showcases",
+            "Team member profiles with links",
+            "Beautiful GameForge-themed design",
+          ]}
+        />
+      );
+    }
+
     return (
       <ProjectShowcase
-        slug={subdomain}
-        title="Chroma Shift"
-        tagline="Master the art of color in this mind-bending puzzle adventure"
-        description="Chroma Shift is an innovative puzzle game where you manipulate the spectrum of light to solve increasingly complex challenges. Navigate through a world where color is your greatest tool and perception is your guide."
-        heroImageUrl={heroImage}
-        genre="Puzzle / Adventure"
-        platform="PC / Web"
-        status="In Development"
-        timeline="Q2 2025"
-        team={[
-          {
-            name: "Anderson Gladney",
-            role: "Lead Developer",
-            avatarUrl: maleAvatar,
-            profileUrl: "https://andersongladney.aethex.me",
-          },
-          {
-            name: "Sarah Kim",
-            role: "Game Designer",
-            avatarUrl: femaleAvatar,
-            profileUrl: "https://sarah.aethex.me",
-          },
-          {
-            name: "Marcus Chen",
-            role: "Artist",
-          },
-          {
-            name: "Elena Rodriguez",
-            role: "Sound Designer",
-          },
-        ]}
-        features={[
-          "50+ hand-crafted puzzles across 5 unique worlds",
-          "Dynamic color-blending mechanics",
-          "Atmospheric soundtrack that reacts to gameplay",
-          "Speedrun mode with global leaderboards",
-        ]}
+        slug={projectData.slug}
+        title={projectData.title}
+        tagline={projectData.tagline}
+        description={projectData.description}
+        heroImageUrl={projectData.heroImageUrl || heroImage}
+        genre={projectData.genre}
+        platform={projectData.platform}
+        status={projectData.status}
+        timeline={projectData.timeline || undefined}
+        team={projectData.teamMembers.map(tm => ({
+          name: tm.name,
+          role: tm.role,
+          avatarUrl: tm.avatarUrl || undefined,
+          profileUrl: tm.profileUrl || undefined,
+        }))}
+        features={projectData.features}
+        playUrl={projectData.playUrl || undefined}
       />
     );
   }
 
   return (
-    <div className="min-h-screen bg-background flex items-center justify-center">
+    <div className="min-h-screen bg-slate-950 flex items-center justify-center">
       <div className="text-center p-8">
-        <h1 className="text-4xl font-bold font-display mb-4">AeThex Passport Engine</h1>
-        <p className="text-muted-foreground mb-8">
+        <h1 className="text-4xl font-bold text-white font-display mb-4">AeThex Passport Engine</h1>
+        <p className="text-slate-400 mb-8">
           This app routes traffic for creator profiles and project showcases.
         </p>
         <div className="flex gap-4 justify-center">
           <a
             href="?preview=creator"
-            className="px-6 py-3 bg-neon-purple text-white rounded-lg font-medium hover-elevate"
+            className="px-6 py-3 bg-purple-600 text-white rounded-lg font-medium hover:bg-purple-700 transition-colors"
             data-testid="button-preview-creator"
           >
             Preview Creator Profile
           </a>
           <a
             href="?preview=project"
-            className="px-6 py-3 bg-gameforge-green text-gameforge-dark rounded-lg font-medium hover-elevate"
+            className="px-6 py-3 bg-green-500 text-slate-900 rounded-lg font-medium hover:bg-green-400 transition-colors"
             data-testid="button-preview-project"
           >
             Preview Project Showcase
