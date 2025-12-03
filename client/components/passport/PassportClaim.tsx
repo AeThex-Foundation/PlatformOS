@@ -9,8 +9,9 @@ import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { 
   Sparkles, Shield, Globe, ExternalLink, Check, 
-  User, Palette, Zap, ArrowRight, Loader2, Lock
+  User, Palette, Zap, ArrowRight, Loader2, Lock, Music
 } from "lucide-react";
+import { Link } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
 
@@ -212,6 +213,37 @@ export default function PassportClaim() {
                     <p className="text-xs text-slate-500">{realm.description}</p>
                   </button>
                 ))}
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className="bg-slate-900/50 border-slate-800">
+            <CardHeader>
+              <CardTitle className="text-white flex items-center gap-2">
+                <Music className="w-5 h-5 text-purple-400" />
+                Ethos Guild
+              </CardTitle>
+              <CardDescription>
+                Manage your audio portfolio and music production profile
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <p className="text-slate-400 text-sm mb-4">
+                Join the Ethos Guild to showcase your audio production skills, share tracks, 
+                and connect with projects looking for music and sound design.
+              </p>
+              <div className="flex gap-3">
+                <Button asChild variant="outline" className="border-purple-500/30 text-purple-300 hover:bg-purple-500/10">
+                  <Link to="/ethos/settings">
+                    <Music className="w-4 h-4 mr-2" />
+                    Artist Settings
+                  </Link>
+                </Button>
+                <Button asChild variant="outline" className="border-slate-700">
+                  <Link to="/ethos/library">
+                    Track Library
+                  </Link>
+                </Button>
               </div>
             </CardContent>
           </Card>
