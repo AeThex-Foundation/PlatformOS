@@ -6,12 +6,125 @@
 
 import { Router, Request, Response } from 'express';
 import { passportStorage } from '../storage/passport-storage';
+import { supabaseAdmin } from '../oauth/oauth-service';
 
 const router = Router();
 
 /**
+ * GET /api/passport/subdomain-data/:slug
+ * Get creator passport by username slug (for *.aethex.me subdomains)
+ * Returns data in the format expected by SubdomainPassport component
+ */
+router.get('/subdomain-data/:slug', async (req: Request, res: Response) => {
+  try {
+    const { slug } = req.params;
+    
+    const { data: profile, error } = await supabaseAdmin
+      .from('user_profiles')
+      .select('*')
+      .eq('username', slug.toLowerCase())
+      .single();
+    
+    if (error || !profile) {
+      return res.status(404).json({ error: "User not found", type: "creator" });
+    }
+    
+    const { data: achievements } = await supabaseAdmin
+      .from('user_achievements')
+      .select(`
+        achievement_id,
+        achievements (
+          id,
+          name,
+          description,
+          icon,
+          xp_reward
+        )
+      `)
+      .eq('user_id', profile.id);
+
+    const userWithAchievements = {
+      ...profile,
+      achievements: (achievements || []).map((ua: any) => ua.achievements).filter(Boolean),
+      interests: profile.interests || [],
+      linkedProviders: [],
+    };
+    
+    res.json({
+      type: "creator",
+      user: userWithAchievements,
+      domain: "aethex.me",
+    });
+  } catch (error) {
+    console.error("[Passport] Failed to fetch subdomain data:", error);
+    res.status(500).json({ error: "Failed to fetch passport" });
+  }
+});
+
+/**
+ * GET /api/passport/project-data/:slug
+ * Get project/group data by slug (for *.aethex.space subdomains)
+ */
+router.get('/project-data/:slug', async (req: Request, res: Response) => {
+  try {
+    const { slug } = req.params;
+    
+    const { data: group, error } = await supabaseAdmin
+      .from('groups')
+      .select('*')
+      .eq('slug', slug.toLowerCase())
+      .single();
+    
+    if (error || !group) {
+      return res.status(404).json({ error: "Group not found", type: "group" });
+    }
+    
+    const { data: members } = await supabaseAdmin
+      .from('group_members')
+      .select(`
+        user_id,
+        role,
+        joined_at,
+        user_profiles:user_id (
+          id,
+          username,
+          full_name,
+          avatar_url
+        )
+      `)
+      .eq('group_id', group.id);
+
+    const { data: projects } = await supabaseAdmin
+      .from('projects')
+      .select('id, title, slug, description, image_url, created_at')
+      .eq('group_id', group.id);
+
+    const groupWithMembers = {
+      ...group,
+      memberCount: members?.length || 0,
+      members: (members || []).map((m: any) => ({
+        userId: m.user_id,
+        role: m.role,
+        joinedAt: m.joined_at,
+        user: m.user_profiles,
+      })),
+    };
+    
+    res.json({
+      type: "group",
+      group: groupWithMembers,
+      projects: projects || [],
+      domain: "aethex.space",
+    });
+  } catch (error) {
+    console.error("[Passport] Failed to fetch project data:", error);
+    res.status(500).json({ error: "Failed to fetch project" });
+  }
+});
+
+/**
  * GET /api/passport/:slug
- * Get creator passport by username slug
+ * Get creator passport by username slug (legacy/simple endpoint)
  */
 router.get('/:slug', async (req: Request, res: Response) => {
   try {
