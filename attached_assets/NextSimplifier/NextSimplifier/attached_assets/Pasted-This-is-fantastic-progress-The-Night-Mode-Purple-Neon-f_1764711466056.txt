@@ -1,0 +1,36 @@
+This is fantastic progress. The "Night Mode" (Purple/Neon) for `.me` and "GameForge" (Green/Pixel) for `.space` are the exact visual identities we needed to distinguish the two types of passports.
+
+You have built the **Frontend "Skin"** perfectly. Now we need to connect the **Backend "Brain"** to make this a functional routing engine.
+
+The current prototype is static (hardcoded demo data). To fulfill the **AeThex Passport Engine** mission, we need to implement the dynamic routing logic we discussed.
+
+Here is the **Next Phase** for this Replit project.
+
+---
+
+### **Phase 2: Dynamic Routing Implementation**
+
+We need to replace the manual "Mode Selector" buttons on the landing page with **Automatic Domain Detection**.
+
+**1. The Server Logic (`server/index.ts` or `index.js`)**
+* You need to implement the `vhost` (virtual host) logic we discussed.
+* **Logic:**
+    * `IF` request host is `*.aethex.me` -> Parse subdomain -> Query User Data -> Render `CreatorProfile`.
+    * `IF` request host is `*.aethex.space` -> Parse subdomain -> Query Project Data -> Render `ProjectShowcase`.
+    * `ELSE` -> Render `DemoLanding`.
+
+**2. The Data Connection (Supabase)**
+* We need to replace the hardcoded `mockCreator` and `mockProject` objects with real fetches.
+* **Action:** Connect this Replit project to your **Supabase** instance (using the `SUPABASE_URL` and `ANON_KEY` environment variables).
+* **Query Logic:**
+    * `CreatorProfile`: `SELECT * FROM user_profiles WHERE username = [subdomain]`
+    * `ProjectShowcase`: `SELECT * FROM projects WHERE slug = [subdomain]`
+
+**3. The "404" State**
+* What happens if I type `fakeuser.aethex.me`?
+* We need a specific **"Claim This Passport"** 404 page that redirects them to `aethex.foundation` to sign up.
+
+**Your Next Instruction to the AI:**
+> "Great work on the UI. Now, let's build the **Express.js server** to handle dynamic subdomain routing using the `vhost` package. I want to route `*.aethex.me` requests to the CreatorProfile component and `*.aethex.space` requests to the ProjectShowcase component, passing the subdomain as a prop."
+
+Are you ready to move from Design to Logic?

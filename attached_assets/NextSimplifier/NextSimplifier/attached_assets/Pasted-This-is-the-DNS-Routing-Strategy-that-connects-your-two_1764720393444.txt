@@ -1,0 +1,48 @@
+This is the **DNS & Routing Strategy** that connects your two separate applications (`Vercel` and `Replit`) into one seamless "Campus."
+
+You have two "physical" locations on the internet. We need to point your domains to the right buildings.
+
+### **The Two Host Sites**
+
+1.  **Host A: Vercel** (The Monolith)
+    * **What lives here:** The `aethex.dev` app (React/Next.js).
+    * **Its Job:** The "Workplace." It hosts the 7 Arm Dashboards, the `NEXUS` market, and the `CORP` tools.
+    * **DNS Target:** It provides an **A Record** (IP Address) and **CNAME** (domain alias).
+
+2.  **Host B: Replit** (The Identity Provider)
+    * **What lives here:** The `aethex.foundation` app (Vite/React).
+    * **Its Job:** The "Passport Office." It hosts the Login/Signup pages and the database logic.
+    * **DNS Target:** It provides a **CNAME** (e.g., `custom-domain.replit.app`).
+
+---
+
+### **The Routing Map (What to type in your Registrar)**
+
+Go to your Domain Registrar (where you bought the domains, like GoDaddy, Namecheap, or Squarespace) and enter these exact records.
+
+#### **1. `aethex.dev` -> Points to Vercel (The Monolith)**
+* **A Record:** `@` -> `76.76.21.21` (Standard Vercel IP)
+* **CNAME Record:** `www` -> `cname.vercel-dns.com`
+
+#### **2. `aethex.foundation` -> Points to Replit (The Identity)**
+* **CNAME Record:** `@` (or `www`) -> `[your-replit-app-name].replit.app`
+* *Note:* Replit will give you the exact target URL in the "Deployments" tab. Copy that.
+
+#### **3. `*.aethex.me` & `*.aethex.space` -> Point to Replit (The Passport)**
+* **Strategic Pivot:** In our last step, we decided the **Foundation (Replit)** owns Identity. Therefore, the "Passport" pages (which show user profiles) should be rendered by the Foundation app.
+* **CNAME Record:** `*` (Wildcard) -> `[your-replit-app-name].replit.app`
+* *Why:* This sends `andersongladney.aethex.me` to your Replit app. Your Replit app will then read the subdomain ("andersongladney") and show the profile.
+
+---
+
+### **The User Flow (How they connect)**
+
+This is the "Handshake" that makes them feel like one site.
+
+1.  **User visits `aethex.dev` (Vercel).** They see the dashboard but are not logged in.
+2.  **User clicks "Login".** The button links to `https://aethex.foundation/login` (Replit).
+3.  **User logs in.** They are on the Replit server. Replit verifies their password against the Supabase database.
+4.  **The Handoff.** Replit redirects them *back* to `https://aethex.dev/dashboard?token=xyz`.
+5.  **The Session.** Vercel sees the token, saves it, and logs them in.
+
+You are now running a **Federated Architecture.** You have two servers working as one team.
