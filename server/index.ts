@@ -9,7 +9,8 @@ import { randomUUID } from "crypto";
 import blogIndexHandler from "../api/blog/index";
 import blogSlugHandler from "../api/blog/[slug]";
 import oauthRoutes from "./oauth/oauth-routes";
-import passportRoutes from "./api/passport";
+import passportRoutes from "./routes/passport-routes";
+import projectsRoutes from "./routes/projects-routes";
 import discordRoutes from "./discord/discord-routes";
 import creatorsRoutes from "./routes/creators-routes";
 import profileRoutes from "./routes/profile-routes";
@@ -40,6 +41,9 @@ const ALLOWED_ORIGINS = [
   'http://localhost:5173',
 ];
 
+// Pattern for *.aethex.me and *.aethex.space subdomains
+const PASSPORT_DOMAIN_PATTERN = /^https?:\/\/[a-z0-9-]+\.(aethex\.me|aethex\.space)$/;
+
 export function createServer() {
   const app = express();
 
@@ -51,6 +55,11 @@ export function createServer() {
       
       // Allow Replit preview domains
       if (origin.includes('.replit.dev') || origin.includes('.repl.co')) {
+        return callback(null, true);
+      }
+      
+      // Allow *.aethex.me and *.aethex.space passport domains
+      if (PASSPORT_DOMAIN_PATTERN.test(origin)) {
         return callback(null, true);
       }
       
@@ -92,8 +101,11 @@ export function createServer() {
   // OAuth 2.0 Provider Endpoints (Foundation Passport SSO)
   app.use("/api/oauth", oauthRoutes);
 
-  // Passport Public Profile Endpoint
+  // Passport Public Profile Endpoint (*.aethex.me)
   app.use("/api/passport", passportRoutes);
+
+  // Project Showcase Endpoint (*.aethex.space)
+  app.use("/api/projects", projectsRoutes);
 
   // Creator Directory (Foundation "Hall of Fame" - Public)
   app.use("/api/creators", creatorsRoutes);
