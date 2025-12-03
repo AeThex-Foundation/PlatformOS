@@ -115,7 +115,7 @@ const ProjectPassport = ({
                 <div className="flex items-center gap-4">
                   <Avatar className="h-16 w-16">
                     <AvatarImage src={owner.avatar_url || undefined} />
-                    <AvatarFallback>{owner.username[0]}</AvatarFallback>
+                    <AvatarFallback>{owner.username?.[0] || owner.full_name?.[0] || "?"}</AvatarFallback>
                   </Avatar>
                   <div>
                     <p className="font-semibold text-foreground">
