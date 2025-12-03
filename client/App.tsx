@@ -24,6 +24,7 @@ import Profile from "./pages/Profile";
 import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
 import Passport from "./pages/Passport";
+import PassportDemo from "./pages/PassportDemo";
 import DiscordVerify from "./pages/DiscordVerify";
 import FourOhFourPage from "./pages/404";
 import GameForge from "./pages/GameForge";
@@ -146,6 +147,9 @@ function AppContent() {
             <Route path="/creators" element={<Navigate to="/community" replace />} />
             <Route path="/leaderboard" element={<Navigate to="/community" replace />} />
             <Route path="/projects" element={<Navigate to="/hub/community" replace />} />
+
+            {/* Passport Demo */}
+            <Route path="/passport/demo" element={<PassportDemo />} />
 
             {/* Passport Profile (Wildcard - must be before 404) */}
             <Route path="/:username" element={<Passport />} />
