@@ -82,6 +82,9 @@ export default {
           800: "hsl(var(--gold-800))",
           900: "hsl(var(--gold-900))",
         },
+        "neon-purple": "#a855f7",
+        "gameforge-green": "#39ff14",
+        "gameforge-dark": "#0a0f0a",
       },
       borderRadius: {
         lg: "var(--radius)",
