@@ -97,6 +97,26 @@ import ProfileEdit from "./pages/ProfileEdit";
 import { Analytics } from "@vercel/analytics/react";
 import { Web3Provider } from "./components/Web3Provider";
 
+import Teams from "./pages/Teams";
+import Nexus from "./pages/Nexus";
+import Support from "./pages/Support";
+
+import CreatorDirectory from "./pages/creators/CreatorDirectory";
+import CreatorProfile from "./pages/creators/CreatorProfile";
+
+import DocsOverview from "./pages/docs/DocsOverview";
+import DocsGettingStarted from "./pages/docs/DocsGettingStarted";
+import DocsTutorials from "./pages/docs/DocsTutorials";
+import DocsApiReference from "./pages/docs/DocsApiReference";
+import DocsCli from "./pages/docs/DocsCli";
+import DocsCurriculum from "./pages/docs/DocsCurriculum";
+import DocsCurriculumEthos from "./pages/docs/DocsCurriculumEthos";
+import DocsExamples from "./pages/docs/DocsExamples";
+import DocsIntegrations from "./pages/docs/DocsIntegrations";
+import DocsPlatform from "./pages/docs/DocsPlatform";
+import DocsPartnerProposal from "./pages/docs/DocsPartnerProposal";
+import DocsEditorsGuide from "./pages/docs/DocsEditorsGuide";
+
 const queryClient = new QueryClient();
 
 function isPassportSubdomain(): "creator" | "project" | false {
@@ -188,7 +208,6 @@ function AppContent() {
             <Route path="/ethics-council" element={<Navigate to="/trust" replace />} />
             <Route path="/curriculum" element={<Navigate to="/programs" replace />} />
             <Route path="/workshops" element={<Navigate to="/programs" replace />} />
-            <Route path="/creators" element={<Navigate to="/community" replace />} />
             <Route path="/leaderboard" element={<Navigate to="/community" replace />} />
             <Route path="/projects" element={<Navigate to="/hub/community" replace />} />
 
@@ -238,6 +257,29 @@ function AppContent() {
             <Route path="/changelog" element={<Changelog />} />
             <Route path="/status" element={<Status />} />
             <Route path="/tutorials" element={<Tutorials />} />
+
+            {/* Teams, Nexus, Support */}
+            <Route path="/teams" element={<Teams />} />
+            <Route path="/nexus" element={<Nexus />} />
+            <Route path="/support" element={<Support />} />
+
+            {/* Creators */}
+            <Route path="/creators" element={<CreatorDirectory />} />
+            <Route path="/creators/:username" element={<CreatorProfile />} />
+
+            {/* Documentation */}
+            <Route path="/docs" element={<DocsOverview />} />
+            <Route path="/docs/getting-started" element={<DocsGettingStarted />} />
+            <Route path="/docs/tutorials" element={<DocsTutorials />} />
+            <Route path="/docs/api" element={<DocsApiReference />} />
+            <Route path="/docs/cli" element={<DocsCli />} />
+            <Route path="/docs/curriculum" element={<DocsCurriculum />} />
+            <Route path="/docs/curriculum/ethos" element={<DocsCurriculumEthos />} />
+            <Route path="/docs/examples" element={<DocsExamples />} />
+            <Route path="/docs/integrations" element={<DocsIntegrations />} />
+            <Route path="/docs/platform" element={<DocsPlatform />} />
+            <Route path="/docs/partner-proposal" element={<DocsPartnerProposal />} />
+            <Route path="/docs/editors-guide" element={<DocsEditorsGuide />} />
 
             {/* Passport Hub */}
             <Route path="/passport" element={<PassportHub />} />

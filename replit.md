@@ -60,6 +60,11 @@ The Guardian's Hub is a Single Page Application (SPA) built with React 18, TypeS
 - **Content Pages:** Blog system (`/blog`), activity feed (`/feed`), changelog (`/changelog`), system status (`/status`), and tutorials (`/tutorials`).
 - **Staff Tools (`/staff/*`):** Internal staff pages including announcements, knowledge base, project tracking, team handbook, expense reports, learning portal, performance reviews, and internal marketplace.
 - **Foundation Pages (`/foundation/*`):** Foundation member pages including dashboard, achievements, curriculum, contribute, get-involved, learn-more, and teams.
+- **Documentation System (`/docs/*`):** Complete documentation hub with DocsLayout wrapper providing sidebar navigation, search, and theme toggle. Includes 12 pages: Overview, Getting Started, Platform, API Reference, CLI, Tutorials, Examples, Integrations, Curriculum, Ethos Curriculum, Editors Guide, and Partner Proposal.
+- **Nexus Community Hub (`/nexus`):** Central talent marketplace connecting creators across all AeThex arms. Features Audio Tracks for Sale and Hire Artists sections powered by Ethos Guild integration.
+- **Support Center (`/support`):** Help center with FAQ categories, support channel options (Live Chat, Email, Phone, Community), self-help resources, and emergency support contact.
+- **Teams (`/teams`):** User team management for creating and viewing collaborative teams with member invitations.
+- **Creator Directory (`/creators`):** Public creator directory with search, ARM filters (Labs, GameForge, Corp, Foundation, DevConnect, Ethos), and individual creator profiles at `/creators/:username`.
 
 ### System Design Choices
 - **Type Safety:** TypeScript for type-safe communication.
