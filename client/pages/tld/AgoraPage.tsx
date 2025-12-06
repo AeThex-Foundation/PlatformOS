@@ -1,9 +1,16 @@
 import { useState, useEffect, useMemo } from 'react';
 import { Proposal, ProposalStatus } from '@/types/tld';
-import { getProposals, getTreasuryBalance } from '@/services/tld-api';
+import { getProposals, getTreasuryBalance, createProposal } from '@/services/tld-api';
 import { Card, CardContent } from '@/components/ui/card';
 import { Link } from 'react-router-dom';
 import { Skeleton } from '@/components/ui/skeleton';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { Label } from '@/components/ui/label';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { useAuth } from '@/contexts/AuthContext';
+import { Plus, Loader2 } from 'lucide-react';
 import Layout from '@/components/Layout';
 
 const getStatusColor = (status: ProposalStatus) => {
@@ -41,21 +48,51 @@ const ProposalCard = ({ proposal }: { proposal: Proposal }) => {
 };
 
 export default function AgoraPage() {
+  const { user } = useAuth();
   const [proposals, setProposals] = useState<Proposal[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [activeTab, setActiveTab] = useState<ProposalStatus | 'All'>('All');
   const [treasury, setTreasury] = useState<{ balance: number; currency: string } | null>(null);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [proposalTitle, setProposalTitle] = useState('');
+  const [proposalDescription, setProposalDescription] = useState('');
+  const [submitError, setSubmitError] = useState('');
+
+  const fetchData = async () => {
+    setIsLoading(true);
+    const [proposalsData, treasuryData] = await Promise.all([getProposals(), getTreasuryBalance()]);
+    setProposals(proposalsData);
+    setTreasury(treasuryData);
+    setIsLoading(false);
+  };
 
   useEffect(() => {
-    const fetchData = async () => {
-      setIsLoading(true);
-      const [proposalsData, treasuryData] = await Promise.all([getProposals(), getTreasuryBalance()]);
-      setProposals(proposalsData);
-      setTreasury(treasuryData);
-      setIsLoading(false);
-    };
     fetchData();
   }, []);
+
+  const handleCreateProposal = async () => {
+    if (!proposalTitle.trim() || !proposalDescription.trim()) {
+      setSubmitError('Please fill in all fields');
+      return;
+    }
+    
+    setIsSubmitting(true);
+    setSubmitError('');
+    
+    const result = await createProposal(proposalTitle, proposalDescription);
+    
+    if (result.success) {
+      setProposalTitle('');
+      setProposalDescription('');
+      setIsDialogOpen(false);
+      fetchData();
+    } else {
+      setSubmitError(result.error || 'Failed to create proposal');
+    }
+    
+    setIsSubmitting(false);
+  };
 
   const filteredProposals = useMemo(() => {
     if (activeTab === 'All') return proposals;
@@ -110,13 +147,59 @@ export default function AgoraPage() {
           </CardContent>
         </Card>
 
-        <div className="flex justify-between items-center mb-6">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
           <div className="flex space-x-2 bg-slate-950 p-1 rounded-lg">
             <TabButton status="All" />
             <TabButton status={ProposalStatus.Active} />
             <TabButton status={ProposalStatus.Passed} />
             <TabButton status={ProposalStatus.Defeated} />
           </div>
+          
+          {user && (
+            <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+              <DialogTrigger asChild>
+                <Button className="bg-red-500 hover:bg-red-600">
+                  <Plus className="mr-2 h-4 w-4" /> Create Proposal
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="bg-slate-900 border-slate-800">
+                <DialogHeader>
+                  <DialogTitle className="text-white">Create New Proposal</DialogTitle>
+                </DialogHeader>
+                <div className="space-y-4 mt-4">
+                  <div>
+                    <Label htmlFor="title" className="text-gray-400">Title</Label>
+                    <Input
+                      id="title"
+                      value={proposalTitle}
+                      onChange={(e) => setProposalTitle(e.target.value)}
+                      placeholder="A clear, concise title for your proposal"
+                      className="bg-slate-950 border-slate-700"
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="description" className="text-gray-400">Description</Label>
+                    <Textarea
+                      id="description"
+                      value={proposalDescription}
+                      onChange={(e) => setProposalDescription(e.target.value)}
+                      placeholder="Explain your proposal in detail. What problem does it solve? How will it benefit the community?"
+                      className="bg-slate-950 border-slate-700 min-h-[150px]"
+                    />
+                  </div>
+                  {submitError && <p className="text-red-400 text-sm">{submitError}</p>}
+                  <Button 
+                    onClick={handleCreateProposal} 
+                    disabled={isSubmitting}
+                    className="w-full bg-red-500 hover:bg-red-600"
+                  >
+                    {isSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+                    Submit Proposal
+                  </Button>
+                </div>
+              </DialogContent>
+            </Dialog>
+          )}
         </div>
 
         {isLoading ? (

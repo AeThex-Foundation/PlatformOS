@@ -35,6 +35,7 @@ export interface Proposal {
 }
 
 export enum GrantStatus {
+  Pending = 'Pending',
   UnderReview = 'Under Review',
   Approved = 'Approved',
   Rejected = 'Rejected',

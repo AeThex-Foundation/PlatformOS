@@ -26,6 +26,8 @@ import adminOauthClientsRoutes from "./routes/admin-oauth-clients-routes";
 import domainsRoutes from "./routes/domains-routes";
 import ethosRoutes from "./routes/ethos-routes";
 import gameforgeRoutes from "./routes/gameforge-routes";
+import governanceRoutes from "./routes/governance-routes";
+import grantsRoutes from "./routes/grants-routes";
 import { authMiddleware } from "./middleware/auth";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -135,6 +137,12 @@ export function createServer() {
 
   // GameForge ARM - Project, sprint, task management
   app.use("/api/gameforge", gameforgeRoutes);
+
+  // Governance (Agora) - Proposals and voting
+  app.use("/api/governance", governanceRoutes);
+
+  // Grants - Developer grant program
+  app.use("/api/grants", grantsRoutes);
 
   app.post("/api/contact", async (req, res) => {
     try {
