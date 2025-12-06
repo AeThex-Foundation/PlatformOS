@@ -123,4 +123,48 @@ router.get('/', async (req: Request, res: Response) => {
   }
 });
 
+/**
+ * GET /api/creators/:username
+ * 
+ * Get a single creator profile by username
+ */
+router.get('/:username', async (req: Request, res: Response) => {
+  try {
+    const { username } = req.params;
+    
+    if (!username || typeof username !== 'string') {
+      return res.status(400).json({ error: 'Username is required' });
+    }
+
+    const { data, error } = await supabaseAdmin
+      .from('user_profiles')
+      .select('username, full_name, avatar_url, bio, arms, roles, last_active_at, created_at')
+      .eq('username', username.toLowerCase())
+      .eq('show_in_creator_directory', true)
+      .single();
+
+    if (error || !data) {
+      return res.status(404).json({ error: 'Creator not found' });
+    }
+
+    const creator: CreatorProfile = {
+      username: data.username,
+      full_name: data.full_name,
+      avatar_url: data.avatar_url,
+      bio: data.bio || '',
+      arms: data.arms || [],
+      roles: data.roles || [],
+      is_architect: (data.roles || []).includes('Architect'),
+      last_active_at: data.last_active_at,
+      created_at: data.created_at,
+    };
+
+    res.setHeader('Cache-Control', 'public, max-age=60');
+    return res.json(creator);
+  } catch (err) {
+    console.error('Creator profile error:', err);
+    return res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
 export default router;
