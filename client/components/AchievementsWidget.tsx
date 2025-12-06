@@ -39,7 +39,7 @@ const rarityMap = {
     color: "bg-green-600/50 text-green-100",
     border: "border-green-500/30",
   },
-  rare: { color: "bg-aethex-600/50 text-gold-100", border: "border-gold-500/30" },
+  rare: { color: "bg-blue-600/50 text-blue-100", border: "border-blue-500/30" },
   epic: {
     color: "bg-purple-600/50 text-purple-100",
     border: "border-purple-500/30",
@@ -56,8 +56,8 @@ const colorMap = {
     border: "border-red-500/20",
   },
   blue: {
-    bg: "bg-gradient-to-br from-aethex-950/40 to-aethex-900/20",
-    border: "border-gold-500/20",
+    bg: "bg-gradient-to-br from-blue-950/40 to-blue-900/20",
+    border: "border-blue-500/20",
   },
   purple: {
     bg: "bg-gradient-to-br from-purple-950/40 to-purple-900/20",
