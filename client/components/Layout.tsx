@@ -50,9 +50,10 @@ export default function CodeLayout({ children, hideFooter }: LayoutProps) {
   const publicNavigation = [
     { name: "Home", href: "/" },
     { name: "About", href: "/about" },
+    { name: "Foundation", href: "/foundation/about" },
     { name: "Programs", href: "/programs" },
+    { name: "Downloads", href: "/downloads" },
     { name: "Community", href: "/community" },
-    { name: "Resources", href: "/resources" },
     { name: "Trust", href: "/trust" },
     { name: "Contact", href: "/contact" },
   ];
@@ -63,8 +64,8 @@ export default function CodeLayout({ children, hideFooter }: LayoutProps) {
     { name: "Governance", href: "/hub/governance" },
     { name: "Community", href: "/hub/community" },
     { name: "Programs", href: "/programs" },
+    { name: "Downloads", href: "/downloads" },
     { name: "Achievements", href: "/achievements" },
-    { name: "Resources", href: "/resources" },
     { name: "My Profile", href: "/profile/me" },
   ];
 
