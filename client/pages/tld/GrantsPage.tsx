@@ -120,7 +120,7 @@ const MyGrants = ({ grants }: { grants: GrantApplication[] }) => {
                 </div>
                 <span className={`text-sm font-semibold px-3 py-1 rounded-full ${
                   grant.status === 'Approved' ? 'bg-green-500/20 text-green-400' : 
-                  grant.status === 'Rejected' ? 'bg-red-500/20 text-red-400' : 'bg-blue-500/20 text-blue-400'
+                  grant.status === 'Rejected' ? 'bg-red-500/20 text-red-400' : 'bg-amber-500/20 text-amber-400'
                 }`}>{grant.status}</span>
               </div>
             ))}

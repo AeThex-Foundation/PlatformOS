@@ -65,6 +65,13 @@ The Guardian's Hub is a Single Page Application (SPA) built with React 18, TypeS
 - **Support Center (`/support`):** Help center with FAQ categories, support channel options (Live Chat, Email, Phone, Community), self-help resources, and emergency support contact.
 - **Teams (`/teams`):** User team management for creating and viewing collaborative teams with member invitations.
 - **Creator Directory (`/creators`):** Public creator directory with search, ARM filters (Labs, GameForge, Corp, Foundation, DevConnect, Ethos), and individual creator profiles at `/creators/:username`.
+- **TLD Hub - .aethex Domain System:** Integrated domain registration and governance platform:
+  - **Domain Registration (`/tld`):** Search and claim .aethex domains with token-gated access (requires $AETHEX tokens). Features domain availability check, pricing tiers based on character length, and blockchain integration via Freename API.
+  - **Domain Dashboard (`/tld/dashboard`):** Logged-in users can view their claimed domains, manage domain records (ETH, BTC, SOL addresses, IPFS, avatar, social handles), and renew expiring domains.
+  - **Agora Governance (`/agora`):** DAO governance platform displaying treasury balance, active/passed/defeated proposals with vote counts, proposal filtering tabs, and proposal creation dialog for authenticated users. Shows "How Governance Works" guide (Propose → Vote → Execute).
+  - **Developer Grants (`/grants`):** Grant program for ecosystem development with focus areas (Wallet Integrations, dApp Tooling, Community & Education), funding tiers (Level 1: $10K, Level 2: $30K), and application submission form.
+  - **API Endpoints:** `/api/governance/proposals` (CRUD, voting), `/api/governance/treasury`, `/api/grants` (applications), `/api/domains/check/:subdomain`, `/api/domains/claim`, `/api/domains/my-domain`, `/api/domains/balance/:wallet`, `/api/domains/resolve/:domain`
+  - **Database Tables:** governance_proposals, governance_votes, grant_applications (integrates with existing user_profiles for domain storage)
 
 ### System Design Choices
 - **Type Safety:** TypeScript for type-safe communication.
