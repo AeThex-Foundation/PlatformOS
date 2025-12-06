@@ -14,15 +14,6 @@ interface Arm {
 
 const ARMS: Arm[] = [
   {
-    id: "foundation",
-    name: "AeThex | Foundation",
-    label: "Foundation",
-    color: "#EF4444",
-    bgColor: "bg-red-500/20",
-    logoUrl: "https://cdn.builder.io/api/v1/image/assets%2Ffc53d607e21d497595ac97e0637001a1%2Fc02cb1bf5056479bbb3ea4bd91f0d472?format=webp&width=800",
-    href: "/",
-  },
-  {
     id: "gameforge",
     name: "AeThex | GameForge",
     label: "GameForge",
