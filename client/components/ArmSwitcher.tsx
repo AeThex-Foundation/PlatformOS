@@ -1,5 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useArmTheme } from "@/contexts/ArmThemeContext";
+import { GraduationCap, Briefcase, Newspaper, Shield } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 
 interface Arm {
   id: string;
@@ -7,7 +9,8 @@ interface Arm {
   label: string;
   color: string;
   bgColor: string;
-  logoUrl: string;
+  logoUrl?: string;
+  icon?: LucideIcon;
   href: string;
   external?: boolean;
 }
@@ -21,6 +24,42 @@ const ARMS: Arm[] = [
     bgColor: "bg-green-500/20",
     logoUrl: "https://cdn.builder.io/api/v1/image/assets%2Ffc53d607e21d497595ac97e0637001a1%2Fcd3534c1caa0497abfd44224040c6059?format=webp&width=800",
     href: "/gameforge",
+  },
+  {
+    id: "mentorship",
+    name: "Mentorship Programs",
+    label: "Mentorship",
+    color: "#F59E0B",
+    bgColor: "bg-amber-500/20",
+    icon: GraduationCap,
+    href: "/mentorship",
+  },
+  {
+    id: "opportunities",
+    name: "Opportunities",
+    label: "Opportunities",
+    color: "#06B6D4",
+    bgColor: "bg-cyan-500/20",
+    icon: Briefcase,
+    href: "/opportunities",
+  },
+  {
+    id: "blog",
+    name: "AeThex Blog",
+    label: "Blog",
+    color: "#8B5CF6",
+    bgColor: "bg-violet-500/20",
+    icon: Newspaper,
+    href: "/blog",
+  },
+  {
+    id: "staff",
+    name: "Staff Portal",
+    label: "Staff",
+    color: "#EF4444",
+    bgColor: "bg-red-500/20",
+    icon: Shield,
+    href: "/staff/announcements",
   },
 ];
 
@@ -56,11 +95,18 @@ export default function ArmSwitcher() {
               className={`absolute inset-0 rounded-lg ${arm.bgColor} opacity-0 group-hover:opacity-100 transition-opacity duration-200`}
             />
 
-            <img
-              src={arm.logoUrl}
-              alt={arm.label}
-              className="relative h-9 w-9 object-contain transition-all duration-200"
-            />
+            {arm.logoUrl ? (
+              <img
+                src={arm.logoUrl}
+                alt={arm.label}
+                className="relative h-9 w-9 object-contain transition-all duration-200"
+              />
+            ) : arm.icon ? (
+              <arm.icon 
+                className="relative h-6 w-6 transition-all duration-200" 
+                style={{ color: arm.color }}
+              />
+            ) : null}
 
             {/* Tooltip */}
             <div className="absolute top-full left-1/2 -translate-x-1/2 mt-3 px-2 py-1 bg-gray-900 rounded text-xs text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap pointer-events-none z-50">
@@ -82,11 +128,18 @@ export default function ArmSwitcher() {
             }`}
             title={arm.name}
           >
-            <img
-              src={arm.logoUrl}
-              alt={arm.label}
-              className="relative h-7 w-7 object-contain transition-all duration-200"
-            />
+            {arm.logoUrl ? (
+              <img
+                src={arm.logoUrl}
+                alt={arm.label}
+                className="relative h-7 w-7 object-contain transition-all duration-200"
+              />
+            ) : arm.icon ? (
+              <arm.icon 
+                className="relative h-5 w-5 transition-all duration-200" 
+                style={{ color: arm.color }}
+              />
+            ) : null}
 
             {/* Tooltip */}
             <div className="absolute top-full left-1/2 -translate-x-1/2 mt-3 px-2 py-1 bg-gray-900 rounded text-xs text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap pointer-events-none z-50">
@@ -111,11 +164,18 @@ export default function ArmSwitcher() {
             <div
               className={`absolute inset-0 rounded-lg ${arm.bgColor} opacity-0 group-hover:opacity-100 transition-opacity duration-200`}
             />
-            <img
-              src={arm.logoUrl}
-              alt={arm.label}
-              className="relative h-6 w-6 object-contain"
-            />
+            {arm.logoUrl ? (
+              <img
+                src={arm.logoUrl}
+                alt={arm.label}
+                className="relative h-6 w-6 object-contain"
+              />
+            ) : arm.icon ? (
+              <arm.icon 
+                className="relative h-5 w-5" 
+                style={{ color: arm.color }}
+              />
+            ) : null}
           </button>
         ))}
       </div>
