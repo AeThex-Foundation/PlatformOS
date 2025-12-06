@@ -25,6 +25,7 @@ import oauthClientsRoutes from "./routes/oauth-clients-routes";
 import adminOauthClientsRoutes from "./routes/admin-oauth-clients-routes";
 import domainsRoutes from "./routes/domains-routes";
 import ethosRoutes from "./routes/ethos-routes";
+import gameforgeRoutes from "./routes/gameforge-routes";
 import { authMiddleware } from "./middleware/auth";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -131,6 +132,9 @@ export function createServer() {
 
   // AeThex Domains (.aethex) - Public resolution, auth for claiming
   app.use("/api/domains", domainsRoutes);
+
+  // GameForge ARM - Project, sprint, task management
+  app.use("/api/gameforge", gameforgeRoutes);
 
   app.post("/api/contact", async (req, res) => {
     try {

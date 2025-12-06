@@ -41,6 +41,12 @@ The Guardian's Hub is a Single Page Application (SPA) built with React 18, TypeS
   - **Storage:** Uses Supabase bucket "ethos-tracks" for audio file storage with secure upload/download
   - **Database Tables:** ethos_tracks, ethos_artist_profiles, ethos_guild_members, ethos_licensing_agreements
   - **Security:** Authenticated-only access for unpublished tracks; ownership verification on update/delete operations
+- **GameForge ARM Dashboard:** Complete project management system for game development:
+  - **API Endpoints:** `/api/gameforge/projects` (CRUD), `/api/gameforge/sprints` (sprint management), `/api/gameforge/tasks` (task CRUD), `/api/gameforge/team` (team roster), `/api/gameforge/metrics` (project/sprint analytics)
+  - **Dashboard (`/gameforge/dashboard`):** Tabbed interface with Overview (stats, countdown), Scope (sprint goal), Team (member cards), Tasks (Kanban board), and Sprints (management)
+  - **SprintManager Component:** Create/join sprints, view sprint timeline, member tracking
+  - **Database Tables:** gameforge_projects, gameforge_sprints, gameforge_sprint_members, gameforge_tasks, gameforge_team_members
+  - **Security:** All endpoints require authentication; project leads have elevated permissions for CRUD operations
 - **Passport Hub (`/passport`):** Central management hub with 4 tabbed sections:
   - **Directory Tab:** Public searchable member directory with filters (All, Verified, Level 10+), displaying passport holders with realm badges, levels, and verification status.
   - **Claim Tab:** Authenticated user passport customization allowing updates to active title, bio, and realm alignment with live preview.

@@ -34,6 +34,7 @@ import GameForgePricing from "./pages/gameforge/GameForgePricing";
 import GameForgeStartBuilding from "./pages/gameforge/GameForgeStartBuilding";
 import GameForgeTeams from "./pages/gameforge/GameForgeTeams";
 import GameForgeViewPortfolio from "./pages/gameforge/GameForgeViewPortfolio";
+import GameForgeDashboard from "./pages/dashboards/GameForgeDashboard";
 
 import Hub from "./pages/hub/Hub";
 import Protocol from "./pages/hub/Protocol";
@@ -123,6 +124,7 @@ function AppContent() {
             <Route path="/gameforge/start-building" element={<GameForgeStartBuilding />} />
             <Route path="/gameforge/teams" element={<GameForgeTeams />} />
             <Route path="/gameforge/view-portfolio" element={<GameForgeViewPortfolio />} />
+            <Route path="/gameforge/dashboard" element={<GameForgeDashboard />} />
             
             {/* Admin Routes */}
             <Route path="/admin" element={<Admin />} />
