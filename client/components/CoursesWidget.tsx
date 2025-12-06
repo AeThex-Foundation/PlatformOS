@@ -37,8 +37,8 @@ const colorMap = {
     border: "border-red-500/20",
   },
   blue: {
-    bg: "bg-gradient-to-br from-aethex-950/40 to-aethex-900/20",
-    border: "border-gold-500/20",
+    bg: "bg-gradient-to-br from-blue-950/40 to-blue-900/20",
+    border: "border-blue-500/20",
   },
   purple: {
     bg: "bg-gradient-to-br from-purple-950/40 to-purple-900/20",
@@ -58,7 +58,7 @@ const statusMap = {
   },
   in_progress: {
     label: "In Progress",
-    color: "bg-aethex-600/50 text-gold-100",
+    color: "bg-blue-600/50 text-blue-100",
     icon: Clock,
   },
   completed: {
@@ -109,7 +109,7 @@ export function CoursesWidget({
               </div>
               <div className="text-center">
                 <p className="text-xs text-gray-400">In Progress</p>
-                <p className="text-lg font-bold text-gold-400">
+                <p className="text-lg font-bold text-blue-400">
                   {inProgressCount}
                 </p>
               </div>

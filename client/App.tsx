@@ -44,6 +44,44 @@ import HubPassport from "./pages/hub/Passport";
 
 import EthosArtistSettings from "./pages/ethos/ArtistSettings";
 import EthosTrackLibrary from "./pages/ethos/TrackLibrary";
+import EthosGuild from "./pages/ethos/EthosGuild";
+import EthosArtistProfile from "./pages/ethos/ArtistProfile";
+import EthosLicensingDashboard from "./pages/ethos/LicensingDashboard";
+
+import MenteeHub from "./pages/mentorship/MenteeHub";
+import MentorApply from "./pages/mentorship/MentorApply";
+import MentorProfile from "./pages/mentorship/MentorProfile";
+import MentorshipPrograms from "./pages/mentorship/MentorshipPrograms";
+import MentorshipRequest from "./pages/mentorship/MentorshipRequest";
+
+import FoundationAchievements from "./pages/foundation/FoundationAchievements";
+import FoundationContribute from "./pages/foundation/FoundationContribute";
+import FoundationCurriculum from "./pages/foundation/FoundationCurriculum";
+import FoundationDashboard from "./pages/foundation/FoundationDashboard";
+import FoundationGetInvolved from "./pages/foundation/FoundationGetInvolved";
+import FoundationLearnMore from "./pages/foundation/FoundationLearnMore";
+import FoundationTeams from "./pages/foundation/FoundationTeams";
+
+import OpportunitiesHub from "./pages/opportunities/OpportunitiesHub";
+import OpportunityDetail from "./pages/opportunities/OpportunityDetail";
+import OpportunityPostForm from "./pages/opportunities/OpportunityPostForm";
+import MyApplications from "./pages/opportunities/MyApplications";
+
+import StaffAnnouncements from "./pages/staff/StaffAnnouncements";
+import StaffKnowledgeBase from "./pages/staff/StaffKnowledgeBase";
+import StaffProjectTracking from "./pages/staff/StaffProjectTracking";
+import StaffTeamHandbook from "./pages/staff/StaffTeamHandbook";
+import StaffExpenseReports from "./pages/staff/StaffExpenseReports";
+import StaffLearningPortal from "./pages/staff/StaffLearningPortal";
+import StaffPerformanceReviews from "./pages/staff/StaffPerformanceReviews";
+import StaffInternalMarketplace from "./pages/staff/StaffInternalMarketplace";
+
+import Blog from "./pages/content/Blog";
+import BlogPost from "./pages/content/BlogPost";
+import Feed from "./pages/content/Feed";
+import Changelog from "./pages/content/Changelog";
+import Status from "./pages/content/Status";
+import Tutorials from "./pages/content/Tutorials";
 
 import Programs from "./pages/Programs";
 import Achievements from "./pages/Achievements";
@@ -144,12 +182,9 @@ function AppContent() {
             {/* Legacy Redirects */}
             <Route path="/foundation" element={<Navigate to="/about" replace />} />
             <Route path="/foundation/about" element={<Navigate to="/about" replace />} />
-            <Route path="/foundation/curriculum" element={<Navigate to="/programs" replace />} />
-            <Route path="/foundation/achievements" element={<Navigate to="/achievements" replace />} />
             <Route path="/foundation/downloads" element={<Navigate to="/downloads" replace />} />
             <Route path="/foundation/community" element={<Navigate to="/community" replace />} />
             <Route path="/foundation/community/*" element={<Navigate to="/community" replace />} />
-            <Route path="/foundation/*" element={<Navigate to="/foundation/about" replace />} />
             <Route path="/ethics-council" element={<Navigate to="/trust" replace />} />
             <Route path="/curriculum" element={<Navigate to="/programs" replace />} />
             <Route path="/workshops" element={<Navigate to="/programs" replace />} />
@@ -158,8 +193,51 @@ function AppContent() {
             <Route path="/projects" element={<Navigate to="/hub/community" replace />} />
 
             {/* Ethos Guild */}
+            <Route path="/ethos" element={<EthosGuild />} />
             <Route path="/ethos/settings" element={<EthosArtistSettings />} />
             <Route path="/ethos/library" element={<EthosTrackLibrary />} />
+            <Route path="/ethos/artist/:id" element={<EthosArtistProfile />} />
+            <Route path="/ethos/licensing" element={<EthosLicensingDashboard />} />
+
+            {/* Mentorship */}
+            <Route path="/mentorship" element={<MentorshipPrograms />} />
+            <Route path="/mentorship/mentee" element={<MenteeHub />} />
+            <Route path="/mentorship/apply" element={<MentorApply />} />
+            <Route path="/mentorship/mentor/:id" element={<MentorProfile />} />
+            <Route path="/mentorship/request" element={<MentorshipRequest />} />
+
+            {/* Foundation Pages */}
+            <Route path="/foundation/achievements" element={<FoundationAchievements />} />
+            <Route path="/foundation/contribute" element={<FoundationContribute />} />
+            <Route path="/foundation/curriculum" element={<FoundationCurriculum />} />
+            <Route path="/foundation/dashboard" element={<FoundationDashboard />} />
+            <Route path="/foundation/get-involved" element={<FoundationGetInvolved />} />
+            <Route path="/foundation/learn-more" element={<FoundationLearnMore />} />
+            <Route path="/foundation/teams" element={<FoundationTeams />} />
+
+            {/* Opportunities */}
+            <Route path="/opportunities" element={<OpportunitiesHub />} />
+            <Route path="/opportunities/:id" element={<OpportunityDetail />} />
+            <Route path="/opportunities/post" element={<OpportunityPostForm />} />
+            <Route path="/my-applications" element={<MyApplications />} />
+
+            {/* Staff */}
+            <Route path="/staff/announcements" element={<StaffAnnouncements />} />
+            <Route path="/staff/knowledge-base" element={<StaffKnowledgeBase />} />
+            <Route path="/staff/project-tracking" element={<StaffProjectTracking />} />
+            <Route path="/staff/handbook" element={<StaffTeamHandbook />} />
+            <Route path="/staff/expenses" element={<StaffExpenseReports />} />
+            <Route path="/staff/learning" element={<StaffLearningPortal />} />
+            <Route path="/staff/reviews" element={<StaffPerformanceReviews />} />
+            <Route path="/staff/marketplace" element={<StaffInternalMarketplace />} />
+
+            {/* Content */}
+            <Route path="/blog" element={<Blog />} />
+            <Route path="/blog/:slug" element={<BlogPost />} />
+            <Route path="/feed" element={<Feed />} />
+            <Route path="/changelog" element={<Changelog />} />
+            <Route path="/status" element={<Status />} />
+            <Route path="/tutorials" element={<Tutorials />} />
 
             {/* Passport Hub */}
             <Route path="/passport" element={<PassportHub />} />
