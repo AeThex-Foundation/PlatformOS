@@ -50,21 +50,19 @@ export default function CodeLayout({ children, hideFooter }: LayoutProps) {
   const publicNavigation = [
     { name: "Home", href: "/" },
     { name: "About", href: "/about" },
-    { name: "Programs", href: "/programs" },
+    { name: "Domains", href: "/tld" },
+    { name: "Agora", href: "/agora" },
+    { name: "Grants", href: "/grants" },
     { name: "Docs", href: "/docs" },
-    { name: "Nexus", href: "/nexus" },
-    { name: "Creators", href: "/creators" },
     { name: "Support", href: "/support" },
-    { name: "Contact", href: "/contact" },
   ];
 
   const userNavigation = [
     { name: "Hub", href: "/hub" },
-    { name: "Nexus", href: "/nexus" },
-    { name: "Teams", href: "/teams" },
-    { name: "Governance", href: "/hub/governance" },
+    { name: "My Domains", href: "/tld/dashboard" },
+    { name: "Agora", href: "/agora" },
+    { name: "Grants", href: "/grants" },
     { name: "Docs", href: "/docs" },
-    { name: "Achievements", href: "/achievements" },
     { name: "Support", href: "/support" },
     { name: "My Profile", href: "/profile/me" },
   ];

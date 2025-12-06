@@ -101,6 +101,11 @@ import Teams from "./pages/Teams";
 import Nexus from "./pages/Nexus";
 import Support from "./pages/Support";
 
+import TLDHome from "./pages/tld/TLDHome";
+import TLDDashboard from "./pages/tld/TLDDashboard";
+import AgoraPage from "./pages/tld/AgoraPage";
+import GrantsPage from "./pages/tld/GrantsPage";
+
 import CreatorDirectory from "./pages/creators/CreatorDirectory";
 import CreatorProfile from "./pages/creators/CreatorProfile";
 
@@ -280,6 +285,12 @@ function AppContent() {
             <Route path="/docs/platform" element={<DocsPlatform />} />
             <Route path="/docs/partner-proposal" element={<DocsPartnerProposal />} />
             <Route path="/docs/editors-guide" element={<DocsEditorsGuide />} />
+
+            {/* TLD Hub - .aethex Domain System */}
+            <Route path="/tld" element={<TLDHome />} />
+            <Route path="/tld/dashboard" element={<TLDDashboard />} />
+            <Route path="/agora" element={<AgoraPage />} />
+            <Route path="/grants" element={<GrantsPage />} />
 
             {/* Passport Hub */}
             <Route path="/passport" element={<PassportHub />} />
