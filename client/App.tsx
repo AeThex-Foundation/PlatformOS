@@ -51,7 +51,6 @@ import Community from "./pages/Community";
 import Trust from "./pages/Trust";
 import Resources from "./pages/Resources";
 import Downloads from "./pages/Downloads";
-import FoundationAbout from "./pages/foundation/FoundationAbout";
 
 import Admin from "./pages/Admin";
 import OAuthClients from "./pages/OAuthClients";
@@ -140,11 +139,11 @@ function AppContent() {
             <Route path="/terms" element={<Terms />} />
 
             {/* Foundation */}
-            <Route path="/foundation/about" element={<FoundationAbout />} />
             <Route path="/downloads" element={<Downloads />} />
 
             {/* Legacy Redirects */}
-            <Route path="/foundation" element={<Navigate to="/foundation/about" replace />} />
+            <Route path="/foundation" element={<Navigate to="/about" replace />} />
+            <Route path="/foundation/about" element={<Navigate to="/about" replace />} />
             <Route path="/foundation/curriculum" element={<Navigate to="/programs" replace />} />
             <Route path="/foundation/achievements" element={<Navigate to="/achievements" replace />} />
             <Route path="/foundation/downloads" element={<Navigate to="/downloads" replace />} />
