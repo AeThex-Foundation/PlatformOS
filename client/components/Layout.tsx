@@ -32,6 +32,7 @@ import {
   BookOpen,
   Shield,
 } from "lucide-react";
+import ArmSwitcher from "./ArmSwitcher";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -140,6 +141,11 @@ export default function CodeLayout({ children, hideFooter }: LayoutProps) {
                 }}
               />
             </Link>
+          </div>
+
+          {/* ARM Switcher */}
+          <div className="flex-1 flex justify-center">
+            <ArmSwitcher />
           </div>
 
           {/* Auth Section */}
