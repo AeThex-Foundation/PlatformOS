@@ -55,6 +55,11 @@ The Guardian's Hub is a Single Page Application (SPA) built with React 18, TypeS
 - **Cross-Domain SSO:** AeThex Passport SDK for client site integration with full PKCE support, React integration, automatic token refresh, and secure storage. Uses HS256 JWT for access tokens and provides OpenID Connect discovery.
 - **Admin System:** CRUD operations for OAuth clients with role-based access control and session management.
 - **Content Management:** Centralized content management for Foundation and Hub-specific data, including statistics, team members, milestones, resources, and governance details.
+- **Mentorship System (`/mentorship`):** Complete mentorship platform with program listings, mentee hub, mentor applications, mentor profiles, and mentorship request flow.
+- **Opportunities System (`/opportunities`):** Job and collaboration board with opportunity posting, search/filter by ARM, application submission, and application tracking.
+- **Content Pages:** Blog system (`/blog`), activity feed (`/feed`), changelog (`/changelog`), system status (`/status`), and tutorials (`/tutorials`).
+- **Staff Tools (`/staff/*`):** Internal staff pages including announcements, knowledge base, project tracking, team handbook, expense reports, learning portal, performance reviews, and internal marketplace.
+- **Foundation Pages (`/foundation/*`):** Foundation member pages including dashboard, achievements, curriculum, contribute, get-involved, learn-more, and teams.
 
 ### System Design Choices
 - **Type Safety:** TypeScript for type-safe communication.
