@@ -12,6 +12,12 @@ export interface Creator {
   devconnect_linked?: boolean;
   last_active_at?: string;
   created_at?: string;
+  passport_level?: number;
+  passport_xp?: number;
+  realm?: string;
+  is_verified?: boolean;
+  aethex_domain?: string;
+  division?: 'Ethos' | 'Forge' | 'Visuals';
 }
 
 interface GetCreatorsParams {
@@ -54,6 +60,13 @@ interface BackendResponse {
   };
 }
 
+function getDivisionFromArms(arms: string[]): 'Ethos' | 'Forge' | 'Visuals' | undefined {
+  if (arms.includes('ETHOS')) return 'Ethos';
+  if (arms.includes('GAMEFORGE') || arms.includes('LABS')) return 'Forge';
+  if (arms.includes('STUDIO')) return 'Visuals';
+  return undefined;
+}
+
 function transformCreator(backend: BackendCreator): Creator {
   return {
     id: backend.username,
@@ -69,6 +82,12 @@ function transformCreator(backend: BackendCreator): Creator {
     devconnect_linked: false,
     last_active_at: backend.last_active_at,
     created_at: backend.created_at,
+    passport_level: backend.is_architect ? 25 : undefined,
+    passport_xp: undefined,
+    realm: undefined,
+    is_verified: backend.is_architect,
+    aethex_domain: backend.is_architect ? `${backend.username}.aethex` : undefined,
+    division: getDivisionFromArms(backend.arms || []),
   };
 }
 
