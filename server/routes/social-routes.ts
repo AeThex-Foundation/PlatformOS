@@ -171,3 +171,121 @@ socialRoutes.post("/api/mentorship/requests/:id/status", async (req, res) => {
     return res.status(500).json({ error: err.message || "Server error" });
   }
 });
+
+socialRoutes.get("/api/mentors", async (req, res) => {
+  try {
+    const { q, expertise, available, limit } = req.query;
+
+    let query = supabase
+      .from("mentors")
+      .select(`
+        user_id,
+        bio,
+        expertise,
+        hourly_rate,
+        available,
+        created_at,
+        user_profiles:user_id(id, full_name, username, avatar_url, bio)
+      `);
+
+    if (available === "true") {
+      query = query.eq("available", true);
+    }
+
+    if (expertise) {
+      const expertiseArr = String(expertise).split(",").map(e => e.trim().toLowerCase());
+      query = query.overlaps("expertise", expertiseArr);
+    }
+
+    const maxLimit = Math.min(Number(limit) || 30, 100);
+    query = query.limit(maxLimit);
+
+    const { data, error } = await query.order("created_at", { ascending: false });
+
+    if (error) {
+      console.error("[Social] List mentors error:", error);
+      return res.status(500).json({ error: "Failed to fetch mentors" });
+    }
+
+    let results = data || [];
+
+    if (q) {
+      const searchTerm = String(q).toLowerCase();
+      results = results.filter((m: any) => {
+        const profile = m.user_profiles;
+        const name = (profile?.full_name || "").toLowerCase();
+        const username = (profile?.username || "").toLowerCase();
+        const bio = (m.bio || "").toLowerCase();
+        return name.includes(searchTerm) || username.includes(searchTerm) || bio.includes(searchTerm);
+      });
+    }
+
+    return res.json(results);
+  } catch (err: any) {
+    console.error("[Social] List mentors exception:", err);
+    return res.status(500).json({ error: err.message || "Server error" });
+  }
+});
+
+socialRoutes.post("/api/mentors/apply", async (req: AuthenticatedRequest, res: Response) => {
+  try {
+    const userId = req.user?.id;
+    if (!userId) {
+      return res.status(401).json({ error: "Authentication required" });
+    }
+
+    const { bio, expertise, hourly_rate, available } = req.body;
+
+    const { data: existing } = await supabase
+      .from("mentors")
+      .select("user_id")
+      .eq("user_id", userId)
+      .maybeSingle();
+
+    if (existing) {
+      const { data, error } = await supabase
+        .from("mentors")
+        .update({
+          bio: bio || null,
+          expertise: expertise || [],
+          hourly_rate: hourly_rate ?? null,
+          available: typeof available === "boolean" ? available : true,
+          updated_at: new Date().toISOString(),
+        })
+        .eq("user_id", userId)
+        .select()
+        .single();
+
+      if (error) {
+        console.error("[Social] Update mentor error:", error);
+        return res.status(500).json({ error: "Failed to update mentor profile" });
+      }
+
+      return res.json(data);
+    } else {
+      const { data, error } = await supabase
+        .from("mentors")
+        .insert({
+          user_id: userId,
+          bio: bio || null,
+          expertise: expertise || [],
+          hourly_rate: hourly_rate ?? null,
+          available: typeof available === "boolean" ? available : true,
+          created_at: new Date().toISOString(),
+          updated_at: new Date().toISOString(),
+        })
+        .select()
+        .single();
+
+      if (error) {
+        console.error("[Social] Create mentor error:", error);
+        return res.status(500).json({ error: "Failed to create mentor profile" });
+      }
+
+      return res.json(data);
+    }
+  } catch (err: any) {
+    console.error("[Social] Apply mentor exception:", err);
+    return res.status(500).json({ error: err.message || "Server error" });
+  }
+});
