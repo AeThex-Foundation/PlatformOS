@@ -142,6 +142,10 @@ opportunitiesRoutes.put("/api/opportunities/:id", async (req: AuthenticatedReque
     const { id } = req.params;
     const { title, description, company, location, type, arm, salary_range, requirements, deadline } = req.body;
 
+    if (requirements !== undefined && !Array.isArray(requirements)) {
+      return res.status(400).json({ error: "requirements must be an array" });
+    }
+
     const { data: existing, error: checkError } = await supabase
       .from("opportunities")
       .select("posted_by")
@@ -156,20 +160,20 @@ opportunitiesRoutes.put("/api/opportunities/:id", async (req: AuthenticatedReque
       return res.status(403).json({ error: "Not authorized to update this opportunity" });
     }
 
+    const updates: Record<string, any> = { updated_at: new Date().toISOString() };
+    if (title !== undefined) updates.title = title;
+    if (description !== undefined) updates.description = description;
+    if (company !== undefined) updates.company = company;
+    if (location !== undefined) updates.location = location;
+    if (type !== undefined) updates.type = type;
+    if (arm !== undefined) updates.arm = arm;
+    if (salary_range !== undefined) updates.salary_range = salary_range;
+    if (requirements !== undefined) updates.requirements = requirements;
+    if (deadline !== undefined) updates.deadline = deadline;
+
     const { data, error } = await supabase
       .from("opportunities")
-      .update({
-        title,
-        description,
-        company,
-        location,
-        type,
-        arm,
-        salary_range,
-        requirements,
-        deadline,
-        updated_at: new Date().toISOString(),
-      })
+      .update(updates)
       .eq("id", id)
       .select()
       .single();

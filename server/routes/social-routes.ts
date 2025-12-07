@@ -140,17 +140,36 @@ socialRoutes.get("/api/mentorship/requests", async (req, res) => {
   }
 });
 
-socialRoutes.post("/api/mentorship/requests/:id/status", async (req, res) => {
+socialRoutes.post("/api/mentorship/requests/:id/status", async (req: AuthenticatedRequest, res: Response) => {
   try {
-    const { id } = req.params;
-    const { actor_id, status } = req.body;
+    const userId = req.user?.id;
+    if (!userId) {
+      return res.status(401).json({ error: "Authentication required" });
+    }
 
-    if (!actor_id || !status) {
-      return res.status(400).json({ error: "Missing required fields" });
+    const { id } = req.params;
+    const { status } = req.body;
+
+    if (!status) {
+      return res.status(400).json({ error: "Missing status" });
     }
 
     if (!["accepted", "rejected", "cancelled"].includes(status)) {
       return res.status(400).json({ error: "Invalid status" });
+    }
+
+    const { data: existing, error: fetchError } = await supabase
+      .from("mentorship_requests")
+      .select("mentee_id, mentor_id")
+      .eq("id", id)
+      .single();
+
+    if (!existing) {
+      return res.status(404).json({ error: "Request not found" });
+    }
+
+    if (existing.mentee_id !== userId && existing.mentor_id !== userId) {
+      return res.status(403).json({ error: "Not authorized to update this request" });
     }
 
     const { data, error } = await supabase
@@ -236,22 +255,26 @@ socialRoutes.post("/api/mentors/apply", async (req: AuthenticatedRequest, res: R
 
     const { bio, expertise, hourly_rate, available } = req.body;
 
+    if (expertise !== undefined && !Array.isArray(expertise)) {
+      return res.status(400).json({ error: "expertise must be an array" });
+    }
+
     const { data: existing } = await supabase
       .from("mentors")
-      .select("user_id")
+      .select("*")
       .eq("user_id", userId)
       .maybeSingle();
 
     if (existing) {
+      const updates: Record<string, any> = { updated_at: new Date().toISOString() };
+      if (bio !== undefined) updates.bio = bio;
+      if (expertise !== undefined) updates.expertise = expertise;
+      if (hourly_rate !== undefined) updates.hourly_rate = hourly_rate;
+      if (available !== undefined) updates.available = available;
+
       const { data, error } = await supabase
         .from("mentors")
-        .update({
-          bio: bio || null,
-          expertise: expertise || [],
-          hourly_rate: hourly_rate ?? null,
-          available: typeof available === "boolean" ? available : true,
-          updated_at: new Date().toISOString(),
-        })
+        .update(updates)
         .eq("user_id", userId)
         .select()
         .single();
