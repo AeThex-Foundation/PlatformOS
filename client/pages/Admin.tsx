@@ -25,7 +25,14 @@ import {
   TrendingUp,
   Activity,
   CheckCircle2,
-  AlertCircle
+  AlertCircle,
+  GraduationCap,
+  Briefcase,
+  MessageSquare,
+  ThumbsUp,
+  Trash2,
+  ToggleLeft,
+  ToggleRight
 } from "lucide-react";
 import {
   Select,
@@ -50,6 +57,51 @@ interface User {
   roles?: string[];
 }
 
+interface Mentor {
+  id: number;
+  user_id: string;
+  bio: string;
+  expertise: string[];
+  hourly_rate: number;
+  available: boolean;
+  created_at: string;
+  user_profiles?: { username: string; full_name: string; email: string; avatar_url: string | null };
+}
+
+interface Opportunity {
+  id: number;
+  title: string;
+  company: string;
+  type: string;
+  arm: string;
+  created_at: string;
+  poster_id: string;
+}
+
+interface MentorshipRequest {
+  id: number;
+  mentee_id: string;
+  mentor_id: number;
+  message: string;
+  status: string;
+  created_at: string;
+}
+
+interface Endorsement {
+  id: number;
+  endorser_id: string;
+  endorsed_id: string;
+  skill: string;
+  created_at: string;
+}
+
+interface AdminStats {
+  mentors: number;
+  opportunities: number;
+  mentorship_requests: number;
+  endorsements: number;
+}
+
 export default function Admin() {
   const { user, roles } = useAuth();
   const navigate = useNavigate();
@@ -58,6 +110,12 @@ export default function Admin() {
   const [searchQuery, setSearchQuery] = useState("");
   const [loading, setLoading] = useState(true);
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
+  
+  const [mentors, setMentors] = useState<Mentor[]>([]);
+  const [opportunities, setOpportunities] = useState<Opportunity[]>([]);
+  const [requests, setRequests] = useState<MentorshipRequest[]>([]);
+  const [endorsements, setEndorsements] = useState<Endorsement[]>([]);
+  const [stats, setStats] = useState<AdminStats>({ mentors: 0, opportunities: 0, mentorship_requests: 0, endorsements: 0 });
 
   // Check admin permissions
   const isAdmin = roles.some((role) =>
@@ -80,14 +138,20 @@ export default function Admin() {
       return;
     }
 
-    const fetchUsers = async () => {
+    const fetchData = async () => {
       setLoading(true);
       try {
-        const res = await fetch('/api/admin/users?limit=100', {
-          credentials: 'include',
-        });
-        if (res.ok) {
-          const data = await res.json();
+        const [usersRes, mentorsRes, oppsRes, reqsRes, endorseRes, statsRes] = await Promise.all([
+          fetch('/api/admin/users?limit=100', { credentials: 'include' }),
+          fetch('/api/admin/mentors', { credentials: 'include' }),
+          fetch('/api/admin/opportunities', { credentials: 'include' }),
+          fetch('/api/admin/mentorship-requests', { credentials: 'include' }),
+          fetch('/api/admin/endorsements', { credentials: 'include' }),
+          fetch('/api/admin/stats/overview', { credentials: 'include' })
+        ]);
+
+        if (usersRes.ok) {
+          const data = await usersRes.json();
           const mapped: User[] = data.users.map((u: any) => ({
             id: u.id,
             username: u.username,
@@ -103,11 +167,36 @@ export default function Admin() {
           }));
           setUsers(mapped);
         }
+
+        if (mentorsRes.ok) {
+          const data = await mentorsRes.json();
+          setMentors(data.mentors || []);
+        }
+
+        if (oppsRes.ok) {
+          const data = await oppsRes.json();
+          setOpportunities(data.opportunities || []);
+        }
+
+        if (reqsRes.ok) {
+          const data = await reqsRes.json();
+          setRequests(data.requests || []);
+        }
+
+        if (endorseRes.ok) {
+          const data = await endorseRes.json();
+          setEndorsements(data.endorsements || []);
+        }
+
+        if (statsRes.ok) {
+          const data = await statsRes.json();
+          setStats(data);
+        }
       } catch (error) {
-        console.error('Failed to fetch users:', error);
+        console.error('Failed to fetch admin data:', error);
         toast({
           title: "Error",
-          description: "Failed to load users",
+          description: "Failed to load admin data",
           variant: "destructive",
         });
       } finally {
@@ -115,7 +204,7 @@ export default function Admin() {
       }
     };
 
-    fetchUsers();
+    fetchData();
   }, [user, isAdmin, navigate, toast]);
 
   const handleRoleUpdate = async (userId: string, newRoles: string[]) => {
@@ -174,6 +263,105 @@ export default function Admin() {
       }
     } catch (error) {
       console.error('Failed to grant achievement:', error);
+    }
+  };
+
+  const handleToggleMentorAvailability = async (mentorId: number, available: boolean) => {
+    try {
+      const res = await fetch(`/api/admin/mentors/${mentorId}`, {
+        method: 'PATCH',
+        credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ available }),
+      });
+      if (res.ok) {
+        setMentors(mentors.map(m => m.id === mentorId ? { ...m, available } : m));
+        toast({ title: "Mentor Updated", description: `Availability set to ${available ? 'available' : 'unavailable'}` });
+      } else {
+        const errorData = await res.json().catch(() => ({ error: 'Unknown error' }));
+        toast({ title: "Failed to Update", description: errorData.error || 'Could not update mentor', variant: "destructive" });
+      }
+    } catch (error) {
+      console.error('Failed to toggle mentor:', error);
+      toast({ title: "Error", description: "Network error occurred", variant: "destructive" });
+    }
+  };
+
+  const handleDeleteMentor = async (mentorId: number) => {
+    try {
+      const res = await fetch(`/api/admin/mentors/${mentorId}`, {
+        method: 'DELETE',
+        credentials: 'include',
+      });
+      if (res.ok) {
+        setMentors(mentors.filter(m => m.id !== mentorId));
+        toast({ title: "Mentor Removed", description: "Mentor profile has been deleted" });
+      } else {
+        const errorData = await res.json().catch(() => ({ error: 'Unknown error' }));
+        toast({ title: "Failed to Delete", description: errorData.error || 'Could not delete mentor', variant: "destructive" });
+      }
+    } catch (error) {
+      console.error('Failed to delete mentor:', error);
+      toast({ title: "Error", description: "Network error occurred", variant: "destructive" });
+    }
+  };
+
+  const handleDeleteOpportunity = async (opportunityId: number) => {
+    try {
+      const res = await fetch(`/api/admin/opportunities/${opportunityId}`, {
+        method: 'DELETE',
+        credentials: 'include',
+      });
+      if (res.ok) {
+        setOpportunities(opportunities.filter(o => o.id !== opportunityId));
+        toast({ title: "Opportunity Removed", description: "Opportunity has been deleted" });
+      } else {
+        const errorData = await res.json().catch(() => ({ error: 'Unknown error' }));
+        toast({ title: "Failed to Delete", description: errorData.error || 'Could not delete opportunity', variant: "destructive" });
+      }
+    } catch (error) {
+      console.error('Failed to delete opportunity:', error);
+      toast({ title: "Error", description: "Network error occurred", variant: "destructive" });
+    }
+  };
+
+  const handleUpdateRequestStatus = async (requestId: number, status: string) => {
+    try {
+      const res = await fetch(`/api/admin/mentorship-requests/${requestId}`, {
+        method: 'PATCH',
+        credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ status }),
+      });
+      if (res.ok) {
+        setRequests(requests.map(r => r.id === requestId ? { ...r, status } : r));
+        toast({ title: "Request Updated", description: `Status changed to ${status}` });
+      } else {
+        const errorData = await res.json().catch(() => ({ error: 'Unknown error' }));
+        toast({ title: "Failed to Update", description: errorData.error || 'Could not update request', variant: "destructive" });
+      }
+    } catch (error) {
+      console.error('Failed to update request:', error);
+      toast({ title: "Error", description: "Network error occurred", variant: "destructive" });
+    }
+  };
+
+  const handleDeleteEndorsement = async (endorsementId: number) => {
+    try {
+      const res = await fetch(`/api/admin/endorsements/${endorsementId}`, {
+        method: 'DELETE',
+        credentials: 'include',
+      });
+      if (res.ok) {
+        setEndorsements(endorsements.filter(e => e.id !== endorsementId));
+        toast({ title: "Endorsement Removed", description: "Endorsement has been deleted" });
+      } else {
+        const errorData = await res.json().catch(() => ({ error: 'Unknown error' }));
+        toast({ title: "Failed to Delete", description: errorData.error || 'Could not delete endorsement', variant: "destructive" });
+      }
+    } catch (error) {
+      console.error('Failed to delete endorsement:', error);
+      toast({ title: "Error", description: "Network error occurred", variant: "destructive" });
     }
   };
 
@@ -273,7 +461,7 @@ export default function Admin() {
 
           {/* Main Content */}
           <Tabs defaultValue="users" className="space-y-6">
-            <TabsList className="grid w-full grid-cols-3 max-w-md">
+            <TabsList className="flex flex-wrap gap-2 h-auto p-2">
               <TabsTrigger value="users">
                 <Users className="h-4 w-4 mr-2" />
                 Users
@@ -282,9 +470,21 @@ export default function Admin() {
                 <UserCog className="h-4 w-4 mr-2" />
                 Roles
               </TabsTrigger>
-              <TabsTrigger value="achievements">
-                <Award className="h-4 w-4 mr-2" />
-                Achievements
+              <TabsTrigger value="mentors">
+                <GraduationCap className="h-4 w-4 mr-2" />
+                Mentors ({stats.mentors})
+              </TabsTrigger>
+              <TabsTrigger value="opportunities">
+                <Briefcase className="h-4 w-4 mr-2" />
+                Opportunities ({stats.opportunities})
+              </TabsTrigger>
+              <TabsTrigger value="requests">
+                <MessageSquare className="h-4 w-4 mr-2" />
+                Requests ({stats.mentorship_requests})
+              </TabsTrigger>
+              <TabsTrigger value="endorsements">
+                <ThumbsUp className="h-4 w-4 mr-2" />
+                Endorsements ({stats.endorsements})
               </TabsTrigger>
             </TabsList>
 
@@ -414,25 +614,224 @@ export default function Admin() {
               </Card>
             </TabsContent>
 
-            {/* Achievements Tab */}
-            <TabsContent value="achievements" className="space-y-6">
+            {/* Mentors Tab */}
+            <TabsContent value="mentors" className="space-y-6">
               <Card className="border-border/30">
                 <CardHeader>
-                  <CardTitle>Grant Achievements</CardTitle>
-                  <CardDescription>Award badges and achievements to users</CardDescription>
+                  <CardTitle>Mentor Management</CardTitle>
+                  <CardDescription>View, toggle availability, and remove mentors</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <div className="text-center py-12">
-                    <Award className="h-16 w-16 text-muted-foreground mx-auto mb-4 opacity-50" />
-                    <h3 className="text-lg font-semibold mb-2">Achievement Granting System</h3>
-                    <p className="text-sm text-muted-foreground mb-6">
-                      Select a user and choose an achievement to grant
-                    </p>
-                    <Button variant="outline" className="border-gold-400/50">
-                      <Award className="h-4 w-4 mr-2" />
-                      Browse Achievements
-                    </Button>
-                  </div>
+                  {mentors.length === 0 ? (
+                    <div className="text-center py-12">
+                      <GraduationCap className="h-16 w-16 text-muted-foreground mx-auto mb-4 opacity-50" />
+                      <p className="text-muted-foreground">No mentors registered yet</p>
+                    </div>
+                  ) : (
+                    <div className="space-y-4">
+                      {mentors.map((mentor) => (
+                        <Card key={mentor.id} className="border-border/50">
+                          <CardContent className="pt-6">
+                            <div className="flex items-center justify-between">
+                              <div className="flex items-center gap-4">
+                                <Avatar className="h-10 w-10">
+                                  <AvatarImage src={mentor.user_profiles?.avatar_url || undefined} />
+                                  <AvatarFallback>{mentor.user_profiles?.full_name?.[0] || 'M'}</AvatarFallback>
+                                </Avatar>
+                                <div>
+                                  <p className="font-semibold">{mentor.user_profiles?.full_name || 'Unknown'}</p>
+                                  <p className="text-sm text-muted-foreground">@{mentor.user_profiles?.username}</p>
+                                  <div className="flex gap-1 mt-1">
+                                    {mentor.expertise?.slice(0, 3).map((skill) => (
+                                      <Badge key={skill} variant="outline" className="text-xs">{skill}</Badge>
+                                    ))}
+                                  </div>
+                                </div>
+                              </div>
+                              <div className="flex items-center gap-4">
+                                <Badge variant={mentor.available ? "default" : "secondary"}>
+                                  {mentor.available ? 'Available' : 'Unavailable'}
+                                </Badge>
+                                <p className="text-sm text-muted-foreground">${mentor.hourly_rate}/hr</p>
+                                <Button
+                                  variant="ghost"
+                                  size="sm"
+                                  onClick={() => handleToggleMentorAvailability(mentor.id, !mentor.available)}
+                                >
+                                  {mentor.available ? <ToggleRight className="h-4 w-4" /> : <ToggleLeft className="h-4 w-4" />}
+                                </Button>
+                                <Button
+                                  variant="ghost"
+                                  size="sm"
+                                  className="text-red-400 hover:text-red-300"
+                                  onClick={() => handleDeleteMentor(mentor.id)}
+                                >
+                                  <Trash2 className="h-4 w-4" />
+                                </Button>
+                              </div>
+                            </div>
+                          </CardContent>
+                        </Card>
+                      ))}
+                    </div>
+                  )}
+                </CardContent>
+              </Card>
+            </TabsContent>
+
+            {/* Opportunities Tab */}
+            <TabsContent value="opportunities" className="space-y-6">
+              <Card className="border-border/30">
+                <CardHeader>
+                  <CardTitle>Opportunity Moderation</CardTitle>
+                  <CardDescription>Review and remove job/collaboration postings</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  {opportunities.length === 0 ? (
+                    <div className="text-center py-12">
+                      <Briefcase className="h-16 w-16 text-muted-foreground mx-auto mb-4 opacity-50" />
+                      <p className="text-muted-foreground">No opportunities posted yet</p>
+                    </div>
+                  ) : (
+                    <div className="space-y-4">
+                      {opportunities.map((opp) => (
+                        <Card key={opp.id} className="border-border/50">
+                          <CardContent className="pt-6">
+                            <div className="flex items-center justify-between">
+                              <div>
+                                <p className="font-semibold">{opp.title}</p>
+                                <p className="text-sm text-muted-foreground">{opp.company}</p>
+                                <div className="flex gap-2 mt-1">
+                                  <Badge variant="outline">{opp.type}</Badge>
+                                  <Badge variant="outline">{opp.arm}</Badge>
+                                </div>
+                              </div>
+                              <div className="flex items-center gap-4">
+                                <p className="text-xs text-muted-foreground">
+                                  {new Date(opp.created_at).toLocaleDateString()}
+                                </p>
+                                <Button
+                                  variant="ghost"
+                                  size="sm"
+                                  className="text-red-400 hover:text-red-300"
+                                  onClick={() => handleDeleteOpportunity(opp.id)}
+                                >
+                                  <Trash2 className="h-4 w-4" />
+                                </Button>
+                              </div>
+                            </div>
+                          </CardContent>
+                        </Card>
+                      ))}
+                    </div>
+                  )}
+                </CardContent>
+              </Card>
+            </TabsContent>
+
+            {/* Mentorship Requests Tab */}
+            <TabsContent value="requests" className="space-y-6">
+              <Card className="border-border/30">
+                <CardHeader>
+                  <CardTitle>Mentorship Request Oversight</CardTitle>
+                  <CardDescription>View and manage mentorship connection requests</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  {requests.length === 0 ? (
+                    <div className="text-center py-12">
+                      <MessageSquare className="h-16 w-16 text-muted-foreground mx-auto mb-4 opacity-50" />
+                      <p className="text-muted-foreground">No mentorship requests yet</p>
+                    </div>
+                  ) : (
+                    <div className="space-y-4">
+                      {requests.map((req) => (
+                        <Card key={req.id} className="border-border/50">
+                          <CardContent className="pt-6">
+                            <div className="flex items-center justify-between">
+                              <div>
+                                <p className="text-sm">
+                                  <span className="font-semibold">Mentee:</span> {req.mentee_id.slice(0, 8)}...
+                                </p>
+                                <p className="text-sm">
+                                  <span className="font-semibold">Mentor ID:</span> {req.mentor_id}
+                                </p>
+                                <p className="text-xs text-muted-foreground mt-1 max-w-md truncate">
+                                  {req.message}
+                                </p>
+                              </div>
+                              <div className="flex items-center gap-4">
+                                <Select
+                                  value={req.status}
+                                  onValueChange={(val) => handleUpdateRequestStatus(req.id, val)}
+                                >
+                                  <SelectTrigger className="w-32">
+                                    <SelectValue />
+                                  </SelectTrigger>
+                                  <SelectContent>
+                                    <SelectItem value="pending">Pending</SelectItem>
+                                    <SelectItem value="accepted">Accepted</SelectItem>
+                                    <SelectItem value="rejected">Rejected</SelectItem>
+                                    <SelectItem value="cancelled">Cancelled</SelectItem>
+                                  </SelectContent>
+                                </Select>
+                              </div>
+                            </div>
+                          </CardContent>
+                        </Card>
+                      ))}
+                    </div>
+                  )}
+                </CardContent>
+              </Card>
+            </TabsContent>
+
+            {/* Endorsements Tab */}
+            <TabsContent value="endorsements" className="space-y-6">
+              <Card className="border-border/30">
+                <CardHeader>
+                  <CardTitle>Endorsement Moderation</CardTitle>
+                  <CardDescription>Review and remove skill endorsements</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  {endorsements.length === 0 ? (
+                    <div className="text-center py-12">
+                      <ThumbsUp className="h-16 w-16 text-muted-foreground mx-auto mb-4 opacity-50" />
+                      <p className="text-muted-foreground">No endorsements yet</p>
+                    </div>
+                  ) : (
+                    <div className="space-y-4">
+                      {endorsements.map((end) => (
+                        <Card key={end.id} className="border-border/50">
+                          <CardContent className="pt-6">
+                            <div className="flex items-center justify-between">
+                              <div>
+                                <p className="text-sm">
+                                  <span className="font-semibold">From:</span> {end.endorser_id.slice(0, 8)}...
+                                </p>
+                                <p className="text-sm">
+                                  <span className="font-semibold">To:</span> {end.endorsed_id.slice(0, 8)}...
+                                </p>
+                                <Badge variant="outline" className="mt-1">{end.skill}</Badge>
+                              </div>
+                              <div className="flex items-center gap-4">
+                                <p className="text-xs text-muted-foreground">
+                                  {new Date(end.created_at).toLocaleDateString()}
+                                </p>
+                                <Button
+                                  variant="ghost"
+                                  size="sm"
+                                  className="text-red-400 hover:text-red-300"
+                                  onClick={() => handleDeleteEndorsement(end.id)}
+                                >
+                                  <Trash2 className="h-4 w-4" />
+                                </Button>
+                              </div>
+                            </div>
+                          </CardContent>
+                        </Card>
+                      ))}
+                    </div>
+                  )}
                 </CardContent>
               </Card>
             </TabsContent>
