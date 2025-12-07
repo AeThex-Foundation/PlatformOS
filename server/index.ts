@@ -28,6 +28,7 @@ import ethosRoutes from "./routes/ethos-routes";
 import gameforgeRoutes from "./routes/gameforge-routes";
 import governanceRoutes from "./routes/governance-routes";
 import grantsRoutes from "./routes/grants-routes";
+import { socialRoutes } from "./routes/social-routes";
 import { authMiddleware } from "./middleware/auth";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -143,6 +144,7 @@ export function createServer() {
 
   // Grants - Developer grant program
   app.use("/api/grants", grantsRoutes);
+  app.use(socialRoutes); // Social features (endorsements, mentorship requests)
 
   app.post("/api/contact", async (req, res) => {
     try {

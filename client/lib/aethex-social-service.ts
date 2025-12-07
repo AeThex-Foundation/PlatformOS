@@ -182,8 +182,8 @@ export const aethexSocialService = {
     const resp = await fetch(`${API_BASE}/api/social/endorse`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
+      credentials: "include",
       body: JSON.stringify({
-        endorser_id: endorserId,
         endorsed_id: endorsedId,
         skill,
       }),
@@ -246,8 +246,8 @@ export const aethexSocialService = {
     const resp = await fetch(`${API_BASE}/api/mentorship/request`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
+      credentials: "include",
       body: JSON.stringify({
-        mentee_id: menteeId,
         mentor_id: mentorId,
         message: message || null,
       }),
