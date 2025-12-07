@@ -7,21 +7,41 @@ import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+  DialogFooter,
+} from "@/components/ui/dialog";
+import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
   Loader2,
   ArrowLeft,
-  ExternalLink,
   MessageSquare,
   Award,
   Code,
-  Music,
   Shield,
   Star,
   CheckCircle,
   Users,
   Zap,
+  Send,
 } from "lucide-react";
 import { getCreatorByUsername } from "@/api/creators";
 import type { Creator } from "@/api/creators";
+import { useAuth } from "@/contexts/AuthContext";
+import { aethexSocialService } from "@/lib/aethex-social-service";
+import { useAethexToast } from "@/hooks/use-aethex-toast";
 
 const divisionEmojis: Record<string, string> = {
   Ethos: '🎧',
@@ -36,11 +56,32 @@ const realmColors: Record<string, string> = {
   'Experience Hub': 'bg-purple-500/20 text-purple-400 border-purple-500/30',
 };
 
+const skillOptions = [
+  "React", "TypeScript", "Node.js", "Python", "Game Design",
+  "3D Modeling", "UI/UX Design", "Sound Design", "Music Production",
+  "Animation", "Blockchain", "Smart Contracts", "Leadership", "Mentoring",
+];
+
 export default function CreatorProfile() {
   const { username } = useParams<{ username: string }>();
   const navigate = useNavigate();
+  const { user } = useAuth();
+  const aethexToast = useAethexToast();
+  
   const [creator, setCreator] = useState<Creator | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  
+  // Dialog states
+  const [collaborateOpen, setCollaborateOpen] = useState(false);
+  const [messageOpen, setMessageOpen] = useState(false);
+  const [endorseOpen, setEndorseOpen] = useState(false);
+  
+  // Form states
+  const [collaborateSubject, setCollaborateSubject] = useState("");
+  const [collaborateMessage, setCollaborateMessage] = useState("");
+  const [messageText, setMessageText] = useState("");
+  const [endorseSkill, setEndorseSkill] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     const fetchCreator = async () => {
@@ -59,6 +100,125 @@ export default function CreatorProfile() {
 
     fetchCreator();
   }, [username]);
+
+  const requireAuth = (callback: () => void) => {
+    if (!user) {
+      aethexToast.info({
+        title: "Sign in required",
+        description: "Please sign in to interact with guild members.",
+      });
+      const next = encodeURIComponent(window.location.pathname);
+      navigate(`/login?next=${next}`);
+      return;
+    }
+    callback();
+  };
+
+  const handleCollaborate = () => requireAuth(() => {
+    setCollaborateSubject("");
+    setCollaborateMessage("");
+    setCollaborateOpen(true);
+  });
+
+  const handleMessage = () => requireAuth(() => {
+    setMessageText("");
+    setMessageOpen(true);
+  });
+
+  const handleEndorse = () => requireAuth(() => {
+    setEndorseSkill("");
+    setEndorseOpen(true);
+  });
+
+  const submitCollaborate = async () => {
+    if (!user?.id || !creator) return;
+    if (!collaborateSubject.trim() || !collaborateMessage.trim()) {
+      aethexToast.error({
+        title: "Missing fields",
+        description: "Please fill in subject and message.",
+      });
+      return;
+    }
+    
+    setIsSubmitting(true);
+    try {
+      // Use mentorship request as collaboration channel with formatted message
+      const fullMessage = `[Collaboration Request: ${collaborateSubject}]\n\n${collaborateMessage}`;
+      await aethexSocialService.requestMentorship(user.id, creator.id, fullMessage);
+      
+      aethexToast.success({
+        title: "Request sent!",
+        description: `Your collaboration request has been sent to @${creator.username}.`,
+      });
+      setCollaborateOpen(false);
+    } catch (e: any) {
+      aethexToast.error({
+        title: "Failed to send",
+        description: e?.message || "Something went wrong.",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const submitMessage = async () => {
+    if (!user?.id || !creator) return;
+    if (!messageText.trim()) {
+      aethexToast.error({
+        title: "Empty message",
+        description: "Please enter a message.",
+      });
+      return;
+    }
+    
+    setIsSubmitting(true);
+    try {
+      // Send as a mentorship-style direct message
+      await aethexSocialService.requestMentorship(user.id, creator.id, messageText);
+      
+      aethexToast.success({
+        title: "Message sent!",
+        description: `Your message has been delivered to @${creator.username}.`,
+      });
+      setMessageOpen(false);
+    } catch (e: any) {
+      aethexToast.error({
+        title: "Failed to send",
+        description: e?.message || "Something went wrong.",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const submitEndorse = async () => {
+    if (!user?.id || !creator) return;
+    if (!endorseSkill) {
+      aethexToast.error({
+        title: "Select a skill",
+        description: "Please select a skill to endorse.",
+      });
+      return;
+    }
+    
+    setIsSubmitting(true);
+    try {
+      await aethexSocialService.endorseSkill(user.id, creator.id, endorseSkill);
+      
+      aethexToast.success({
+        title: "Endorsement added!",
+        description: `You endorsed @${creator.username} for ${endorseSkill}.`,
+      });
+      setEndorseOpen(false);
+    } catch (e: any) {
+      aethexToast.error({
+        title: "Failed to endorse",
+        description: e?.message || "Something went wrong.",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   if (isLoading) {
     return (
@@ -188,16 +348,25 @@ export default function CreatorProfile() {
 
                     <div className="flex flex-col sm:flex-row gap-3">
                       <Button
+                        onClick={handleCollaborate}
                         className="bg-red-500 text-white hover:bg-red-600"
                       >
                         <Users className="h-4 w-4 mr-2" />
                         Collaborate
                       </Button>
-                      <Button variant="outline" className="border-amber-500/30 text-amber-300 hover:bg-amber-500/10">
+                      <Button 
+                        onClick={handleMessage}
+                        variant="outline" 
+                        className="border-amber-500/30 text-amber-300 hover:bg-amber-500/10"
+                      >
                         <MessageSquare className="h-4 w-4 mr-2" />
                         Message
                       </Button>
-                      <Button variant="outline" className="border-amber-500/30 text-amber-300 hover:bg-amber-500/10">
+                      <Button 
+                        onClick={handleEndorse}
+                        variant="outline" 
+                        className="border-amber-500/30 text-amber-300 hover:bg-amber-500/10"
+                      >
                         <Zap className="h-4 w-4 mr-2" />
                         Endorse
                       </Button>
@@ -288,6 +457,163 @@ export default function CreatorProfile() {
           </div>
         </main>
       </div>
+
+      {/* Collaborate Dialog */}
+      <Dialog open={collaborateOpen} onOpenChange={setCollaborateOpen}>
+        <DialogContent className="bg-red-950/90 border-amber-700/30 text-white">
+          <DialogHeader>
+            <DialogTitle className="text-amber-300">Request Collaboration</DialogTitle>
+            <DialogDescription className="text-amber-200/60">
+              Send a collaboration request to @{creator?.username}
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-4 py-4">
+            <div className="space-y-2">
+              <Label htmlFor="subject" className="text-amber-200">Subject</Label>
+              <Input
+                id="subject"
+                placeholder="Project name or topic..."
+                value={collaborateSubject}
+                onChange={(e) => setCollaborateSubject(e.target.value)}
+                className="bg-black/30 border-amber-700/30 text-white placeholder:text-amber-200/40"
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="collab-message" className="text-amber-200">Message</Label>
+              <Textarea
+                id="collab-message"
+                placeholder="Describe what you'd like to collaborate on..."
+                value={collaborateMessage}
+                onChange={(e) => setCollaborateMessage(e.target.value)}
+                className="bg-black/30 border-amber-700/30 text-white placeholder:text-amber-200/40 min-h-[100px]"
+              />
+            </div>
+          </div>
+          <DialogFooter>
+            <Button 
+              variant="ghost" 
+              onClick={() => setCollaborateOpen(false)}
+              className="text-amber-300 hover:bg-amber-500/10"
+            >
+              Cancel
+            </Button>
+            <Button 
+              onClick={submitCollaborate}
+              disabled={isSubmitting}
+              className="bg-red-500 hover:bg-red-600"
+            >
+              {isSubmitting ? (
+                <Loader2 className="h-4 w-4 animate-spin mr-2" />
+              ) : (
+                <Send className="h-4 w-4 mr-2" />
+              )}
+              Send Request
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* Message Dialog */}
+      <Dialog open={messageOpen} onOpenChange={setMessageOpen}>
+        <DialogContent className="bg-red-950/90 border-amber-700/30 text-white">
+          <DialogHeader>
+            <DialogTitle className="text-amber-300">Send Message</DialogTitle>
+            <DialogDescription className="text-amber-200/60">
+              Send a direct message to @{creator?.username}
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-4 py-4">
+            <div className="space-y-2">
+              <Label htmlFor="message" className="text-amber-200">Your Message</Label>
+              <Textarea
+                id="message"
+                placeholder="Write your message here..."
+                value={messageText}
+                onChange={(e) => setMessageText(e.target.value)}
+                className="bg-black/30 border-amber-700/30 text-white placeholder:text-amber-200/40 min-h-[120px]"
+              />
+            </div>
+          </div>
+          <DialogFooter>
+            <Button 
+              variant="ghost" 
+              onClick={() => setMessageOpen(false)}
+              className="text-amber-300 hover:bg-amber-500/10"
+            >
+              Cancel
+            </Button>
+            <Button 
+              onClick={submitMessage}
+              disabled={isSubmitting}
+              className="bg-red-500 hover:bg-red-600"
+            >
+              {isSubmitting ? (
+                <Loader2 className="h-4 w-4 animate-spin mr-2" />
+              ) : (
+                <MessageSquare className="h-4 w-4 mr-2" />
+              )}
+              Send Message
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* Endorse Dialog */}
+      <Dialog open={endorseOpen} onOpenChange={setEndorseOpen}>
+        <DialogContent className="bg-red-950/90 border-amber-700/30 text-white">
+          <DialogHeader>
+            <DialogTitle className="text-amber-300">Endorse Skill</DialogTitle>
+            <DialogDescription className="text-amber-200/60">
+              Vouch for @{creator?.username}'s expertise
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-4 py-4">
+            <div className="space-y-2">
+              <Label className="text-amber-200">Select a skill to endorse</Label>
+              <Select value={endorseSkill} onValueChange={setEndorseSkill}>
+                <SelectTrigger className="bg-black/30 border-amber-700/30 text-white">
+                  <SelectValue placeholder="Choose a skill..." />
+                </SelectTrigger>
+                <SelectContent className="bg-red-950 border-amber-700/30">
+                  {skillOptions.map((skill) => (
+                    <SelectItem 
+                      key={skill} 
+                      value={skill}
+                      className="text-amber-200 focus:bg-amber-500/20 focus:text-amber-100"
+                    >
+                      {skill}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+            <p className="text-sm text-amber-200/60">
+              Your endorsement adds credibility to this member's profile and helps others identify their strengths.
+            </p>
+          </div>
+          <DialogFooter>
+            <Button 
+              variant="ghost" 
+              onClick={() => setEndorseOpen(false)}
+              className="text-amber-300 hover:bg-amber-500/10"
+            >
+              Cancel
+            </Button>
+            <Button 
+              onClick={submitEndorse}
+              disabled={isSubmitting || !endorseSkill}
+              className="bg-red-500 hover:bg-red-600"
+            >
+              {isSubmitting ? (
+                <Loader2 className="h-4 w-4 animate-spin mr-2" />
+              ) : (
+                <Zap className="h-4 w-4 mr-2" />
+              )}
+              Endorse
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </Layout>
   );
 }
