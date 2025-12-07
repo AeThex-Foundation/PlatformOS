@@ -53,7 +53,14 @@ The Guardian's Hub is a Single Page Application (SPA) built with React 18, TypeS
   - **Showcase Tab:** Marketing page explaining passport features, realm system, XP progression, and identity ownership benefits.
   - **Admin Tab:** Admin-only dashboard (owner/admin/founder roles) with system stats, member management, and user verification toggles.
 - **Cross-Domain SSO:** AeThex Passport SDK for client site integration with full PKCE support, React integration, automatic token refresh, and secure storage. Uses HS256 JWT for access tokens and provides OpenID Connect discovery.
-- **Admin System:** CRUD operations for OAuth clients with role-based access control and session management.
+- **Admin System:** Comprehensive admin dashboard (`/admin`) with role-based access control (owner/admin/founder). Features include:
+  - **User Management:** Search, view, role assignment, and XP/level management for all users
+  - **Mentor Management:** View all mentors, toggle availability, remove mentor profiles via `/api/admin/mentors`
+  - **Opportunity Moderation:** View, edit, and delete any job/collaboration posting via `/api/admin/opportunities`
+  - **Mentorship Request Oversight:** View and update status of all mentorship requests via `/api/admin/mentorship-requests`
+  - **Endorsement Moderation:** View and remove skill endorsements to prevent abuse via `/api/admin/endorsements`
+  - **OAuth Client Management:** CRUD operations for OAuth clients with session management
+  - **Security:** All admin endpoints protected by `requireAuth` middleware with input validation for mutable fields
 - **Content Management:** Centralized content management for Foundation and Hub-specific data, including statistics, team members, milestones, resources, and governance details.
 - **Mentorship System (`/mentorship`):** Complete mentorship platform with program listings, mentee hub, mentor applications, mentor profiles, and mentorship request flow.
 - **Opportunities System (`/opportunities`):** Job and collaboration board with opportunity posting, search/filter by ARM, application submission, and application tracking.
