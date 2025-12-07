@@ -3,7 +3,8 @@ import { useSearchParams } from "react-router-dom";
 import Layout from "@/components/Layout";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Loader2, Search, Users } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { Loader2, Search, Users, Shield } from "lucide-react";
 import { getCreators } from "@/api/creators";
 import { CreatorCard } from "@/components/creator-network/CreatorCard";
 import { ArmFilter } from "@/components/creator-network/ArmFilter";
@@ -63,43 +64,51 @@ export default function CreatorDirectory() {
   return (
     <Layout>
       <div className="relative min-h-screen bg-black text-white overflow-hidden">
-        {/* Background */}
-        <div className="pointer-events-none absolute inset-0 opacity-[0.12] [background-image:radial-gradient(circle_at_top,#8b5cf6_0,rgba(0,0,0,0.45)_55%,rgba(0,0,0,0.9)_100%)]" />
-        <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(transparent_0,transparent_calc(100%-1px),rgba(139,92,246,0.05)_calc(100%-1px))] bg-[length:100%_32px]" />
-        <div className="pointer-events-none absolute inset-0 opacity-[0.08] [background-image:linear-gradient(90deg,rgba(139,92,246,0.1)_1px,transparent_1px),linear-gradient(0deg,rgba(139,92,246,0.1)_1px,transparent_1px)] [background-size:50px_50px] animate-pulse" />
-        <div className="pointer-events-none absolute top-20 left-10 w-72 h-72 bg-purple-500/20 rounded-full blur-3xl animate-blob" />
-        <div className="pointer-events-none absolute bottom-20 right-10 w-72 h-72 bg-purple-600/10 rounded-full blur-3xl animate-blob animation-delay-2000" />
+        {/* Background - Foundation Red/Gold theme */}
+        <div className="pointer-events-none absolute inset-0 opacity-[0.12] [background-image:radial-gradient(circle_at_top,#ef4444_0,rgba(0,0,0,0.45)_55%,rgba(0,0,0,0.9)_100%)]" />
+        <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(transparent_0,transparent_calc(100%-1px),rgba(239,68,68,0.05)_calc(100%-1px))] bg-[length:100%_32px]" />
+        <div className="pointer-events-none absolute inset-0 opacity-[0.08] [background-image:linear-gradient(90deg,rgba(251,191,36,0.1)_1px,transparent_1px),linear-gradient(0deg,rgba(251,191,36,0.1)_1px,transparent_1px)] [background-size:50px_50px] animate-pulse" />
+        <div className="pointer-events-none absolute top-20 left-10 w-72 h-72 bg-red-500/20 rounded-full blur-3xl animate-blob" />
+        <div className="pointer-events-none absolute bottom-20 right-10 w-72 h-72 bg-amber-500/10 rounded-full blur-3xl animate-blob animation-delay-2000" />
 
         <main className="relative z-10">
           {/* Hero Section */}
-          <section className="py-12 lg:py-20 border-b border-slate-800">
+          <section className="py-12 lg:py-20 border-b border-amber-800/30">
             <div className="container mx-auto max-w-6xl px-4">
               <div className="text-center mb-8">
+                <Badge
+                  variant="outline"
+                  className="border-amber-400/40 bg-red-500/10 text-amber-300 mb-4"
+                >
+                  <Shield className="h-4 w-4 mr-2" />
+                  Foundation Certified
+                </Badge>
                 <div className="inline-flex items-center justify-center gap-2 mb-4">
-                  <Users className="h-8 w-8 text-purple-400" />
-                  <h1 className="text-4xl lg:text-5xl font-black text-white">
-                    Creator Directory
+                  <Users className="h-8 w-8 text-amber-400" />
+                  <h1 className="text-4xl lg:text-5xl font-black">
+                    <span className="text-red-400">Nexus</span>{" "}
+                    <span className="text-amber-400">Directory</span>
                   </h1>
                 </div>
-                <p className="text-lg text-gray-300 max-w-2xl mx-auto">
-                  Discover talented creators across all AeThex arms. Filter by
-                  specialty, skills, and arm affiliation.
+                <p className="text-lg text-amber-200/80 max-w-2xl mx-auto">
+                  Meet the unified guild of certified creators. All members hold 
+                  verified AeThex Passports and are trained by the Foundation.
                 </p>
               </div>
 
               {/* Search Bar */}
               <form onSubmit={handleSearch} className="max-w-2xl mx-auto">
                 <div className="relative">
-                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-amber-400/60" />
                   <Input
-                    placeholder="Search creators by name or skills..."
+                    placeholder="Search guild members by name or division..."
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
-                    className="pl-10 h-12 bg-slate-800/50 border-slate-700 text-white placeholder:text-gray-400"
+                    className="pl-10 h-12 bg-red-950/30 border-amber-700/30 text-white placeholder:text-amber-200/40"
                   />
                   <Button
                     type="submit"
-                    className="absolute right-2 top-1/2 -translate-y-1/2"
+                    className="absolute right-2 top-1/2 -translate-y-1/2 bg-red-500 hover:bg-red-600"
                   >
                     Search
                   </Button>
@@ -126,15 +135,15 @@ export default function CreatorDirectory() {
                 <div className="lg:col-span-3">
                   {isLoading ? (
                     <div className="flex items-center justify-center py-20">
-                      <Loader2 className="h-8 w-8 animate-spin text-purple-400" />
+                      <Loader2 className="h-8 w-8 animate-spin text-amber-400" />
                     </div>
                   ) : creators.length === 0 ? (
                     <div className="text-center py-20">
-                      <Users className="h-12 w-12 text-gray-600 mx-auto mb-4" />
-                      <h3 className="text-xl font-semibold text-gray-300 mb-2">
-                        No creators found
+                      <Users className="h-12 w-12 text-amber-600/50 mx-auto mb-4" />
+                      <h3 className="text-xl font-semibold text-amber-300 mb-2">
+                        No guild members found
                       </h3>
-                      <p className="text-gray-500 mb-6">
+                      <p className="text-amber-200/60 mb-6">
                         Try adjusting your filters or search terms
                       </p>
                       <Button
@@ -144,6 +153,7 @@ export default function CreatorDirectory() {
                           setPage(1);
                         }}
                         variant="outline"
+                        className="border-amber-400/40 text-amber-300 hover:bg-amber-500/10"
                       >
                         Clear Filters
                       </Button>

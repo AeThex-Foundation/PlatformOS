@@ -61,10 +61,14 @@ The Guardian's Hub is a Single Page Application (SPA) built with React 18, TypeS
 - **Staff Tools (`/staff/*`):** Internal staff pages including announcements, knowledge base, project tracking, team handbook, expense reports, learning portal, performance reviews, and internal marketplace.
 - **Foundation Pages (`/foundation/*`):** Foundation member pages including dashboard, achievements, curriculum, contribute, get-involved, learn-more, and teams.
 - **Documentation System (`/docs/*`):** Complete documentation hub with DocsLayout wrapper providing sidebar navigation, search, and theme toggle. Includes 12 pages: Overview, Getting Started, Platform, API Reference, CLI, Tutorials, Examples, Integrations, Curriculum, Ethos Curriculum, Editors Guide, and Partner Proposal.
-- **Nexus Community Hub (`/nexus`):** Central talent marketplace connecting creators across all AeThex arms. Features Audio Tracks for Sale and Hire Artists sections powered by Ethos Guild integration.
+- **Nexus - The Guild (`/nexus`):** The unified collective of all AeThex creators. Not a marketplace, but the People - coders, artists, musicians, and designers working as one workforce certified by the Foundation. Features three divisions:
+  - **Ethos Division:** Audio Engineers, Composers, Voice Actors - the "Soul and Vibe" of creations
+  - **Forge Division:** Programmers, Game Designers, Scriptwriters
+  - **Visuals Division:** 3D Modelers, UI/UX Designers, Animators
+  - Includes shared audio resources and certified member directory
 - **Support Center (`/support`):** Help center with FAQ categories, support channel options (Live Chat, Email, Phone, Community), self-help resources, and emergency support contact.
 - **Teams (`/teams`):** User team management for creating and viewing collaborative teams with member invitations.
-- **Creator Directory (`/creators`):** Public creator directory with search, ARM filters (Labs, GameForge, Corp, Foundation, DevConnect, Ethos), and individual creator profiles at `/creators/:username`.
+- **Nexus Directory (`/creators`):** Foundation-certified guild member directory with search and division filters. All members hold verified AeThex Passports. Displays passport level, realm, and verification status. Individual profiles at `/creators/:username`.
 - **TLD Hub - .aethex Domain System:** Integrated domain registration and governance platform:
   - **Domain Registration (`/tld`):** Search and claim .aethex domains with token-gated access (requires $AETHEX tokens). Features domain availability check, pricing tiers based on character length, and blockchain integration via Freename API.
   - **Domain Dashboard (`/tld/dashboard`):** Logged-in users can view their claimed domains, manage domain records (ETH, BTC, SOL addresses, IPFS, avatar, social handles), and renew expiring domains.
