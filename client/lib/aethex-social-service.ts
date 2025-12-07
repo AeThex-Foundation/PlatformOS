@@ -224,8 +224,8 @@ export const aethexSocialService = {
     const resp = await fetch(`${API_BASE}/api/mentors/apply`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
+      credentials: "include",
       body: JSON.stringify({
-        user_id: userId,
         bio: input.bio ?? null,
         expertise: input.expertise || [],
         hourly_rate:
