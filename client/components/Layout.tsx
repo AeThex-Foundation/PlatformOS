@@ -53,6 +53,7 @@ export default function CodeLayout({ children, hideFooter }: LayoutProps) {
     { name: "Domains", href: "/tld" },
     { name: "Agora", href: "/agora" },
     { name: "Grants", href: "/grants" },
+    { name: "Donate", href: "/donate" },
     { name: "Docs", href: "/docs" },
     { name: "Support", href: "/support" },
   ];
@@ -62,6 +63,7 @@ export default function CodeLayout({ children, hideFooter }: LayoutProps) {
     { name: "My Domains", href: "/tld/dashboard" },
     { name: "Agora", href: "/agora" },
     { name: "Grants", href: "/grants" },
+    { name: "Donate", href: "/donate" },
     { name: "Docs", href: "/docs" },
     { name: "Support", href: "/support" },
     { name: "My Profile", href: "/profile/me" },
