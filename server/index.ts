@@ -31,6 +31,7 @@ import grantsRoutes from "./routes/grants-routes";
 import { socialRoutes } from "./routes/social-routes";
 import { opportunitiesRoutes } from "./routes/opportunities-routes";
 import { authMiddleware } from "./middleware/auth";
+import donateRoutes from "./routes/donate-routes";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -145,6 +146,10 @@ export function createServer() {
 
   // Grants - Developer grant program
   app.use("/api/grants", grantsRoutes);
+  
+  // Donations - Foundation funding
+  app.use("/api/donate", donateRoutes);
+  
   app.use(socialRoutes); // Social features (endorsements, mentorship requests)
   app.use(opportunitiesRoutes); // Opportunities board
 

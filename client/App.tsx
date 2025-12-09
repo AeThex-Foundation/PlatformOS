@@ -121,6 +121,7 @@ import DocsIntegrations from "./pages/docs/DocsIntegrations";
 import DocsPlatform from "./pages/docs/DocsPlatform";
 import DocsPartnerProposal from "./pages/docs/DocsPartnerProposal";
 import DocsEditorsGuide from "./pages/docs/DocsEditorsGuide";
+import Donate from "./pages/Donate";
 
 const queryClient = new QueryClient();
 
@@ -159,6 +160,7 @@ function AppContent() {
             <Route path="/resources" element={<Resources />} />
             <Route path="/trust" element={<Trust />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/donate" element={<Donate />} />
 
             {/* Hub (Authenticated Member Area) */}
             <Route path="/hub" element={<Hub />} />
