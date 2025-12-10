@@ -31,7 +31,7 @@ import {
   Clock,
   ArrowRight,
 } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useEffect, useState, useRef } from "react";
 import LoadingScreen from "@/components/LoadingScreen";
 import { useAuth } from "@/contexts/AuthContext";
@@ -74,12 +74,32 @@ interface LeaderboardEntry {
 
 export default function Donate() {
   const navigate = useNavigate();
+  const location = useLocation();
   const { user } = useAuth();
   const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(true);
   const [isMonthly, setIsMonthly] = useState(true);
   const [leaderboardPeriod, setLeaderboardPeriod] = useState<'monthly' | 'alltime'>('alltime');
   const toastShownRef = useRef(false);
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    if (params.get('success') === 'true') {
+      const tier = params.get('tier') || 'donation';
+      toast({
+        title: "Thank You!",
+        description: `Your ${tier} donation was successful. You're now part of the AeThex family!`,
+      });
+      navigate('/donate', { replace: true });
+    } else if (params.get('canceled') === 'true') {
+      toast({
+        title: "Donation Canceled",
+        description: "No worries! Come back when you're ready to support the mission.",
+        variant: "destructive",
+      });
+      navigate('/donate', { replace: true });
+    }
+  }, [location.search, toast, navigate]);
   
   const [stats, setStats] = useState<DonationStats>({
     recruits_trained: 0,

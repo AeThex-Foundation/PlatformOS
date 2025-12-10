@@ -24,6 +24,7 @@
     "express": "^4.18.2",
     "jsonwebtoken": "^9.0.2",
     "nodemailer": "^7.0.10",
+    "stripe": "^20.0.0",
     "tsx": "^4.20.6",
     "viem": "^2.40.0",
     "wagmi": "^3.0.1",
