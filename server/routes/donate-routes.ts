@@ -1,8 +1,27 @@
 import { Router, Request, Response } from 'express';
 import { adminSupabase } from '../supabase';
 import { requireAuth } from '../middleware/auth';
+import Stripe from 'stripe';
 
 const router = Router();
+
+const stripe = process.env.STRIPE_SECRET_KEY 
+  ? new Stripe(process.env.STRIPE_SECRET_KEY)
+  : null;
+
+const PRICE_CONFIG = {
+  initiate_monthly: 1000,
+  architect_monthly: 5000,
+  overseer_monthly: 25000,
+  initiate_onetime: 1000,
+  architect_onetime: 5000,
+  overseer_onetime: 25000,
+  equip_recruit: 2500,
+  fuel_sprint: 10000,
+  launch_graduate: 50000,
+  sponsor_sprint: 100000,
+  guild_patron: 500000,
+};
 
 const getDefaultStats = () => ({
   recruits_trained: 1240,
@@ -247,46 +266,101 @@ function getDefaultLeaderboard() {
 router.post('/checkout', requireAuth, async (req: Request, res: Response) => {
   try {
     const userId = (req as any).user?.id;
-    const { tier, amount, isRecurring } = req.body;
+    const userEmail = (req as any).user?.email;
+    const { tier, amount, isRecurring, productType } = req.body;
 
     if (!tier || !amount) {
       return res.status(400).json({ error: 'Missing tier or amount' });
     }
 
-    if (!adminSupabase) {
-      return res.json({ 
-        success: true, 
-        message: 'Thank you for your interest! Stripe payment integration is being configured. Your donation preference has been noted.',
-        pending_stripe: true,
+    if (!stripe) {
+      return res.status(503).json({ 
+        error: 'Payment processing is not configured. Please contact support.',
       });
     }
 
-    const result = await adminSupabase
-      .from('donations')
-      .insert({
-        user_id: userId,
-        tier,
-        amount,
-        is_recurring: isRecurring,
-        status: 'pending',
-        created_at: new Date().toISOString(),
-      } as any);
+    const amountInCents = Math.round(amount * 100);
+    const tierNames: Record<string, string> = {
+      initiate: 'Initiate Tier',
+      architect: 'Architect Tier',
+      overseer: 'Overseer Tier',
+      equip_recruit: 'Equip a Recruit',
+      fuel_sprint: 'Fuel a Sprint',
+      launch_graduate: 'Launch a Graduate',
+      sponsor_sprint: 'Sponsor a Sprint',
+      guild_patron: 'Guild Patron',
+    };
 
-    if (result?.error) {
-      console.error('[Donate] Checkout error:', result.error);
+    const productName = tierNames[tier] || `${tier} Donation`;
+    const baseUrl = process.env.REPLIT_DEV_DOMAIN 
+      ? `https://${process.env.REPLIT_DEV_DOMAIN}`
+      : 'http://localhost:5000';
+
+    if (isRecurring) {
+      const session = await stripe.checkout.sessions.create({
+        payment_method_types: ['card'],
+        mode: 'subscription',
+        customer_email: userEmail,
+        line_items: [{
+          price_data: {
+            currency: 'usd',
+            product_data: {
+              name: `AeThex Foundation - ${productName} (Monthly)`,
+              description: `Monthly recurring donation to the AeThex Foundation`,
+            },
+            unit_amount: amountInCents,
+            recurring: { interval: 'month' },
+          },
+          quantity: 1,
+        }],
+        success_url: `${baseUrl}/donate?success=true&tier=${tier}`,
+        cancel_url: `${baseUrl}/donate?canceled=true`,
+        metadata: {
+          user_id: userId,
+          tier,
+          product_type: productType || 'subscription',
+        },
+      });
+
+      return res.json({ 
+        success: true, 
+        checkoutUrl: session.url,
+        sessionId: session.id,
+      });
+    } else {
+      const session = await stripe.checkout.sessions.create({
+        payment_method_types: ['card'],
+        mode: 'payment',
+        customer_email: userEmail,
+        line_items: [{
+          price_data: {
+            currency: 'usd',
+            product_data: {
+              name: `AeThex Foundation - ${productName}`,
+              description: `One-time donation to the AeThex Foundation`,
+            },
+            unit_amount: amountInCents,
+          },
+          quantity: 1,
+        }],
+        success_url: `${baseUrl}/donate?success=true&tier=${tier}`,
+        cancel_url: `${baseUrl}/donate?canceled=true`,
+        metadata: {
+          user_id: userId,
+          tier,
+          product_type: productType || 'one-time',
+        },
+      });
+
+      return res.json({ 
+        success: true, 
+        checkoutUrl: session.url,
+        sessionId: session.id,
+      });
     }
-
-    res.json({ 
-      success: true, 
-      message: 'Thank you for your interest! Stripe payment integration is being configured. Your donation preference has been recorded.',
-      pending_stripe: true,
-      tier,
-      amount,
-      isRecurring,
-    });
-  } catch (error) {
+  } catch (error: any) {
     console.error('[Donate] Checkout error:', error);
-    res.status(500).json({ error: 'Internal server error' });
+    res.status(500).json({ error: error.message || 'Failed to create checkout session' });
   }
 });
 
