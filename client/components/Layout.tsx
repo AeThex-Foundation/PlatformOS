@@ -521,8 +521,7 @@ export default function CodeLayout({ children, hideFooter }: LayoutProps) {
                   </span>
                 </div>
                 <p className="text-sm text-muted-foreground hover:text-muted-foreground/80 transition-colors">
-                  Pushing the boundaries of technology through cutting-edge
-                  research and breakthrough discoveries.
+                  From the Valley of the Sun to the global stage. Training Arizona's game developers to ship real titles.
                 </p>
                 <div className="space-y-2 text-sm text-muted-foreground">
                   <p className="flex items-center gap-2">
@@ -593,7 +592,7 @@ export default function CodeLayout({ children, hideFooter }: LayoutProps) {
                   </li>
                   <li>
                     <Link
-                      to="/about"
+                      to="/donate"
                       onClick={scrollToTop}
                       className="transition-all duration-300 hover:translate-x-1 inline-block"
                       style={{
@@ -606,12 +605,12 @@ export default function CodeLayout({ children, hideFooter }: LayoutProps) {
                         (e.currentTarget.style.color = "inherit")
                       }
                     >
-                      OAuth Provider
+                      Donate
                     </Link>
                   </li>
                   <li>
                     <Link
-                      to="/resources"
+                      to="/mentorship"
                       onClick={scrollToTop}
                       className="transition-all duration-300 hover:translate-x-1 inline-block"
                       style={{
@@ -624,12 +623,12 @@ export default function CodeLayout({ children, hideFooter }: LayoutProps) {
                         (e.currentTarget.style.color = "inherit")
                       }
                     >
-                      Open Source Projects
+                      Mentorship
                     </Link>
                   </li>
                   <li>
                     <Link
-                      to="/programs"
+                      to="/gameforge"
                       onClick={scrollToTop}
                       className="transition-all duration-300 hover:translate-x-1 inline-block"
                       style={{
@@ -642,7 +641,25 @@ export default function CodeLayout({ children, hideFooter }: LayoutProps) {
                         (e.currentTarget.style.color = "inherit")
                       }
                     >
-                      Workshops & Learning
+                      GameForge
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      to="/creators"
+                      onClick={scrollToTop}
+                      className="transition-all duration-300 hover:translate-x-1 inline-block"
+                      style={{
+                        color: "inherit",
+                      }}
+                      onMouseEnter={(e) =>
+                        (e.currentTarget.style.color = FOUNDATION_COLOR)
+                      }
+                      onMouseLeave={(e) =>
+                        (e.currentTarget.style.color = "inherit")
+                      }
+                    >
+                      Nexus / Creators
                     </Link>
                   </li>
                 </ul>
@@ -719,22 +736,6 @@ export default function CodeLayout({ children, hideFooter }: LayoutProps) {
                       }
                     >
                       Governance & DAO
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      to="/about"
-                      onClick={scrollToTop}
-                      className="transition-all duration-300 hover:translate-x-1 inline-block"
-                      style={{ color: "inherit" }}
-                      onMouseEnter={(e) =>
-                        (e.currentTarget.style.color = FOUNDATION_COLOR)
-                      }
-                      onMouseLeave={(e) =>
-                        (e.currentTarget.style.color = "inherit")
-                      }
-                    >
-                      About the Foundation
                     </Link>
                   </li>
                   <li>
