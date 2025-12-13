@@ -908,6 +908,20 @@ export default function CodeLayout({ children, hideFooter }: LayoutProps) {
                 >
                   Terms of Service
                 </Link>
+                <Link
+                  to="/legal/disclaimer"
+                  onClick={scrollToTop}
+                  className="text-xs text-muted-foreground transition-all duration-300 hover:scale-105"
+                  style={{ color: "inherit" }}
+                  onMouseEnter={(e) =>
+                    (e.currentTarget.style.color = FOUNDATION_COLOR)
+                  }
+                  onMouseLeave={(e) =>
+                    (e.currentTarget.style.color = "inherit")
+                  }
+                >
+                  Legal Disclaimer
+                </Link>
               </div>
             </div>
           </div>

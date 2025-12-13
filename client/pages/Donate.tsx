@@ -8,6 +8,8 @@ import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import {
   Heart,
   Zap,
@@ -30,6 +32,14 @@ import {
   Check,
   Clock,
   ArrowRight,
+  Share2,
+  Twitter,
+  Linkedin,
+  Copy,
+  ExternalLink,
+  BadgeCheck,
+  X,
+  Scale,
 } from "lucide-react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useEffect, useState, useRef } from "react";
@@ -79,6 +89,10 @@ export default function Donate() {
   const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(true);
   const [isMonthly, setIsMonthly] = useState(true);
+  const [coverFees, setCoverFees] = useState(false);
+  const [linkPassport, setLinkPassport] = useState(false);
+  const [showThankYou, setShowThankYou] = useState(false);
+  const [thankYouTier, setThankYouTier] = useState('');
   const [leaderboardPeriod, setLeaderboardPeriod] = useState<'monthly' | 'alltime'>('alltime');
   const toastShownRef = useRef(false);
 
@@ -86,10 +100,8 @@ export default function Donate() {
     const params = new URLSearchParams(location.search);
     if (params.get('success') === 'true') {
       const tier = params.get('tier') || 'donation';
-      toast({
-        title: "Thank You!",
-        description: `Your ${tier} donation was successful. You're now part of the AeThex family!`,
-      });
+      setThankYouTier(tier);
+      setShowThankYou(true);
       navigate('/donate', { replace: true });
     } else if (params.get('canceled') === 'true') {
       toast({
@@ -166,12 +178,20 @@ export default function Donate() {
       return;
     }
     
+    const finalAmount = coverFees ? Math.ceil(amount * 1.03) : amount;
+    
     try {
       const res = await fetch('/api/donate/checkout', {
         method: 'POST',
         credentials: 'include',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ tier, amount, isRecurring }),
+        body: JSON.stringify({ 
+          tier, 
+          amount: finalAmount, 
+          isRecurring,
+          coverFees,
+          linkPassport: linkPassport && user ? true : false
+        }),
       });
       
       if (res.ok) {
@@ -357,18 +377,49 @@ export default function Donate() {
             {/* Left Column - Donation Tiers */}
             <div className="lg:col-span-2 space-y-8">
               
-              {/* Subscription Toggle */}
-              <div className="flex items-center justify-center gap-4 p-4 bg-black/40 rounded-lg border border-red-500/20">
-                <span className={`text-sm ${!isMonthly ? 'text-white font-semibold' : 'text-gray-400'}`}>One-Time</span>
-                <Switch
-                  checked={isMonthly}
-                  onCheckedChange={setIsMonthly}
-                  className="data-[state=checked]:bg-red-600"
-                />
-                <span className={`text-sm ${isMonthly ? 'text-white font-semibold' : 'text-gray-400'}`}>Monthly</span>
-                {isMonthly && (
-                  <Badge className="bg-green-600/50 text-green-100 text-xs">Best Value</Badge>
-                )}
+              {/* Subscription Toggle & Options */}
+              <div className="space-y-4 p-4 bg-black/40 rounded-lg border border-red-500/20">
+                <div className="flex items-center justify-center gap-4">
+                  <span className={`text-sm ${!isMonthly ? 'text-white font-semibold' : 'text-gray-400'}`}>One-Time</span>
+                  <Switch
+                    checked={isMonthly}
+                    onCheckedChange={setIsMonthly}
+                    className="data-[state=checked]:bg-red-600"
+                  />
+                  <span className={`text-sm ${isMonthly ? 'text-white font-semibold' : 'text-gray-400'}`}>Monthly</span>
+                  {isMonthly && (
+                    <Badge className="bg-green-600/50 text-green-100 text-xs">Best Value</Badge>
+                  )}
+                </div>
+                
+                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-center gap-4 pt-3 border-t border-gray-800">
+                  <div className="flex items-center space-x-2">
+                    <Checkbox 
+                      id="coverFees" 
+                      checked={coverFees}
+                      onCheckedChange={(checked) => setCoverFees(checked === true)}
+                      className="border-amber-500/50 data-[state=checked]:bg-amber-600 data-[state=checked]:border-amber-600"
+                    />
+                    <Label htmlFor="coverFees" className="text-sm text-gray-300 cursor-pointer">
+                      Cover processing fees (+3%)
+                    </Label>
+                  </div>
+                  
+                  {user && (
+                    <div className="flex items-center space-x-2">
+                      <Checkbox 
+                        id="linkPassport" 
+                        checked={linkPassport}
+                        onCheckedChange={(checked) => setLinkPassport(checked === true)}
+                        className="border-amber-500/50 data-[state=checked]:bg-amber-600 data-[state=checked]:border-amber-600"
+                      />
+                      <Label htmlFor="linkPassport" className="text-sm text-gray-300 cursor-pointer flex items-center gap-1">
+                        <BadgeCheck className="h-4 w-4 text-amber-400" />
+                        Link donation to my Passport profile
+                      </Label>
+                    </div>
+                  )}
+                </div>
               </div>
 
               {/* Gamified Tiers */}
@@ -653,36 +704,6 @@ export default function Donate() {
                 </div>
               </div>
 
-              {/* Crypto Donation */}
-              <Card className="bg-gradient-to-br from-purple-950/30 via-black/40 to-blue-950/30 border-purple-500/30">
-                <CardContent className="p-6">
-                  <div className="flex flex-col md:flex-row items-center gap-6">
-                    <div className="flex items-center gap-4">
-                      <div className="w-16 h-16 rounded-full bg-gradient-to-r from-purple-600 to-blue-600 flex items-center justify-center">
-                        <Wallet className="h-8 w-8 text-white" />
-                      </div>
-                      <div>
-                        <h3 className="text-xl font-bold text-white">Donate with Crypto</h3>
-                        <p className="text-gray-400">Send MATIC, ETH, or $AETHEX directly to our DAO treasury</p>
-                      </div>
-                    </div>
-                    <div className="flex gap-3 flex-wrap justify-center md:ml-auto">
-                      <Button 
-                        onClick={handleCryptoDonate}
-                        variant="outline" 
-                        className="border-purple-500/50 text-purple-300 hover:bg-purple-500/10"
-                      >
-                        <Wallet className="h-4 w-4 mr-2" />
-                        Connect Wallet
-                      </Button>
-                      <Badge className="bg-amber-600/50 text-amber-100 flex items-center gap-1">
-                        <Sparkles className="h-3 w-3" />
-                        +10% Governance Power
-                      </Badge>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
             </div>
 
             {/* Right Column - Activity & Leaderboard */}
@@ -803,17 +824,33 @@ export default function Donate() {
 
               {/* Payment Methods */}
               <Card className="bg-black/40 border-gray-500/30">
-                <CardContent className="p-4">
-                  <p className="text-sm text-gray-400 text-center mb-3">Secure payments via</p>
+                <CardContent className="p-4 space-y-3">
+                  <p className="text-sm text-gray-400 text-center">Secure payments via</p>
                   <div className="flex items-center justify-center gap-4">
                     <div className="flex items-center gap-2 text-gray-300">
                       <CreditCard className="h-5 w-5" />
                       <span className="text-sm">Card</span>
                     </div>
-                    <div className="flex items-center gap-2 text-gray-300">
+                    <div className="h-4 w-px bg-gray-600" />
+                    <button 
+                      onClick={handleCryptoDonate}
+                      className="flex items-center gap-2 text-gray-300 hover:text-purple-300 transition-colors"
+                    >
                       <Wallet className="h-5 w-5" />
                       <span className="text-sm">Crypto</span>
-                    </div>
+                    </button>
+                  </div>
+                  <p className="text-xs text-gray-500 text-center">
+                    Prefer crypto? Send MATIC or ETH to our treasury.
+                  </p>
+                  <div className="pt-2 border-t border-gray-700">
+                    <a 
+                      href="/legal/disclaimer" 
+                      className="text-xs text-gray-500 hover:text-amber-400 transition-colors flex items-center justify-center gap-1"
+                    >
+                      <Scale className="h-3 w-3" />
+                      Legal Disclaimer & Token Policy
+                    </a>
                   </div>
                 </CardContent>
               </Card>
@@ -821,6 +858,95 @@ export default function Donate() {
           </div>
         </div>
       </div>
+      
+      {/* Thank You Modal */}
+      <Dialog open={showThankYou} onOpenChange={setShowThankYou}>
+        <DialogContent className="bg-gradient-to-br from-black via-red-950/20 to-black border-amber-500/40 max-w-md">
+          <DialogHeader className="text-center space-y-4">
+            <div className="mx-auto w-20 h-20 rounded-full bg-gradient-to-r from-amber-500 to-red-500 flex items-center justify-center">
+              <Heart className="h-10 w-10 text-white fill-white" />
+            </div>
+            <DialogTitle className="text-2xl font-bold text-white">
+              Thank You, Hero!
+            </DialogTitle>
+            <DialogDescription className="text-gray-300 text-base">
+              Your {thankYouTier} donation makes a real difference. You're helping train the next generation of game developers.
+            </DialogDescription>
+          </DialogHeader>
+          
+          <div className="space-y-6 pt-4">
+            {linkPassport && (
+              <div className="flex items-center gap-3 p-3 rounded-lg bg-amber-500/10 border border-amber-500/30">
+                <BadgeCheck className="h-6 w-6 text-amber-400" />
+                <div>
+                  <p className="text-sm font-medium text-white">Donation Linked to Your Passport</p>
+                  <p className="text-xs text-gray-400">Your support is now visible on your profile</p>
+                </div>
+              </div>
+            )}
+            
+            <div className="space-y-3">
+              <p className="text-sm text-gray-400 text-center">Share your support</p>
+              <div className="flex justify-center gap-3">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="border-blue-400/50 text-blue-300 hover:bg-blue-500/10"
+                  onClick={() => {
+                    window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent("I just donated to @AeThexFoundation to help train the next generation of game developers! Join me in building the digital frontier. 🎮✨")}&url=${encodeURIComponent("https://aethex.org/donate")}`, '_blank');
+                  }}
+                >
+                  <Twitter className="h-4 w-4 mr-1" />
+                  Twitter
+                </Button>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="border-blue-600/50 text-blue-400 hover:bg-blue-600/10"
+                  onClick={() => {
+                    window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent("https://aethex.org/donate")}`, '_blank');
+                  }}
+                >
+                  <Linkedin className="h-4 w-4 mr-1" />
+                  LinkedIn
+                </Button>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="border-gray-500/50 text-gray-300 hover:bg-gray-500/10"
+                  onClick={() => {
+                    navigator.clipboard.writeText("https://aethex.org/donate");
+                    toast({
+                      title: "Link Copied!",
+                      description: "Share with friends to multiply your impact.",
+                    });
+                  }}
+                >
+                  <Copy className="h-4 w-4 mr-1" />
+                  Copy
+                </Button>
+              </div>
+            </div>
+            
+            <div className="pt-2 space-y-3">
+              <Button
+                className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700"
+                onClick={() => window.open('https://discord.gg/aethex', '_blank')}
+              >
+                <ExternalLink className="h-4 w-4 mr-2" />
+                Join Our Discord Community
+              </Button>
+              <Button
+                variant="ghost"
+                className="w-full text-gray-400 hover:text-white"
+                onClick={() => setShowThankYou(false)}
+              >
+                Continue Exploring
+              </Button>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
     </Layout>
   );
 }

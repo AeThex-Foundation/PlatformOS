@@ -122,6 +122,7 @@ import DocsPlatform from "./pages/docs/DocsPlatform";
 import DocsPartnerProposal from "./pages/docs/DocsPartnerProposal";
 import DocsEditorsGuide from "./pages/docs/DocsEditorsGuide";
 import Donate from "./pages/Donate";
+import LegalDisclaimer from "./pages/LegalDisclaimer";
 
 const queryClient = new QueryClient();
 
@@ -202,6 +203,7 @@ function AppContent() {
             {/* Legal */}
             <Route path="/privacy" element={<Privacy />} />
             <Route path="/terms" element={<Terms />} />
+            <Route path="/legal/disclaimer" element={<LegalDisclaimer />} />
 
             {/* Foundation */}
             <Route path="/downloads" element={<Downloads />} />
