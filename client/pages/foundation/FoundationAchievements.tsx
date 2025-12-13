@@ -170,7 +170,7 @@ export default function FoundationAchievements() {
                   <div>
                     <h1 className="text-3xl font-bold">Achievements</h1>
                     <p className="text-slate-300">
-                      Earn badges and unlock rewards
+                      Earn credentials and track your professional development
                     </p>
                   </div>
                 </div>
@@ -325,9 +325,9 @@ export default function FoundationAchievements() {
                       Start Earning Badges
                     </h3>
                     <p className="text-slate-400 mb-6 max-w-2xl mx-auto">
-                      Sign in to track your achievements, earn points, and
-                      unlock exclusive rewards as you progress through
-                      Foundation courses.
+                      Sign in to track your professional development, earn 
+                      credentials, and build your portfolio as you progress 
+                      through our workforce training programs.
                     </p>
                     <Button
                       onClick={() => navigate("/login")}

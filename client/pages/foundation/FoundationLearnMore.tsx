@@ -18,59 +18,59 @@ export default function FoundationLearnMore() {
   const resources = [
     {
       id: 1,
-      title: "Game Development Fundamentals",
+      title: "Programming Fundamentals",
       type: "Video Course",
       icon: Play,
       description:
-        "Complete introduction to game development concepts and best practices",
+        "Complete introduction to programming concepts and problem-solving techniques",
       lessons: "50",
       duration: "20 hours",
-      topics: ["Game loops", "Physics", "Input handling", "Asset management"],
+      topics: ["Logic & algorithms", "Data structures", "Debugging", "Best practices"],
       free: true,
     },
     {
       id: 2,
-      title: "Roblox Best Practices Guide",
+      title: "Digital Literacy Essentials",
       type: "Written Guide",
       icon: FileText,
       description:
-        "Comprehensive guide to building professional Roblox experiences",
+        "Comprehensive guide to essential digital skills for the modern workplace",
       pages: "120",
       downloads: "10K+",
       topics: [
-        "Server architecture",
-        "Security practices",
-        "Performance tips",
-        "UI/UX patterns",
+        "Cloud computing basics",
+        "Cybersecurity awareness",
+        "Collaboration tools",
+        "Data management",
       ],
       free: true,
     },
     {
       id: 3,
-      title: "Architecture Patterns for Games",
+      title: "Software Development Patterns",
       type: "Interactive Tutorial",
       icon: Code,
       description:
-        "Learn scalable architectural patterns used in professional game development",
+        "Learn industry-standard architectural patterns used in professional development",
       modules: "8",
       projects: "4",
-      topics: ["MVC pattern", "ECS systems", "Networking", "State management"],
+      topics: ["Design patterns", "Clean code", "Testing strategies", "Version control"],
       free: true,
     },
     {
       id: 4,
-      title: "Performance Optimization Handbook",
+      title: "Career Development Handbook",
       type: "Technical Reference",
       icon: BookOpen,
       description:
-        "In-depth guide to optimizing game performance and reducing latency",
+        "In-depth guide to building a successful career in technology",
       chapters: "15",
       samples: "100+",
       topics: [
-        "Memory optimization",
-        "GPU optimization",
-        "Network optimization",
-        "Profiling tools",
+        "Portfolio building",
+        "Interview preparation",
+        "Networking skills",
+        "Continuous learning",
       ],
       free: true,
     },
@@ -113,28 +113,28 @@ export default function FoundationLearnMore() {
 
   const curriculumPaths = [
     {
-      name: "Beginner Game Developer",
+      name: "Digital Foundations",
       duration: "8 weeks",
       modules: 8,
-      description: "Start your game development journey from scratch",
+      description: "Build essential digital literacy skills from scratch",
     },
     {
-      name: "Roblox Professional",
+      name: "Software Development",
       duration: "12 weeks",
       modules: 12,
-      description: "Master Roblox development for professional work",
+      description: "Master programming for professional employment",
     },
     {
-      name: "Multiplayer Expert",
+      name: "Full-Stack Development",
       duration: "10 weeks",
       modules: 10,
-      description: "Learn to build complex multiplayer systems",
+      description: "Learn to build complete web applications",
     },
     {
-      name: "Game Architecture Master",
+      name: "Technical Leadership",
       duration: "14 weeks",
       modules: 14,
-      description: "Design scalable systems for production games",
+      description: "Develop leadership and project management skills",
     },
   ];
 
@@ -164,9 +164,9 @@ export default function FoundationLearnMore() {
                 Free Learning Resources
               </h1>
               <p className="text-lg text-red-100/80 max-w-3xl">
-                Learn game development from the ground up with our free,
-                comprehensive educational resources. Everything you need to
-                become an expert developer.
+                Build job-ready skills with our free, comprehensive educational resources.
+                Everything you need to advance your digital literacy and develop 
+                a career in technology.
               </p>
             </div>
           </section>
@@ -418,11 +418,11 @@ export default function FoundationLearnMore() {
           <section className="py-16 border-t border-red-400/10">
             <div className="container mx-auto max-w-4xl px-4 text-center">
               <h2 className="text-3xl font-bold text-red-300 mb-4">
-                Start Your Learning Journey
+                Start Your Career Development Journey
               </h2>
               <p className="text-lg text-red-100/80 mb-8">
-                Choose a learning path and begin mastering game development
-                today. Everything is completely free and open to the community.
+                Choose a learning path and begin building job-ready skills
+                today. All workforce development resources are completely free.
               </p>
               <Button
                 className="bg-red-400 text-black shadow-[0_0_30px_rgba(239,68,68,0.35)] hover:bg-red-300"

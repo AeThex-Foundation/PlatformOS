@@ -27,15 +27,15 @@ interface CourseDownload {
 const courses: CourseDownload[] = [
   {
     id: "1",
-    title: "Introduction to Game Development",
-    slug: "intro-game-dev",
-    category: "game-dev",
+    title: "Introduction to Programming",
+    slug: "intro-programming",
+    category: "web-dev",
     difficulty: "beginner",
     duration: 12,
     chapters: 10,
     formats: ["markdown", "pdf", "code"],
     description:
-      "Learn game development fundamentals including game loops, physics, input handling, and asset management.",
+      "Learn programming fundamentals including logic, problem-solving, data structures, and debugging techniques.",
   },
   {
     id: "2",
@@ -51,15 +51,15 @@ const courses: CourseDownload[] = [
   },
   {
     id: "3",
-    title: "Advanced Unreal Engine Development",
-    slug: "advanced-unreal-engine",
-    category: "game-dev",
+    title: "Digital Media Production",
+    slug: "digital-media",
+    category: "design",
     difficulty: "advanced",
     duration: 24,
     chapters: 8,
     formats: ["markdown", "code"],
     description:
-      "Deep dive into Unreal Engine 5 optimization, C++ integration, networking, and advanced features.",
+      "Deep dive into multimedia creation, video editing, motion graphics, and content publishing workflows.",
   },
   {
     id: "4",
@@ -147,15 +147,15 @@ const courses: CourseDownload[] = [
   },
   {
     id: "11",
-    title: "Python for Game Development",
-    slug: "python-intermediate",
-    category: "game-dev",
+    title: "Python for Data Analysis",
+    slug: "python-data-analysis",
+    category: "ai-ml",
     difficulty: "intermediate",
     duration: 15,
     chapters: 8,
     formats: ["markdown", "pdf", "code"],
     description:
-      "Build games using Python and Pygame with practical examples.",
+      "Analyze data using Python, Pandas, and visualization libraries with practical examples.",
   },
   {
     id: "12",
@@ -172,7 +172,6 @@ const courses: CourseDownload[] = [
 ];
 
 const categoryColors: Record<string, string> = {
-  "game-dev": "from-orange-500 to-red-500",
   "web-dev": "from-blue-500 to-cyan-500",
   "ai-ml": "from-purple-500 to-pink-500",
   design: "from-indigo-500 to-purple-500",
@@ -215,12 +214,12 @@ export default function FoundationDownloadCenter() {
           {/* Header */}
           <div className="mb-12 text-center">
             <h1 className="text-4xl font-bold text-white mb-4">
-              Foundation Learning Center
+              Workforce Development Center
             </h1>
             <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-              Download comprehensive course materials across multiple formats.
-              Full-length guides with chapters, code samples, and practice
-              projects.
+              Download comprehensive training materials across multiple formats.
+              Full-length guides with chapters, practical exercises, and 
+              career-ready projects.
             </p>
           </div>
 
@@ -270,7 +269,7 @@ export default function FoundationDownloadCenter() {
                   >
                     All
                   </Button>
-                  {["game-dev", "web-dev", "ai-ml", "design", "business"].map(
+                  {["web-dev", "ai-ml", "design", "business"].map(
                     (cat) => (
                       <Button
                         key={cat}
@@ -406,9 +405,9 @@ export default function FoundationDownloadCenter() {
           {/* Info */}
           <div className="mt-12 p-6 bg-blue-900/20 border border-blue-700/50 rounded-lg">
             <p className="text-blue-200 text-sm">
-              💡 All course materials are regularly updated and include code
-              samples, exercises, and real-world projects. Download today and
-              start learning at your own pace!
+              All training materials are regularly updated and include practical
+              exercises, real-world projects, and career-focused content. Download 
+              today and start building job-ready skills at your own pace!
             </p>
           </div>
         </div>

@@ -19,46 +19,46 @@ export default function FoundationContribute() {
   const contributionWays = [
     {
       icon: Code,
-      title: "Code Contributions",
-      description: "Help develop and improve our open-source projects",
+      title: "Skills Development",
+      description: "Build your portfolio while helping others learn",
       ways: [
-        "Submit pull requests",
-        "Fix bugs and issues",
-        "Add new features",
-        "Improve documentation",
+        "Create learning resources",
+        "Develop training materials",
+        "Build educational tools",
+        "Document best practices",
       ],
     },
     {
       icon: Sparkles,
-      title: "Ideas & Feedback",
-      description: "Share your ideas for new features and improvements",
+      title: "Program Improvement",
+      description: "Help shape our workforce development programs",
       ways: [
-        "Report issues",
-        "Suggest features",
-        "Provide user feedback",
-        "Review pull requests",
+        "Suggest curriculum updates",
+        "Provide learner feedback",
+        "Review educational content",
+        "Propose new training tracks",
       ],
     },
     {
       icon: Users,
-      title: "Community Support",
-      description: "Help other developers in our community",
+      title: "Mentorship & Support",
+      description: "Guide learners on their career development journey",
       ways: [
         "Answer questions",
-        "Help on Discord",
         "Mentor newcomers",
-        "Share knowledge",
+        "Lead study groups",
+        "Share industry insights",
       ],
     },
     {
       icon: Star,
-      title: "Sponsorship",
-      description: "Support our mission financially",
+      title: "Foundation Support",
+      description: "Help sustain our educational mission",
       ways: [
-        "GitHub sponsorship",
+        "Corporate partnerships",
         "Monthly donations",
-        "Corporate support",
-        "In-kind support",
+        "Grant sponsorship",
+        "In-kind contributions",
       ],
     },
   ];
@@ -155,9 +155,9 @@ export default function FoundationContribute() {
                 Ways to Contribute
               </h1>
               <p className="text-lg text-red-100/80 max-w-3xl">
-                Join our community and help us build amazing open-source
-                projects. There are many ways to contribute, regardless of your
-                skill level.
+                Join our community and help advance workforce development and digital literacy.
+                There are many ways to contribute and grow professionally, regardless of your
+                current skill level.
               </p>
             </div>
           </section>
