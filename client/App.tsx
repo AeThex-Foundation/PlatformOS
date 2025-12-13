@@ -34,7 +34,6 @@ import GameForgePricing from "./pages/gameforge/GameForgePricing";
 import GameForgeStartBuilding from "./pages/gameforge/GameForgeStartBuilding";
 import GameForgeTeams from "./pages/gameforge/GameForgeTeams";
 import GameForgeViewPortfolio from "./pages/gameforge/GameForgeViewPortfolio";
-import GameForgeDashboard from "./pages/dashboards/GameForgeDashboard";
 
 import Hub from "./pages/hub/Hub";
 import Protocol from "./pages/hub/Protocol";
@@ -131,6 +130,11 @@ function OpportunityIdRedirect() {
   return <Navigate to={`/gig-radar/${id}`} replace />;
 }
 
+function GameForgeDashboardRedirect() {
+  window.location.href = "https://aethex.dev/gameforge/dashboard";
+  return null;
+}
+
 function isPassportSubdomain(): "creator" | "project" | false {
   const hostname = window.location.hostname;
   if (hostname.endsWith(".aethex.me")) {
@@ -196,7 +200,8 @@ function AppContent() {
             <Route path="/gameforge/start-building" element={<GameForgeStartBuilding />} />
             <Route path="/gameforge/teams" element={<GameForgeTeams />} />
             <Route path="/gameforge/view-portfolio" element={<GameForgeViewPortfolio />} />
-            <Route path="/gameforge/dashboard" element={<GameForgeDashboard />} />
+            {/* GameForge Dashboard moved to aethex.dev (Corp) - legal compliance */}
+            <Route path="/gameforge/dashboard" element={<GameForgeDashboardRedirect />} />
             
             {/* Admin Routes */}
             <Route path="/admin" element={<Admin />} />
