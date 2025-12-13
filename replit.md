@@ -34,14 +34,14 @@ Guardian's Hub is a React 18, TypeScript, Vite, and TailwindCSS 3 Single Page Ap
 - **Passport Engine (Multi-Tenant Profiles):** Host-based routing for creator profiles (`*.aethex.me`) and project showcases (`*.aethex.space`), dynamically rendering content based on subdomain and fetching enriched Supabase data.
 - **Rich Passport System:** Full-featured profile pages with realm alignment, XP/Level progression, achievement badges, Ethos Guild integration, projects section, arm affiliations, follower stats, and social links.
 - **Ethos Guild Integration:** Audio artist portfolio system with API endpoints, artist settings (skills, pricing), track library (upload, management), and secure Supabase storage.
-- **GameForge ARM Dashboard:** Project management system for game development with CRUD APIs for projects, sprints, tasks, and team management.
+- **GameForge Showcase (Read-Only):** Public showcase of released games and team credits. Full project management (CRUD operations) is on aethex.dev (Corp) for legal compliance.
 - **Passport Hub (`/passport`):** Central management with member directory, passport customization, feature showcase, and admin dashboard (user management, verification).
 - **Cross-Domain SSO:** AeThex Passport SDK for client site integration with PKCE, React support, automatic token refresh, secure storage, and a server-side OAuth session bridge for cookie-based authentication.
 - **Admin System:** Comprehensive dashboard (`/admin`) with role-based access control, user management, mentor management, opportunity moderation, mentorship request oversight, endorsement moderation, and OAuth client management.
 - **Donation System (`/donate`):** Platform with live stats, funding goals, gamified tiers, one-time mission funding, corporate sponsorship, activity feed, donor leaderboard, and crypto donations (MATIC/ETH/AETHEX).
 - **Content Management:** Centralized for Foundation and Hub data (stats, team, milestones, resources).
 - **Mentorship System (`/mentorship`):** Platform for program listings, mentor applications, profiles, and request flow.
-- **Opportunities System (`/opportunities`):** Job/collaboration board with posting, search/filter, and application tracking.
+- **Gig Radar (`/gig-radar`):** Read-only job/collaboration board (formerly /opportunities). Job posting/management is on aethex.dev.
 - **Nexus - The Guild (`/nexus`):** Unified collective of AeThex creators (coders, artists, musicians, designers) with Ethos, Forge, and Visuals divisions. Includes a certified member directory (`/creators`).
 - **TLD Hub - .aethex Domain System:** Integrated domain registration (`/tld`) with search, token-gated claiming, and a dashboard for managing claimed domains. Includes Agora governance (`/agora`) for DAO proposals and treasury, and Developer Grants (`/grants`) program.
 
@@ -61,3 +61,31 @@ Guardian's Hub is a React 18, TypeScript, Vite, and TailwindCSS 3 Single Page Ap
 - **Nodemailer:** Email sending.
 - **Tally.xyz:** DAO governance UI, analytics, and proposal management.
 - **Freename:** .aethex subdomain minting and resolution API.
+
+## API Segregation (Legal Compliance)
+
+The AeThex ecosystem enforces strict API segregation between entities:
+
+| Site | Access Level | Purpose |
+|------|--------------|---------|
+| **aethex.foundation** | Read-Only | Public showcase, mission proof for grants, creator directory |
+| **aethex.dev** | Full CRUD | Corp operations - billing, escrow, payroll, project management |
+| **aethex.studio** | API-Only | Hour tracking, timesheet submission, AZ Tax Commission compliance |
+
+### Foundation API Endpoints (Read-Only)
+- `GET /api/gameforge/releases` - Public game showcase
+- `GET /api/gameforge/releases/:slug` - Individual game page
+- `GET /api/gameforge/stats` - Public statistics
+- `GET /api/gameforge/team/:projectId` - Team credits for released projects
+- `GET /api/gig-radar/*` - Job/gig listings (read-only)
+
+### Moved to aethex.dev (Corp)
+- All POST/PUT/DELETE for projects, sprints, tasks
+- Team management APIs
+- Metrics and reporting APIs
+
+### Moved to aethex.studio (API-Only)
+- Clock in/out APIs
+- Timesheet submission
+- Discord check-in webhook
+- Payroll export for NEXUS sync
