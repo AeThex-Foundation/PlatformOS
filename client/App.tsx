@@ -130,10 +130,6 @@ function OpportunityIdRedirect() {
   return <Navigate to={`/gig-radar/${id}`} replace />;
 }
 
-function GameForgeDashboardRedirect() {
-  window.location.href = "https://aethex.dev/gameforge/dashboard";
-  return null;
-}
 
 function isPassportSubdomain(): "creator" | "project" | false {
   const hostname = window.location.hostname;
@@ -200,8 +196,6 @@ function AppContent() {
             <Route path="/gameforge/start-building" element={<GameForgeStartBuilding />} />
             <Route path="/gameforge/teams" element={<GameForgeTeams />} />
             <Route path="/gameforge/view-portfolio" element={<GameForgeViewPortfolio />} />
-            {/* GameForge Dashboard moved to aethex.dev (Corp) - legal compliance */}
-            <Route path="/gameforge/dashboard" element={<GameForgeDashboardRedirect />} />
             
             {/* Admin Routes */}
             <Route path="/admin" element={<Admin />} />

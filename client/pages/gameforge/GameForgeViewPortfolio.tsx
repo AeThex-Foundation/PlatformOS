@@ -1,55 +1,64 @@
+import { useState, useEffect } from "react";
 import Layout from "@/components/Layout";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
-import { Star, Download, Calendar, Users, ArrowRight } from "lucide-react";
+import { Calendar, Users, ArrowRight, Loader2, Gamepad2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+
+interface GameRelease {
+  id: string;
+  name: string;
+  description: string;
+  platform: string;
+  genre: string[];
+  actual_release_date: string;
+  team_size: number;
+  user_profiles?: {
+    id: string;
+    full_name: string;
+    avatar_url: string;
+    username: string;
+  };
+}
+
+interface ReleasesResponse {
+  releases: GameRelease[];
+  total: number;
+}
 
 export default function GameForgeViewPortfolio() {
   const navigate = useNavigate();
+  const [releases, setReleases] = useState<GameRelease[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-  const games = [
-    {
-      title: "Battle Royale X",
-      releaseDate: "December 2024",
-      genre: "Action",
-      players: "50K+",
-      rating: 4.7,
-      downloads: "145K",
-      revenue: "$85K",
-      team: "10 devs, 2 designers",
-    },
-    {
-      title: "Casual Match",
-      releaseDate: "November 2024",
-      genre: "Puzzle",
-      players: "100K+",
-      rating: 4.5,
-      downloads: "320K",
-      revenue: "$125K",
-      team: "6 devs, 1 designer",
-    },
-    {
-      title: "Speedrun Challenge",
-      releaseDate: "October 2024",
-      genre: "Action",
-      players: "35K+",
-      rating: 4.8,
-      downloads: "98K",
-      revenue: "$52K",
-      team: "8 devs, 1 designer",
-    },
-    {
-      title: "Story Adventure",
-      releaseDate: "September 2024",
-      genre: "Adventure",
-      players: "28K+",
-      rating: 4.6,
-      downloads: "76K",
-      revenue: "$38K",
-      team: "12 devs, 3 designers",
-    },
-  ];
+  useEffect(() => {
+    async function fetchReleases() {
+      try {
+        const response = await fetch("/api/gameforge/releases");
+        if (!response.ok) {
+          throw new Error("Failed to fetch releases");
+        }
+        const data: ReleasesResponse = await response.json();
+        setReleases(data.releases);
+      } catch (err: any) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchReleases();
+  }, []);
+
+  const formatDate = (dateString: string) => {
+    if (!dateString) return "TBD";
+    return new Date(dateString).toLocaleDateString("en-US", {
+      month: "long",
+      year: "numeric",
+    });
+  };
 
   return (
     <Layout>
@@ -75,83 +84,121 @@ export default function GameForgeViewPortfolio() {
                 Released Games
               </h1>
               <p className="text-lg text-green-100/80 max-w-3xl">
-                Games shipped by GameForge. See player stats, revenue, and team
-                sizes from our monthly releases.
+                Games shipped by GameForge graduates. Verified portfolio credits
+                for our program alumni.
               </p>
             </div>
           </section>
 
           <section className="py-16">
             <div className="container mx-auto max-w-6xl px-4">
-              <div className="space-y-6">
-                {games.map((game, idx) => (
-                  <Card
-                    key={idx}
-                    className="bg-green-950/20 border-green-400/30 hover:border-green-400/60 transition-all"
+              {loading ? (
+                <div className="flex items-center justify-center py-20">
+                  <Loader2 className="h-8 w-8 animate-spin text-green-400" />
+                  <span className="ml-3 text-green-300">Loading releases...</span>
+                </div>
+              ) : error ? (
+                <div className="text-center py-20">
+                  <p className="text-red-400 mb-4">{error}</p>
+                  <Button
+                    variant="outline"
+                    className="border-green-400 text-green-300"
+                    onClick={() => window.location.reload()}
                   >
-                    <CardContent className="pt-6">
-                      <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-4">
-                        <div>
-                          <h3 className="text-lg font-bold text-green-300 mb-1">
-                            {game.title}
-                          </h3>
-                          <Badge className="bg-green-500/20 text-green-300 border border-green-400/40 text-xs">
-                            {game.genre}
-                          </Badge>
-                          <p className="text-xs text-green-200/60 mt-2">
-                            {game.releaseDate}
-                          </p>
-                        </div>
+                    Try Again
+                  </Button>
+                </div>
+              ) : releases.length === 0 ? (
+                <div className="text-center py-20">
+                  <Gamepad2 className="h-16 w-16 text-green-400/40 mx-auto mb-4" />
+                  <h3 className="text-xl font-bold text-green-300 mb-2">
+                    No Releases Yet
+                  </h3>
+                  <p className="text-green-100/60">
+                    Games will appear here once they're released by our program graduates.
+                  </p>
+                </div>
+              ) : (
+                <div className="space-y-6">
+                  {releases.map((game) => (
+                    <Card
+                      key={game.id}
+                      className="bg-green-950/20 border-green-400/30 hover:border-green-400/60 transition-all"
+                    >
+                      <CardContent className="pt-6">
+                        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+                          <div>
+                            <h3 className="text-lg font-bold text-green-300 mb-1">
+                              {game.name}
+                            </h3>
+                            <div className="flex flex-wrap gap-1 mb-2">
+                              {(game.genre || []).map((g, idx) => (
+                                <Badge
+                                  key={idx}
+                                  className="bg-green-500/20 text-green-300 border border-green-400/40 text-xs"
+                                >
+                                  {g}
+                                </Badge>
+                              ))}
+                            </div>
+                            <p className="text-sm text-green-200/60 line-clamp-2">
+                              {game.description}
+                            </p>
+                          </div>
 
-                        <div className="space-y-1">
-                          <p className="text-xs font-semibold text-green-400">
-                            PLAYERS
-                          </p>
-                          <p className="text-lg font-bold text-green-300">
-                            {game.players}
-                          </p>
-                          <p className="text-xs text-green-200/60">active</p>
-                        </div>
+                          <div className="space-y-1">
+                            <p className="text-xs font-semibold text-green-400">
+                              PLATFORM
+                            </p>
+                            <p className="text-lg font-bold text-green-300">
+                              {game.platform || "Multiple"}
+                            </p>
+                          </div>
 
-                        <div className="space-y-1">
-                          <p className="text-xs font-semibold text-green-400">
-                            RATING
-                          </p>
-                          <p className="text-lg font-bold text-green-300 flex items-center gap-1">
-                            {game.rating}{" "}
-                            <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                          </p>
-                          <p className="text-xs text-green-200/60">
-                            {game.downloads} downloads
-                          </p>
-                        </div>
+                          <div className="space-y-1">
+                            <p className="text-xs font-semibold text-green-400 flex items-center gap-1">
+                              <Calendar className="h-3 w-3" /> RELEASED
+                            </p>
+                            <p className="text-lg font-bold text-green-300">
+                              {formatDate(game.actual_release_date)}
+                            </p>
+                            <p className="text-xs text-green-200/60 flex items-center gap-1">
+                              <Users className="h-3 w-3" /> {game.team_size || 1} team members
+                            </p>
+                          </div>
 
-                        <div className="space-y-1">
-                          <p className="text-xs font-semibold text-green-400">
-                            REVENUE
-                          </p>
-                          <p className="text-lg font-bold text-green-300">
-                            {game.revenue}
-                          </p>
-                          <p className="text-xs text-green-200/60">
-                            {game.team}
-                          </p>
+                          <div className="space-y-1">
+                            <p className="text-xs font-semibold text-green-400">
+                              PROJECT LEAD
+                            </p>
+                            {game.user_profiles ? (
+                              <div className="flex items-center gap-2">
+                                {game.user_profiles.avatar_url && (
+                                  <img
+                                    src={game.user_profiles.avatar_url}
+                                    alt={game.user_profiles.full_name}
+                                    className="w-8 h-8 rounded-full border border-green-400/40"
+                                  />
+                                )}
+                                <div>
+                                  <p className="text-sm font-medium text-green-300">
+                                    {game.user_profiles.full_name}
+                                  </p>
+                                  <p className="text-xs text-green-200/60">
+                                    @{game.user_profiles.username}
+                                  </p>
+                                </div>
+                              </div>
+                            ) : (
+                              <p className="text-sm text-green-200/60">—</p>
+                            )}
+                          </div>
                         </div>
-
-                        <div className="flex items-end justify-end">
-                          <Button
-                            variant="ghost"
-                            size="sm"
-                            className="text-green-300 hover:bg-green-500/10"
-                          >
-                            Details →
-                          </Button>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              )}
             </div>
           </section>
 
