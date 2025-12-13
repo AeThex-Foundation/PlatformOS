@@ -1,4 +1,5 @@
 import { supabase } from "@/lib/supabase";
+import { aethexContributionService } from "@/lib/aethex-database-adapter";
 
 // API Base URL for fetch requests
 const API_BASE = import.meta.env.VITE_API_BASE || "";
@@ -280,6 +281,17 @@ export const aethexSocialService = {
       },
     );
     if (!resp.ok) throw new Error(await resp.text());
-    return await resp.json();
+    const result = await resp.json();
+    
+    if (status === "accepted" && result?.mentee_id) {
+      aethexContributionService.logContribution(
+        result.mentee_id,
+        "mentorship",
+        "Mentorship request accepted",
+        1
+      ).catch(err => console.warn("[Contributions] Failed to log mentorship:", err));
+    }
+    
+    return result;
   },
 };

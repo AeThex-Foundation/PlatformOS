@@ -1393,3 +1393,36 @@ export const aethexRoleService = {
     }
   },
 };
+
+// Contribution Services (for Discord bot integration)
+export const aethexContributionService = {
+  async logContribution(userId: string, contributionType: string, description: string, hoursLogged?: number) {
+    const response = await fetch('/api/contributions', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ 
+        user_id: userId, 
+        contribution_type: contributionType, 
+        description, 
+        hours_logged: hoursLogged 
+      })
+    });
+    if (!response.ok) {
+      console.error('[Contributions] Failed to log:', await response.text());
+      return null;
+    }
+    return response.json();
+  },
+
+  async getUserContributions(userId: string) {
+    const response = await fetch(`/api/contributions/${userId}`);
+    if (!response.ok) return [];
+    return response.json();
+  },
+
+  async getStats() {
+    const response = await fetch('/api/contributions/stats/summary');
+    if (!response.ok) return null;
+    return response.json();
+  }
+};
