@@ -1247,13 +1247,18 @@ export const aethexNotificationService = {
     message: string,
   ): Promise<void> {
     try {
-      await supabase.from("notifications").insert({
+      const { error } = await supabase.from("notifications").insert({
         user_id: userId,
         type,
         title,
         message,
       });
-    } catch {}
+      if (error) {
+        console.error("[Notifications] Failed to create:", error);
+      }
+    } catch (err) {
+      console.error("[Notifications] Create error:", err);
+    }
   },
 };
 
