@@ -21,12 +21,12 @@ export default function FoundationGetInvolved() {
     {
       icon: Users,
       title: "Join the Community",
-      description: "Connect with thousands of developers worldwide",
+      description: "Connect with thousands of learners and professionals worldwide",
       actions: [
         "Join our Discord server",
         "Attend community events",
         "Participate in discussions",
-        "Share your projects",
+        "Share your progress",
       ],
     },
     {
@@ -97,28 +97,28 @@ export default function FoundationGetInvolved() {
 
   const events = [
     {
-      title: "Game Jam - January 2025",
+      title: "Career Skills Challenge - January 2025",
       date: "Jan 25-27, 2025",
       type: "Competition",
       participants: "200+",
       prize: "$5K",
     },
     {
-      title: "Dev Talk Series",
+      title: "Tech Talk Series",
       date: "Every 2nd Tuesday",
       type: "Workshop",
       participants: "100+",
       prize: "Certificates",
     },
     {
-      title: "Roblox Creator Summit",
+      title: "Digital Literacy Summit",
       date: "Mar 15-17, 2025",
       type: "Conference",
       participants: "1K+",
       prize: "Sponsorships",
     },
     {
-      title: "Multiplayer Game Hackathon",
+      title: "Web Development Hackathon",
       date: "Feb 8-9, 2025",
       type: "Competition",
       participants: "150+",
@@ -128,21 +128,21 @@ export default function FoundationGetInvolved() {
 
   const mentorshipProgram = [
     {
-      role: "Junior Developer",
+      role: "Career Starter",
       duration: "12 weeks",
-      description: "Learn game development fundamentals with a mentor",
+      description: "Build foundational skills with personalized mentorship",
       commitment: "5-10 hours/week",
     },
     {
-      role: "Intermediate Developer",
+      role: "Skill Builder",
       duration: "8 weeks",
-      description: "Master advanced concepts and best practices",
+      description: "Master advanced concepts and industry best practices",
       commitment: "3-5 hours/week",
     },
     {
-      role: "Advanced Developer",
+      role: "Career Mentor",
       duration: "Ongoing",
-      description: "Mentor others and contribute to major projects",
+      description: "Guide others while advancing your leadership skills",
       commitment: "2-4 hours/week",
     },
   ];
@@ -173,8 +173,8 @@ export default function FoundationGetInvolved() {
                 Get Involved
               </h1>
               <p className="text-lg text-red-100/80 max-w-3xl">
-                Join our thriving community of developers. Whether you're just
-                starting or a seasoned pro, there's a place for you here.
+                Join our thriving community of learners and professionals. Whether you're 
+                building foundational skills or advancing your career, there's a place for you here.
               </p>
             </div>
           </section>
@@ -408,8 +408,8 @@ export default function FoundationGetInvolved() {
                 Ready to Join?
               </h2>
               <p className="text-lg text-red-100/80 mb-8">
-                Whether you want to learn, teach, build, or contribute, there's
-                a community of developers waiting for you.
+                Whether you want to learn new skills, mentor others, or contribute to 
+                workforce development, our community is here to support your growth.
               </p>
               <Button
                 className="bg-red-400 text-black shadow-[0_0_30px_rgba(239,68,68,0.35)] hover:bg-red-300"

@@ -52,11 +52,11 @@ interface Workshop {
 }
 
 const CATEGORIES = [
-  { value: "game-dev", label: "Game Development" },
   { value: "web-dev", label: "Web Development" },
   { value: "ai-ml", label: "AI & Machine Learning" },
   { value: "design", label: "Design" },
   { value: "business", label: "Business" },
+  { value: "digital-literacy", label: "Digital Literacy" },
 ];
 
 const difficultyColors: Record<string, string> = {
@@ -67,50 +67,50 @@ const difficultyColors: Record<string, string> = {
 
 const learningPaths = [
   {
-    title: "Game Developer Path",
-    description: "From zero to shipping your first game",
+    title: "Software Development Track",
+    description: "Build job-ready programming skills from fundamentals to deployment",
     courses: 8,
     hours: 40,
     icon: GraduationCap,
     gradient: "from-aethex-500 to-red-600",
-    skills: ["Unity", "C#", "Game Design", "2D/3D Art"],
+    skills: ["Programming", "Problem Solving", "Version Control", "Deployment"],
   },
   {
-    title: "Roblox Creator Path",
-    description: "Build professional Roblox experiences",
+    title: "Interactive Media Track",
+    description: "Create engaging digital experiences and applications",
     courses: 6,
     hours: 30,
     icon: Zap,
     gradient: "from-red-500 to-gold-500",
-    skills: ["Lua", "Roblox Studio", "Monetization", "UGC"],
+    skills: ["Scripting", "Digital Tools", "User Experience", "Content Creation"],
   },
   {
-    title: "Technical Artist Path",
-    description: "Master shaders, VFX, and visual tools",
+    title: "Digital Arts Track",
+    description: "Master visual design tools and creative technologies",
     courses: 5,
     hours: 25,
     icon: Target,
     gradient: "from-gold-500 to-amber-500",
-    skills: ["Shaders", "VFX", "Blender", "Substance"],
+    skills: ["Visual Design", "3D Modeling", "Animation", "Digital Illustration"],
   },
   {
-    title: "Game Designer Path",
-    description: "Learn mechanics, balance, and player psychology",
+    title: "Product Design Track",
+    description: "Learn user-centered design and project management",
     courses: 7,
     hours: 35,
     icon: Trophy,
     gradient: "from-amber-500 to-aethex-600",
-    skills: ["Systems Design", "Level Design", "UX", "Prototyping"],
+    skills: ["UX Research", "Prototyping", "Project Planning", "Team Collaboration"],
   },
 ];
 
 const sampleCourses: Course[] = [
   {
     id: "1",
-    slug: "intro-game-dev",
-    title: "Introduction to Game Development",
-    description: "Learn the fundamentals of game development, from concepts to your first playable prototype.",
-    category: "game-dev",
+    slug: "intro-programming",
+    title: "Introduction to Programming",
+    description: "Learn programming fundamentals including logic, problem-solving, and debugging techniques.",
+    category: "web-dev",
     difficulty: "beginner",
     instructor_name: "Sarah Mitchell",
     estimated_hours: 8,
@@ -119,10 +119,10 @@ const sampleCourses: Course[] = [
   },
   {
     id: "2",
-    slug: "unity-fundamentals",
-    title: "Unity Engine Fundamentals",
-    description: "Master the Unity game engine from installation to building complete games.",
-    category: "game-dev",
+    slug: "web-dev-fundamentals",
+    title: "Web Development Fundamentals",
+    description: "Master HTML, CSS, and JavaScript to build modern, responsive websites.",
+    category: "web-dev",
     difficulty: "beginner",
     instructor_name: "Sarah Mitchell",
     estimated_hours: 15,
@@ -131,10 +131,10 @@ const sampleCourses: Course[] = [
   },
   {
     id: "3",
-    slug: "advanced-csharp",
-    title: "Advanced C# for Game Developers",
-    description: "Deep dive into C# patterns, optimization techniques, and best practices.",
-    category: "game-dev",
+    slug: "advanced-javascript",
+    title: "Advanced JavaScript for Professionals",
+    description: "Deep dive into JavaScript patterns, optimization techniques, and best practices.",
+    category: "web-dev",
     difficulty: "intermediate",
     instructor_name: "David Okonkwo",
     estimated_hours: 12,
@@ -143,10 +143,10 @@ const sampleCourses: Course[] = [
   },
   {
     id: "4",
-    slug: "roblox-studio-mastery",
-    title: "Roblox Studio Mastery",
-    description: "Complete guide to Roblox game development, from basic mechanics to monetization.",
-    category: "game-dev",
+    slug: "digital-literacy-essentials",
+    title: "Digital Literacy Essentials",
+    description: "Complete guide to essential digital skills, from productivity tools to online safety.",
+    category: "digital-literacy",
     difficulty: "beginner",
     instructor_name: "Priya Sharma",
     estimated_hours: 20,
@@ -155,10 +155,10 @@ const sampleCourses: Course[] = [
   },
   {
     id: "5",
-    slug: "shader-programming",
-    title: "Shader Programming for Games",
-    description: "Learn HLSL/GLSL shader programming to create stunning visual effects.",
-    category: "design",
+    slug: "data-visualization",
+    title: "Data Visualization with Python",
+    description: "Learn to create compelling data visualizations using Python and modern libraries.",
+    category: "ai-ml",
     difficulty: "advanced",
     instructor_name: "David Okonkwo",
     estimated_hours: 18,
@@ -167,9 +167,9 @@ const sampleCourses: Course[] = [
   },
   {
     id: "6",
-    slug: "game-design-fundamentals",
-    title: "Game Design Fundamentals",
-    description: "Learn the principles of engaging game design, mechanics, and player psychology.",
+    slug: "ui-ux-design-fundamentals",
+    title: "UI/UX Design Fundamentals",
+    description: "Learn the principles of user-centered design, usability, and user experience.",
     category: "design",
     difficulty: "beginner",
     instructor_name: "Sarah Mitchell",
@@ -182,8 +182,8 @@ const sampleCourses: Course[] = [
 const sampleWorkshops: Workshop[] = [
   {
     id: "1",
-    title: "Live Game Jam: Build a Puzzle Game",
-    description: "Join us for a 3-hour live session where we build a complete puzzle game from scratch.",
+    title: "Code Challenge: Build a Web Application",
+    description: "Join us for a 3-hour live session where we build a complete web app from scratch.",
     instructor: "Sarah Mitchell",
     date: "2025-12-05",
     time: "14:00",
@@ -195,8 +195,8 @@ const sampleWorkshops: Workshop[] = [
   },
   {
     id: "2",
-    title: "Multiplayer Networking Deep Dive",
-    description: "Learn advanced networking concepts for real-time multiplayer games.",
+    title: "API Development Deep Dive",
+    description: "Learn advanced concepts for building and integrating REST APIs.",
     instructor: "James Park",
     date: "2025-12-12",
     time: "16:00",
@@ -272,7 +272,7 @@ export default function Programs() {
     <>
       <SEO
         pageTitle="Programs"
-        description="Free courses, workshops, and learning paths from the AeThex Foundation. Learn game development, design, and more."
+        description="Free workforce development programs, digital literacy courses, and career-ready training paths from the AeThex Foundation."
       />
       <Layout>
         <div className="relative min-h-screen bg-background text-foreground overflow-hidden pb-12">
@@ -292,7 +292,7 @@ export default function Programs() {
                       Programs
                     </h1>
                     <p className="text-muted-foreground">
-                      Free education from industry experts
+                      Workforce development and digital literacy training
                     </p>
                   </div>
                 </div>
@@ -301,26 +301,26 @@ export default function Programs() {
                   <Card className="bg-card/60 backdrop-blur-sm border-aethex-500/20 text-center">
                     <CardContent className="pt-6">
                       <div className="text-3xl font-bold text-aethex-400 mb-1">50+</div>
-                      <div className="text-sm text-muted-foreground">Free Courses</div>
+                      <div className="text-sm text-muted-foreground">Training Modules</div>
                     </CardContent>
                   </Card>
                   <Card className="bg-card/60 backdrop-blur-sm border-gold-500/20 text-center">
                     <CardContent className="pt-6">
                       <div className="text-3xl font-bold text-gold-400 mb-1">200+</div>
-                      <div className="text-sm text-muted-foreground">Video Hours</div>
+                      <div className="text-sm text-muted-foreground">Instructional Hours</div>
                     </CardContent>
                   </Card>
                   <Card className="bg-card/60 backdrop-blur-sm border-red-500/20 text-center">
                     <CardContent className="pt-6">
                       <div className="text-3xl font-bold text-red-400 mb-1">15K+</div>
-                      <div className="text-sm text-muted-foreground">Students</div>
+                      <div className="text-sm text-muted-foreground">Learners Trained</div>
                     </CardContent>
                   </Card>
                   <Card className="bg-card/60 backdrop-blur-sm border-amber-500/20 text-center">
                     <CardContent className="pt-6">
                       <div className="text-3xl font-bold text-amber-400 mb-1">4.8</div>
                       <div className="text-sm text-muted-foreground flex items-center justify-center gap-1">
-                        <Star className="h-4 w-4 fill-current" /> Avg Rating
+                        <Star className="h-4 w-4 fill-current" /> Program Rating
                       </div>
                     </CardContent>
                   </Card>
@@ -330,9 +330,9 @@ export default function Programs() {
 
             <section className="py-12 border-y border-border/30 bg-card/30">
               <div className="container mx-auto max-w-7xl px-4">
-                <h2 className="text-2xl font-bold mb-6">Learning Paths</h2>
+                <h2 className="text-2xl font-bold mb-6">Career-Ready Learning Paths</h2>
                 <p className="text-muted-foreground mb-8 max-w-2xl">
-                  Structured paths to take you from beginner to professional.
+                  Structured workforce training programs designed to build job-ready skills from fundamentals to professional competency.
                 </p>
                 <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
                   {learningPaths.map((path, index) => {

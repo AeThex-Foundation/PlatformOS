@@ -48,8 +48,8 @@ export default function Resources() {
   const [resources] = useState<Resource[]>([
     {
       id: "1",
-      title: "Game Design Document Template",
-      description: "Comprehensive GDD template with sections for core mechanics, narrative, technical specs, and monetization. Used by 500+ developers.",
+      title: "Project Planning Template",
+      description: "Comprehensive project template with sections for requirements, milestones, technical specs, and deliverables. Used by 500+ learners.",
       type: "template",
       category: "Design",
       format: "PDF",
@@ -57,21 +57,21 @@ export default function Resources() {
       downloads: 1242,
       featured: true,
       tags: ["Design", "Documentation", "Planning"],
-      downloadUrl: "/downloads/gdd-template.pdf",
-      previewUrl: "/previews/gdd-template",
+      downloadUrl: "/downloads/project-template.pdf",
+      previewUrl: "/previews/project-template",
     },
     {
       id: "2",
-      title: "Unity Character Controller Script",
-      description: "Production-ready character controller with movement, jumping, crouching, and camera control. Fully commented and customizable.",
+      title: "React Component Starter Kit",
+      description: "Production-ready React components with state management, routing, and API integration. Fully commented and customizable.",
       type: "template",
       category: "Code",
-      format: "C# Script",
+      format: "ZIP",
       size: "45 KB",
       downloads: 2156,
       featured: true,
-      tags: ["Unity", "Character", "Movement"],
-      downloadUrl: "/downloads/unity-character-controller.cs",
+      tags: ["React", "Components", "Web Development"],
+      downloadUrl: "/downloads/react-starter-kit.zip",
     },
     {
       id: "3",
@@ -89,7 +89,7 @@ export default function Resources() {
     {
       id: "4",
       title: "UI/UX Best Practices Guide",
-      description: "Complete guide to game UI/UX design covering menus, HUDs, accessibility, and player feedback. 45 pages with examples.",
+      description: "Complete guide to UI/UX design covering layouts, navigation, accessibility, and user feedback. 45 pages with examples.",
       type: "guide",
       category: "Design",
       format: "PDF",
@@ -102,29 +102,29 @@ export default function Resources() {
     },
     {
       id: "5",
-      title: "Shader Collection Pack",
-      description: "20+ optimized shaders for Unity and Unreal Engine including water, fire, dissolve, and post-processing effects.",
+      title: "CSS Animation Collection",
+      description: "20+ ready-to-use CSS animations and transitions including fade, slide, bounce, and loading effects.",
       type: "asset",
       category: "Graphics",
       format: "ZIP",
       size: "5.6 MB",
       downloads: 3421,
       featured: false,
-      tags: ["Shaders", "VFX", "Graphics"],
-      downloadUrl: "/downloads/shader-pack.zip",
+      tags: ["CSS", "Animation", "Web Design"],
+      downloadUrl: "/downloads/css-animations.zip",
     },
     {
       id: "6",
-      title: "AI Behavior Tree Framework",
-      description: "Modular behavior tree system with visual editor. Supports custom nodes, blackboard, and debugging. MIT licensed.",
+      title: "Python Automation Scripts",
+      description: "Modular automation toolkit with file processing, web scraping, and data manipulation scripts. MIT licensed.",
       type: "tool",
       category: "AI",
-      format: "Unity Package",
+      format: "ZIP",
       size: "1.2 MB",
       downloads: 987,
       featured: false,
-      tags: ["AI", "Tools", "Unity"],
-      downloadUrl: "/downloads/behavior-tree.unitypackage",
+      tags: ["Python", "Automation", "Tools"],
+      downloadUrl: "/downloads/python-automation.zip",
     },
     {
       id: "7",
@@ -155,21 +155,21 @@ export default function Resources() {
     },
     {
       id: "9",
-      title: "Pixel Art Sprite Pack - Fantasy",
-      description: "300+ pixel art sprites including characters, monsters, items, and tilesets. 16x16 and 32x32 variants included.",
+      title: "Icon & Illustration Pack",
+      description: "300+ vector icons and illustrations for web and mobile applications. SVG and PNG variants included.",
       type: "asset",
       category: "Graphics",
       format: "ZIP",
       size: "24.5 MB",
       downloads: 4521,
       featured: true,
-      tags: ["Pixel Art", "Sprites", "Fantasy", "RPG"],
-      downloadUrl: "/downloads/fantasy-pixel-sprites.zip",
+      tags: ["Icons", "Illustrations", "Design", "UI"],
+      downloadUrl: "/downloads/icon-illustration-pack.zip",
     },
     {
       id: "10",
-      title: "Game Audio Toolkit",
-      description: "250+ royalty-free sound effects and 10 ambient music tracks. Includes UI sounds, combat, environment, and more.",
+      title: "Presentation Audio Toolkit",
+      description: "250+ royalty-free sound effects and 10 background music tracks for presentations, tutorials, and content creation.",
       type: "asset",
       category: "Audio",
       format: "ZIP",
@@ -177,59 +177,59 @@ export default function Resources() {
       downloads: 2876,
       featured: false,
       tags: ["Audio", "SFX", "Music", "Royalty-Free"],
-      downloadUrl: "/downloads/game-audio-toolkit.zip",
+      downloadUrl: "/downloads/audio-toolkit.zip",
     },
     {
       id: "11",
-      title: "Inventory System (Unity)",
-      description: "Drag-and-drop inventory with stackable items, equipment slots, crafting, and save/load support. Fully documented.",
+      title: "Database Schema Templates",
+      description: "Ready-to-use database schemas for common applications including user management, e-commerce, and content systems.",
       type: "tool",
       category: "Systems",
-      format: "Unity Package",
+      format: "ZIP",
       size: "2.8 MB",
       downloads: 1543,
       featured: false,
-      tags: ["Unity", "Inventory", "UI", "Systems"],
-      downloadUrl: "/downloads/inventory-system.unitypackage",
+      tags: ["Database", "Schema", "SQL", "Systems"],
+      downloadUrl: "/downloads/database-schemas.zip",
     },
     {
       id: "12",
-      title: "Game Monetization Playbook",
-      description: "Strategic guide to ethical game monetization. Covers F2P, premium, DLC, battle passes, and cosmetics with case studies.",
+      title: "Digital Literacy Workbook",
+      description: "Comprehensive workbook covering essential digital skills. Includes exercises, assessments, and real-world scenarios.",
       type: "guide",
       category: "Business",
       format: "PDF",
       size: "5.4 MB",
       downloads: 987,
       featured: false,
-      tags: ["Monetization", "Business", "F2P", "Strategy"],
-      downloadUrl: "/downloads/monetization-playbook.pdf",
+      tags: ["Digital Literacy", "Workbook", "Skills", "Training"],
+      downloadUrl: "/downloads/digital-literacy-workbook.pdf",
     },
     {
       id: "13",
-      title: "Dialogue System Framework",
-      description: "Node-based dialogue system with branching conversations, conditions, variables, and localization support.",
+      title: "API Documentation Template",
+      description: "Professional API documentation template with endpoint descriptions, examples, and authentication guides.",
       type: "tool",
       category: "Narrative",
-      format: "Unity Package",
+      format: "ZIP",
       size: "1.9 MB",
       downloads: 1122,
       featured: false,
-      tags: ["Dialogue", "Narrative", "Unity", "Localization"],
-      downloadUrl: "/downloads/dialogue-system.unitypackage",
+      tags: ["API", "Documentation", "Template", "REST"],
+      downloadUrl: "/downloads/api-docs-template.zip",
     },
     {
       id: "14",
-      title: "3D Low Poly Environment Kit",
-      description: "Modular low-poly environment assets including buildings, props, vegetation, and terrain pieces. Optimized for mobile.",
+      title: "Website Template Collection",
+      description: "Responsive website templates for portfolios, landing pages, and business sites. Mobile-optimized.",
       type: "asset",
       category: "3D",
       format: "ZIP",
       size: "89 MB",
       downloads: 1876,
       featured: false,
-      tags: ["3D", "Low Poly", "Environment", "Mobile"],
-      downloadUrl: "/downloads/lowpoly-environment.zip",
+      tags: ["HTML", "CSS", "Templates", "Responsive"],
+      downloadUrl: "/downloads/website-templates.zip",
     },
     {
       id: "15",
@@ -350,7 +350,7 @@ export default function Resources() {
     <>
       <SEO
         pageTitle="Resource Library"
-        description="Download Foundation resources - guides, templates, assets, and tools for game development"
+        description="Download free workforce development resources - guides, templates, and digital literacy materials from the AeThex Foundation"
       />
       <Layout>
         <div className="container mx-auto px-4 py-16 space-y-12">
@@ -365,7 +365,7 @@ export default function Resources() {
               </span>
             </h1>
             <p className="text-xl text-muted-foreground max-w-3xl">
-              Free, open-source resources to accelerate your game development journey
+              Free, open-source resources to accelerate your workforce development and digital literacy journey
             </p>
           </section>
 
@@ -528,7 +528,7 @@ export default function Resources() {
             <Package className="h-12 w-12 text-aethex-400 mx-auto mb-4" />
             <h2 className="text-2xl font-bold mb-2">Have a resource to share?</h2>
             <p className="text-muted-foreground mb-6">
-              Contribute your guides, templates, or tools to help the community
+              Contribute your educational resources to help learners in our community
             </p>
             <Button className="bg-gradient-to-r from-aethex-500 to-gold-500">
               Submit Resource

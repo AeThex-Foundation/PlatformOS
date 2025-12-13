@@ -56,7 +56,7 @@ export default function Index() {
   const foundationNav = [
     {
       title: "Programs",
-      description: "Learn game development with workshops, courses, and hands-on projects",
+      description: "Workforce training through workshops, certifications, and project-based learning",
       icon: GraduationCap,
       color: "from-aethex-500 to-red-600",
       link: "/programs",
@@ -64,15 +64,15 @@ export default function Index() {
     },
     {
       title: "Open Source",
-      description: "Tools, frameworks, and libraries for building better games",
+      description: "Real-world tools and frameworks for hands-on technical skill building",
       icon: Code,
       color: "from-red-500 to-gold-500",
       link: "/hub/community",
-      audience: "Developers",
+      audience: "Learners",
     },
     {
       title: "Community",
-      description: "Connect with developers, join teams, and collaborate on projects",
+      description: "Connect with mentors, join collaborative teams, and grow professionally",
       icon: Users,
       color: "from-gold-500 to-amber-500",
       link: "/community",
@@ -80,7 +80,7 @@ export default function Index() {
     },
     {
       title: "Achievements",
-      description: "Build your portfolio and showcase your skills with badges",
+      description: "Industry-recognized credentials and portfolio development",
       icon: Award,
       color: "from-amber-500 to-aethex-600",
       link: "/achievements",
@@ -98,58 +98,58 @@ export default function Index() {
       tags: ["Courses", "Progress"],
     },
     {
-      title: "Project Showcase",
-      description: "Explore and contribute to open source game dev tools",
+      title: "Skills Portfolio",
+      description: "Explore and contribute to open-source learning tools",
       icon: Code,
       color: "from-red-500 to-gold-500",
       link: "/hub/community",
-      tags: ["Tools", "Libraries"],
+      tags: ["Projects", "Skills"],
     },
     {
-      title: "Developer Profile",
-      description: "Public portfolio with verifiable achievements and contributions",
+      title: "Learner Profile",
+      description: "Public portfolio with verifiable credentials and achievements",
       icon: Award,
       color: "from-gold-500 to-amber-500",
       link: "/profile/me",
-      tags: ["Portfolio", "Badges"],
+      tags: ["Portfolio", "Credentials"],
     },
     {
       title: "Resource Center",
-      description: "Download tools, templates, and assets for your projects",
+      description: "Download guides, templates, and training materials",
       icon: Download,
       color: "from-amber-500 to-aethex-600",
       link: "/resources",
-      tags: ["Tools", "Assets"],
+      tags: ["Guides", "Materials"],
     },
   ];
 
   const showcaseImpact = [
     {
-      title: "Developers Trained",
+      title: "Learners Trained",
       metric: 5000,
       suffix: "+",
-      description: "Through workshops and online courses",
+      description: "Through workforce development programs",
       color: "bg-aethex-500/10 border-aethex-400/30",
     },
     {
-      title: "Open Source Tools",
+      title: "Skill-Building Projects",
       metric: 25,
       suffix: "+",
-      description: "Active projects and libraries maintained",
+      description: "Hands-on learning opportunities maintained",
       color: "bg-red-500/10 border-red-400/30",
     },
     {
       title: "Community Members",
       metric: 10000,
       suffix: "+",
-      description: "Active developers in our network",
+      description: "Active learners in our professional network",
       color: "bg-gold-500/10 border-gold-400/30",
     },
     {
-      title: "Resources Shared",
+      title: "Educational Resources",
       metric: 100,
       suffix: "+",
-      description: "Free tutorials, guides, and templates",
+      description: "Free digital literacy materials",
       color: "bg-amber-500/10 border-amber-400/30",
     },
   ];
@@ -170,7 +170,7 @@ export default function Index() {
     <>
       <SEO
         pageTitle="Foundation"
-        description="AeThex Foundation: Learn. Build. Connect. Open-source tools, education, and community for game developers."
+        description="AeThex Foundation: Advancing workforce development and digital literacy through hands-on mentorship, project-based learning, and open-source technology education."
         canonical={
           typeof window !== "undefined"
             ? window.location.href
@@ -220,10 +220,11 @@ export default function Index() {
                     </span>
                   </h1>
                   <h2 className="text-2xl lg:text-3xl text-gradient animate-fade-in bg-gradient-to-r from-red-400 to-gold-400 bg-clip-text text-transparent">
-                    Learn. Build. Connect.
+                    Empowering Tomorrow's Workforce
                   </h2>
                   <p className="text-lg text-muted-foreground max-w-3xl mx-auto animate-slide-up">
-                    Open-source tools, educational workshops, and a thriving community for game developers. Join the Foundation and build your future.
+                    Advancing <strong className="text-red-300">workforce development</strong> and{" "}
+                    <strong className="text-red-300">digital literacy</strong> through hands-on mentorship, project-based learning, and open-source technology education.
                   </p>
                 </div>
               </div>

@@ -34,7 +34,7 @@ export default function FoundationAbout() {
                 About AeThex Foundation
               </h1>
               <p className="text-lg text-red-100/80 max-w-2xl">
-                Empowering developers through education and open source
+                Advancing workforce development and digital literacy through accessible education
               </p>
             </div>
           </section>
@@ -45,9 +45,10 @@ export default function FoundationAbout() {
               <div className="rounded-lg border border-red-400/30 bg-red-950/20 p-8 mb-12">
                 <h2 className="text-2xl font-bold text-red-300 mb-4">Our Mission</h2>
                 <p className="text-red-200/80 text-lg leading-relaxed">
-                  AeThex Foundation is dedicated to democratizing game development through education, open-source 
-                  software, and community engagement. We believe that making powerful development tools and knowledge 
-                  freely available lifts the entire industry and empowers creators of all skill levels.
+                  AeThex Foundation is dedicated to advancing <strong className="text-red-300">workforce development</strong> and{" "}
+                  <strong className="text-red-300">digital literacy</strong> through accessible education, open-source 
+                  technology, and community mentorship. We believe that making professional-grade training and resources 
+                  freely available empowers learners of all backgrounds to build meaningful careers in technology.
                 </p>
               </div>
 
@@ -60,29 +61,29 @@ export default function FoundationAbout() {
                   </CardHeader>
                   <CardContent>
                     <p className="text-red-200/70">
-                      Building inclusive communities of passionate developers
+                      Building inclusive networks for collaborative professional growth
                     </p>
                   </CardContent>
                 </Card>
                 <Card className="bg-red-950/20 border-red-400/30">
                   <CardHeader>
                     <Code className="h-8 w-8 text-red-400 mb-2" />
-                    <CardTitle className="text-red-300">Open Source</CardTitle>
+                    <CardTitle className="text-red-300">Digital Literacy</CardTitle>
                   </CardHeader>
                   <CardContent>
                     <p className="text-red-200/70">
-                      Maintaining and advancing open-source projects
+                      Teaching essential technology skills for the modern workforce
                     </p>
                   </CardContent>
                 </Card>
                 <Card className="bg-red-950/20 border-red-400/30">
                   <CardHeader>
                     <BookOpen className="h-8 w-8 text-red-400 mb-2" />
-                    <CardTitle className="text-red-300">Education</CardTitle>
+                    <CardTitle className="text-red-300">Workforce Training</CardTitle>
                   </CardHeader>
                   <CardContent>
                     <p className="text-red-200/70">
-                      Creating accessible learning resources for all levels
+                      Creating job-ready training programs for all skill levels
                     </p>
                   </CardContent>
                 </Card>
@@ -93,7 +94,7 @@ export default function FoundationAbout() {
                   </CardHeader>
                   <CardContent>
                     <p className="text-red-200/70">
-                      Supporting the next generation of game developers
+                      Supporting the next generation of technology professionals
                     </p>
                   </CardContent>
                 </Card>
