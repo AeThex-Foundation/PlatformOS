@@ -4,7 +4,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { useAccount, useChainId, useSwitchChain } from "wagmi";
 import Layout from "@/components/Layout";
 import SEO from "@/components/SEO";
-import { Card } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -103,6 +103,36 @@ export default function Governance() {
                   Participate in on-chain governance. Create proposals, vote with {currentContracts.tokenSymbol} tokens, and shape the future of the Foundation.
                 </p>
               </div>
+              
+              {/* Transparency Section */}
+              <Card className="bg-gradient-to-br from-red-950/30 to-black/40 border-red-500/20 mt-6">
+                <CardContent className="p-6 space-y-4">
+                  <h3 className="text-lg font-bold text-white">How Our DAO Works</h3>
+                  <div className="grid md:grid-cols-3 gap-4 text-sm">
+                    <div className="space-y-2">
+                      <p className="font-semibold text-red-300">AeThex Passport</p>
+                      <p className="text-gray-400">
+                        Your Passport is your verified identity across all AeThex properties. 
+                        It tracks your contributions, skills, and reputation within the ecosystem.
+                      </p>
+                    </div>
+                    <div className="space-y-2">
+                      <p className="font-semibold text-red-300">Governance Tokens</p>
+                      <p className="text-gray-400">
+                        {currentContracts.tokenSymbol} tokens represent voting power. Earn them through 
+                        contributions, mentorship, and community participation. 1 token = 1 vote.
+                      </p>
+                    </div>
+                    <div className="space-y-2">
+                      <p className="font-semibold text-red-300">Proposal Process</p>
+                      <p className="text-gray-400">
+                        Anyone with tokens can create proposals. After a review period, 
+                        token holders vote. Approved proposals execute automatically via smart contract.
+                      </p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
               <WalletConnect />
             </div>
           </section>

@@ -60,16 +60,16 @@ export default function About() {
           <div className="space-y-6 animate-slide-down">
             <div className="space-y-2">
               <Badge className="w-fit bg-red-600/50 text-red-100">
-                Non-Profit Guardian
+                501(c)(3) Nonprofit Organization
               </Badge>
               <h1 className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-red-300 via-pink-300 to-red-300 bg-clip-text text-transparent">
                 AeThex Foundation
               </h1>
             </div>
             <p className="text-xl text-gray-300 max-w-2xl leading-relaxed">
-              The heart of our ecosystem. We believe in building community,
-              empowering developers, and advancing game development through
-              open-source innovation and mentorship.
+              Advancing <strong className="text-red-300">workforce development</strong> and{" "}
+              <strong className="text-red-300">digital literacy</strong> through hands-on 
+              mentorship, project-based learning, and open-source technology education.
             </p>
             <div className="flex flex-wrap gap-3">
               <Button
@@ -247,44 +247,51 @@ export default function About() {
               Our Mission
             </h2>
             <Card className="bg-gradient-to-br from-red-950/40 to-red-900/20 border-red-500/20">
-              <CardContent className="p-6 space-y-4">
-                <p className="text-gray-300 text-lg leading-relaxed">
-                  The AeThex Foundation is a non-profit organization dedicated
-                  to advancing game development through community-driven
-                  mentorship, open-source innovation, and educational
-                  excellence. We believe that great developers are built, not
-                  born—and that the future of gaming lies in collaboration,
-                  transparency, and shared knowledge.
-                </p>
+              <CardContent className="p-6 space-y-6">
+                <div className="space-y-4">
+                  <p className="text-gray-300 text-lg leading-relaxed">
+                    The AeThex Foundation is a 501(c)(3) nonprofit organization dedicated to{" "}
+                    <strong className="text-white">workforce development</strong> and{" "}
+                    <strong className="text-white">digital literacy</strong> in emerging technology fields.
+                    Through structured mentorship programs, project-based learning, and open-source 
+                    educational resources, we prepare individuals for careers in software development, 
+                    digital media production, and creative technology.
+                  </p>
+                  <p className="text-gray-400 leading-relaxed">
+                    We believe that technical skills are best developed through real-world application. 
+                    Our programs connect learners with experienced professionals who guide them through 
+                    completing portfolio-ready projects, building the practical experience employers seek.
+                  </p>
+                </div>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   <div className="space-y-2">
                     <h3 className="font-semibold text-red-300 flex items-center gap-2">
-                      <Users className="h-5 w-5" />
-                      Community is Our Core
+                      <GraduationCap className="h-5 w-5" />
+                      Workforce Development
                     </h3>
                     <p className="text-sm text-gray-400">
-                      Building lasting relationships and support networks within
-                      game development.
+                      Preparing individuals for technology careers through 
+                      hands-on training and mentorship with industry professionals.
                     </p>
                   </div>
                   <div className="space-y-2">
                     <h3 className="font-semibold text-red-300 flex items-center gap-2">
                       <Code className="h-5 w-5" />
-                      Open Innovation
+                      Digital Literacy
                     </h3>
                     <p className="text-sm text-gray-400">
-                      Advancing the industry through open-source Axiom Protocol
-                      and shared tools.
+                      Teaching essential technical skills including programming, 
+                      version control, and collaborative development practices.
                     </p>
                   </div>
                   <div className="space-y-2">
                     <h3 className="font-semibold text-red-300 flex items-center gap-2">
-                      <GraduationCap className="h-5 w-5" />
-                      Excellence & Growth
+                      <Users className="h-5 w-5" />
+                      Community Impact
                     </h3>
                     <p className="text-sm text-gray-400">
-                      Mentoring developers to ship real products and achieve
-                      their potential.
+                      Creating pathways to economic opportunity through accessible, 
+                      project-based technology education.
                     </p>
                   </div>
                 </div>

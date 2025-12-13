@@ -288,12 +288,43 @@ export default function Donate() {
             
             <div className="space-y-4">
               <h1 className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-red-400 via-amber-400 to-red-400 bg-clip-text text-transparent">
-                Help Build the Digital Frontier
+                Fund the Future Workforce
               </h1>
-              <p className="text-xl text-gray-300 max-w-2xl leading-relaxed">
-                Your donation funds hands-on game development training for local talent. Every dollar trains students, awards scholarships, and launches careers in the creative industry.
+              <p className="text-xl text-gray-300 max-w-3xl leading-relaxed">
+                Your donation directly funds <strong className="text-white">workforce development</strong> and{" "}
+                <strong className="text-white">digital literacy</strong> programs. Every dollar goes toward 
+                training the next generation of technology professionals through hands-on mentorship and 
+                project-based learning.
               </p>
             </div>
+            
+            {/* Impact Blueprint */}
+            <Card className="bg-gradient-to-r from-green-950/30 via-emerald-950/20 to-green-950/30 border-green-500/30">
+              <CardContent className="p-6">
+                <h3 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
+                  <Target className="h-5 w-5 text-green-400" />
+                  Your Impact, Quantified
+                </h3>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+                  <div className="space-y-1">
+                    <p className="text-2xl font-bold text-green-400">$10</p>
+                    <p className="text-xs text-gray-400">= 1 hour of mentorship</p>
+                  </div>
+                  <div className="space-y-1">
+                    <p className="text-2xl font-bold text-green-400">$50</p>
+                    <p className="text-xs text-gray-400">= 1 student's monthly tools</p>
+                  </div>
+                  <div className="space-y-1">
+                    <p className="text-2xl font-bold text-green-400">$250</p>
+                    <p className="text-xs text-gray-400">= 1 complete training sprint</p>
+                  </div>
+                  <div className="space-y-1">
+                    <p className="text-2xl font-bold text-green-400">$1,000</p>
+                    <p className="text-xs text-gray-400">= 1 career launched</p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
             
             {/* Live Stats Dashboard */}
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
