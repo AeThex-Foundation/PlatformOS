@@ -76,10 +76,10 @@ export default function OpportunityPostForm() {
                 </Button>
                 <Button
                   variant="ghost"
-                  onClick={() => navigate("/opportunities")}
+                  onClick={() => navigate("/gig-radar")}
                   className="flex-1"
                 >
-                  View Opportunities
+                  View Gigs
                 </Button>
               </div>
             </CardContent>
@@ -133,7 +133,7 @@ export default function OpportunityPostForm() {
         title: "Success",
         description: "Opportunity posted successfully!",
       });
-      navigate(`/opportunities/${newOpportunity.id}`);
+      navigate(`/gig-radar/${newOpportunity.id}`);
     } catch (error) {
       console.error("Failed to create opportunity:", error);
       toast({
@@ -164,10 +164,10 @@ export default function OpportunityPostForm() {
                 variant="ghost"
                 size="sm"
                 className="mb-6 text-slate-400 hover:text-white"
-                onClick={() => navigate("/opportunities")}
+                onClick={() => navigate("/gig-radar")}
               >
                 <ArrowLeft className="h-4 w-4 mr-2" />
-                Back to Opportunities
+                Back to Gig Radar
               </Button>
 
               <div className="flex items-center gap-3 mb-4">

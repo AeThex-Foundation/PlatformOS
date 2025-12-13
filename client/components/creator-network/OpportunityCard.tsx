@@ -100,7 +100,7 @@ export function OpportunityCard({ opportunity }: OpportunityCardProps) {
 
         <div className="mt-auto pt-4 border-t border-slate-700">
           <Button
-            onClick={() => navigate(`/opportunities/${opportunity.id}`)}
+            onClick={() => navigate(`/gig-radar/${opportunity.id}`)}
             className="w-full"
             variant="outline"
           >
