@@ -351,7 +351,7 @@ export default function MentorshipPrograms() {
                     size="lg"
                     className="border-emerald-400/50 text-emerald-200 hover:border-emerald-400 hover:bg-emerald-500/10 hover-lift"
                   >
-                    <Link to="/docs">Program Details</Link>
+                    <Link to="/programs">Program Details</Link>
                   </Button>
                 </div>
               </div>

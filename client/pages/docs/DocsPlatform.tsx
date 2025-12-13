@@ -8,487 +8,384 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
-  LayoutDashboard,
-  IdCard,
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import {
+  GraduationCap,
+  BookOpen,
   Users,
-  ActivitySquare,
-  Sparkles,
-  Compass,
-  Workflow,
-  ShieldCheck,
-  Database,
-  BarChart3,
-  Globe,
+  Download,
+  HelpCircle,
   ArrowRight,
-  Link as LinkIcon,
+  CheckCircle2,
+  Clock,
+  Award,
+  MessageCircle,
+  FileText,
+  Compass,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import DocsLayout from "@/components/docs/DocsLayout";
 
-const platformPillars = [
+const platformFeatures = [
   {
-    title: "Unified dashboard",
+    title: "Training Programs",
     description:
-      "Monitor deployments, live metrics, and release health from a single control surface. Jump into incidents, approvals, and audit trails without leaving the workspace.",
-    icon: LayoutDashboard,
-    href: "/dashboard",
-    cta: "Visit dashboard",
+      "Browse and enroll in free courses across Interactive Media, Web Development, Creative Technology, and Career Skills.",
+    icon: BookOpen,
+    href: "/programs",
+    cta: "View Programs",
   },
   {
-    title: "AeThex Passport",
+    title: "Course Downloads",
     description:
-      "Give builders portable identity with verified skills, achievements, and cross-product progress synced to their Passport profile.",
-    icon: IdCard,
-    href: "/passport/me",
-    cta: "Open passport",
+      "Access free PDFs, code templates, project files, and supplementary materials for all courses.",
+    icon: Download,
+    href: "/downloads",
+    cta: "Browse Downloads",
   },
   {
-    title: "Collaboration",
+    title: "Mentorship Program",
     description:
-      "Coordinate teams with realms, role-based access, and shared project templates. Invite talent directly from the community directory.",
+      "Connect with industry professionals for personalized guidance, code reviews, and career advice.",
     icon: Users,
-    href: "/community",
-    cta: "Meet the community",
-  },
-  {
-    title: "Live operations",
-    description:
-      "Run live experiences with analytics, status pages, and automated incident workflows wired into AeThex services.",
-    icon: ActivitySquare,
-    href: "/status",
-    cta: "Check status",
-  },
-];
-
-const collaborationWorkflows = [
-  {
-    label: "Onboard & align",
-    description:
-      "Welcome teammates through the guided onboarding flow, capture their interests, and assign the right mentorship programs from day one.",
-    highlight:
-      "Onboarding modules cover personal info, interests, and project preferences so teams ramp quickly.",
-  },
-  {
-    label: "Build together",
-    description:
-      "Kick off projects with shared canvases, synced task boards, and CLI-generated environments. Use the realm switcher to target the correct workspace.",
-    highlight:
-      "In-app toasts notify collaborators when schema changes, deployments, or reviews need attention.",
-  },
-  {
-    label: "Launch & iterate",
-    description:
-      "Promote builds through AeThex Deploy, track KPIs in the analytics feed, and publish release notes via the changelog tools.",
-    highlight:
-      "Community announcements and blog posts keep players and stakeholders in the loop automatically.",
-  },
-];
-
-const experienceModules = [
-  {
-    name: "Social feed",
-    description:
-      "Share updates, prototypes, and patch notes in the feed. The composer supports media, Markdown, and rollout tags for targeted audiences.",
-    href: "/feed",
-  },
-  {
-    name: "Mentorship programs",
-    description:
-      "Match emerging studios with veteran advisors. Outline project goals, track sessions, and graduate mentors into full collaborators.",
     href: "/mentorship",
+    cta: "Find a Mentor",
   },
   {
-    name: "Community showcases",
+    title: "Student Dashboard",
     description:
-      "Highlight standout creators, publish case studies, and route interested partners to booking forms right from the community page.",
+      "Track your progress, view enrolled courses, earn certificates, and manage your learning journey.",
+    icon: GraduationCap,
+    href: "/dashboard",
+    cta: "Go to Dashboard",
+  },
+];
+
+const frequentlyAskedQuestions = [
+  {
+    question: "Are the programs really free?",
+    answer:
+      "Yes! All AeThex Foundation training programs are 100% free. We're funded through grants, donations, and community support to provide workforce development opportunities at no cost to learners.",
+  },
+  {
+    question: "How do I enroll in a course?",
+    answer:
+      "First, create a free AeThex Passport account at /onboarding. Once logged in, visit /programs to browse available courses and click 'Enroll' on any course you'd like to take. You can enroll in multiple courses at once.",
+  },
+  {
+    question: "Do I need prior experience?",
+    answer:
+      "No prior experience is required for beginner-level courses. Our curriculum is designed to take you from complete beginner to job-ready. Just bring curiosity and commitment to learn!",
+  },
+  {
+    question: "How long does it take to complete a course?",
+    answer:
+      "Course length varies by track. Most individual modules take 1-3 hours. Complete learning tracks (like Interactive Media or Web Development) typically take 4-12 months at a pace of 5-10 hours per week.",
+  },
+  {
+    question: "Are there certificates?",
+    answer:
+      "Yes! You'll receive a digital certificate for each completed course that you can add to your LinkedIn profile and resume. Certificates verify the skills you've learned.",
+  },
+  {
+    question: "Can I learn at my own pace?",
+    answer:
+      "Absolutely. All courses are self-paced with no strict deadlines. You can start, pause, and resume whenever works for your schedule. Some cohort-based programs may have set schedules.",
+  },
+  {
+    question: "How does mentorship work?",
+    answer:
+      "After enrolling in courses, you can apply for our mentorship program at /mentorship. If matched, you'll have regular 1:1 sessions with an industry professional who can provide personalized guidance and career advice.",
+  },
+  {
+    question: "What software/tools do I need?",
+    answer:
+      "For most web development courses, just a computer with a web browser. For game development, you'll need to download Unity (free) or Roblox Studio (free). Each course lists specific requirements at the start.",
+  },
+  {
+    question: "Is there community support?",
+    answer:
+      "Yes! Join our Discord community to connect with other learners, ask questions, share projects, and get help. Visit /community for links and more information.",
+  },
+  {
+    question: "How do I get help if I'm stuck?",
+    answer:
+      "Multiple support options: 1) Ask in our Discord community, 2) Connect with a mentor, 3) Review course materials and FAQs, 4) Contact support at support@aethex.tech for technical issues.",
+  },
+];
+
+const studentResources = [
+  {
+    title: "Getting Started Guide",
+    description: "Step-by-step enrollment walkthrough for new students.",
+    href: "/docs/getting-started",
+    icon: Compass,
+  },
+  {
+    title: "Course Curriculum",
+    description: "Detailed syllabi and learning outcomes for all tracks.",
+    href: "/docs/curriculum",
+    icon: FileText,
+  },
+  {
+    title: "Learning Guides",
+    description: "Tutorials and step-by-step project walkthroughs.",
+    href: "/docs/tutorials",
+    icon: BookOpen,
+  },
+  {
+    title: "Community & Support",
+    description: "Connect with other learners and get help.",
     href: "/community",
-  },
-  {
-    name: "Profile passport",
-    description:
-      "Curate public achievements, experience levels, and verified skill badges. Use the passport summary widget across marketing surfaces.",
-    href: "/profile",
+    icon: MessageCircle,
   },
 ];
 
-const analyticsHighlights = [
+const successMetrics = [
   {
-    title: "Realtime insights",
-    detail:
-      "Project metrics stream into dashboards with per-environment filters. Combine ingestion data with custom signals exposed via the REST API.",
-    icon: BarChart3,
+    stat: "1,000+",
+    label: "Students Enrolled",
+    icon: Users,
   },
   {
-    title: "Governed data",
-    detail:
-      "Role-aware views ensure sensitive dashboards only appear for authorized users. Export snapshots or schedule recurring digests.",
-    icon: ShieldCheck,
+    stat: "95%",
+    label: "Completion Rate",
+    icon: CheckCircle2,
   },
   {
-    title: "Operational history",
-    detail:
-      "Every deployment, incident, and advisory event lands in the shared timeline so teams can audit changes months later.",
-    icon: Database,
-  },
-];
-
-const governanceChecklist = [
-  "OAuth connections let studios link third-party identity providers for single sign-on and group provisioning.",
-  "Realm switcher enforces scoped access to projects, assets, and financial data.",
-  "Compliance exports bundle audit logs, access reviews, and deployment manifests for regulatory submissions.",
-  "Automated alerts surface risk when environments drift or policy checks fail during deploys.",
-];
-
-const resourceLinks = [
-  {
-    title: "Explore onboarding",
-    href: "/onboarding",
-    label: "Review builder flow",
+    stat: "4.8/5",
+    label: "Average Rating",
+    icon: Award,
   },
   {
-    title: "Configure OAuth",
-    href: "/docs/api#authentication",
-    label: "Manage identity",
-  },
-  {
-    title: "Launch new project",
-    href: "/projects/new",
-    label: "Start from template",
-  },
-  {
-    title: "Track live status",
-    href: "/status",
-    label: "Monitor ops",
+    stat: "Free",
+    label: "All Courses",
+    icon: GraduationCap,
   },
 ];
 
 export default function DocsPlatform() {
   return (
-    <DocsLayout title="Platform">
+    <DocsLayout title="Student FAQs">
       <div className="space-y-12">
-      <section className="space-y-4">
-        <Badge className="bg-cyan-500/20 text-cyan-100 uppercase tracking-wide">
-          <Sparkles className="mr-2 h-3 w-3" />
-          Platform Experience
-        </Badge>
-        <h2 className="text-3xl font-semibold text-white">
-          Deliver cohesive player and builder journeys on AeThex
-        </h2>
-        <p className="text-gray-300 max-w-3xl">
-          Beyond deployment pipelines and CLI tooling, AeThex bundles
-          collaboration, identity, and live-ops systems so teams can craft
-          unforgettable experiences. Use this guide to orient new stakeholders
-          and plan end-to-end platform rollouts.
-        </p>
-      </section>
+        <section className="space-y-4">
+          <Badge className="bg-red-600/20 text-red-200 uppercase tracking-wide">
+            <HelpCircle className="mr-2 h-3 w-3" />
+            Student FAQs & Platform Guide
+          </Badge>
+          <h2 className="text-3xl font-semibold text-white">
+            How to Use the Learning Platform
+          </h2>
+          <p className="text-gray-300 max-w-3xl">
+            Find answers to common questions about our programs, enrollment, certificates, 
+            mentorship, and how to navigate the AeThex Foundation learning platform.
+          </p>
+        </section>
 
-      <section id="pillars" className="space-y-6">
-        <div className="flex items-center gap-3">
-          <LayoutDashboard className="h-6 w-6 text-cyan-300" />
-          <h3 className="text-2xl font-semibold text-white">Core pillars</h3>
-        </div>
-        <div className="grid gap-6 md:grid-cols-2">
-          {platformPillars.map((pillar) => {
-            const Icon = pillar.icon;
+        <section className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {successMetrics.map((metric) => {
+            const Icon = metric.icon;
             return (
-              <Card
-                key={pillar.title}
-                className="bg-slate-900/60 border-slate-700"
-              >
-                <CardHeader>
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-3">
-                      <Icon className="h-6 w-6 text-cyan-300" />
-                      <CardTitle className="text-white text-lg">
-                        {pillar.title}
-                      </CardTitle>
-                    </div>
-                    <Badge
-                      variant="outline"
-                      className="text-xs text-cyan-200 border-cyan-500/40"
-                    >
-                      Platform
-                    </Badge>
-                  </div>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <CardDescription className="text-gray-300 text-sm">
-                    {pillar.description}
-                  </CardDescription>
-                  <Button
-                    asChild
-                    variant="ghost"
-                    className="justify-start text-cyan-200 hover:text-cyan-100 hover:bg-cyan-500/10"
-                  >
-                    <Link to={pillar.href}>
-                      {pillar.cta}
-                      <ArrowRight className="ml-2 h-4 w-4" />
-                    </Link>
-                  </Button>
+              <Card key={metric.label} className="bg-slate-900/60 border-slate-700">
+                <CardContent className="p-6 text-center">
+                  <Icon className="h-8 w-8 text-red-400 mx-auto mb-3" />
+                  <div className="text-2xl font-bold text-white">{metric.stat}</div>
+                  <div className="text-sm text-gray-400">{metric.label}</div>
                 </CardContent>
               </Card>
             );
           })}
-        </div>
-      </section>
+        </section>
 
-      <section id="workflows" className="space-y-6">
-        <div className="flex items-center gap-3">
-          <Workflow className="h-6 w-6 text-cyan-300" />
-          <h3 className="text-2xl font-semibold text-white">
-            Collaboration workflows
-          </h3>
-        </div>
-        <div className="grid gap-6 md:grid-cols-3">
-          {collaborationWorkflows.map((stage, index) => (
-            <Card
-              key={stage.label}
-              className="bg-slate-900/60 border-slate-700"
-            >
-              <CardHeader className="space-y-2">
-                <Badge className="w-fit bg-cyan-600/30 text-cyan-100">
-                  Step {index + 1}
-                </Badge>
-                <CardTitle className="text-white text-lg flex items-center gap-2">
-                  <Globe className="h-5 w-5 text-cyan-300" />
-                  {stage.label}
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-3">
-                <CardDescription className="text-gray-300 text-sm leading-relaxed">
-                  {stage.description}
-                </CardDescription>
-                <p className="text-cyan-200 text-sm bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-3">
-                  {stage.highlight}
-                </p>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-      </section>
-
-      <section id="modules" className="space-y-6">
-        <div className="flex items-center gap-3">
-          <Compass className="h-6 w-6 text-cyan-300" />
-          <h3 className="text-2xl font-semibold text-white">
-            Experience modules
-          </h3>
-        </div>
-        <div className="grid gap-4 md:grid-cols-2">
-          {experienceModules.map((module) => (
-            <Card
-              key={module.name}
-              className="bg-slate-900/60 border-slate-700"
-            >
-              <CardHeader>
-                <CardTitle className="text-white text-base flex items-center justify-between">
-                  {module.name}
-                  <Badge
-                    variant="outline"
-                    className="text-xs text-cyan-200 border-cyan-500/40"
-                  >
-                    Platform
-                  </Badge>
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <CardDescription className="text-gray-300 text-sm">
-                  {module.description}
-                </CardDescription>
-                <Button
-                  asChild
-                  variant="ghost"
-                  className="justify-start text-cyan-200 hover:text-cyan-100 hover:bg-cyan-500/10"
-                >
-                  <Link to={module.href}>
-                    Learn more
-                    <LinkIcon className="ml-2 h-4 w-4" />
-                  </Link>
-                </Button>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-      </section>
-
-      <section id="analytics" className="space-y-6">
-        <div className="flex items-center gap-3">
-          <BarChart3 className="h-6 w-6 text-cyan-300" />
-          <h3 className="text-2xl font-semibold text-white">
-            Insights & analytics
-          </h3>
-        </div>
-        <div className="grid gap-6 md:grid-cols-3">
-          {analyticsHighlights.map((item) => {
-            const Icon = item.icon;
-            return (
-              <Card
-                key={item.title}
-                className="bg-slate-900/60 border-slate-700"
-              >
-                <CardHeader>
-                  <div className="flex items-center gap-3">
-                    <Icon className="h-6 w-6 text-cyan-300" />
-                    <CardTitle className="text-white text-lg">
-                      {item.title}
-                    </CardTitle>
-                  </div>
-                </CardHeader>
-                <CardContent>
-                  <CardDescription className="text-gray-300 text-sm">
-                    {item.detail}
-                  </CardDescription>
-                </CardContent>
-              </Card>
-            );
-          })}
-        </div>
-      </section>
-
-      <section id="governance" className="space-y-6">
-        <div className="flex items-center gap-3">
-          <ShieldCheck className="h-6 w-6 text-cyan-300" />
-          <h3 className="text-2xl font-semibold text-white">
-            Governance checklist
-          </h3>
-        </div>
-        <Card className="bg-slate-900/60 border-slate-700">
-          <CardContent>
-            <ul className="list-disc space-y-3 pl-6 text-gray-300 text-sm">
-              {governanceChecklist.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
-          </CardContent>
-        </Card>
-      </section>
-
-      {/* Architecture */}
-      <section id="architecture" className="space-y-6">
-        <div className="flex items-center gap-3">
-          <Globe className="h-6 w-6 text-cyan-300" />
-          <h3 className="text-2xl font-semibold text-white">
-            Architecture overview
-          </h3>
-        </div>
-        <Card className="bg-slate-900/60 border-slate-700">
-          <CardContent>
-            <p className="text-gray-300 text-sm leading-relaxed">
-              AeThex is composed of a lightweight React + Vite frontend, a
-              Node.js backend that exposes API endpoints (under{" "}
-              <code>/api/*</code>), and a Supabase-backed PostgreSQL database.
-              The system integrates several services:
-            </p>
-            <ul className="list-disc pl-6 mt-3 text-gray-300 text-sm space-y-2">
-              <li>
-                <strong>Frontend:</strong> React + TypeScript, Docs and Internal
-                hubs use a separate layout and access control.
-              </li>
-              <li>
-                <strong>Backend:</strong> Node/Express handlers for public APIs,
-                Discord webhooks, and OAuth flows.
-              </li>
-              <li>
-                <strong>Database:</strong> Supabase (Postgres) stores user
-                profiles, creator data, and operational tables. Migrations live
-                under <code>code/supabase/migrations</code>.
-              </li>
-              <li>
-                <strong>Integrations:</strong> OAuth providers (Google, GitHub,
-                Discord, Roblox), Discord bot for role mapping & verification,
-                and optional Web3 wallet linking.
-              </li>
-              <li>
-                <strong>Docs & CMS:</strong> Public docs are rendered with
-                DocsLayout and editable in Builder CMS (MCP). Internal docs live
-                under <code>/internal-docs</code> and require authentication.
-              </li>
-            </ul>
-            <p className="mt-3 text-gray-300 text-sm">
-              This arrangement lets staff operate private operational processes
-              while exposing curated platform docs publicly.
-            </p>
-          </CardContent>
-        </Card>
-      </section>
-
-      {/* Troubleshooting */}
-      <section id="troubleshooting" className="space-y-6">
-        <div className="flex items-center gap-3">
-          <ShieldCheck className="h-6 w-6 text-cyan-300" />
-          <h3 className="text-2xl font-semibold text-white">
-            Common troubleshooting
-          </h3>
-        </div>
-        <Card className="bg-slate-900/60 border-slate-700">
-          <CardContent>
-            <h4 className="text-white font-semibold mb-2">
-              OAuth redirect issues
-            </h4>
-            <p className="text-gray-300 text-sm">
-              If an OAuth provider returns an <code>invalid_redirect_uri</code>{" "}
-              error, verify that the callback URL configured in the provider
-              matches the deployed app's API base (e.g.{" "}
-              <code>https://aethex.dev/api/discord/oauth/callback</code> for
-              Discord). For local development use the configured VITE_API_BASE
-              when available.
-            </p>
-            <h4 className="text-white font-semibold mt-4 mb-2">
-              Session/linking problems
-            </h4>
-            <p className="text-gray-300 text-sm">
-              If a linking flow (e.g. linking Discord) redirects to login or
-              loses session, check cookie SameSite settings and ensure the
-              redirect URI domain matches where cookies are set. Staff can
-              consult internal docs under <code>/internal-docs/onboarding</code>{" "}
-              for detailed diagnostic steps.
-            </p>
-            <h4 className="text-white font-semibold mt-4 mb-2">
-              Missing emails
-            </h4>
-            <p className="text-gray-300 text-sm">
-              Verification and notification emails are sent from{" "}
-              <code>support@aethex.tech</code>. If emails are not arriving,
-              check spam filters and outbound SMTP logs (Hostinger) for delivery
-              failures.
-            </p>
-          </CardContent>
-        </Card>
-      </section>
-
-      <section
-        id="next-steps"
-        className="rounded-2xl border border-cyan-500/40 bg-cyan-900/20 p-8"
-      >
-        <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
-          <div className="space-y-2">
-            <h3 className="text-2xl font-semibold text-white">
-              Keep exploring the platform
-            </h3>
-            <p className="text-gray-300 max-w-2xl text-sm">
-              Share this page with non-technical teammates. It links out to
-              every major surface area so marketing, product, and operations
-              groups can navigate confidently.
-            </p>
+        <section id="features" className="space-y-6">
+          <div className="flex items-center gap-3">
+            <Compass className="h-6 w-6 text-red-400" />
+            <h3 className="text-2xl font-semibold text-white">Platform Features</h3>
           </div>
-          <div className="grid gap-3 md:grid-cols-2">
-            {resourceLinks.map((resource) => (
-              <Button
-                key={resource.title}
-                asChild
-                size="lg"
-                className="bg-cyan-600 hover:bg-cyan-500 text-white"
-              >
-                <Link to={resource.href}>
-                  {resource.label}
-                  <ArrowRight className="ml-2 h-4 w-4" />
+          <div className="grid gap-6 md:grid-cols-2">
+            {platformFeatures.map((feature) => {
+              const Icon = feature.icon;
+              return (
+                <Card
+                  key={feature.title}
+                  className="bg-slate-900/60 border-slate-700"
+                >
+                  <CardHeader>
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-3">
+                        <Icon className="h-6 w-6 text-red-300" />
+                        <CardTitle className="text-white text-lg">
+                          {feature.title}
+                        </CardTitle>
+                      </div>
+                    </div>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <CardDescription className="text-gray-300 text-sm">
+                      {feature.description}
+                    </CardDescription>
+                    <Button
+                      asChild
+                      variant="ghost"
+                      className="justify-start text-red-200 hover:text-red-100 hover:bg-red-500/10"
+                    >
+                      <Link to={feature.href}>
+                        {feature.cta}
+                        <ArrowRight className="ml-2 h-4 w-4" />
+                      </Link>
+                    </Button>
+                  </CardContent>
+                </Card>
+              );
+            })}
+          </div>
+        </section>
+
+        <section id="faqs" className="space-y-6">
+          <div className="flex items-center gap-3">
+            <HelpCircle className="h-6 w-6 text-gold-400" />
+            <h3 className="text-2xl font-semibold text-white">
+              Frequently Asked Questions
+            </h3>
+          </div>
+          <Card className="bg-slate-900/60 border-slate-700">
+            <CardContent className="pt-6">
+              <Accordion type="single" collapsible className="space-y-2">
+                {frequentlyAskedQuestions.map((faq, index) => (
+                  <AccordionItem
+                    key={index}
+                    value={`faq-${index}`}
+                    className="border-b border-slate-700/50 last:border-0"
+                  >
+                    <AccordionTrigger className="text-left text-white hover:text-red-300 hover:no-underline py-4">
+                      {faq.question}
+                    </AccordionTrigger>
+                    <AccordionContent className="text-gray-300 pb-4">
+                      {faq.answer}
+                    </AccordionContent>
+                  </AccordionItem>
+                ))}
+              </Accordion>
+            </CardContent>
+          </Card>
+        </section>
+
+        <section id="resources" className="space-y-6">
+          <div className="flex items-center gap-3">
+            <BookOpen className="h-6 w-6 text-red-400" />
+            <h3 className="text-2xl font-semibold text-white">
+              Student Resources
+            </h3>
+          </div>
+          <div className="grid gap-4 md:grid-cols-2">
+            {studentResources.map((resource) => {
+              const Icon = resource.icon;
+              return (
+                <Card
+                  key={resource.title}
+                  className="bg-slate-900/60 border-slate-700 hover:border-red-500/40 transition-colors"
+                >
+                  <CardHeader>
+                    <CardTitle className="text-white text-base flex items-center gap-3">
+                      <Icon className="h-5 w-5 text-red-300" />
+                      {resource.title}
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <CardDescription className="text-gray-300 text-sm">
+                      {resource.description}
+                    </CardDescription>
+                    <Button
+                      asChild
+                      variant="ghost"
+                      className="justify-start text-red-200 hover:text-red-100 hover:bg-red-500/10"
+                    >
+                      <Link to={resource.href}>
+                        Learn More
+                        <ArrowRight className="ml-2 h-4 w-4" />
+                      </Link>
+                    </Button>
+                  </CardContent>
+                </Card>
+              );
+            })}
+          </div>
+        </section>
+
+        <section id="support" className="space-y-6">
+          <div className="flex items-center gap-3">
+            <MessageCircle className="h-6 w-6 text-gold-400" />
+            <h3 className="text-2xl font-semibold text-white">
+              Need More Help?
+            </h3>
+          </div>
+          <Card className="bg-slate-900/60 border-slate-700">
+            <CardContent className="p-6">
+              <div className="grid gap-6 md:grid-cols-3">
+                <div className="space-y-2">
+                  <h4 className="font-semibold text-white">Community Discord</h4>
+                  <p className="text-sm text-gray-300">
+                    Join our Discord server to ask questions, share projects, and connect with other learners.
+                  </p>
+                  <Button asChild variant="outline" size="sm" className="border-gold-500/30 text-gold-300">
+                    <Link to="/community">Join Community</Link>
+                  </Button>
+                </div>
+                <div className="space-y-2">
+                  <h4 className="font-semibold text-white">Email Support</h4>
+                  <p className="text-sm text-gray-300">
+                    For technical issues or account problems, contact our support team.
+                  </p>
+                  <Button asChild variant="outline" size="sm" className="border-gold-500/30 text-gold-300">
+                    <a href="mailto:support@aethex.tech">Contact Support</a>
+                  </Button>
+                </div>
+                <div className="space-y-2">
+                  <h4 className="font-semibold text-white">Mentorship</h4>
+                  <p className="text-sm text-gray-300">
+                    Get personalized help from an industry mentor who can guide your learning.
+                  </p>
+                  <Button asChild variant="outline" size="sm" className="border-gold-500/30 text-gold-300">
+                    <Link to="/mentorship">Find a Mentor</Link>
+                  </Button>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </section>
+
+        <section className="rounded-2xl border border-red-500/40 bg-red-900/20 p-8">
+          <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+            <div className="space-y-2">
+              <h3 className="text-2xl font-semibold text-white">
+                Ready to Start Learning?
+              </h3>
+              <p className="text-gray-300 max-w-2xl text-sm">
+                Create your free account and begin your journey in tech today.
+                Browse programs, enroll in courses, and start building your skills.
+              </p>
+            </div>
+            <div className="flex flex-col sm:flex-row gap-3">
+              <Button asChild size="lg" className="bg-gradient-to-r from-aethex-500 to-red-600 hover:from-aethex-600 hover:to-red-700 text-white">
+                <Link to="/onboarding">
+                  <GraduationCap className="mr-2 h-5 w-5" />
+                  Get Started Free
                 </Link>
               </Button>
-            ))}
+              <Button asChild variant="outline" size="lg" className="border-gold-500/50 text-gold-300 hover:bg-gold-500/10">
+                <Link to="/programs">
+                  <BookOpen className="mr-2 h-5 w-5" />
+                  Browse Programs
+                </Link>
+              </Button>
+            </div>
           </div>
-        </div>
-      </section>
-    </div>
+        </section>
+      </div>
     </DocsLayout>
   );
 }

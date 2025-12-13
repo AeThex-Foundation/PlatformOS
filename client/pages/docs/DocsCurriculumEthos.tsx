@@ -581,11 +581,11 @@ function DocsCurriculumEthosContent() {
   return (
     <div className="space-y-8">
       {/* Hero Section */}
-      <section className="relative overflow-hidden rounded-3xl border border-pink-500/40 bg-gradient-to-br from-pink-500/10 to-purple-500/10 p-8">
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(236,72,153,0.2),transparent_60%)]" />
+      <section className="relative overflow-hidden rounded-3xl border border-red-500/40 bg-gradient-to-br from-red-500/10 to-gold-500/10 p-8">
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(239,68,68,0.2),transparent_60%)]" />
         <div className="relative z-10 flex flex-col gap-6">
           <div className="flex flex-col gap-3">
-            <Badge className="w-fit bg-gradient-to-r from-pink-600 to-purple-600 text-white">
+            <Badge className="w-fit bg-gradient-to-r from-red-600 to-gold-600 text-white">
               Ethos Guild Curriculum
             </Badge>
             <h1 className="text-3xl font-semibold text-white sm:text-4xl">
@@ -603,17 +603,17 @@ function DocsCurriculumEthosContent() {
               return (
                 <Card
                   key={stat.label}
-                  className="border-pink-500/30 bg-black/50 backdrop-blur"
+                  className="border-red-500/30 bg-black/50 backdrop-blur"
                 >
                   <CardHeader className="flex flex-row items-center gap-3 pb-2">
-                    <span className="rounded-full bg-pink-500/10 p-2 text-pink-300">
+                    <span className="rounded-full bg-red-500/10 p-2 text-red-300">
                       <Icon className="h-5 w-5" />
                     </span>
                     <CardTitle className="text-white text-lg">
                       {stat.label}
                     </CardTitle>
                   </CardHeader>
-                  <CardContent className="pt-0 text-2xl font-semibold text-pink-400">
+                  <CardContent className="pt-0 text-2xl font-semibold text-gold-400">
                     {stat.value}
                   </CardContent>
                 </Card>
@@ -625,10 +625,10 @@ function DocsCurriculumEthosContent() {
 
       {/* Curriculum Roadmap */}
       <section className="grid gap-6 lg:grid-cols-[minmax(0,2.2fr)_minmax(0,1fr)]">
-        <Card className="border-pink-500/30 bg-black/50 backdrop-blur">
+        <Card className="border-red-500/30 bg-black/50 backdrop-blur">
           <CardHeader className="space-y-4">
             <CardTitle className="flex items-center gap-3 text-2xl text-white">
-              <Waves className="h-6 w-6 text-pink-400" /> Curriculum Roadmap
+              <Waves className="h-6 w-6 text-red-400" /> Curriculum Roadmap
             </CardTitle>
             <CardDescription className="text-gray-300">
               Four progressive modules from foundational synthwave to advanced
@@ -642,9 +642,9 @@ function DocsCurriculumEthosContent() {
                 <AccordionItem
                   key={module.id}
                   value={module.id}
-                  className="overflow-hidden rounded-2xl border border-pink-500/20 bg-black/70"
+                  className="overflow-hidden rounded-2xl border border-red-500/20 bg-black/70"
                 >
-                  <AccordionTrigger className="px-5 py-4 text-left hover:no-underline data-[state=open]:bg-pink-500/10">
+                  <AccordionTrigger className="px-5 py-4 text-left hover:no-underline data-[state=open]:bg-red-500/10">
                     <div className="flex w-full flex-col gap-2 text-left">
                       <div className="flex flex-wrap items-center gap-2">
                         <Badge
@@ -654,7 +654,7 @@ function DocsCurriculumEthosContent() {
                               ? "border-emerald-500/40 bg-emerald-500/10 text-emerald-200"
                               : module.level === "builder"
                                 ? "border-sky-500/40 bg-sky-500/10 text-sky-200"
-                                : "border-purple-500/40 bg-purple-500/10 text-purple-200"
+                                : "border-gold-500/40 bg-gold-500/10 text-gold-200"
                           }
                         >
                           {module.level === "foundation"
@@ -665,7 +665,7 @@ function DocsCurriculumEthosContent() {
                         </Badge>
                         <Badge
                           variant="outline"
-                          className="border-pink-500/40 bg-pink-500/10 text-pink-300"
+                          className="border-gold-500/40 bg-gold-500/10 text-gold-300"
                         >
                           {module.duration}
                         </Badge>
@@ -683,7 +683,7 @@ function DocsCurriculumEthosContent() {
                   <AccordionContent className="px-5 pb-6 pt-2">
                     <div className="space-y-4">
                       <div>
-                        <h4 className="text-sm font-semibold uppercase tracking-wide text-pink-300">
+                        <h4 className="text-sm font-semibold uppercase tracking-wide text-gold-300">
                           Learning Focus
                         </h4>
                         <div className="mt-2 flex flex-wrap gap-2">
@@ -691,22 +691,22 @@ function DocsCurriculumEthosContent() {
                             <Badge
                               key={focusItem}
                               variant="outline"
-                              className="border-pink-500/40 bg-pink-500/5 text-xs text-pink-200"
+                              className="border-gold-500/40 bg-gold-500/5 text-xs text-gold-200"
                             >
                               {focusItem}
                             </Badge>
                           ))}
                         </div>
                       </div>
-                      <div className="rounded-2xl border border-pink-500/20 bg-black/60 p-4">
-                        <h4 className="text-sm font-semibold uppercase tracking-wide text-pink-300">
+                      <div className="rounded-2xl border border-red-500/20 bg-black/60 p-4">
+                        <h4 className="text-sm font-semibold uppercase tracking-wide text-gold-300">
                           Lesson Sequence
                         </h4>
                         <div className="mt-3 space-y-3">
                           {module.lessons.map((lesson, index) => (
                             <div
                               key={lesson.title}
-                              className="rounded-xl border border-pink-500/20 bg-black/80 p-4 space-y-3"
+                              className="rounded-xl border border-red-500/20 bg-black/80 p-4 space-y-3"
                             >
                               <div className="flex flex-wrap items-center justify-between gap-3">
                                 <div>
@@ -719,7 +719,7 @@ function DocsCurriculumEthosContent() {
                                 </div>
                                 <div className="flex gap-2">
                                   {lesson.duration && (
-                                    <Badge variant="outline" className="border-pink-500/40 bg-pink-500/10 text-xs text-pink-200">
+                                    <Badge variant="outline" className="border-gold-500/40 bg-gold-500/10 text-xs text-gold-200">
                                       {lesson.duration}
                                     </Badge>
                                   )}
@@ -746,19 +746,19 @@ function DocsCurriculumEthosContent() {
                               </p>
 
                               {lesson.objectives && lesson.objectives.length > 0 && (
-                                <div className="space-y-1 border-t border-pink-500/10 pt-2">
-                                  <p className="text-xs font-semibold uppercase tracking-wide text-pink-300">
+                                <div className="space-y-1 border-t border-red-500/10 pt-2">
+                                  <p className="text-xs font-semibold uppercase tracking-wide text-gold-300">
                                     Learning Objectives
                                   </p>
                                   <ul className="space-y-1">
                                     {lesson.objectives.slice(0, 2).map((obj, i) => (
                                       <li key={i} className="text-xs text-gray-400 flex gap-2">
-                                        <span className="text-pink-400">✓</span>
+                                        <span className="text-red-400">✓</span>
                                         <span>{obj}</span>
                                       </li>
                                     ))}
                                     {lesson.objectives.length > 2 && (
-                                      <li className="text-xs text-pink-300">
+                                      <li className="text-xs text-gold-300">
                                         +{lesson.objectives.length - 2} more objectives
                                       </li>
                                     )}
@@ -767,8 +767,8 @@ function DocsCurriculumEthosContent() {
                               )}
 
                               {lesson.exercises && lesson.exercises.length > 0 && (
-                                <div className="space-y-1 border-t border-pink-500/10 pt-2">
-                                  <p className="text-xs font-semibold uppercase tracking-wide text-pink-300">
+                                <div className="space-y-1 border-t border-red-500/10 pt-2">
+                                  <p className="text-xs font-semibold uppercase tracking-wide text-gold-300">
                                     Practical Exercises
                                   </p>
                                   <p className="text-xs text-gray-400">{lesson.exercises.length} hands-on exercises included</p>
@@ -788,7 +788,7 @@ function DocsCurriculumEthosContent() {
 
         {/* Sidebar: Why This Curriculum */}
         <div className="space-y-6">
-          <Card className="border-pink-500/30 bg-black/50 backdrop-blur">
+          <Card className="border-red-500/30 bg-black/50 backdrop-blur">
             <CardHeader className="space-y-2">
               <CardTitle className="text-xl text-white">
                 Why This Curriculum Works
@@ -803,9 +803,9 @@ function DocsCurriculumEthosContent() {
                 return (
                   <div
                     key={highlight.title}
-                    className="flex items-start gap-3 rounded-2xl border border-pink-500/20 bg-black/70 p-4"
+                    className="flex items-start gap-3 rounded-2xl border border-red-500/20 bg-black/70 p-4"
                   >
-                    <span className="rounded-lg bg-pink-500/10 p-2 text-pink-300">
+                    <span className="rounded-lg bg-red-500/10 p-2 text-red-300">
                       <Icon className="h-5 w-5" />
                     </span>
                     <div className="space-y-1">
@@ -822,7 +822,7 @@ function DocsCurriculumEthosContent() {
             </CardContent>
           </Card>
 
-          <Card className="border-pink-500/30 bg-black/50 backdrop-blur">
+          <Card className="border-red-500/30 bg-black/50 backdrop-blur">
             <CardHeader>
               <CardTitle className="text-xl text-white">
                 🎉 Phase 3: Content Live
@@ -844,7 +844,7 @@ function DocsCurriculumEthosContent() {
                 </div>
               </div>
               <div className="flex items-start gap-3">
-                <Zap className="mt-1 h-5 w-5 text-pink-400" />
+                <Zap className="mt-1 h-5 w-5 text-red-400" />
                 <div>
                   <p className="text-sm font-semibold text-white">
                     Database & Marketplace Ready
@@ -855,7 +855,7 @@ function DocsCurriculumEthosContent() {
                 </div>
               </div>
               <div className="flex items-start gap-3">
-                <Music className="mt-1 h-5 w-5 text-purple-400" />
+                <Music className="mt-1 h-5 w-5 text-gold-400" />
                 <div>
                   <p className="text-sm font-semibold text-white">
                     Content Writing (Phase 3)
@@ -867,7 +867,7 @@ function DocsCurriculumEthosContent() {
                 </div>
               </div>
               <div className="flex items-start gap-3">
-                <CheckCircle className="mt-1 h-5 w-5 text-cyan-400" />
+                <CheckCircle className="mt-1 h-5 w-5 text-gold-400" />
                 <div>
                   <p className="text-sm font-semibold text-white">
                     Live Launch Coming
@@ -880,7 +880,7 @@ function DocsCurriculumEthosContent() {
             </CardContent>
           </Card>
 
-          <Card className="border-pink-500/30 bg-gradient-to-br from-pink-500/10 to-purple-500/10">
+          <Card className="border-red-500/30 bg-gradient-to-br from-red-500/10 to-gold-500/10">
             <CardHeader>
               <CardTitle className="text-lg text-white">Get Started</CardTitle>
             </CardHeader>
@@ -891,7 +891,7 @@ function DocsCurriculumEthosContent() {
               </p>
               <Button
                 asChild
-                className="w-full gap-2 bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-500 hover:to-purple-500"
+                className="w-full gap-2 bg-gradient-to-r from-red-600 to-gold-600 hover:from-red-500 hover:to-gold-500"
               >
                 <Link to="/community/groups/ethos">
                   Join the Guild <ArrowRight className="h-4 w-4" />
@@ -902,10 +902,10 @@ function DocsCurriculumEthosContent() {
         </div>
       </section>
 
-      <Separator className="border-pink-500/20" />
+      <Separator className="border-red-500/20" />
 
       {/* CTA Section */}
-      <section className="rounded-3xl border border-pink-500/40 bg-gradient-to-r from-pink-500/10 to-purple-500/10 p-8 text-center">
+      <section className="rounded-3xl border border-red-500/40 bg-gradient-to-r from-red-500/10 to-gold-500/10 p-8 text-center">
         <h2 className="text-2xl font-semibold text-white">
           Ready to Create the Sound of AeThex?
         </h2>
@@ -917,7 +917,7 @@ function DocsCurriculumEthosContent() {
         <div className="mt-6 flex flex-wrap justify-center gap-3">
           <Button
             asChild
-            className="gap-2 bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-500 hover:to-purple-500"
+            className="gap-2 bg-gradient-to-r from-red-600 to-gold-600 hover:from-red-500 hover:to-gold-500"
           >
             <Link to="/community/groups/ethos">
               Join the Ethos Guild <ArrowRight className="h-4 w-4" />
@@ -926,7 +926,7 @@ function DocsCurriculumEthosContent() {
           <Button
             asChild
             variant="outline"
-            className="gap-2 border-pink-500/60 text-pink-300 hover:bg-pink-500/10"
+            className="gap-2 border-gold-500/60 text-gold-300 hover:bg-gold-500/10"
           >
             <Link to="/nexus">
               Explore NEXUS Marketplace <ArrowRight className="h-4 w-4" />

@@ -1,300 +1,160 @@
-import { Link } from "react-router-dom";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import {
-  Blocks,
-  Flame,
-  Share2,
-  ArrowRight,
-  Github,
-  Code2,
-  Globe,
-} from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { ArrowRight, BookOpen, Sparkles } from "lucide-react";
 import DocsLayout from "@/components/docs/DocsLayout";
 
-const exampleSnippets = [
-  {
-    title: "Server-side matchmaking",
-    description:
-      "Quickly assemble a matchmaking service that uses AeThex queues, weighting rules, and player telemetry streams.",
-    language: "TypeScript",
-    href: "https://github.com/aethex/examples/tree/main/matchmaking-service",
-    code: `import { createQueue, matchPlayers } from "@aethex/matchmaking";
-
-const queue = await createQueue({
-  region: "us-central",
-  size: 4,
-  constraints: [
-    { field: "skillRating", tolerance: 120 },
-    { field: "latency", max: 90 },
-  ],
-});
-
-export async function enqueuePlayer(player) {
-  await queue.enqueue(player.id, {
-    skillRating: player.mmr,
-    latency: player.ping,
-  });
-
-  const match = await matchPlayers(queue);
-  if (match) {
-    await queue.lock(match.id);
-    return match;
-  }
-
-  return null;
-}`,
-  },
-  {
-    title: "Realtime activity overlays",
-    description:
-      "Broadcast live deployment and incident updates to your in-game HUD or operations dashboard using AeThex events.",
-    language: "React",
-    href: "https://github.com/aethex/examples/tree/main/realtime-overlay",
-    code: `import { useEffect, useState } from "react";
-import { subscribe } from "@aethex/events";
-
-export function ActivityOverlay() {
-  const [events, setEvents] = useState([]);
+export default function DocsExamples() {
+  const navigate = useNavigate();
+  const [countdown, setCountdown] = useState(5);
 
   useEffect(() => {
-    const unsubscribe = subscribe("deployment.*", (event) => {
-      setEvents((current) => [event, ...current].slice(0, 5));
-    });
+    const countdownTimer = setInterval(() => {
+      setCountdown((prev) => (prev > 0 ? prev - 1 : 0));
+    }, 1000);
 
-    return () => unsubscribe();
-  }, []);
+    const redirectTimer = setTimeout(() => {
+      navigate("/programs");
+    }, 5000);
+
+    return () => {
+      clearInterval(countdownTimer);
+      clearTimeout(redirectTimer);
+    };
+  }, [navigate]);
 
   return (
-    <aside className="rounded-xl border border-purple-500/40 bg-black/60 p-4">
-      <h3 className="text-sm font-semibold text-purple-200">Live activity</h3>
-      <ul className="mt-3 space-y-2 text-xs text-gray-200">
-        {events.map((evt) => (
-          <li key={evt.id} className="rounded border border-purple-500/20 bg-purple-900/20 p-2">
-            <span className="font-mono text-purple-300">{evt.type}</span>
-            <span className="ml-2 text-gray-400">{evt.payload.summary}</span>
-          </li>
-        ))}
-      </ul>
-    </aside>
-  );
-}`,
-  },
-  {
-    title: "Workshop automation",
-    description:
-      "Automate the packaging and publishing of custom workshop content across AeThex environments using the CLI.",
-    language: "Shell",
-    href: "https://github.com/aethex/examples/tree/main/workshop-automation",
-    code: `#!/usr/bin/env bash
-set -euo pipefail
+    <DocsLayout title="Student Projects">
+      <div className="space-y-8">
+        <section className="space-y-4">
+          <Badge className="bg-red-500/20 text-red-200 uppercase tracking-wide">
+            <Sparkles className="mr-2 h-3 w-3" />
+            Student Showcase
+          </Badge>
+          <h2 className="text-3xl font-semibold text-white">
+            See What Students Create
+          </h2>
+          <p className="text-gray-300 max-w-3xl">
+            This page has moved! We're redirecting you to our Programs page where
+            you can explore student projects, see what you'll learn, and discover
+            the amazing work created by Foundation graduates.
+          </p>
+        </section>
 
-WORKSPACE=\${1:-"mods"}
-
-npm install
-aethex login --token "$AETHEX_TOKEN"
-
-aethex workshop package "$WORKSPACE" --out dist/
-aethex deploy --environment production --artifact dist/workshop.tgz
-
-echo "Workshop build published"`,
-  },
-];
-
-const integrationIdeas = [
-  {
-    title: "Commerce hooks",
-    description:
-      "Sync AeThex purchase events into your billing or CRM system using the webhook relay template.",
-    link: "/docs/api",
-  },
-  {
-    title: "Live operations dashboard",
-    description:
-      "Combine project metrics, incident response playbooks, and player sentiment into a single React dashboard.",
-    link: "/docs/tutorials",
-  },
-  {
-    title: "Cross-platform presence",
-    description:
-      "Mirror AeThex voice and party status with your Discord or Slack community using the presence bridge sample.",
-    link: "/community",
-  },
-  {
-    title: "Analytics pipeline",
-    description:
-      "Export gameplay events to your data warehouse with the managed streaming connectors.",
-    link: "/docs/getting-started",
-  },
-];
-
-export default function DocsExamples() {
-  return (
-    <DocsLayout title="Examples">
-      <div className="space-y-12">
-      <section id="overview" className="space-y-4">
-        <Badge className="bg-emerald-500/20 text-emerald-100 uppercase tracking-wide">
-          <Blocks className="mr-2 h-3 w-3" />
-          Examples & Templates
-        </Badge>
-        <h2 className="text-3xl font-semibold text-white">
-          Production-ready patterns you can copy
-        </h2>
-        <p className="text-gray-300 max-w-3xl">
-          Explore curated examples covering backend services, realtime overlays,
-          automation scripts, and workflow integrations. Each project includes
-          detailed READMEs, infrastructure diagrams, and deployment runbooks.
-        </p>
-      </section>
-
-      <section id="code-gallery" className="grid gap-6 lg:grid-cols-3">
-        {exampleSnippets.map((snippet) => (
-          <Card
-            key={snippet.title}
-            className="bg-slate-900/60 border-slate-700"
-          >
-            <CardHeader className="space-y-2">
-              <div className="flex items-center justify-between">
-                <CardTitle className="text-white text-lg">
-                  {snippet.title}
-                </CardTitle>
-                <Badge variant="outline">{snippet.language}</Badge>
-              </div>
-              <CardDescription className="text-gray-300 text-sm">
-                {snippet.description}
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <pre className="rounded-lg border border-slate-700 bg-slate-950/60 p-4 text-xs text-emerald-200 overflow-x-auto">
-                <code>{snippet.code}</code>
-              </pre>
+        <Card className="bg-gradient-to-br from-red-900/40 to-gold-900/20 border-red-500/30">
+          <CardHeader>
+            <CardTitle className="text-gold-300 flex items-center gap-2">
+              <BookOpen className="h-5 w-5" />
+              Redirecting to Programs...
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <p className="text-gray-300">
+              You'll be automatically redirected in{" "}
+              <span className="font-bold text-gold-400">{countdown}</span>{" "}
+              seconds.
+            </p>
+            <div className="flex gap-4">
               <Button
                 asChild
-                className="w-full bg-emerald-500 hover:bg-emerald-400 text-black"
+                className="bg-red-600 hover:bg-red-500 text-white"
               >
-                <Link to={snippet.href} target="_blank" rel="noreferrer">
-                  <Github className="mr-2 h-4 w-4" />
-                  Open repository
+                <Link to="/programs">
+                  Go to Programs Now
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
+              <Button
+                asChild
+                variant="outline"
+                className="border-gold-500/50 text-gold-300 hover:bg-gold-500/10"
+              >
+                <Link to="/docs/tutorials">View Learning Guides</Link>
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+
+        <section className="grid gap-4 md:grid-cols-2">
+          <Card className="bg-slate-900/60 border-slate-700">
+            <CardHeader>
+              <CardTitle className="text-white text-lg">
+                What You'll Find in Programs
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <ul className="space-y-2 text-gray-300 text-sm">
+                <li className="flex items-center gap-2">
+                  <span className="h-1.5 w-1.5 rounded-full bg-red-500" />
+                  Interactive Media & Game Development tracks
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="h-1.5 w-1.5 rounded-full bg-gold-500" />
+                  Web Development learning paths
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="h-1.5 w-1.5 rounded-full bg-red-500" />
+                  Creative Technology courses
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="h-1.5 w-1.5 rounded-full bg-gold-500" />
+                  Professional Development skills
+                </li>
+              </ul>
             </CardContent>
           </Card>
-        ))}
-      </section>
 
-      <section id="templates" className="space-y-4">
-        <div className="flex items-center gap-3">
-          <Flame className="h-6 w-6 text-emerald-300" />
-          <h3 className="text-2xl font-semibold text-white">
-            Deploy faster with templates
-          </h3>
-        </div>
-        <div className="grid gap-4 md:grid-cols-2">
-          {integrationIdeas.map((idea) => (
-            <Card key={idea.title} className="bg-slate-900/60 border-slate-700">
-              <CardHeader>
-                <CardTitle className="text-white text-base">
-                  {idea.title}
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CardDescription className="text-gray-300 text-sm mb-4">
-                  {idea.description}
-                </CardDescription>
-                <Button
-                  asChild
-                  variant="ghost"
-                  className="text-emerald-300 hover:text-emerald-200 justify-start"
-                >
-                  <Link to={idea.link}>
-                    Continue learning
-                    <ArrowRight className="ml-2 h-4 w-4" />
-                  </Link>
-                </Button>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-      </section>
-
-      <section
-        id="share"
-        className="rounded-2xl border border-emerald-500/40 bg-emerald-900/20 p-8"
-      >
-        <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
-          <div className="space-y-2">
-            <h3 className="text-2xl font-semibold text-white">
-              Share what you build
-            </h3>
-            <p className="text-gray-200 max-w-2xl text-sm">
-              Publish your own templates or improvements by opening a pull
-              request to the public AeThex examples repository. Every accepted
-              contribution is highlighted in the monthly creator spotlight.
-            </p>
-          </div>
-          <div className="flex gap-3">
-            <Button
-              asChild
-              size="lg"
-              className="bg-emerald-500 hover:bg-emerald-400 text-black"
-            >
-              <Link to="https://github.com/aethex/examples" target="_blank">
-                <Code2 className="mr-2 h-5 w-5" />
-                Contribute on GitHub
-              </Link>
-            </Button>
-            <Button
-              asChild
-              variant="outline"
-              size="lg"
-              className="border-emerald-300/60 text-emerald-100"
-            >
-              <Link to="/community">
-                <Share2 className="mr-2 h-5 w-5" />
-                Showcase to the community
-              </Link>
-            </Button>
-          </div>
-        </div>
-      </section>
-
-      <section
-        id="services"
-        className="rounded-2xl border border-emerald-500/20 bg-slate-900/80 p-8"
-      >
-        <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
-          <div className="space-y-2">
-            <h4 className="text-xl font-semibold text-white">
-              Need a custom integration?
-            </h4>
-            <p className="text-gray-300 text-sm">
-              Our professional services team partners with studios to build
-              tailored pipelines, analytics dashboards, and automation workflows
-              on top of AeThex.
-            </p>
-          </div>
-          <Button
-            asChild
-            variant="outline"
-            size="lg"
-            className="border-emerald-300/60 text-emerald-100"
-          >
-            <Link to="/corp">
-              <Globe className="mr-2 h-5 w-5" />
-              Talk to AeThex consultants
-            </Link>
-          </Button>
-        </div>
-      </section>
-    </div>
+          <Card className="bg-slate-900/60 border-slate-700">
+            <CardHeader>
+              <CardTitle className="text-white text-lg">
+                Related Resources
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <ul className="space-y-2 text-gray-300 text-sm">
+                <li>
+                  <Link
+                    to="/docs/curriculum"
+                    className="text-gold-400 hover:text-gold-300 underline"
+                  >
+                    Course Syllabi
+                  </Link>{" "}
+                  — View detailed course outlines
+                </li>
+                <li>
+                  <Link
+                    to="/docs/tutorials"
+                    className="text-gold-400 hover:text-gold-300 underline"
+                  >
+                    Learning Guides
+                  </Link>{" "}
+                  — Step-by-step tutorials
+                </li>
+                <li>
+                  <Link
+                    to="/mentorship"
+                    className="text-gold-400 hover:text-gold-300 underline"
+                  >
+                    Mentorship
+                  </Link>{" "}
+                  — Connect with industry mentors
+                </li>
+                <li>
+                  <Link
+                    to="/downloads"
+                    className="text-gold-400 hover:text-gold-300 underline"
+                  >
+                    Downloads
+                  </Link>{" "}
+                  — Free learning resources
+                </li>
+              </ul>
+            </CardContent>
+          </Card>
+        </section>
+      </div>
     </DocsLayout>
   );
 }
