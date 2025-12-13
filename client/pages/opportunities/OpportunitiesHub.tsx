@@ -1,16 +1,15 @@
 import { useState, useEffect } from "react";
-import { useSearchParams, useNavigate } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import Layout from "@/components/Layout";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Loader2, Search, Briefcase } from "lucide-react";
+import { Loader2, Search, Radar } from "lucide-react";
 import { getOpportunities } from "@/api/opportunities";
 import { OpportunityCard } from "@/components/creator-network/OpportunityCard";
 import { ArmFilter } from "@/components/creator-network/ArmFilter";
 import type { Opportunity } from "@/api/opportunities";
 
 export default function OpportunitiesHub() {
-  const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
   const [opportunities, setOpportunities] = useState<Opportunity[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -35,7 +34,6 @@ export default function OpportunitiesHub() {
         setOpportunities(result.data);
         setTotalPages(result.pagination.pages);
 
-        // Update URL params
         const params = new URLSearchParams();
         if (selectedArm) params.set("arm", selectedArm);
         if (search) params.set("search", search);
@@ -65,37 +63,31 @@ export default function OpportunitiesHub() {
   return (
     <Layout>
       <div className="relative min-h-screen bg-black text-white overflow-hidden">
-        {/* Background */}
-        <div className="pointer-events-none absolute inset-0 opacity-[0.12] [background-image:radial-gradient(circle_at_top,#06b6d4_0,rgba(0,0,0,0.45)_55%,rgba(0,0,0,0.9)_100%)]" />
-        <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(transparent_0,transparent_calc(100%-1px),rgba(6,182,212,0.05)_calc(100%-1px))] bg-[length:100%_32px]" />
-        <div className="pointer-events-none absolute inset-0 opacity-[0.08] [background-image:linear-gradient(90deg,rgba(6,182,212,0.1)_1px,transparent_1px),linear-gradient(0deg,rgba(6,182,212,0.1)_1px,transparent_1px)] [background-size:50px_50px] animate-pulse" />
-        <div className="pointer-events-none absolute top-20 left-10 w-72 h-72 bg-cyan-500/20 rounded-full blur-3xl animate-blob" />
-        <div className="pointer-events-none absolute bottom-20 right-10 w-72 h-72 bg-cyan-600/10 rounded-full blur-3xl animate-blob animation-delay-2000" />
+        {/* Background - Foundation Red/Gold Theme */}
+        <div className="pointer-events-none absolute inset-0 opacity-[0.12] [background-image:radial-gradient(circle_at_top,#EF4444_0,rgba(0,0,0,0.45)_55%,rgba(0,0,0,0.9)_100%)]" />
+        <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(transparent_0,transparent_calc(100%-1px),rgba(239,68,68,0.05)_calc(100%-1px))] bg-[length:100%_32px]" />
+        <div className="pointer-events-none absolute inset-0 opacity-[0.08] [background-image:linear-gradient(90deg,rgba(239,68,68,0.1)_1px,transparent_1px),linear-gradient(0deg,rgba(239,68,68,0.1)_1px,transparent_1px)] [background-size:50px_50px] animate-pulse" />
+        <div className="pointer-events-none absolute top-20 left-10 w-72 h-72 bg-red-500/20 rounded-full blur-3xl animate-blob" />
+        <div className="pointer-events-none absolute bottom-20 right-10 w-72 h-72 bg-amber-500/10 rounded-full blur-3xl animate-blob animation-delay-2000" />
 
         <main className="relative z-10">
           {/* Hero Section */}
-          <section className="py-12 lg:py-20 border-b border-slate-800">
+          <section className="py-12 lg:py-20 border-b border-red-900/30">
             <div className="container mx-auto max-w-6xl px-4">
               <div className="text-center mb-8">
+                <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium bg-red-500/10 text-red-400 border border-red-500/20 mb-4">
+                  <Radar className="h-3 w-3" />
+                  Student Placement
+                </span>
                 <div className="inline-flex items-center justify-center gap-2 mb-4">
-                  <Briefcase className="h-8 w-8 text-cyan-400" />
-                  <h1 className="text-4xl lg:text-5xl font-black text-white">
-                    Opportunities
+                  <Radar className="h-8 w-8 text-red-400" />
+                  <h1 className="text-4xl lg:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-amber-400">
+                    Gig Radar
                   </h1>
                 </div>
-                <p className="text-lg text-gray-300 max-w-2xl mx-auto mb-6">
-                  Find jobs, collaborations, and research opportunities across
-                  all AeThex arms.
+                <p className="text-lg text-gray-300 max-w-2xl mx-auto">
+                  Browse available positions and project collaborations for Foundation-trained talent.
                 </p>
-                <div className="flex justify-center gap-3">
-                  <Button
-                    onClick={() => navigate("/opportunities/post")}
-                    className="bg-cyan-500 text-black hover:bg-cyan-400"
-                  >
-                    <Briefcase className="h-4 w-4 mr-2" />
-                    Post Opportunity
-                  </Button>
-                </div>
               </div>
 
               {/* Search Bar */}
@@ -103,14 +95,14 @@ export default function OpportunitiesHub() {
                 <div className="relative">
                   <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
                   <Input
-                    placeholder="Search opportunities by title or description..."
+                    placeholder="Search gigs by title or description..."
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
-                    className="pl-10 h-12 bg-slate-800/50 border-slate-700 text-white placeholder:text-gray-400"
+                    className="pl-10 h-12 bg-red-950/30 border-red-900/50 text-white placeholder:text-gray-400 focus:border-red-500"
                   />
                   <Button
                     type="submit"
-                    className="absolute right-2 top-1/2 -translate-y-1/2"
+                    className="absolute right-2 top-1/2 -translate-y-1/2 bg-red-500 hover:bg-red-600 text-white"
                   >
                     Search
                   </Button>
@@ -137,13 +129,13 @@ export default function OpportunitiesHub() {
                 <div className="lg:col-span-3">
                   {isLoading ? (
                     <div className="flex items-center justify-center py-20">
-                      <Loader2 className="h-8 w-8 animate-spin text-cyan-400" />
+                      <Loader2 className="h-8 w-8 animate-spin text-red-400" />
                     </div>
                   ) : opportunities.length === 0 ? (
                     <div className="text-center py-20">
-                      <Briefcase className="h-12 w-12 text-gray-600 mx-auto mb-4" />
+                      <Radar className="h-12 w-12 text-gray-600 mx-auto mb-4" />
                       <h3 className="text-xl font-semibold text-gray-300 mb-2">
-                        No opportunities found
+                        No gigs found
                       </h3>
                       <p className="text-gray-500 mb-6">
                         Try adjusting your filters or search terms
@@ -155,6 +147,7 @@ export default function OpportunitiesHub() {
                           setPage(1);
                         }}
                         variant="outline"
+                        className="border-red-900/50 hover:bg-red-950/30"
                       >
                         Clear Filters
                       </Button>
@@ -174,6 +167,7 @@ export default function OpportunitiesHub() {
                             onClick={() => setPage(Math.max(1, page - 1))}
                             disabled={page === 1}
                             variant="outline"
+                            className="border-red-900/50 hover:bg-red-950/30"
                           >
                             Previous
                           </Button>
@@ -187,6 +181,7 @@ export default function OpportunitiesHub() {
                                 onClick={() => setPage(p)}
                                 variant={page === p ? "default" : "outline"}
                                 size="sm"
+                                className={page === p ? "bg-red-500 hover:bg-red-600" : "border-red-900/50 hover:bg-red-950/30"}
                               >
                                 {p}
                               </Button>
@@ -198,6 +193,7 @@ export default function OpportunitiesHub() {
                             }
                             disabled={page === totalPages}
                             variant="outline"
+                            className="border-red-900/50 hover:bg-red-950/30"
                           >
                             Next
                           </Button>
