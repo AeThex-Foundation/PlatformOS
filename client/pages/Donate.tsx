@@ -255,19 +255,23 @@ export default function Donate() {
           
           {/* Hero Section - Mission Dashboard */}
           <div className="space-y-6 animate-slide-down">
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-4 flex-wrap">
               <Badge className="bg-green-600/50 text-green-100 animate-pulse">
                 <Activity className="h-3 w-3 mr-1" />
                 MISSION STATUS: ACTIVE
               </Badge>
+              <Badge className="bg-amber-600/30 text-amber-200 border border-amber-500/40">
+                <Shield className="h-3 w-3 mr-1" />
+                501(c)(3) Public Charity • Tax-Deductible
+              </Badge>
             </div>
             
-            <div className="space-y-2">
+            <div className="space-y-4">
               <h1 className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-red-400 via-amber-400 to-red-400 bg-clip-text text-transparent">
-                Fund the Future
+                Help Build the Digital Frontier
               </h1>
               <p className="text-xl text-gray-300 max-w-2xl leading-relaxed">
-                Your support directly trains the next generation of creators, funds mentorship programs, and keeps the AeThex machine running.
+                Your donation funds hands-on game development training for local talent. Every dollar trains students, awards scholarships, and launches careers in the creative industry.
               </p>
             </div>
             
@@ -277,7 +281,7 @@ export default function Donate() {
                 <CardContent className="p-4 text-center">
                   <Users className="h-6 w-6 text-green-400 mx-auto mb-2" />
                   <div className="text-2xl font-bold text-white">{stats.recruits_trained.toLocaleString()}</div>
-                  <div className="text-xs text-gray-400">Recruits Trained</div>
+                  <div className="text-xs text-gray-400">Students Trained</div>
                 </CardContent>
               </Card>
               <Card className="bg-gradient-to-br from-blue-950/40 to-blue-900/20 border-blue-500/30">
@@ -527,9 +531,9 @@ export default function Donate() {
                       <div className="w-12 h-12 rounded-full bg-green-600/30 flex items-center justify-center mx-auto">
                         <GraduationCap className="h-6 w-6 text-green-400" />
                       </div>
-                      <h3 className="font-bold text-white">Equip a Recruit</h3>
+                      <h3 className="font-bold text-white">Equip a Student</h3>
                       <p className="text-2xl font-bold text-green-400">$25</p>
-                      <p className="text-sm text-gray-400">Covers one student's tool licenses for a month</p>
+                      <p className="text-sm text-gray-400">Funds a student's software license for a year</p>
                       <Button variant="outline" className="w-full border-green-500/50 text-green-300 hover:bg-green-500/10">
                         Fund This
                       </Button>
