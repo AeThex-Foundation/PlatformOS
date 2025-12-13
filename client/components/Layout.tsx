@@ -877,7 +877,7 @@ export default function CodeLayout({ children, hideFooter }: LayoutProps) {
               }}
             >
               <p className="text-xs text-muted-foreground transition-colors">
-                © 2024 AeThex Foundation. All rights reserved.
+                © 2025 AeThex Foundation. All rights reserved.
               </p>
               <div className="flex items-center space-x-4 mt-4 sm:mt-0">
                 <Link
