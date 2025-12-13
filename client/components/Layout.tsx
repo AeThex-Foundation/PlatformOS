@@ -521,7 +521,7 @@ export default function CodeLayout({ children, hideFooter }: LayoutProps) {
                   </span>
                 </div>
                 <p className="text-sm text-muted-foreground hover:text-muted-foreground/80 transition-colors">
-                  From the Valley of the Sun to the global stage. Training Arizona's game developers to ship real titles.
+                  From the Valley of the Sun to the global stage. Training game developers to ship real titles.
                 </p>
                 <div className="space-y-2 text-sm text-muted-foreground">
                   <p className="flex items-center gap-2">
