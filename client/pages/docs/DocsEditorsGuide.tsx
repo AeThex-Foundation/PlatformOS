@@ -1,173 +1,160 @@
-import { Link } from "react-router-dom";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-} from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { GitBranch, ExternalLink, CheckCircle2 } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { ArrowRight, BookOpen, Users } from "lucide-react";
 import DocsLayout from "@/components/docs/DocsLayout";
 
 export default function DocsEditorsGuide() {
+  const navigate = useNavigate();
+  const [countdown, setCountdown] = useState(5);
+
+  useEffect(() => {
+    const countdownTimer = setInterval(() => {
+      setCountdown((prev) => (prev > 0 ? prev - 1 : 0));
+    }, 1000);
+
+    const redirectTimer = setTimeout(() => {
+      navigate("/programs");
+    }, 5000);
+
+    return () => {
+      clearInterval(countdownTimer);
+      clearTimeout(redirectTimer);
+    };
+  }, [navigate]);
+
   return (
-    <DocsLayout title="Editor's Guide">
+    <DocsLayout title="Getting Help">
       <div className="space-y-8">
-      <section>
-        <Badge className="bg-indigo-600/20 text-indigo-200 uppercase tracking-wide">
-          Docs Editing
-        </Badge>
-        <h2 className="text-3xl font-semibold text-white">
-          Editing Public Docs (Builder → GitHub PR workflow)
-        </h2>
-        <p className="text-gray-300 max-w-3xl">
-          This guide explains how staff can edit public documentation using
-          Builder CMS and publish changes through a GitHub pull request.
-          Internal operational docs must remain under{" "}
-          <code>/internal-docs</code> and are not editable from the public docs
-          workflow.
-        </p>
-      </section>
+        <section className="space-y-4">
+          <Badge className="bg-red-500/20 text-red-200 uppercase tracking-wide">
+            <Users className="mr-2 h-3 w-3" />
+            Student Support
+          </Badge>
+          <h2 className="text-3xl font-semibold text-white">
+            Need Help? We're Here!
+          </h2>
+          <p className="text-gray-300 max-w-3xl">
+            Looking for guidance on your learning journey? We're redirecting you
+            to our Programs page where you can find support resources, connect
+            with mentors, and join our student community.
+          </p>
+        </section>
 
-      <section className="grid gap-6 lg:grid-cols-2">
-        <Card className="bg-slate-900/60 border-slate-700">
+        <Card className="bg-gradient-to-br from-red-900/40 to-gold-900/20 border-red-500/30">
           <CardHeader>
-            <CardTitle className="text-white">Edit in Builder</CardTitle>
-            <CardDescription className="text-gray-300">
-              Use the Builder (MCP) editor for content changes, layout tweaks,
-              and page composition.
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <ol className="list-decimal pl-6 space-y-2 text-sm text-gray-300">
-              <li>
-                Open the app and click <strong>Open MCP popover</strong> (
-                <a
-                  href="#open-mcp-popover"
-                  className="text-aethex-400 underline"
-                >
-                  #open-mcp-popover
-                </a>
-                ).
-              </li>
-              <li>
-                Select <strong>Builder.io</strong> and edit the desired public
-                doc entry (e.g. Getting Started, Platform).
-              </li>
-              <li>
-                Use the preview mode to validate across themes (Brand /
-                Professional).
-              </li>
-              <li>
-                Save drafts and request review from the Docs team (assign
-                reviewer in Builder).
-              </li>
-            </ol>
-          </CardContent>
-        </Card>
-
-        <Card className="bg-slate-900/60 border-slate-700">
-          <CardHeader>
-            <CardTitle className="text-white">
-              Export & Publish (GitHub PR)
+            <CardTitle className="text-gold-300 flex items-center gap-2">
+              <BookOpen className="h-5 w-5" />
+              Redirecting to Programs...
             </CardTitle>
-            <CardDescription className="text-gray-300">
-              After Builder review, export or commit changes to the docs repo
-              and open a GitHub PR.
-            </CardDescription>
           </CardHeader>
-          <CardContent>
-            <ol className="list-decimal pl-6 space-y-2 text-sm text-gray-300">
-              <li>
-                From Builder, use the export feature to get Markdown/JSX
-                content, or copy the updated component code.
-              </li>
-              <li>
-                Create a branch in the repository named{" "}
-                <code>docs/{`your-change`}</code> and add the changes under{" "}
-                <code>code/client/pages/docs</code> or <code>code/docs</code>.
-              </li>
-              <li>
-                Open a GitHub Pull Request describing the change, link the
-                Builder draft, and assign the Docs reviewer team.
-              </li>
-              <li>
-                CI will run lint & build checks. After approval, merge to main
-                and the docs will be deployed automatically.
-              </li>
-            </ol>
-          </CardContent>
-        </Card>
-      </section>
-
-      <section>
-        <Card className="bg-slate-900/60 border-slate-700">
-          <CardHeader>
-            <CardTitle className="text-white">
-              Public docs policy & safety checks
-            </CardTitle>
-            <CardDescription className="text-gray-300">
-              Ensure no internal APIs or sensitive operational details are
-              exposed publicly.
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <ul className="list-disc pl-6 mt-2 space-y-2 text-sm text-gray-300">
-              <li>
-                Do not include internal admin endpoints, service role keys, or
-                SQL migrations in public docs.
-              </li>
-              <li>
-                When in doubt, link to an internal doc (under{" "}
-                <code>/internal-docs</code>) instead of copying operational
-                procedures to public docs.
-              </li>
-              <li>
-                For partner-facing API documentation, create a gated partner
-                docs area (contact the Docs lead).
-              </li>
-              <li>
-                Security checklist: remove any{" "}
-                <code>/api/discord/role-mappings</code>, admin-register
-                endpoints, or internal-only debug examples before publishing.
-              </li>
-            </ul>
-          </CardContent>
-        </Card>
-      </section>
-
-      <section>
-        <Card className="bg-slate-900/60 border-slate-700">
-          <CardHeader>
-            <CardTitle className="text-white">Quick checklist</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <ul className="list-disc pl-6 mt-2 space-y-2 text-sm text-gray-300">
-              <li>Builder draft created and reviewed.</li>
-              <li>
-                GitHub PR open with Builder draft link and reviewer assigned.
-              </li>
-              <li>CI passes (lint, build).</li>
-              <li>Final review & merge by Docs lead.</li>
-            </ul>
-            <div className="mt-4">
-              <Button asChild>
-                <a
-                  href="https://github.com/AeThex-Corporation/aethex-forge"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center gap-2"
-                >
-                  <GitBranch className="h-4 w-4" /> Open repo
-                </a>
+          <CardContent className="space-y-4">
+            <p className="text-gray-300">
+              You'll be automatically redirected in{" "}
+              <span className="font-bold text-gold-400">{countdown}</span>{" "}
+              seconds.
+            </p>
+            <div className="flex gap-4">
+              <Button
+                asChild
+                className="bg-red-600 hover:bg-red-500 text-white"
+              >
+                <Link to="/programs">
+                  Go to Programs Now
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
+              </Button>
+              <Button
+                asChild
+                variant="outline"
+                className="border-gold-500/50 text-gold-300 hover:bg-gold-500/10"
+              >
+                <Link to="/mentorship">Find a Mentor</Link>
               </Button>
             </div>
           </CardContent>
         </Card>
-      </section>
-    </div>
+
+        <section className="grid gap-4 md:grid-cols-2">
+          <Card className="bg-slate-900/60 border-slate-700">
+            <CardHeader>
+              <CardTitle className="text-white text-lg">
+                Support Options
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <ul className="space-y-2 text-gray-300 text-sm">
+                <li className="flex items-center gap-2">
+                  <span className="h-1.5 w-1.5 rounded-full bg-red-500" />
+                  One-on-one mentorship sessions
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="h-1.5 w-1.5 rounded-full bg-gold-500" />
+                  Discord community for peer help
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="h-1.5 w-1.5 rounded-full bg-red-500" />
+                  Weekly office hours with instructors
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="h-1.5 w-1.5 rounded-full bg-gold-500" />
+                  Project feedback and code reviews
+                </li>
+              </ul>
+            </CardContent>
+          </Card>
+
+          <Card className="bg-slate-900/60 border-slate-700">
+            <CardHeader>
+              <CardTitle className="text-white text-lg">
+                Related Resources
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <ul className="space-y-2 text-gray-300 text-sm">
+                <li>
+                  <Link
+                    to="/mentorship"
+                    className="text-gold-400 hover:text-gold-300 underline"
+                  >
+                    Mentorship
+                  </Link>{" "}
+                  — Connect with industry experts
+                </li>
+                <li>
+                  <Link
+                    to="/docs/platform"
+                    className="text-gold-400 hover:text-gold-300 underline"
+                  >
+                    FAQs
+                  </Link>{" "}
+                  — Common questions answered
+                </li>
+                <li>
+                  <Link
+                    to="/community"
+                    className="text-gold-400 hover:text-gold-300 underline"
+                  >
+                    Community
+                  </Link>{" "}
+                  — Join our Discord
+                </li>
+                <li>
+                  <Link
+                    to="/docs/getting-started"
+                    className="text-gold-400 hover:text-gold-300 underline"
+                  >
+                    Getting Started
+                  </Link>{" "}
+                  — Your first steps
+                </li>
+              </ul>
+            </CardContent>
+          </Card>
+        </section>
+      </div>
     </DocsLayout>
   );
 }

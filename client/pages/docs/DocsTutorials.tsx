@@ -19,18 +19,20 @@ import {
   BookOpen,
   Code,
   Gamepad2,
-  Database,
   Palette,
-  Brain,
+  Briefcase,
   Rocket,
   Filter,
   Search,
   ChevronRight,
   Eye,
   Heart,
+  Video,
+  FileText,
+  GraduationCap,
 } from "lucide-react";
 
-interface DocsTutorial {
+interface LearningGuide {
   id: string;
   title: string;
   description: string;
@@ -43,119 +45,149 @@ interface DocsTutorial {
   likes: number;
   tags: string[];
   isNew?: boolean;
-  type: "video" | "article" | "interactive";
-  path: string;
+  type: "video" | "article" | "project";
+  href: string;
 }
 
-const docsTutorials: DocsTutorial[] = [
+const learningGuides: LearningGuide[] = [
   {
     id: "1",
-    title: "AeThex Platform Quick Start",
+    title: "Getting Started with Unity",
     description:
-      "Get up and running with AeThex in under 10 minutes. Learn the basics of project creation, navigation, and core features.",
-    category: "Getting Started",
+      "Your first steps in game development. Learn the Unity interface, create your first scene, and understand basic game objects.",
+    category: "Interactive Media",
     difficulty: "beginner",
-    duration: "8 min",
+    duration: "45 min",
     author: "AeThex Team",
     rating: 4.9,
     views: 5420,
     likes: 412,
-    tags: ["platform", "basics", "quickstart"],
+    tags: ["unity", "game-dev", "beginner"],
     isNew: true,
     type: "video",
-    path: "/docs/getting-started",
+    href: "/programs",
   },
   {
     id: "2",
-    title: "Project Setup and Configuration",
+    title: "HTML & CSS Crash Course",
     description:
-      "Deep dive into project configuration, environment setup, and best practices for organizing your AeThex projects.",
-    category: "Setup",
+      "Learn the building blocks of the web. Create your first webpage with semantic HTML and modern CSS styling techniques.",
+    category: "Web Development",
     difficulty: "beginner",
-    duration: "15 min",
+    duration: "1 hr",
     author: "Sarah Chen",
     rating: 4.8,
-    views: 3240,
-    likes: 287,
-    tags: ["setup", "configuration", "projects"],
-    type: "article",
-    path: "/docs/getting-started#setup-workflow",
+    views: 8240,
+    likes: 687,
+    tags: ["html", "css", "web"],
+    type: "video",
+    href: "/programs",
   },
   {
     id: "3",
-    title: "Working with the AeThex API",
+    title: "Build a Roblox Obby Game",
     description:
-      "Comprehensive guide to integrating with AeThex APIs, authentication, rate limiting, and error handling.",
-    category: "API Integration",
-    difficulty: "intermediate",
-    duration: "25 min",
+      "Step-by-step guide to creating an obstacle course game in Roblox Studio with checkpoints and scoring.",
+    category: "Interactive Media",
+    difficulty: "beginner",
+    duration: "2 hrs",
     author: "Alex Rodriguez",
-    rating: 4.7,
-    views: 2156,
-    likes: 198,
-    tags: ["api", "integration", "authentication"],
-    type: "interactive",
-    path: "/docs/api",
+    rating: 4.9,
+    views: 4156,
+    likes: 398,
+    tags: ["roblox", "lua", "game-dev"],
+    type: "project",
+    href: "/programs",
   },
   {
     id: "4",
-    title: "Building Games with AeThex Tools",
+    title: "JavaScript Fundamentals",
     description:
-      "Step-by-step tutorial for creating your first game using AeThex development tools and frameworks.",
-    category: "Game Development",
-    difficulty: "intermediate",
-    duration: "45 min",
+      "Master the basics of JavaScript programming: variables, functions, loops, and DOM manipulation.",
+    category: "Web Development",
+    difficulty: "beginner",
+    duration: "1.5 hrs",
     author: "Mike Johnson",
-    rating: 4.9,
-    views: 4567,
+    rating: 4.7,
+    views: 6567,
     likes: 523,
-    tags: ["games", "development", "tools"],
+    tags: ["javascript", "programming", "web"],
     type: "video",
-    path: "/docs/examples#code-gallery",
+    href: "/programs",
   },
   {
     id: "5",
-    title: "Advanced Database Patterns",
+    title: "Creating Game Art in Pixel Style",
     description:
-      "Learn advanced database design patterns, optimization techniques, and performance tuning for AeThex applications.",
-    category: "Database",
-    difficulty: "advanced",
-    duration: "35 min",
+      "Learn pixel art techniques for creating game sprites, backgrounds, and animations using free tools.",
+    category: "Creative Technology",
+    difficulty: "beginner",
+    duration: "1 hr",
     author: "Emma Wilson",
-    rating: 4.6,
-    views: 1876,
-    likes: 165,
-    tags: ["database", "optimization", "patterns"],
-    type: "article",
-    path: "/docs/api#core-endpoints",
+    rating: 4.8,
+    views: 3876,
+    likes: 345,
+    tags: ["pixel-art", "game-art", "design"],
+    type: "video",
+    href: "/programs",
   },
   {
     id: "6",
-    title: "AI Integration Workshop",
+    title: "React: Build Your First App",
     description:
-      "Hands-on workshop for integrating AI and machine learning capabilities into your AeThex projects.",
-    category: "AI/ML",
-    difficulty: "advanced",
-    duration: "60 min",
+      "Introduction to React development. Create a functional web application with components, props, and state.",
+    category: "Web Development",
+    difficulty: "intermediate",
+    duration: "2 hrs",
     author: "Dr. Lisa Park",
-    rating: 4.8,
-    views: 2943,
-    likes: 334,
-    tags: ["ai", "machine-learning", "integration"],
+    rating: 4.9,
+    views: 5943,
+    likes: 534,
+    tags: ["react", "javascript", "frontend"],
     isNew: true,
-    type: "interactive",
-    path: "/docs/examples#templates",
+    type: "project",
+    href: "/programs",
+  },
+  {
+    id: "7",
+    title: "Resume Writing for Tech Jobs",
+    description:
+      "Craft a compelling resume that highlights your projects and skills. Includes templates and examples.",
+    category: "Career Skills",
+    difficulty: "beginner",
+    duration: "30 min",
+    author: "AeThex Team",
+    rating: 4.6,
+    views: 2234,
+    likes: 198,
+    tags: ["career", "resume", "job-search"],
+    type: "article",
+    href: "/programs",
+  },
+  {
+    id: "8",
+    title: "Audio Design for Games",
+    description:
+      "Create sound effects and ambient audio for your games using free software and recording techniques.",
+    category: "Creative Technology",
+    difficulty: "intermediate",
+    duration: "1.5 hrs",
+    author: "Marcus Lee",
+    rating: 4.7,
+    views: 1987,
+    likes: 167,
+    tags: ["audio", "sound-design", "game-dev"],
+    type: "video",
+    href: "/programs",
   },
 ];
 
 const categories = [
-  { id: "all", name: "All", icon: BookOpen },
-  { id: "getting-started", name: "Getting Started", icon: Rocket },
-  { id: "setup", name: "Setup", icon: Code },
-  { id: "api-integration", name: "API Integration", icon: Database },
-  { id: "game-development", name: "Game Development", icon: Gamepad2 },
-  { id: "database", name: "Database", icon: Database },
-  { id: "ai-ml", name: "AI/ML", icon: Brain },
+  { id: "all", name: "All Guides", icon: BookOpen },
+  { id: "interactive-media", name: "Interactive Media", icon: Gamepad2 },
+  { id: "web-development", name: "Web Development", icon: Code },
+  { id: "creative-technology", name: "Creative Technology", icon: Palette },
+  { id: "career-skills", name: "Career Skills", icon: Briefcase },
 ];
 
 export default function DocsTutorials() {
@@ -167,9 +199,9 @@ export default function DocsTutorials() {
   const getDifficultyColor = (difficulty: string) => {
     switch (difficulty) {
       case "beginner":
-        return "bg-green-500";
+        return "bg-emerald-500";
       case "intermediate":
-        return "bg-yellow-500";
+        return "bg-gold-500";
       case "advanced":
         return "bg-red-500";
       default:
@@ -180,10 +212,10 @@ export default function DocsTutorials() {
   const getTypeIcon = (type: string) => {
     switch (type) {
       case "video":
-        return Play;
+        return Video;
       case "article":
-        return BookOpen;
-      case "interactive":
+        return FileText;
+      case "project":
         return Code;
       default:
         return BookOpen;
@@ -196,47 +228,46 @@ export default function DocsTutorials() {
         return "text-red-400";
       case "article":
         return "text-blue-400";
-      case "interactive":
-        return "text-green-400";
+      case "project":
+        return "text-emerald-400";
       default:
         return "text-gray-400";
     }
   };
 
-  const filteredTutorials = docsTutorials.filter((tutorial) => {
+  const filteredGuides = learningGuides.filter((guide) => {
     const matchesSearch =
-      tutorial.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      tutorial.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      tutorial.tags.some((tag) =>
+      guide.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      guide.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      guide.tags.some((tag) =>
         tag.toLowerCase().includes(searchTerm.toLowerCase()),
       );
     const matchesCategory =
       selectedCategory === "all" ||
-      tutorial.category.toLowerCase().replace(/[\/\s]/g, "-") ===
-        selectedCategory;
+      guide.category.toLowerCase().replace(/[\/\s]/g, "-") === selectedCategory;
     const matchesDifficulty =
-      selectedDifficulty === "all" ||
-      tutorial.difficulty === selectedDifficulty;
-    const matchesType =
-      selectedType === "all" || tutorial.type === selectedType;
+      selectedDifficulty === "all" || guide.difficulty === selectedDifficulty;
+    const matchesType = selectedType === "all" || guide.type === selectedType;
 
     return matchesSearch && matchesCategory && matchesDifficulty && matchesType;
   });
 
   return (
-    <DocsLayout title="Tutorials" description="Step-by-step guides">
+    <DocsLayout title="Learning Guides" description="Step-by-step tutorials for students">
       <div>
-        {/* Header */}
-        <div className="mb-8 hidden">
-          <h2 className="text-2xl font-bold text-white mb-4">
-            Documentation Tutorials
-          </h2>
-          <p className="text-gray-300 mb-6">
-            Step-by-step guides and interactive tutorials to help you master
-            AeThex
-          </p>
+        <div className="mb-8">
+          <div className="flex items-center gap-3 mb-4">
+            <GraduationCap className="h-8 w-8 text-red-400" />
+            <div>
+              <h2 className="text-2xl font-bold text-white">
+                Learning Guides & Tutorials
+              </h2>
+              <p className="text-gray-300">
+                Step-by-step guides to help you build skills and create projects
+              </p>
+            </div>
+          </div>
 
-          {/* Filters */}
           <div className="flex flex-col lg:flex-row gap-4 mb-6">
             <div className="flex-1">
               <div className="relative">
@@ -268,14 +299,13 @@ export default function DocsTutorials() {
                 <option value="all">All Types</option>
                 <option value="video">Video</option>
                 <option value="article">Article</option>
-                <option value="interactive">Interactive</option>
+                <option value="project">Project</option>
               </select>
             </div>
           </div>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-          {/* Categories Sidebar */}
           <div className="lg:col-span-1">
             <Card className="bg-slate-800/50 border-slate-700">
               <CardHeader>
@@ -293,7 +323,7 @@ export default function DocsTutorials() {
                       onClick={() => setSelectedCategory(category.id)}
                       className={`w-full flex items-center space-x-3 p-3 rounded-lg transition-all ${
                         selectedCategory === category.id
-                          ? "bg-purple-600 text-white"
+                          ? "bg-gradient-to-r from-aethex-500 to-red-600 text-white"
                           : "bg-slate-900/50 text-gray-300 hover:bg-slate-700/50"
                       }`}
                     >
@@ -306,84 +336,112 @@ export default function DocsTutorials() {
                 })}
               </CardContent>
             </Card>
+
+            <Card className="bg-slate-800/50 border-slate-700 mt-6">
+              <CardHeader>
+                <CardTitle className="text-white flex items-center">
+                  <Rocket className="h-5 w-5 mr-2" />
+                  Quick Links
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-2">
+                <Button asChild variant="outline" className="w-full justify-start border-slate-600 text-gray-300 hover:bg-slate-700/50">
+                  <Link to="/programs">
+                    <Play className="h-4 w-4 mr-2" />
+                    All Programs
+                  </Link>
+                </Button>
+                <Button asChild variant="outline" className="w-full justify-start border-slate-600 text-gray-300 hover:bg-slate-700/50">
+                  <Link to="/downloads">
+                    <FileText className="h-4 w-4 mr-2" />
+                    Downloads
+                  </Link>
+                </Button>
+                <Button asChild variant="outline" className="w-full justify-start border-slate-600 text-gray-300 hover:bg-slate-700/50">
+                  <Link to="/mentorship">
+                    <User className="h-4 w-4 mr-2" />
+                    Find a Mentor
+                  </Link>
+                </Button>
+              </CardContent>
+            </Card>
           </div>
 
-          {/* Tutorials Grid */}
           <div className="lg:col-span-3">
             <div className="mb-4">
               <p className="text-gray-400">
-                Showing {filteredTutorials.length} tutorials
+                Showing {filteredGuides.length} learning guides
               </p>
             </div>
 
             <div className="space-y-4">
-              {filteredTutorials.map((tutorial) => {
-                const TypeIcon = getTypeIcon(tutorial.type);
+              {filteredGuides.map((guide) => {
+                const TypeIcon = getTypeIcon(guide.type);
                 return (
                   <Card
-                    key={tutorial.id}
-                    className="bg-slate-800/50 border-slate-700 hover:border-purple-500/50 transition-all duration-300 cursor-pointer group"
+                    key={guide.id}
+                    className="bg-slate-800/50 border-slate-700 hover:border-red-500/50 transition-all duration-300 cursor-pointer group"
                   >
                     <CardContent className="p-6">
                       <div className="flex items-start justify-between">
                         <div className="flex-1">
                           <div className="flex items-center space-x-3 mb-3">
                             <TypeIcon
-                              className={`h-5 w-5 ${getTypeColor(tutorial.type)}`}
+                              className={`h-5 w-5 ${getTypeColor(guide.type)}`}
                             />
                             <Badge variant="outline" className="text-xs">
-                              {tutorial.category}
+                              {guide.category}
                             </Badge>
                             <Badge
-                              className={`${getDifficultyColor(tutorial.difficulty)} text-white text-xs`}
+                              className={`${getDifficultyColor(guide.difficulty)} text-white text-xs`}
                             >
-                              {tutorial.difficulty}
+                              {guide.difficulty}
                             </Badge>
-                            {tutorial.isNew && (
-                              <Badge className="bg-green-600 text-white text-xs">
+                            {guide.isNew && (
+                              <Badge className="bg-emerald-600 text-white text-xs">
                                 New
                               </Badge>
                             )}
                           </div>
 
-                          <h3 className="text-xl font-semibold text-white mb-2 group-hover:text-purple-400 transition-colors">
-                            {tutorial.title}
+                          <h3 className="text-xl font-semibold text-white mb-2 group-hover:text-red-400 transition-colors">
+                            {guide.title}
                           </h3>
 
                           <p className="text-gray-400 mb-4">
-                            {tutorial.description}
+                            {guide.description}
                           </p>
 
                           <div className="flex items-center justify-between">
                             <div className="flex items-center space-x-4 text-sm text-gray-500">
                               <div className="flex items-center">
                                 <Clock className="h-4 w-4 mr-1" />
-                                {tutorial.duration}
+                                {guide.duration}
                               </div>
                               <div className="flex items-center">
                                 <User className="h-4 w-4 mr-1" />
-                                {tutorial.author}
+                                {guide.author}
                               </div>
                               <div className="flex items-center">
                                 <Star className="h-4 w-4 mr-1 text-yellow-400" />
-                                {tutorial.rating}
+                                {guide.rating}
                               </div>
                               <div className="flex items-center">
                                 <Eye className="h-4 w-4 mr-1" />
-                                {tutorial.views}
+                                {guide.views.toLocaleString()}
                               </div>
                               <div className="flex items-center">
                                 <Heart className="h-4 w-4 mr-1" />
-                                {tutorial.likes}
+                                {guide.likes}
                               </div>
                             </div>
 
                             <Button
                               asChild
-                              className="bg-purple-600 hover:bg-purple-700"
+                              className="bg-gradient-to-r from-aethex-500 to-red-600 hover:from-aethex-600 hover:to-red-700"
                             >
-                              <Link to={tutorial.path}>
-                                Start Tutorial
+                              <Link to={guide.href}>
+                                Start Learning
                                 <ChevronRight className="h-4 w-4 ml-2" />
                               </Link>
                             </Button>
@@ -396,12 +454,12 @@ export default function DocsTutorials() {
               })}
             </div>
 
-            {filteredTutorials.length === 0 && (
+            {filteredGuides.length === 0 && (
               <Card className="bg-slate-800/50 border-slate-700">
                 <CardContent className="p-8 text-center">
                   <BookOpen className="h-12 w-12 text-gray-400 mx-auto mb-4" />
                   <h3 className="text-lg font-semibold text-white mb-2">
-                    No tutorials found
+                    No guides found
                   </h3>
                   <p className="text-gray-400">
                     Try adjusting your search terms or filters to find what
