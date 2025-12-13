@@ -124,8 +124,8 @@ export default function MyApplications() {
                   <p className="text-gray-500 mb-6">
                     Start applying to opportunities to see them here
                   </p>
-                  <Button onClick={() => navigate("/opportunities")}>
-                    Browse Opportunities
+                  <Button onClick={() => navigate("/gig-radar")}>
+                    Browse Gigs
                   </Button>
                 </CardContent>
               </Card>
@@ -185,7 +185,7 @@ export default function MyApplications() {
                         statusIcon={getStatusIcon(app.status)}
                         onWithdraw={handleWithdraw}
                         onViewOpportunity={() =>
-                          navigate(`/opportunities/${app.opportunity_id}`)
+                          navigate(`/gig-radar/${app.opportunity_id}`)
                         }
                       />
                     ))}
@@ -208,7 +208,7 @@ export default function MyApplications() {
                               statusIcon={getStatusIcon(app.status)}
                               onWithdraw={handleWithdraw}
                               onViewOpportunity={() =>
-                                navigate(`/opportunities/${app.opportunity_id}`)
+                                navigate(`/gig-radar/${app.opportunity_id}`)
                               }
                             />
                           ))}

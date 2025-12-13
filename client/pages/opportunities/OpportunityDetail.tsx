@@ -126,9 +126,9 @@ export default function OpportunityDetail() {
             <p className="text-gray-400 mb-6">
               The opportunity you're looking for doesn't exist.
             </p>
-            <Button onClick={() => navigate("/opportunities")}>
+            <Button onClick={() => navigate("/gig-radar")}>
               <ArrowLeft className="h-4 w-4 mr-2" />
-              Back to Opportunities
+              Back to Gig Radar
             </Button>
           </div>
         </div>
@@ -150,12 +150,12 @@ export default function OpportunityDetail() {
             {/* Header */}
             <div className="mb-8">
               <Button
-                onClick={() => navigate("/opportunities")}
+                onClick={() => navigate("/gig-radar")}
                 variant="ghost"
                 className="mb-4"
               >
                 <ArrowLeft className="h-4 w-4 mr-2" />
-                Back to Opportunities
+                Back to Gig Radar
               </Button>
             </div>
 
@@ -269,7 +269,7 @@ export default function OpportunityDetail() {
                     <OpportunityCard
                       key={opp.id}
                       opportunity={opp}
-                      onClick={() => navigate(`/opportunities/${opp.id}`)}
+                      onClick={() => navigate(`/gig-radar/${opp.id}`)}
                     />
                   ))}
                 </div>

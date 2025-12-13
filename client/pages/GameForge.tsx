@@ -174,7 +174,7 @@ export default function GameForge() {
                 <Button
                   variant="outline"
                   className="border-green-400/40 text-green-300 hover:bg-green-500/10"
-                  onClick={() => navigate("/opportunities?arm=gameforge")}
+                  onClick={() => navigate("/gig-radar?arm=gameforge")}
                 >
                   Find GameDev Jobs
                   <ArrowRight className="ml-2 h-4 w-4" />

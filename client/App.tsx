@@ -5,7 +5,7 @@ import { createRoot } from "react-dom/client";
 
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate, useParams } from "react-router-dom";
 import { AuthProvider } from "./contexts/AuthContext";
 import { ArmThemeProvider } from "./contexts/ArmThemeContext";
 import PageTransition from "./components/PageTransition";
@@ -126,6 +126,11 @@ import LegalDisclaimer from "./pages/LegalDisclaimer";
 
 const queryClient = new QueryClient();
 
+function OpportunityIdRedirect() {
+  const { id } = useParams();
+  return <Navigate to={`/gig-radar/${id}`} replace />;
+}
+
 function isPassportSubdomain(): "creator" | "project" | false {
   const hostname = window.location.hostname;
   if (hostname.endsWith(".aethex.me")) {
@@ -243,11 +248,16 @@ function AppContent() {
             <Route path="/foundation/learn-more" element={<FoundationLearnMore />} />
             <Route path="/foundation/teams" element={<FoundationTeams />} />
 
-            {/* Opportunities */}
-            <Route path="/opportunities" element={<OpportunitiesHub />} />
-            <Route path="/opportunities/:id" element={<OpportunityDetail />} />
-            <Route path="/opportunities/post" element={<OpportunityPostForm />} />
+            {/* Gig Radar (formerly Opportunities) */}
+            <Route path="/gig-radar" element={<OpportunitiesHub />} />
+            <Route path="/gig-radar/:id" element={<OpportunityDetail />} />
+            <Route path="/gig-radar/post" element={<OpportunityPostForm />} />
             <Route path="/my-applications" element={<MyApplications />} />
+            
+            {/* Redirects from old opportunities routes */}
+            <Route path="/opportunities" element={<Navigate to="/gig-radar" replace />} />
+            <Route path="/opportunities/post" element={<Navigate to="/gig-radar/post" replace />} />
+            <Route path="/opportunities/:id" element={<OpportunityIdRedirect />} />
 
             {/* Staff */}
             <Route path="/staff/announcements" element={<StaffAnnouncements />} />
