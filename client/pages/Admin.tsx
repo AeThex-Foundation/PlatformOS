@@ -42,6 +42,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
+import { aethexContributionService } from "@/lib/aethex-database-adapter";
 
 interface User {
   id: string;
@@ -334,8 +335,18 @@ export default function Admin() {
         body: JSON.stringify({ status }),
       });
       if (res.ok) {
+        const request = requests.find(r => r.id === requestId);
         setRequests(requests.map(r => r.id === requestId ? { ...r, status } : r));
         toast({ title: "Request Updated", description: `Status changed to ${status}` });
+        
+        if (status === 'accepted' && request) {
+          aethexContributionService.logContribution(
+            request.mentee_id,
+            'mentorship',
+            `Mentorship request accepted`,
+            1
+          ).catch(err => console.warn('[Contributions] Failed to log mentorship:', err));
+        }
       } else {
         const errorData = await res.json().catch(() => ({ error: 'Unknown error' }));
         toast({ title: "Failed to Update", description: errorData.error || 'Could not update request', variant: "destructive" });
