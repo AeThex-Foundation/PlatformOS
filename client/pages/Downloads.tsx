@@ -27,18 +27,66 @@ interface CourseDownload {
 const courses: CourseDownload[] = [
   {
     id: "1",
-    title: "Introduction to Programming",
-    slug: "intro-programming",
-    category: "web-dev",
+    title: "Introduction to Game Development",
+    slug: "intro-game-dev",
+    category: "interactive-media",
     difficulty: "beginner",
     duration: 12,
     chapters: 10,
     formats: ["markdown", "pdf", "code"],
     description:
-      "Learn programming fundamentals including logic, problem-solving, data structures, and debugging techniques.",
+      "Build foundational skills for careers in interactive entertainment and creative technology industries.",
   },
   {
     id: "2",
+    title: "Unity Engine Fundamentals",
+    slug: "unity-fundamentals",
+    category: "interactive-media",
+    difficulty: "beginner",
+    duration: 18,
+    chapters: 12,
+    formats: ["markdown", "pdf", "code"],
+    description:
+      "Master industry-standard tools used by professional studios worldwide for interactive media development.",
+  },
+  {
+    id: "3",
+    title: "C# Programming for Interactive Applications",
+    slug: "csharp-interactive",
+    category: "interactive-media",
+    difficulty: "intermediate",
+    duration: 16,
+    chapters: 10,
+    formats: ["markdown", "pdf", "code"],
+    description:
+      "Learn C# programming fundamentals essential for Unity development and enterprise software careers.",
+  },
+  {
+    id: "4",
+    title: "Roblox Studio Development",
+    slug: "roblox-studio",
+    category: "interactive-media",
+    difficulty: "beginner",
+    duration: 14,
+    chapters: 8,
+    formats: ["markdown", "pdf", "code"],
+    description:
+      "Create interactive experiences on the world's largest user-generated content platform with 70M+ daily users.",
+  },
+  {
+    id: "5",
+    title: "Game Design & User Experience",
+    slug: "game-design-ux",
+    category: "interactive-media",
+    difficulty: "intermediate",
+    duration: 12,
+    chapters: 8,
+    formats: ["markdown", "pdf"],
+    description:
+      "Apply user-centered design principles to create engaging interactive experiences and applications.",
+  },
+  {
+    id: "6",
     title: "Advanced React & State Management",
     slug: "react-advanced",
     category: "web-dev",
@@ -50,19 +98,7 @@ const courses: CourseDownload[] = [
       "Master advanced React patterns, hooks, state management solutions, and performance optimization.",
   },
   {
-    id: "3",
-    title: "Digital Media Production",
-    slug: "digital-media",
-    category: "design",
-    difficulty: "advanced",
-    duration: 24,
-    chapters: 8,
-    formats: ["markdown", "code"],
-    description:
-      "Deep dive into multimedia creation, video editing, motion graphics, and content publishing workflows.",
-  },
-  {
-    id: "4",
+    id: "7",
     title: "Web Development Fundamentals",
     slug: "web-dev-fundamentals",
     category: "web-dev",
@@ -74,7 +110,7 @@ const courses: CourseDownload[] = [
       "Master HTML, CSS, JavaScript, and modern web development tools.",
   },
   {
-    id: "5",
+    id: "8",
     title: "AI & Machine Learning Beginners",
     slug: "ai-ml-beginners",
     category: "ai-ml",
@@ -86,19 +122,7 @@ const courses: CourseDownload[] = [
       "Introduction to machine learning concepts, algorithms, and practical implementation.",
   },
   {
-    id: "6",
-    title: "NLP with Transformers & LLMs",
-    slug: "nlp-transformers",
-    category: "ai-ml",
-    difficulty: "advanced",
-    duration: 18,
-    chapters: 9,
-    formats: ["markdown", "pdf", "code"],
-    description:
-      "Master natural language processing with transformer models and large language models.",
-  },
-  {
-    id: "7",
+    id: "9",
     title: "UI/UX Design Principles",
     slug: "ui-design-principles",
     category: "design",
@@ -110,19 +134,7 @@ const courses: CourseDownload[] = [
       "Learn user-centered design, color theory, typography, and user testing.",
   },
   {
-    id: "8",
-    title: "Building Design Systems at Scale",
-    slug: "design-systems",
-    category: "design",
-    difficulty: "advanced",
-    duration: 16,
-    chapters: 8,
-    formats: ["markdown", "pdf"],
-    description:
-      "Create and maintain enterprise-grade design systems and component libraries.",
-  },
-  {
-    id: "9",
+    id: "10",
     title: "Startup Fundamentals",
     slug: "startup-fundamentals",
     category: "business",
@@ -132,18 +144,6 @@ const courses: CourseDownload[] = [
     formats: ["markdown", "pdf"],
     description:
       "Learn how to launch and scale startups from ideation to fundraising.",
-  },
-  {
-    id: "10",
-    title: "Product Strategy & Roadmapping",
-    slug: "product-strategy",
-    category: "business",
-    difficulty: "intermediate",
-    duration: 12,
-    chapters: 7,
-    formats: ["markdown", "pdf"],
-    description:
-      "Master product thinking, prioritization, and roadmap creation.",
   },
   {
     id: "11",
@@ -172,6 +172,7 @@ const courses: CourseDownload[] = [
 ];
 
 const categoryColors: Record<string, string> = {
+  "interactive-media": "from-red-500 to-gold-500",
   "web-dev": "from-blue-500 to-cyan-500",
   "ai-ml": "from-purple-500 to-pink-500",
   design: "from-indigo-500 to-purple-500",
@@ -269,7 +270,7 @@ export default function FoundationDownloadCenter() {
                   >
                     All
                   </Button>
-                  {["web-dev", "ai-ml", "design", "business"].map(
+                  {["interactive-media", "web-dev", "ai-ml", "design", "business"].map(
                     (cat) => (
                       <Button
                         key={cat}
