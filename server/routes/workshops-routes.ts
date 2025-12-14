@@ -40,6 +40,11 @@ router.get('/', async (req: Request, res: Response) => {
     const { data, error } = await query;
 
     if (error) {
+      if (error.code === '42P01' || error.message?.includes('does not exist')) {
+        console.warn('[Workshops API] Workshops table not found, returning empty array');
+        res.set('Cache-Control', 'public, max-age=120');
+        return res.json({ workshops: [] });
+      }
       console.error('[Workshops API] Error fetching workshops:', error);
       return res.status(500).json({ error: 'Failed to fetch workshops' });
     }
