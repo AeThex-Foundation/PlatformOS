@@ -41,19 +41,19 @@ export default function ClaimPassport({
           <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/60 to-background" />
 
           <div className="relative z-10 flex flex-col items-center text-center max-w-2xl">
-            <div className="w-32 h-32 md:w-48 md:h-48 mb-6 rounded-full bg-neon-purple/20 border-4 border-neon-purple/40 border-dashed flex items-center justify-center">
-              <User className="w-16 h-16 md:w-24 md:h-24 text-neon-purple/60" />
+            <div className="w-32 h-32 md:w-48 md:h-48 mb-6 rounded-full bg-red-500/20 border-4 border-red-500/40 border-dashed flex items-center justify-center">
+              <User className="w-16 h-16 md:w-24 md:h-24 text-red-500/60" />
             </div>
 
             <div className="flex items-center gap-3 mb-4">
-              <Sparkles className="w-6 h-6 text-neon-purple animate-pulse" />
+              <Sparkles className="w-6 h-6 text-amber-500 animate-pulse" />
               <h1 className="text-3xl md:text-4xl font-bold text-foreground" data-testid="heading-claim-passport">
                 This Passport is Available!
               </h1>
-              <Sparkles className="w-6 h-6 text-neon-purple animate-pulse" />
+              <Sparkles className="w-6 h-6 text-amber-500 animate-pulse" />
             </div>
 
-            <p className="text-xl text-neon-purple font-medium mb-2" data-testid="text-domain">
+            <p className="text-xl text-red-400 font-medium mb-2" data-testid="text-domain">
               {fullDomain}
             </p>
 
@@ -64,7 +64,7 @@ export default function ClaimPassport({
             <div className="flex flex-col sm:flex-row gap-4">
               <Button
                 size="lg"
-                className="bg-neon-purple hover:bg-neon-purple/90 text-white gap-2"
+                className="bg-gradient-to-r from-red-500 to-amber-500 hover:from-red-600 hover:to-amber-600 text-white gap-2"
                 asChild
                 data-testid="button-claim-passport"
               >
@@ -76,7 +76,7 @@ export default function ClaimPassport({
               <Button
                 size="lg"
                 variant="outline"
-                className="border-neon-purple/50 text-neon-purple hover:bg-neon-purple/10"
+                className="border-red-500/50 text-red-400 hover:bg-red-500/10"
                 asChild
                 data-testid="button-learn-more"
               >

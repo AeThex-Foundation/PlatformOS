@@ -75,7 +75,7 @@ export default function Support() {
       availability: "Mon-Fri 9AM-6PM PST",
       responseTime: "Immediate",
       bestFor: "Enterprise customers, urgent issues",
-      color: "from-purple-500 to-indigo-600",
+      color: "from-red-500 to-amber-600",
     },
     {
       title: "Community Forum",
@@ -217,7 +217,7 @@ export default function Support() {
               </Badge>
 
               <h1 className="text-4xl lg:text-6xl font-bold leading-tight">
-                <span className="text-gradient-purple">We're Here to Help</span>
+                <span className="text-gradient">We're Here to Help</span>
               </h1>
 
               <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
@@ -493,7 +493,7 @@ export default function Support() {
         <section className="py-20 bg-background/30">
           <div className="container mx-auto px-4 text-center">
             <div className="max-w-3xl mx-auto space-y-8 animate-scale-in">
-              <h2 className="text-3xl lg:text-4xl font-bold text-gradient-purple">
+              <h2 className="text-3xl lg:text-4xl font-bold text-gradient">
                 Still Need Help?
               </h2>
               <p className="text-xl text-muted-foreground">

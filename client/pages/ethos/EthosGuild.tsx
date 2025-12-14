@@ -110,13 +110,13 @@ export default function EthosGuild() {
       title: "The Sound of AeThex",
       description:
         "Provide high-quality, original music and sound design for all AeThex projects.",
-      color: "from-pink-500/20 to-purple-500/20",
+      color: "from-pink-500/20 to-red-500/20",
     },
     {
       title: "Talent Incubator",
       description:
         "Grow a vibrant community of musicians ready for paid commercial work.",
-      color: "from-purple-500/20 to-cyan-500/20",
+      color: "from-red-500/20 to-cyan-500/20",
     },
     {
       title: "Synthwave Aesthetic",
@@ -141,10 +141,10 @@ export default function EthosGuild() {
         {/* Hero Section */}
         <section className="space-y-6 text-center animate-slide-up">
           <div className="space-y-3">
-            <Badge className="mx-auto bg-gradient-to-r from-pink-600 to-purple-600 text-white border-0 text-sm font-semibold px-4 py-1">
+            <Badge className="mx-auto bg-gradient-to-r from-red-600 to-amber-600 text-white border-0 text-sm font-semibold px-4 py-1">
               ✨ ETHOS GUILD ✨
             </Badge>
-            <h1 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-pink-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent">
+            <h1 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-pink-400 via-red-400 to-cyan-400 bg-clip-text text-transparent">
               The Sound of AeThex
             </h1>
             <p className="text-lg text-gray-300 max-w-2xl mx-auto">
@@ -157,7 +157,7 @@ export default function EthosGuild() {
           <div className="flex flex-wrap justify-center gap-4">
             <Button
               asChild
-              className="gap-2 bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-500 hover:to-purple-500 text-white border-0"
+              className="gap-2 bg-gradient-to-r from-red-600 to-amber-600 hover:from-red-500 hover:to-amber-500 text-white border-0"
             >
               <Link to="/ethos/library">
                 Browse Ethos Library <ArrowRight className="h-4 w-4" />
@@ -301,7 +301,7 @@ export default function EthosGuild() {
                     </div>
 
                     <div>
-                      <h3 className="text-purple-300 font-semibold mb-1">
+                      <h3 className="text-red-300 font-semibold mb-1">
                         For GameForge & Foundation
                       </h3>
                       <p className="text-sm">
@@ -400,24 +400,24 @@ export default function EthosGuild() {
                   </div>
 
                   <div>
-                    <h3 className="text-purple-300 font-semibold mb-3">
+                    <h3 className="text-red-300 font-semibold mb-3">
                       Phase 2: MVP Build
                     </h3>
                     <ul className="space-y-2 text-sm ml-4">
                       <li className="flex gap-2">
-                        <span className="text-purple-400">→</span>
+                        <span className="text-red-400">→</span>
                         Track upload & library interface
                       </li>
                       <li className="flex gap-2">
-                        <span className="text-purple-400">→</span>
+                        <span className="text-red-400">→</span>
                         Artist profile pages & portfolio
                       </li>
                       <li className="flex gap-2">
-                        <span className="text-purple-400">→</span>
+                        <span className="text-red-400">→</span>
                         NEXUS "Audio Production" category integration
                       </li>
                       <li className="flex gap-2">
-                        <span className="text-purple-400">→</span>
+                        <span className="text-red-400">→</span>
                         Licensing agreement workflow
                       </li>
                     </ul>
@@ -453,7 +453,7 @@ export default function EthosGuild() {
         </section>
 
         {/* Call to Action */}
-        <section className="rounded-2xl border border-pink-500/40 bg-gradient-to-r from-pink-500/10 to-purple-500/10 p-8 text-center">
+        <section className="rounded-2xl border border-pink-500/40 bg-gradient-to-r from-pink-500/10 to-red-500/10 p-8 text-center">
           <h2 className="text-3xl font-bold text-white mb-3">
             Ready to Make AeThex Sound?
           </h2>
@@ -465,7 +465,7 @@ export default function EthosGuild() {
           <div className="flex flex-wrap justify-center gap-3">
             <Button
               asChild
-              className="bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-500 hover:to-purple-500 text-white border-0"
+              className="bg-gradient-to-r from-red-600 to-amber-600 hover:from-red-500 hover:to-amber-500 text-white border-0"
             >
               <Link to="/docs/curriculum/ethos">
                 Learn Music Production <ArrowRight className="h-4 w-4" />

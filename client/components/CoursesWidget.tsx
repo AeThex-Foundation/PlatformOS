@@ -28,7 +28,7 @@ interface CoursesWidgetProps {
   title?: string;
   description?: string;
   onViewCourse?: (courseId: string) => void;
-  accentColor?: "red" | "blue" | "purple" | "green";
+  accentColor?: "red" | "blue" | "amber" | "green";
 }
 
 const colorMap = {
@@ -40,9 +40,9 @@ const colorMap = {
     bg: "bg-gradient-to-br from-blue-950/40 to-blue-900/20",
     border: "border-blue-500/20",
   },
-  purple: {
-    bg: "bg-gradient-to-br from-purple-950/40 to-purple-900/20",
-    border: "border-purple-500/20",
+  amber: {
+    bg: "bg-gradient-to-br from-amber-950/40 to-amber-900/20",
+    border: "border-amber-500/20",
   },
   green: {
     bg: "bg-gradient-to-br from-green-950/40 to-green-900/20",

@@ -9,7 +9,7 @@ interface BlogCTAProps {
 
 export const BlogCTANexus = () => {
   return (
-    <Card className="border-border/40 bg-gradient-to-r from-purple-900/20 to-blue-900/20 shadow-lg">
+    <Card className="border-border/40 bg-gradient-to-r from-red-900/20 to-amber-900/20 shadow-lg">
       <CardContent className="p-8">
         <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
           <div className="space-y-3">

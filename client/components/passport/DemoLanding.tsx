@@ -92,28 +92,28 @@ export default function DemoLanding({ onSelectMode }: DemoLandingProps) {
               className={cn(
                 "hover-elevate cursor-pointer group transition-colors",
                 isDark 
-                  ? "border-slate-800 bg-slate-900/70 hover:border-purple-500/50" 
-                  : "border-slate-200 bg-white hover:border-purple-400/50 shadow-sm"
+                  ? "border-slate-800 bg-slate-900/70 hover:border-red-500/50" 
+                  : "border-slate-200 bg-white hover:border-red-400/50 shadow-sm"
               )}
               onClick={() => onSelectMode("creator")}
               data-testid="card-select-creator"
             >
               <CardHeader className="pb-4">
-                <div className="w-12 h-12 rounded-lg bg-purple-500/20 flex items-center justify-center mb-2 group-hover:bg-purple-500/30 transition-colors">
-                  <User className="w-6 h-6 text-purple-500" />
+                <div className="w-12 h-12 rounded-lg bg-red-500/20 flex items-center justify-center mb-2 group-hover:bg-red-500/30 transition-colors">
+                  <User className="w-6 h-6 text-red-500" />
                 </div>
                 <CardTitle className={cn("text-2xl", isDark ? "text-white" : "text-slate-900")}>
                   Creator Profile
                 </CardTitle>
                 <CardDescription className={isDark ? "text-slate-400" : "text-slate-500"}>
-                  <code className="text-purple-500">username</code>.aethex.me
+                  <code className="text-red-500">username</code>.aethex.me
                 </CardDescription>
               </CardHeader>
               <CardContent>
                 <p className={cn("mb-4", isDark ? "text-slate-400" : "text-slate-600")}>
                   Personal passport profiles with verified status, achievement badges, realm alignment, and social links.
                 </p>
-                <div className="flex items-center gap-2 text-purple-500 font-medium group-hover:gap-3 transition-all">
+                <div className="flex items-center gap-2 text-red-500 font-medium group-hover:gap-3 transition-all">
                   <span>Night Mode Theme</span>
                   <ArrowRight className="w-4 h-4" />
                 </div>
@@ -162,7 +162,7 @@ export default function DemoLanding({ onSelectMode }: DemoLandingProps) {
             </h3>
             <div className="grid md:grid-cols-2 gap-4 text-sm">
               <div className="flex items-center gap-3">
-                <code className="px-3 py-1.5 rounded bg-purple-500/10 text-purple-500 border border-purple-500/20">
+                <code className="px-3 py-1.5 rounded bg-red-500/10 text-red-500 border border-red-500/20">
                   *.aethex.me
                 </code>
                 <span className={isDark ? "text-slate-500" : "text-slate-600"}>CNAME to deployment</span>

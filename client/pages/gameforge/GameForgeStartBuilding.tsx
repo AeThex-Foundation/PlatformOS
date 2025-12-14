@@ -240,7 +240,7 @@ export default function GameForgeStartBuilding() {
                           className={`${
                             item.status === "On Track"
                               ? "bg-green-500/20 text-green-300 border border-green-400/40"
-                              : "bg-purple-500/20 text-purple-300 border border-purple-400/40"
+                              : "bg-red-500/20 text-red-300 border border-red-400/40"
                           }`}
                         >
                           {item.status}

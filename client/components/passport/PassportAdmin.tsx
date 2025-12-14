@@ -180,7 +180,7 @@ export default function PassportAdmin() {
                   <p className="text-sm text-slate-400">Total XP</p>
                   <p className="text-3xl font-bold text-white">{stats.total_xp.toLocaleString()}</p>
                 </div>
-                <BarChart3 className="w-10 h-10 text-purple-400 opacity-50" />
+                <BarChart3 className="w-10 h-10 text-amber-400 opacity-50" />
               </div>
             </CardContent>
           </Card>

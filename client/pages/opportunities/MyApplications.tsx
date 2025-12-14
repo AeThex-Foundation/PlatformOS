@@ -112,7 +112,7 @@ export default function MyApplications() {
 
             {isLoading ? (
               <div className="flex items-center justify-center py-20">
-                <Loader2 className="h-8 w-8 animate-spin text-purple-400" />
+                <Loader2 className="h-8 w-8 animate-spin text-red-400" />
               </div>
             ) : applications.length === 0 ? (
               <Card className="bg-slate-800/50 border-slate-700">

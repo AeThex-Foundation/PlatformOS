@@ -70,7 +70,7 @@ export default function PassportDirectory() {
     switch (realm) {
       case "Development Forge": return "text-orange-400 bg-orange-500/10 border-orange-500/30";
       case "Strategist Nexus": return "text-blue-400 bg-blue-500/10 border-blue-500/30";
-      case "Innovation Commons": return "text-purple-400 bg-purple-500/10 border-purple-500/30";
+      case "Innovation Commons": return "text-red-400 bg-red-500/10 border-red-500/30";
       case "Experience Hub": return "text-green-400 bg-green-500/10 border-green-500/30";
       default: return "text-slate-400 bg-slate-500/10 border-slate-500/30";
     }

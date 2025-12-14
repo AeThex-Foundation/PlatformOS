@@ -197,7 +197,7 @@ export default function EcosystemLicenseModal({
             <Button
               onClick={handleAccept}
               disabled={!allChecked || isLoading}
-              className="bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-700 hover:to-purple-700 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="bg-gradient-to-r from-red-600 to-amber-600 hover:from-red-700 hover:to-amber-700 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isLoading ? "Accepting..." : "Accept & Continue"}
             </Button>

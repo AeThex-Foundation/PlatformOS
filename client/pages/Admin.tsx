@@ -428,8 +428,8 @@ export default function Admin() {
             <Card className="border-border/30">
               <CardContent className="pt-6">
                 <div className="flex items-center gap-3">
-                  <div className="p-3 rounded-lg bg-purple-500/20">
-                    <Crown className="h-6 w-6 text-purple-400" />
+                  <div className="p-3 rounded-lg bg-red-500/20">
+                    <Crown className="h-6 w-6 text-red-400" />
                   </div>
                   <div>
                     <p className="text-sm text-muted-foreground">Architects</p>
@@ -535,7 +535,7 @@ export default function Admin() {
                               <div className="flex items-center gap-2">
                                 <p className="font-semibold">{user.full_name}</p>
                                 {user.roles?.includes("Architect") && (
-                                  <Badge variant="outline" className="border-purple-400/30 text-purple-400">
+                                  <Badge variant="outline" className="border-red-400/30 text-red-400">
                                     <Crown className="h-3 w-3 mr-1" />
                                     Architect
                                   </Badge>

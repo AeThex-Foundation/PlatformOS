@@ -213,7 +213,7 @@ export default function Tutorials() {
 
   return (
     <Layout>
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
+      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-red-900/30 to-slate-900">
         <div className="container mx-auto px-4 py-8">
           {/* Header */}
           <div className="mb-8">
@@ -281,7 +281,7 @@ export default function Tutorials() {
                         onClick={() => setSelectedCategory(category.id)}
                         className={`w-full flex items-center justify-between p-3 rounded-lg transition-all ${
                           selectedCategory === category.id
-                            ? "bg-purple-600 text-white"
+                            ? "bg-red-600 text-white"
                             : "bg-slate-900/50 text-gray-300 hover:bg-slate-700/50"
                         }`}
                       >
@@ -313,7 +313,7 @@ export default function Tutorials() {
                 {filteredTutorials.map((tutorial) => (
                   <Card
                     key={tutorial.id}
-                    className="bg-slate-800/50 border-slate-700 hover:border-purple-500/50 transition-all duration-300 hover:scale-105 cursor-pointer group"
+                    className="bg-slate-800/50 border-slate-700 hover:border-red-500/50 transition-all duration-300 hover:scale-105 cursor-pointer group"
                   >
                     <div className="relative">
                       <img
@@ -324,7 +324,7 @@ export default function Tutorials() {
                       <div className="absolute inset-0 bg-black/40 rounded-t-lg flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
                         <Button
                           size="lg"
-                          className="bg-purple-600 hover:bg-purple-700"
+                          className="bg-red-600 hover:bg-red-700"
                         >
                           <Play className="h-5 w-5 mr-2" />
                           Start Tutorial
@@ -336,7 +336,7 @@ export default function Tutorials() {
                         </Badge>
                       )}
                       {tutorial.isPremium && (
-                        <Badge className="absolute top-2 right-2 bg-gradient-to-r from-purple-600 to-pink-600 text-white">
+                        <Badge className="absolute top-2 right-2 bg-gradient-to-r from-red-600 to-amber-600 text-white">
                           Premium
                         </Badge>
                       )}
@@ -354,7 +354,7 @@ export default function Tutorials() {
                         </Badge>
                       </div>
 
-                      <h3 className="text-lg font-semibold text-white mb-2 group-hover:text-purple-400 transition-colors">
+                      <h3 className="text-lg font-semibold text-white mb-2 group-hover:text-red-400 transition-colors">
                         {tutorial.title}
                       </h3>
 
@@ -390,7 +390,7 @@ export default function Tutorials() {
                             {tutorial.likes}
                           </div>
                         </div>
-                        <ChevronRight className="h-4 w-4 text-gray-400 group-hover:text-purple-400 transition-colors" />
+                        <ChevronRight className="h-4 w-4 text-gray-400 group-hover:text-red-400 transition-colors" />
                       </div>
 
                       <div className="flex flex-wrap gap-1 mt-3">

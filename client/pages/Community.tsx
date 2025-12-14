@@ -44,7 +44,7 @@ interface LeaderboardEntry {
 
 const ARM_COLORS: Record<string, { bg: string; text: string; border: string }> = {
   FOUNDATION: { bg: "bg-red-500/10", text: "text-red-400", border: "border-red-500/30" },
-  GAMEFORGE: { bg: "bg-purple-500/10", text: "text-purple-400", border: "border-purple-500/30" },
+  GAMEFORGE: { bg: "bg-green-500/10", text: "text-green-400", border: "border-green-500/30" },
   ETHOS: { bg: "bg-blue-500/10", text: "text-blue-400", border: "border-blue-500/30" },
   LABS: { bg: "bg-green-500/10", text: "text-green-400", border: "border-green-500/30" },
 };

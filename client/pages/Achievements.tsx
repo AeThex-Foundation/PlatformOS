@@ -23,7 +23,7 @@ const difficultyColors: Record<"bronze" | "silver" | "gold" | "platinum", string
   bronze: "bg-amber-700/20 text-amber-600 border-amber-700/30",
   silver: "bg-slate-400/20 text-slate-300 border-slate-400/30",
   gold: "bg-yellow-500/20 text-yellow-400 border-yellow-500/30",
-  platinum: "bg-purple-500/20 text-purple-400 border-purple-500/30",
+  platinum: "bg-red-500/20 text-red-400 border-red-500/30",
 };
 
 const mockAchievements: Achievement[] = [
@@ -166,7 +166,7 @@ const stats = [
   { label: "Total Badges", value: "48", icon: Trophy, color: "text-aethex-400" },
   { label: "Active Earners", value: "2.5K", icon: Users, color: "text-gold-400" },
   { label: "Points Awarded", value: "125K", icon: Star, color: "text-amber-400" },
-  { label: "Platinum Holders", value: "89", icon: Zap, color: "text-purple-400" },
+  { label: "Platinum Holders", value: "89", icon: Zap, color: "text-red-400" },
 ];
 
 export default function Achievements() {

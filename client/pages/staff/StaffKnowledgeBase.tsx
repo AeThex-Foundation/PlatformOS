@@ -127,7 +127,7 @@ export default function StaffKnowledgeBase() {
       <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
         {/* Background effects */}
         <div className="absolute inset-0 opacity-30">
-          <div className="absolute top-20 left-10 w-96 h-96 bg-purple-600 rounded-full mix-blend-multiply filter blur-3xl animate-pulse" />
+          <div className="absolute top-20 left-10 w-96 h-96 bg-red-600 rounded-full mix-blend-multiply filter blur-3xl animate-pulse" />
           <div className="absolute bottom-20 right-10 w-96 h-96 bg-blue-600 rounded-full mix-blend-multiply filter blur-3xl animate-pulse" />
         </div>
 
@@ -135,14 +135,14 @@ export default function StaffKnowledgeBase() {
           {/* Header */}
           <div className="container mx-auto max-w-6xl px-4 py-16">
             <div className="flex items-center gap-3 mb-6">
-              <div className="p-3 rounded-lg bg-purple-500/20 border border-purple-500/30">
-                <Book className="h-6 w-6 text-purple-400" />
+              <div className="p-3 rounded-lg bg-red-500/20 border border-red-500/30">
+                <Book className="h-6 w-6 text-red-400" />
               </div>
               <div>
-                <h1 className="text-4xl font-bold text-purple-100">
+                <h1 className="text-4xl font-bold text-red-100">
                   Knowledge Base
                 </h1>
-                <p className="text-purple-200/70">
+                <p className="text-red-200/70">
                   Internal documentation, SOPs, and troubleshooting guides
                 </p>
               </div>
@@ -173,8 +173,8 @@ export default function StaffKnowledgeBase() {
                   onClick={() => setSelectedCategory(category)}
                   className={
                     selectedCategory === category
-                      ? "bg-purple-600 hover:bg-purple-700"
-                      : "border-purple-500/30 text-purple-300 hover:bg-purple-500/10"
+                      ? "bg-red-600 hover:bg-red-700"
+                      : "border-red-500/30 text-red-300 hover:bg-red-500/10"
                   }
                 >
                   {category}
@@ -187,11 +187,11 @@ export default function StaffKnowledgeBase() {
               {filtered.map((article) => (
                 <Card
                   key={article.id}
-                  className="bg-slate-800/50 border-slate-700/50 hover:border-purple-500/50 transition-all cursor-pointer group"
+                  className="bg-slate-800/50 border-slate-700/50 hover:border-red-500/50 transition-all cursor-pointer group"
                 >
                   <CardHeader>
                     <div className="flex items-start justify-between mb-2">
-                      <div className="p-2 rounded bg-purple-500/20 text-purple-400 group-hover:bg-purple-500/30 transition-colors">
+                      <div className="p-2 rounded bg-red-500/20 text-red-400 group-hover:bg-red-500/30 transition-colors">
                         {article.icon}
                       </div>
                       <Badge className="bg-slate-700 text-slate-300 text-xs">
@@ -225,7 +225,7 @@ export default function StaffKnowledgeBase() {
                         <Button
                           size="sm"
                           variant="ghost"
-                          className="text-purple-400 hover:text-purple-300 hover:bg-purple-500/20"
+                          className="text-red-400 hover:text-red-300 hover:bg-red-500/20"
                         >
                           Read
                         </Button>

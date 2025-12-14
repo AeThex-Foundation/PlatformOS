@@ -53,7 +53,7 @@ const realmColors: Record<string, string> = {
   'Development Forge': 'bg-orange-500/20 text-orange-400 border-orange-500/30',
   'Strategist Nexus': 'bg-blue-500/20 text-blue-400 border-blue-500/30',
   'Innovation Commons': 'bg-green-500/20 text-green-400 border-green-500/30',
-  'Experience Hub': 'bg-purple-500/20 text-purple-400 border-purple-500/30',
+  'Experience Hub': 'bg-red-500/20 text-red-400 border-red-500/30',
 };
 
 const skillOptions = [

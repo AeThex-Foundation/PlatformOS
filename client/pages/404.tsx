@@ -266,7 +266,7 @@ const FourOhFourPage = () => {
                 />
               </div>
 
-              <h1 className="text-8xl lg:text-9xl font-bold text-gradient-purple animate-pulse">
+              <h1 className="text-8xl lg:text-9xl font-bold text-gradient animate-pulse">
                 404
               </h1>
 
@@ -375,10 +375,10 @@ const FourOhFourPage = () => {
 
             {/* Easter Egg */}
             {showEasterEgg && (
-              <Card className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 border-purple-400/50 animate-scale-in">
+              <Card className="bg-gradient-to-r from-red-500/20 to-amber-500/20 border-red-400/50 animate-scale-in">
                 <CardContent className="p-6 text-center">
-                  <Sparkles className="h-8 w-8 text-purple-400 mx-auto mb-4 animate-pulse" />
-                  <h3 className="text-xl font-bold text-gradient-purple mb-2">
+                  <Sparkles className="h-8 w-8 text-red-400 mx-auto mb-4 animate-pulse" />
+                  <h3 className="text-xl font-bold text-gradient mb-2">
                     🎉 Konami Code Activated! 🎉
                   </h3>
                   <p className="text-muted-foreground mb-4">
@@ -387,7 +387,7 @@ const FourOhFourPage = () => {
                   </p>
                   <Button
                     onClick={() => navigate("/dashboard")}
-                    className="bg-gradient-to-r from-purple-500 to-pink-600 hover:from-purple-600 hover:to-pink-700 hover-lift interactive-scale"
+                    className="bg-gradient-to-r from-red-500 to-amber-600 hover:from-red-600 hover:to-amber-700 hover-lift interactive-scale"
                   >
                     <Shield className="h-4 w-4 mr-2" />
                     Access Developer Dashboard

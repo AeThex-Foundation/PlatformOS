@@ -114,8 +114,8 @@ export default function LoadingScreen({
                   ? "from-red-400 to-red-500"
                   : accentColor.includes("cyan")
                   ? "from-cyan-400 to-cyan-500"
-                  : accentColor.includes("purple")
-                  ? "from-purple-400 to-purple-500"
+                  : accentColor.includes("amber")
+                  ? "from-amber-400 to-amber-500"
                   : accentColor.includes("pink")
                   ? "from-pink-400 to-pink-500"
                   : "from-aethex-400 to-neon-blue"
@@ -156,7 +156,7 @@ export default function LoadingScreen({
                   "from-gold-500 to-gold-400": "bg-gold-400",
                   "from-red-500 to-red-400": "bg-red-400",
                   "from-cyan-500 to-cyan-400": "bg-cyan-400",
-                  "from-purple-500 to-purple-400": "bg-purple-400",
+                  "from-amber-500 to-amber-400": "bg-amber-400",
                   "from-pink-500 to-pink-400": "bg-pink-400",
                   "from-aethex-500 to-neon-blue": "bg-aethex-400",
                 };

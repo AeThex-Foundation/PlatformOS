@@ -120,7 +120,7 @@ export default function TrackLibrary() {
             <div className="container mx-auto px-4 max-w-6xl">
               <div className="space-y-6">
                 <div className="space-y-3">
-                  <Badge className="inline-flex items-center gap-2 bg-gradient-to-r from-pink-600 to-purple-600">
+                  <Badge className="inline-flex items-center gap-2 bg-gradient-to-r from-red-600 to-amber-600">
                     <Music className="h-3 w-3" />
                     Ethos Track Library
                   </Badge>

@@ -37,7 +37,7 @@ export interface Project {
 
 interface ProjectStatusWidgetProps {
   project: Project | null;
-  accentColor?: "blue" | "cyan" | "purple";
+  accentColor?: "blue" | "cyan" | "amber";
 }
 
 const colorMap = {
@@ -49,9 +49,9 @@ const colorMap = {
     bg: "bg-gradient-to-br from-cyan-950/40 to-cyan-900/20",
     border: "border-cyan-500/20",
   },
-  purple: {
-    bg: "bg-gradient-to-br from-purple-950/40 to-purple-900/20",
-    border: "border-purple-500/20",
+  amber: {
+    bg: "bg-gradient-to-br from-amber-950/40 to-amber-900/20",
+    border: "border-amber-500/20",
   },
 };
 

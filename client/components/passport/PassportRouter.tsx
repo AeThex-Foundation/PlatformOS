@@ -169,7 +169,7 @@ export default function PassportRouter({ previewMode }: PassportRouterProps) {
     return (
       <div className="min-h-screen bg-slate-950 flex items-center justify-center">
         <div className="text-center p-8">
-          <div className="w-12 h-12 border-4 border-purple-500 border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+          <div className="w-12 h-12 border-4 border-amber-500 border-t-transparent rounded-full animate-spin mx-auto mb-4" />
           <p className="text-slate-400">Loading...</p>
         </div>
       </div>
@@ -184,7 +184,7 @@ export default function PassportRouter({ previewMode }: PassportRouterProps) {
           <p className="text-slate-400 mb-8">{error || "The requested page could not be found."}</p>
           <a
             href="https://aethex.foundation"
-            className="px-6 py-3 bg-purple-600 text-white rounded-lg font-medium hover:bg-purple-700 transition-colors"
+            className="px-6 py-3 bg-red-600 text-white rounded-lg font-medium hover:bg-red-700 transition-colors"
           >
             Return to AeThex
           </a>
@@ -294,7 +294,7 @@ export default function PassportRouter({ previewMode }: PassportRouterProps) {
         <div className="flex gap-4 justify-center">
           <a
             href="?preview=creator"
-            className="px-6 py-3 bg-purple-600 text-white rounded-lg font-medium hover:bg-purple-700 transition-colors"
+            className="px-6 py-3 bg-red-600 text-white rounded-lg font-medium hover:bg-red-700 transition-colors"
             data-testid="button-preview-creator"
           >
             Preview Creator Profile

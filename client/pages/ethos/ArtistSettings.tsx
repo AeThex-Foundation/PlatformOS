@@ -625,7 +625,7 @@ export default function ArtistSettings() {
                 <CardContent>
                   <Button
                     onClick={() => setUploadModalOpen(true)}
-                    className="bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-700 hover:to-purple-700"
+                    className="bg-gradient-to-r from-red-600 to-amber-600 hover:from-red-700 hover:to-amber-700"
                   >
                     <Upload className="h-4 w-4 mr-2" />
                     Upload New Track
@@ -723,7 +723,7 @@ export default function ArtistSettings() {
                       <Button
                         onClick={handleSubmitVerification}
                         disabled={isSubmittingVerification}
-                        className="w-full bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-700 hover:to-purple-700"
+                        className="w-full bg-gradient-to-r from-pink-600 to-red-600 hover:from-pink-700 hover:to-red-700"
                       >
                         {isSubmittingVerification
                           ? "Submitting..."
@@ -739,7 +739,7 @@ export default function ArtistSettings() {
                 <Button
                   onClick={handleSave}
                   disabled={saving}
-                  className="bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-700 hover:to-purple-700 flex-1"
+                  className="bg-gradient-to-r from-pink-600 to-red-600 hover:from-pink-700 hover:to-red-700 flex-1"
                 >
                   {saving ? "Saving..." : "Save Settings"}
                 </Button>

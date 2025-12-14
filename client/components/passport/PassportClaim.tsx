@@ -17,8 +17,8 @@ import { useToast } from "@/hooks/use-toast";
 
 const REALMS = [
   { id: "Development Forge", icon: "🔧", color: "from-orange-500 to-red-500", description: "Builders & Engineers" },
-  { id: "Strategist Nexus", icon: "🧠", color: "from-blue-500 to-indigo-500", description: "Planners & Analysts" },
-  { id: "Innovation Commons", icon: "💡", color: "from-purple-500 to-pink-500", description: "Creators & Visionaries" },
+  { id: "Strategist Nexus", icon: "🧠", color: "from-blue-500 to-cyan-500", description: "Planners & Analysts" },
+  { id: "Innovation Commons", icon: "💡", color: "from-red-500 to-amber-500", description: "Creators & Visionaries" },
   { id: "Experience Hub", icon: "🎮", color: "from-green-500 to-emerald-500", description: "Players & Explorers" },
 ];
 
@@ -104,7 +104,7 @@ export default function PassportClaim() {
   return (
     <div className="space-y-6 max-w-4xl mx-auto">
       <div className="text-center">
-        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-purple-500/10 border border-purple-500/30 text-purple-400 text-sm mb-4">
+        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-sm mb-4">
           <Sparkles className="w-4 h-4" />
           <span>Customize Your Identity</span>
         </div>
@@ -119,7 +119,7 @@ export default function PassportClaim() {
           <Card className="bg-slate-900/50 border-slate-800">
             <CardHeader>
               <CardTitle className="text-white flex items-center gap-2">
-                <User className="w-5 h-5 text-purple-400" />
+                <User className="w-5 h-5 text-amber-400" />
                 Your Passport Domain
               </CardTitle>
               <CardDescription>
@@ -128,13 +128,13 @@ export default function PassportClaim() {
             </CardHeader>
             <CardContent>
               <div className="flex items-center gap-3 p-4 bg-slate-800/50 rounded-lg border border-slate-700">
-                <Globe className="w-5 h-5 text-purple-400" />
-                <code className="text-purple-300 font-mono flex-1">{passportUrl}</code>
+                <Globe className="w-5 h-5 text-amber-400" />
+                <code className="text-amber-300 font-mono flex-1">{passportUrl}</code>
                 <a 
                   href={passportUrl} 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="text-slate-400 hover:text-purple-400 transition-colors"
+                  className="text-slate-400 hover:text-amber-400 transition-colors"
                 >
                   <ExternalLink className="w-4 h-4" />
                 </a>
@@ -151,7 +151,7 @@ export default function PassportClaim() {
           <Card className="bg-slate-900/50 border-slate-800">
             <CardHeader>
               <CardTitle className="text-white flex items-center gap-2">
-                <Palette className="w-5 h-5 text-purple-400" />
+                <Palette className="w-5 h-5 text-amber-400" />
                 Profile Details
               </CardTitle>
             </CardHeader>
@@ -163,7 +163,7 @@ export default function PassportClaim() {
                   placeholder="e.g., Full-Stack Developer, Game Designer"
                   value={activeTitle}
                   onChange={(e) => setActiveTitle(e.target.value)}
-                  className="bg-slate-800/50 border-slate-700 focus:border-purple-500/50"
+                  className="bg-slate-800/50 border-slate-700 focus:border-amber-500/50"
                 />
               </div>
               <div className="space-y-2">
@@ -174,7 +174,7 @@ export default function PassportClaim() {
                   value={bio}
                   onChange={(e) => setBio(e.target.value)}
                   rows={3}
-                  className="bg-slate-800/50 border-slate-700 focus:border-purple-500/50 resize-none"
+                  className="bg-slate-800/50 border-slate-700 focus:border-amber-500/50 resize-none"
                 />
               </div>
             </CardContent>
@@ -183,7 +183,7 @@ export default function PassportClaim() {
           <Card className="bg-slate-900/50 border-slate-800">
             <CardHeader>
               <CardTitle className="text-white flex items-center gap-2">
-                <Zap className="w-5 h-5 text-purple-400" />
+                <Zap className="w-5 h-5 text-amber-400" />
                 Realm Alignment
               </CardTitle>
               <CardDescription>
@@ -199,14 +199,14 @@ export default function PassportClaim() {
                     className={cn(
                       "p-4 rounded-lg border-2 text-left transition-all hover-elevate",
                       selectedRealm === realm.id
-                        ? "border-purple-500 bg-purple-500/10"
+                        ? "border-amber-500 bg-amber-500/10"
                         : "border-slate-700 bg-slate-800/30 hover:border-slate-600"
                     )}
                   >
                     <div className="flex items-center gap-2 mb-1">
                       <span className="text-xl">{realm.icon}</span>
                       {selectedRealm === realm.id && (
-                        <Check className="w-4 h-4 text-purple-400 ml-auto" />
+                        <Check className="w-4 h-4 text-amber-400 ml-auto" />
                       )}
                     </div>
                     <h4 className="text-sm font-medium text-white">{realm.id}</h4>
@@ -220,7 +220,7 @@ export default function PassportClaim() {
           <Card className="bg-slate-900/50 border-slate-800">
             <CardHeader>
               <CardTitle className="text-white flex items-center gap-2">
-                <Music className="w-5 h-5 text-purple-400" />
+                <Music className="w-5 h-5 text-amber-400" />
                 Ethos Guild
               </CardTitle>
               <CardDescription>
@@ -233,7 +233,7 @@ export default function PassportClaim() {
                 and connect with projects looking for music and sound design.
               </p>
               <div className="flex gap-3">
-                <Button asChild variant="outline" className="border-purple-500/30 text-purple-300 hover:bg-purple-500/10">
+                <Button asChild variant="outline" className="border-amber-500/30 text-amber-300 hover:bg-amber-500/10">
                   <Link to="/ethos/settings">
                     <Music className="w-4 h-4 mr-2" />
                     Artist Settings
@@ -251,7 +251,7 @@ export default function PassportClaim() {
           <Button 
             onClick={handleSave} 
             disabled={loading}
-            className="w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600"
+            className="w-full bg-gradient-to-r from-red-500 to-amber-500 hover:from-red-600 hover:to-amber-600"
           >
             {loading ? (
               <>
@@ -270,11 +270,11 @@ export default function PassportClaim() {
           <div className="sticky top-24">
             <h3 className="text-sm font-medium text-slate-400 mb-3">Preview</h3>
             <Card className="bg-gradient-to-br from-slate-900 to-slate-950 border-slate-700 overflow-hidden">
-              <div className="h-20 bg-gradient-to-r from-purple-600/20 via-pink-600/20 to-purple-600/20" />
+              <div className="h-20 bg-gradient-to-r from-red-600/20 via-amber-600/20 to-red-600/20" />
               <CardContent className="pt-0 -mt-10">
                 <Avatar className="w-20 h-20 border-4 border-slate-900 mb-4">
                   <AvatarImage src={profile?.avatar_url || undefined} />
-                  <AvatarFallback className="bg-gradient-to-br from-purple-500 to-pink-500 text-white text-2xl font-bold">
+                  <AvatarFallback className="bg-gradient-to-br from-red-500 to-amber-500 text-white text-2xl font-bold">
                     {(profile?.username || "U").slice(0, 2).toUpperCase()}
                   </AvatarFallback>
                 </Avatar>
@@ -286,7 +286,7 @@ export default function PassportClaim() {
                 </div>
                 <p className="text-slate-400 text-sm mb-3">@{profile?.username || "username"}</p>
                 {activeTitle && (
-                  <Badge className="bg-purple-500/20 text-purple-300 border-purple-500/30 mb-3">
+                  <Badge className="bg-amber-500/20 text-amber-300 border-amber-500/30 mb-3">
                     {activeTitle}
                   </Badge>
                 )}

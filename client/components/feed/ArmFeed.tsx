@@ -88,14 +88,14 @@ const ARMS: {
     id: "nexus",
     label: "Nexus",
     icon: Sparkles,
-    color: "text-purple-400",
+    color: "text-amber-400",
     description: "Talent marketplace",
   },
   {
     id: "staff",
     label: "Staff",
     icon: Shield,
-    color: "text-indigo-400",
+    color: "text-red-400",
     description: "Internal operations",
   },
 ];

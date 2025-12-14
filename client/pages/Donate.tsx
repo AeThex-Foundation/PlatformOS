@@ -251,7 +251,7 @@ export default function Donate() {
       case 'donation': return <Heart className="h-4 w-4 text-red-400" />;
       case 'recruit': return <Users className="h-4 w-4 text-green-400" />;
       case 'grant': return <Gift className="h-4 w-4 text-amber-400" />;
-      case 'level_up': return <TrendingUp className="h-4 w-4 text-purple-400" />;
+      case 'level_up': return <TrendingUp className="h-4 w-4 text-amber-400" />;
       default: return <Activity className="h-4 w-4 text-gray-400" />;
     }
   };
@@ -349,9 +349,9 @@ export default function Donate() {
                   <div className="text-xs text-gray-400">Grants Awarded</div>
                 </CardContent>
               </Card>
-              <Card className="bg-gradient-to-br from-purple-950/40 to-purple-900/20 border-purple-500/30">
+              <Card className="bg-gradient-to-br from-amber-950/40 to-amber-900/20 border-amber-500/30">
                 <CardContent className="p-4 text-center">
-                  <GraduationCap className="h-6 w-6 text-purple-400 mx-auto mb-2" />
+                  <GraduationCap className="h-6 w-6 text-amber-400 mx-auto mb-2" />
                   <div className="text-2xl font-bold text-white">{stats.mentorship_matches}</div>
                   <div className="text-xs text-gray-400">Mentorship Matches</div>
                 </CardContent>
@@ -636,15 +636,15 @@ export default function Donate() {
                     </CardContent>
                   </Card>
 
-                  <Card className="bg-gradient-to-br from-purple-950/40 to-black/40 border-purple-500/30 hover:border-purple-400/50 transition-all cursor-pointer" onClick={() => handleDonate('launch_graduate', 500, false)}>
+                  <Card className="bg-gradient-to-br from-red-950/40 to-black/40 border-red-500/30 hover:border-red-400/50 transition-all cursor-pointer" onClick={() => handleDonate('launch_graduate', 500, false)}>
                     <CardContent className="p-6 text-center space-y-3">
-                      <div className="w-12 h-12 rounded-full bg-purple-600/30 flex items-center justify-center mx-auto">
-                        <Star className="h-6 w-6 text-purple-400" />
+                      <div className="w-12 h-12 rounded-full bg-red-600/30 flex items-center justify-center mx-auto">
+                        <Star className="h-6 w-6 text-red-400" />
                       </div>
                       <h3 className="font-bold text-white">Launch a Graduate</h3>
-                      <p className="text-2xl font-bold text-purple-400">$500</p>
+                      <p className="text-2xl font-bold text-red-400">$500</p>
                       <p className="text-sm text-gray-400">Funds a portfolio site for a graduating member</p>
-                      <Button variant="outline" className="w-full border-purple-500/50 text-purple-300 hover:bg-purple-500/10">
+                      <Button variant="outline" className="w-full border-red-500/50 text-red-300 hover:bg-red-500/10">
                         Fund This
                       </Button>
                     </CardContent>
@@ -865,7 +865,7 @@ export default function Donate() {
                     <div className="h-4 w-px bg-gray-600" />
                     <button 
                       onClick={handleCryptoDonate}
-                      className="flex items-center gap-2 text-gray-300 hover:text-purple-300 transition-colors"
+                      className="flex items-center gap-2 text-gray-300 hover:text-amber-300 transition-colors"
                     >
                       <Wallet className="h-5 w-5" />
                       <span className="text-sm">Crypto</span>
@@ -961,7 +961,7 @@ export default function Donate() {
             
             <div className="pt-2 space-y-3">
               <Button
-                className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700"
+                className="w-full bg-gradient-to-r from-red-600 to-amber-600 hover:from-red-700 hover:to-amber-700"
                 onClick={() => window.open('https://discord.gg/aethex', '_blank')}
               >
                 <ExternalLink className="h-4 w-4 mr-2" />

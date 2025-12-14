@@ -18,7 +18,7 @@ export default function CreatorBadge({ icon: Icon, label, className }: CreatorBa
       )}
       data-testid={`badge-creator-${label.toLowerCase().replace(/\s+/g, "-")}`}
     >
-      <Icon className="w-8 h-8 text-neon-purple" />
+      <Icon className="w-8 h-8 text-red-400" />
       <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
         {label}
       </span>

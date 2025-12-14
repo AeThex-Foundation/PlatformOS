@@ -54,8 +54,8 @@ export default function PassportHub() {
             <TabsTrigger 
               value="claim"
               className={cn(
-                "flex items-center gap-2 data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-500/20 data-[state=active]:to-pink-500/20",
-                "data-[state=active]:text-purple-400 data-[state=active]:border-purple-500/50"
+                "flex items-center gap-2 data-[state=active]:bg-gradient-to-r data-[state=active]:from-red-500/20 data-[state=active]:to-amber-500/20",
+                "data-[state=active]:text-red-400 data-[state=active]:border-red-500/50"
               )}
             >
               <Sparkles className="w-4 h-4" />

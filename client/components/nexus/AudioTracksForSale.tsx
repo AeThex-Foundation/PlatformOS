@@ -265,7 +265,7 @@ export default function AudioTracksForSale() {
 
                 {/* CTA Button */}
                 <Button
-                  className="w-full mt-2 bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-700 hover:to-purple-700"
+                  className="w-full mt-2 bg-gradient-to-r from-red-600 to-amber-600 hover:from-red-700 hover:to-amber-700"
                   onClick={(e) => {
                     e.stopPropagation();
                     navigate(`/ethos/library/${track.id}`);

@@ -235,7 +235,7 @@ const getTypeIcon = (type: string) => {
     case "removed":
       return <AlertTriangle className="h-4 w-4 text-red-500" />;
     case "security":
-      return <Shield className="h-4 w-4 text-purple-500" />;
+      return <Shield className="h-4 w-4 text-red-500" />;
     default:
       return <Info className="h-4 w-4 text-gray-500" />;
   }
@@ -252,7 +252,7 @@ const getTypeColor = (type: string) => {
     case "removed":
       return "bg-red-500";
     case "security":
-      return "bg-purple-500";
+      return "bg-red-500";
     default:
       return "bg-gray-500";
   }
@@ -261,7 +261,7 @@ const getTypeColor = (type: string) => {
 const getVersionBadgeColor = (type: string) => {
   switch (type) {
     case "major":
-      return "bg-purple-600";
+      return "bg-red-600";
     case "minor":
       return "bg-blue-600";
     case "patch":
@@ -315,7 +315,7 @@ export default function Changelog() {
 
   return (
     <Layout>
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
+      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-red-900 to-slate-900">
         <div className="container mx-auto px-4 py-8">
           {/* Header */}
           <div className="mb-8">
@@ -337,7 +337,7 @@ export default function Changelog() {
                   <Github className="h-4 w-4 mr-2" />
                   View on GitHub
                 </Button>
-                <Button className="bg-purple-600 hover:bg-purple-700">
+                <Button className="bg-red-600 hover:bg-red-700">
                   <ExternalLink className="h-4 w-4 mr-2" />
                   Release Notes
                 </Button>
@@ -355,7 +355,7 @@ export default function Changelog() {
                         {changelogEntries.length}
                       </p>
                     </div>
-                    <Calendar className="h-8 w-8 text-purple-400" />
+                    <Calendar className="h-8 w-8 text-red-400" />
                   </div>
                 </CardContent>
               </Card>
@@ -476,7 +476,7 @@ export default function Changelog() {
             {filteredEntries.map((entry, index) => (
               <Card
                 key={entry.id}
-                className="bg-slate-800/50 border-slate-700 hover:border-purple-500/50 transition-all duration-300"
+                className="bg-slate-800/50 border-slate-700 hover:border-red-500/50 transition-all duration-300"
               >
                 <CardHeader>
                   <div className="flex items-start justify-between mb-4">
@@ -608,7 +608,7 @@ export default function Changelog() {
                     <Github className="h-4 w-4 mr-2" />
                     Watch on GitHub
                   </Button>
-                  <Button className="bg-purple-600 hover:bg-purple-700">
+                  <Button className="bg-red-600 hover:bg-red-700">
                     <Bell className="h-4 w-4 mr-2" />
                     Subscribe to Updates
                   </Button>

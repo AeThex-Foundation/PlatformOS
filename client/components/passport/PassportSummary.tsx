@@ -24,7 +24,7 @@ const realmMeta: Record<
   game_developer: {
     label: "Development Forge",
     description: "Building immersive experiences and advanced systems.",
-    gradient: "from-neon-purple to-aethex-500",
+    gradient: "from-red-500 to-aethex-500",
   },
   client: {
     label: "Strategist Nexus",

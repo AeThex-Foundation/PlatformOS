@@ -110,7 +110,7 @@ export default function StaffTeamHandbook() {
         {/* Background effects */}
         <div className="absolute inset-0 opacity-30">
           <div className="absolute top-20 left-10 w-96 h-96 bg-blue-600 rounded-full mix-blend-multiply filter blur-3xl animate-pulse" />
-          <div className="absolute bottom-20 right-10 w-96 h-96 bg-indigo-600 rounded-full mix-blend-multiply filter blur-3xl animate-pulse" />
+          <div className="absolute bottom-20 right-10 w-96 h-96 bg-amber-600 rounded-full mix-blend-multiply filter blur-3xl animate-pulse" />
         </div>
 
         <div className="relative z-10">

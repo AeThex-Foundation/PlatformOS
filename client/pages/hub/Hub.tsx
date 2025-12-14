@@ -65,7 +65,7 @@ export default function Hub() {
       title: "Passport",
       description: "Claim your .aethex domain - your on-chain identity",
       icon: Shield,
-      color: "from-purple-500 to-pink-500",
+      color: "from-red-500 to-amber-500",
       link: "/hub/passport",
       badge: "Identity",
     },

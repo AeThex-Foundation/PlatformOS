@@ -27,7 +27,7 @@ interface TeamWidgetProps {
   type?: "sprint" | "org" | "company";
   onViewProfile?: (memberId: string) => void;
   onMessage?: (memberId: string) => void;
-  accentColor?: "green" | "blue" | "purple" | "cyan";
+  accentColor?: "green" | "blue" | "amber" | "cyan";
 }
 
 const colorMap = {
@@ -39,9 +39,9 @@ const colorMap = {
     bg: "bg-gradient-to-br from-aethex-950/40 to-aethex-900/20",
     border: "border-aethex-500/20",
   },
-  purple: {
-    bg: "bg-gradient-to-br from-purple-950/40 to-purple-900/20",
-    border: "border-purple-500/20",
+  amber: {
+    bg: "bg-gradient-to-br from-amber-950/40 to-amber-900/20",
+    border: "border-amber-500/20",
   },
   cyan: {
     bg: "bg-gradient-to-br from-cyan-950/40 to-cyan-900/20",

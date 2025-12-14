@@ -121,7 +121,7 @@ export default function StaffProjectTracking() {
       <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
         {/* Background effects */}
         <div className="absolute inset-0 opacity-30">
-          <div className="absolute top-20 left-10 w-96 h-96 bg-indigo-600 rounded-full mix-blend-multiply filter blur-3xl animate-pulse" />
+          <div className="absolute top-20 left-10 w-96 h-96 bg-red-600 rounded-full mix-blend-multiply filter blur-3xl animate-pulse" />
           <div className="absolute bottom-20 right-10 w-96 h-96 bg-cyan-600 rounded-full mix-blend-multiply filter blur-3xl animate-pulse" />
         </div>
 
@@ -129,14 +129,14 @@ export default function StaffProjectTracking() {
           {/* Header */}
           <div className="container mx-auto max-w-6xl px-4 py-16">
             <div className="flex items-center gap-3 mb-6">
-              <div className="p-3 rounded-lg bg-indigo-500/20 border border-indigo-500/30">
-                <Target className="h-6 w-6 text-indigo-400" />
+              <div className="p-3 rounded-lg bg-red-500/20 border border-red-500/30">
+                <Target className="h-6 w-6 text-red-400" />
               </div>
               <div>
-                <h1 className="text-4xl font-bold text-indigo-100">
+                <h1 className="text-4xl font-bold text-red-100">
                   Project Tracking
                 </h1>
-                <p className="text-indigo-200/70">
+                <p className="text-red-200/70">
                   OKRs, initiatives, and company-wide roadmap
                 </p>
               </div>
@@ -144,42 +144,42 @@ export default function StaffProjectTracking() {
 
             {/* Summary */}
             <div className="grid md:grid-cols-3 gap-4 mb-12">
-              <Card className="bg-indigo-950/30 border-indigo-500/30">
+              <Card className="bg-red-950/30 border-red-500/30">
                 <CardContent className="pt-6">
                   <div className="flex items-center justify-between">
                     <div>
-                      <p className="text-sm text-indigo-200/70">Active OKRs</p>
-                      <p className="text-3xl font-bold text-indigo-100">
+                      <p className="text-sm text-red-200/70">Active OKRs</p>
+                      <p className="text-3xl font-bold text-red-100">
                         {filtered.length}
                       </p>
                     </div>
-                    <Target className="h-8 w-8 text-indigo-400" />
+                    <Target className="h-8 w-8 text-red-400" />
                   </div>
                 </CardContent>
               </Card>
-              <Card className="bg-indigo-950/30 border-indigo-500/30">
+              <Card className="bg-red-950/30 border-red-500/30">
                 <CardContent className="pt-6">
                   <div className="flex items-center justify-between">
                     <div>
-                      <p className="text-sm text-indigo-200/70">Avg Progress</p>
-                      <p className="text-3xl font-bold text-indigo-100">
+                      <p className="text-sm text-red-200/70">Avg Progress</p>
+                      <p className="text-3xl font-bold text-red-100">
                         {avgProgress}%
                       </p>
                     </div>
-                    <TrendingUp className="h-8 w-8 text-indigo-400" />
+                    <TrendingUp className="h-8 w-8 text-red-400" />
                   </div>
                 </CardContent>
               </Card>
-              <Card className="bg-indigo-950/30 border-indigo-500/30">
+              <Card className="bg-red-950/30 border-red-500/30">
                 <CardContent className="pt-6">
                   <div className="flex items-center justify-between">
                     <div>
-                      <p className="text-sm text-indigo-200/70">On Track</p>
-                      <p className="text-3xl font-bold text-indigo-100">
+                      <p className="text-sm text-red-200/70">On Track</p>
+                      <p className="text-3xl font-bold text-red-100">
                         {filtered.filter((o) => o.status === "On Track").length}
                       </p>
                     </div>
-                    <CheckCircle className="h-8 w-8 text-indigo-400" />
+                    <CheckCircle className="h-8 w-8 text-red-400" />
                   </div>
                 </CardContent>
               </Card>
@@ -187,7 +187,7 @@ export default function StaffProjectTracking() {
 
             {/* Team Filter */}
             <div className="mb-8">
-              <p className="text-sm text-indigo-200/70 mb-3">Filter by Team:</p>
+              <p className="text-sm text-red-200/70 mb-3">Filter by Team:</p>
               <div className="flex gap-2 flex-wrap">
                 <Button
                   variant={selectedTeam === null ? "default" : "outline"}
@@ -195,8 +195,8 @@ export default function StaffProjectTracking() {
                   onClick={() => setSelectedTeam(null)}
                   className={
                     selectedTeam === null
-                      ? "bg-indigo-600 hover:bg-indigo-700"
-                      : "border-indigo-500/30 text-indigo-300 hover:bg-indigo-500/10"
+                      ? "bg-red-600 hover:bg-red-700"
+                      : "border-red-500/30 text-red-300 hover:bg-red-500/10"
                   }
                 >
                   All Teams
@@ -209,8 +209,8 @@ export default function StaffProjectTracking() {
                     onClick={() => setSelectedTeam(team)}
                     className={
                       selectedTeam === team
-                        ? "bg-indigo-600 hover:bg-indigo-700"
-                        : "border-indigo-500/30 text-indigo-300 hover:bg-indigo-500/10"
+                        ? "bg-red-600 hover:bg-red-700"
+                        : "border-red-500/30 text-red-300 hover:bg-red-500/10"
                     }
                   >
                     {team}
@@ -224,12 +224,12 @@ export default function StaffProjectTracking() {
               {filtered.map((okr) => (
                 <Card
                   key={okr.id}
-                  className="bg-slate-800/50 border-slate-700/50 hover:border-indigo-500/50 transition-all"
+                  className="bg-slate-800/50 border-slate-700/50 hover:border-red-500/50 transition-all"
                 >
                   <CardHeader>
                     <div className="flex items-start justify-between">
                       <div className="flex-1">
-                        <CardTitle className="text-indigo-100">
+                        <CardTitle className="text-red-100">
                           {okr.title}
                         </CardTitle>
                         <CardDescription className="text-slate-400">
@@ -245,7 +245,7 @@ export default function StaffProjectTracking() {
                     <div className="space-y-2">
                       <div className="flex justify-between text-sm">
                         <span className="text-slate-400">Progress</span>
-                        <span className="text-indigo-300 font-semibold">
+                        <span className="text-red-300 font-semibold">
                           {okr.progress}%
                         </span>
                       </div>
@@ -254,15 +254,15 @@ export default function StaffProjectTracking() {
                     <div className="flex gap-4 flex-wrap">
                       <div>
                         <p className="text-xs text-slate-500">Owner</p>
-                        <p className="text-sm text-indigo-300">{okr.owner}</p>
+                        <p className="text-sm text-red-300">{okr.owner}</p>
                       </div>
                       <div>
                         <p className="text-xs text-slate-500">Quarter</p>
-                        <p className="text-sm text-indigo-300">{okr.quarter}</p>
+                        <p className="text-sm text-red-300">{okr.quarter}</p>
                       </div>
                       <div>
                         <p className="text-xs text-slate-500">Team</p>
-                        <p className="text-sm text-indigo-300">{okr.team}</p>
+                        <p className="text-sm text-red-300">{okr.team}</p>
                       </div>
                     </div>
                   </CardContent>

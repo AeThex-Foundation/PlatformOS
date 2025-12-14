@@ -70,7 +70,7 @@ export default function MentorshipPrograms() {
         "Portfolio development",
         "24/7 chat support",
       ],
-      color: "from-blue-500 to-purple-600",
+      color: "from-blue-500 to-red-600",
       participants: "1:1",
     },
     {
@@ -126,7 +126,7 @@ export default function MentorshipPrograms() {
         "Certification programs",
         "Ongoing support",
       ],
-      color: "from-purple-500 to-pink-600",
+      color: "from-red-500 to-pink-600",
       participants: "10-100+ people",
     },
   ];

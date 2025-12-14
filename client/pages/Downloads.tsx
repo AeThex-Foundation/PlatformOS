@@ -174,8 +174,8 @@ const courses: CourseDownload[] = [
 const categoryColors: Record<string, string> = {
   "interactive-media": "from-red-500 to-gold-500",
   "web-dev": "from-blue-500 to-cyan-500",
-  "ai-ml": "from-purple-500 to-pink-500",
-  design: "from-indigo-500 to-purple-500",
+  "ai-ml": "from-red-500 to-amber-500",
+  design: "from-amber-500 to-red-500",
   business: "from-green-500 to-emerald-500",
 };
 
@@ -210,7 +210,7 @@ export default function FoundationDownloadCenter() {
 
   return (
     <Layout>
-      <div className="min-h-screen bg-gradient-to-br from-slate-950 via-purple-900/20 to-slate-950 py-12 px-4">
+      <div className="min-h-screen bg-gradient-to-br from-slate-950 via-red-900/20 to-slate-950 py-12 px-4">
         <div className="max-w-7xl mx-auto">
           {/* Header */}
           <div className="mb-12 text-center">
@@ -228,7 +228,7 @@ export default function FoundationDownloadCenter() {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-12">
             <Card className="bg-slate-800/50 border-slate-700 text-center">
               <CardContent className="pt-6">
-                <div className="text-3xl font-bold text-purple-400">
+                <div className="text-3xl font-bold text-red-400">
                   {courses.length}
                 </div>
                 <p className="text-gray-300 mt-2">Complete Courses</p>
@@ -323,7 +323,7 @@ export default function FoundationDownloadCenter() {
             {filteredCourses.map((course) => (
               <Card
                 key={course.id}
-                className="bg-slate-800/50 border-slate-700 hover:border-purple-500/50 transition-all overflow-hidden"
+                className="bg-slate-800/50 border-slate-700 hover:border-red-500/50 transition-all overflow-hidden"
               >
                 {/* Category Header */}
                 <div
@@ -335,7 +335,7 @@ export default function FoundationDownloadCenter() {
                 <CardHeader>
                   <div className="flex items-start justify-between mb-2">
                     <div className="flex gap-2">
-                      <Badge className="bg-purple-500/20 text-purple-300">
+                      <Badge className="bg-red-500/20 text-red-300">
                         {course.chapters} Chapters
                       </Badge>
                       <Badge
@@ -385,7 +385,7 @@ export default function FoundationDownloadCenter() {
                   {/* View Details */}
                   <Button
                     variant="ghost"
-                    className="w-full text-purple-400 hover:bg-purple-500/10"
+                    className="w-full text-red-400 hover:bg-red-500/10"
                   >
                     View Details <ArrowRight className="h-4 w-4 ml-2" />
                   </Button>
