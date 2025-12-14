@@ -264,7 +264,9 @@ export default function Programs() {
 
         if (coursesRes.ok) {
           const data = await coursesRes.json();
-          if (data?.length > 0) setCourses(data);
+          if (Array.isArray(data)) {
+            setCourses(data.length > 0 ? data : sampleCourses);
+          }
         }
 
         if (workshopsRes.ok) {
