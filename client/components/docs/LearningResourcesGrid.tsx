@@ -66,7 +66,7 @@ export default function LearningResourcesGrid({
   const hoverBorderColor =
     theme === "professional"
       ? "hover:border-gray-400"
-      : "hover:border-purple-500/50";
+      : "hover:border-red-500/50";
 
   return (
     <div className="mb-12">

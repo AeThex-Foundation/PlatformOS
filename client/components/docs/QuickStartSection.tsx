@@ -100,13 +100,13 @@ export default function QuickStartSection({
           const hoverBorderColor =
             theme === "professional"
               ? "hover:border-gray-400"
-              : "hover:border-purple-500/50";
+              : "hover:border-red-500/50";
           const iconColor =
-            theme === "professional" ? "text-gray-700" : "text-purple-400";
+            theme === "professional" ? "text-gray-700" : "text-gold-400";
           const hoverTitleColor =
             theme === "professional"
               ? "group-hover:text-gray-900"
-              : "group-hover:text-purple-400";
+              : "group-hover:text-red-500";
 
           return (
             <Card

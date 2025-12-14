@@ -16,7 +16,7 @@ export default function DocsSupportCTA({
   const ctaBg =
     theme === "professional"
       ? "border-gray-300 bg-gray-100"
-      : "border-purple-500/40 bg-purple-900/20";
+      : "border-red-500/40 bg-red-900/20";
   const primaryButtonClass =
     theme === "professional"
       ? "bg-black hover:bg-gray-900 text-white"
@@ -24,7 +24,7 @@ export default function DocsSupportCTA({
   const secondaryButtonClass =
     theme === "professional"
       ? "border-gray-300 text-black hover:bg-gray-50"
-      : "border-purple-400/60 text-purple-200";
+      : "border-red-500/60 text-gold-200";
 
   return (
     <div className={`mt-12 rounded-2xl border ${ctaBg} p-8 text-center`}>
