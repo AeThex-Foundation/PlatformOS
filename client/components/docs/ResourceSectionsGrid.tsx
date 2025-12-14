@@ -94,21 +94,21 @@ export default function ResourceSectionsGrid({
 }: ResourceSectionsGridProps) {
   const { colors, theme } = useDocsTheme();
   const iconColor =
-    theme === "professional" ? "text-gray-700" : "text-purple-400";
+    theme === "professional" ? "text-gray-700" : "text-gold-400";
   const hoverBorderColor =
     theme === "professional"
       ? "hover:border-gray-400"
-      : "hover:border-purple-500/50";
+      : "hover:border-red-500/50";
   const hoverTitleColor =
     theme === "professional"
       ? "group-hover:text-gray-900"
-      : "group-hover:text-purple-400";
+      : "group-hover:text-red-500";
   const arrowColor =
-    theme === "professional" ? "text-gray-600" : "text-purple-400";
+    theme === "professional" ? "text-gray-600" : "text-gold-400";
   const explorehoverColor =
     theme === "professional"
       ? "group-hover:text-gray-900"
-      : "group-hover:text-purple-300";
+      : "group-hover:text-red-500";
 
   return (
     <div className="mb-12">
@@ -151,7 +151,7 @@ export default function ResourceSectionsGrid({
                     ))}
                   </ul>
                   <div
-                    className={`flex items-center ${theme === "professional" ? "text-gray-700" : "text-purple-400"} text-sm ${explorehoverColor} transition-colors`}
+                    className={`flex items-center ${theme === "professional" ? "text-gray-700" : "text-gold-400"} text-sm ${explorehoverColor} transition-colors`}
                   >
                     Explore section
                     <ArrowRight className="h-4 w-4 ml-1" />
