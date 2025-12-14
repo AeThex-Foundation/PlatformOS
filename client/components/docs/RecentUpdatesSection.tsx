@@ -88,7 +88,7 @@ export default function RecentUpdatesSection({
                         New
                       </Badge>
                     )}
-                    <Badge variant="outline" className="text-xs">
+                    <Badge variant="outline" className={`text-xs ${theme === "professional" ? "text-gray-700 border-gray-400" : "text-gold-400 border-gold-400"}`}>
                       {update.type}
                     </Badge>
                   </div>

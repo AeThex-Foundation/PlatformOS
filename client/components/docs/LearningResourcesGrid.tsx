@@ -96,7 +96,7 @@ export default function LearningResourcesGrid({
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <Badge variant="outline" className="mb-4">
+                <Badge variant="outline" className={`mb-4 ${theme === "professional" ? "text-gray-700 border-gray-400" : "text-gold-400 border-gold-400"}`}>
                   {resource.count}
                 </Badge>
                 <Button asChild size="sm" className="w-full">

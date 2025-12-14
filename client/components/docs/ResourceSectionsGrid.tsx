@@ -127,7 +127,7 @@ export default function ResourceSectionsGrid({
                 <CardHeader>
                   <div className="flex items-center justify-between mb-2">
                     <Icon className={`h-8 w-8 ${iconColor}`} />
-                    <Badge variant="outline">{section.badge}</Badge>
+                    <Badge variant="outline" className={theme === "professional" ? "text-gray-700 border-gray-400" : "text-gold-400 border-gold-400"}>{section.badge}</Badge>
                   </div>
                   <CardTitle
                     className={`${colors.headingColor} ${hoverTitleColor} transition-colors`}
