@@ -99,7 +99,7 @@ export default function LearningResourcesGrid({
                 <Badge variant="outline" className={`mb-4 ${theme === "professional" ? "text-gray-700 border-gray-400" : "text-gold-400 border-gold-400"}`}>
                   {resource.count}
                 </Badge>
-                <Button asChild size="sm" className="w-full">
+                <Button asChild size="sm" className={`w-full ${theme === "professional" ? "bg-black hover:bg-gray-900 text-white" : "bg-gradient-to-r from-aethex-500 to-red-600 hover:from-aethex-600 hover:to-red-700 text-white"}`}>
                   <Link to={resource.link}>Explore</Link>
                 </Button>
               </CardContent>

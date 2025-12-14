@@ -21,7 +21,7 @@ export default function DocsHeroSection({
       : "bg-gradient-to-r from-aethex-500 to-red-600 hover:from-aethex-600 hover:to-red-700";
   const outlineButtonClass =
     theme === "professional"
-      ? "border-gray-300 text-black hover:bg-gray-100"
+      ? "border-gray-400 text-gray-700 hover:bg-gray-100 hover:text-gray-900"
       : "border-gold-500/50 text-gold-300 hover:bg-gold-500/10";
 
   return (
