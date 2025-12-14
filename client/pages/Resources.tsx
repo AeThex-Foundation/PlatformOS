@@ -3,7 +3,7 @@
  * Downloadable materials, guides, templates, and Foundation assets
  */
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Layout from "@/components/Layout";
 import SEO from "@/components/SEO";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -24,7 +24,8 @@ import {
   Folder,
   Video,
   BookOpen,
-  TrendingUp
+  TrendingUp,
+  Loader2
 } from "lucide-react";
 import { resourceCategories, featuredResources as featuredResourcesData } from "@/lib/content";
 
@@ -43,9 +44,7 @@ interface Resource {
   previewUrl?: string;
 }
 
-export default function Resources() {
-  const [searchQuery, setSearchQuery] = useState("");
-  const [resources] = useState<Resource[]>([
+const sampleResources: Resource[] = [
     {
       id: "1",
       title: "Project Planning Template",
@@ -244,7 +243,49 @@ export default function Resources() {
       tags: ["Solidity", "Security", "Smart Contracts", "Audit"],
       downloadUrl: "/downloads/smart-contract-security.pdf",
     },
-  ]);
+];
+
+export default function Resources() {
+  const [searchQuery, setSearchQuery] = useState("");
+  const [resources, setResources] = useState<Resource[]>(sampleResources);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchResources = async () => {
+      setIsLoading(true);
+      try {
+        const response = await fetch("/api/resources");
+        if (response.ok) {
+          const data = await response.json();
+          if (data?.resources && Array.isArray(data.resources)) {
+            if (data.resources.length > 0) {
+              const mappedResources: Resource[] = data.resources.map((r: any) => ({
+                id: r.id,
+                title: r.title,
+                description: r.description,
+                type: r.type || "guide",
+                category: r.category,
+                format: r.file_type?.toUpperCase() || "PDF",
+                size: r.file_size || "1 MB",
+                downloads: r.download_count || 0,
+                featured: r.is_featured || false,
+                tags: r.tags || [],
+                downloadUrl: r.file_url || "#",
+                previewUrl: r.preview_url,
+              }));
+              setResources(mappedResources);
+            }
+          }
+        }
+      } catch (error) {
+        console.error("Failed to fetch resources:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchResources();
+  }, []);
 
   const getTypeIcon = (type: string) => {
     switch (type) {
