@@ -23,8 +23,8 @@ export default function DocsSupportCTA({
       : "bg-gradient-to-r from-aethex-500 to-neon-blue hover:from-aethex-600 hover:to-neon-blue/90";
   const secondaryButtonClass =
     theme === "professional"
-      ? "border-gray-300 text-black hover:bg-gray-50"
-      : "border-red-500/60 text-gold-200";
+      ? "border-gray-400 text-gray-700 hover:bg-gray-50 hover:text-gray-900"
+      : "border-red-500/60 text-gold-200 hover:bg-red-500/10";
 
   return (
     <div className={`mt-12 rounded-2xl border ${ctaBg} p-8 text-center`}>
