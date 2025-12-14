@@ -33,6 +33,7 @@ import { opportunitiesRoutes } from "./routes/opportunities-routes";
 import { authMiddleware } from "./middleware/auth";
 import donateRoutes from "./routes/donate-routes";
 import contributionRoutes from "./routes/contribution-routes";
+import foundationRoutes from "./routes/foundation-routes";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -153,6 +154,9 @@ export function createServer() {
   
   // Foundation Contributions - Volunteer hours, mentorship, community work
   app.use("/api/contributions", contributionRoutes);
+  
+  // Foundation Core - Courses, stats, and public data
+  app.use("/api/foundation", foundationRoutes);
   
   app.use(socialRoutes); // Social features (endorsements, mentorship requests)
   app.use(opportunitiesRoutes); // Opportunities board
