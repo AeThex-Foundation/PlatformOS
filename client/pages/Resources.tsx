@@ -260,7 +260,7 @@ export default function Resources() {
     switch (type) {
       case "guide": return "bg-blue-500/10 text-blue-400 border-blue-400/30";
       case "template": return "bg-green-500/10 text-green-400 border-green-400/30";
-      case "asset": return "bg-purple-500/10 text-purple-400 border-purple-400/30";
+      case "asset": return "bg-red-500/10 text-red-400 border-red-400/30";
       case "tool": return "bg-amber-500/10 text-amber-400 border-amber-400/30";
       default: return "bg-gray-500/10 text-gray-400 border-gray-400/30";
     }
@@ -475,7 +475,7 @@ export default function Resources() {
             </Card>
             <Card className="border-border/30">
               <CardContent className="pt-6 text-center">
-                <ImageIcon className="h-8 w-8 text-purple-400 mx-auto mb-2" />
+                <ImageIcon className="h-8 w-8 text-red-400 mx-auto mb-2" />
                 <p className="text-2xl font-bold">{assetResources.length}</p>
                 <p className="text-sm text-muted-foreground">Assets</p>
               </CardContent>

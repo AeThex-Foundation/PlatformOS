@@ -12,7 +12,7 @@ const FEATURES = [
     icon: Globe,
     title: "Personal Domain",
     description: "Get your own username.aethex.me subdomain that showcases your profile across the web.",
-    color: "text-purple-400",
+    color: "text-red-400",
   },
   {
     icon: Shield,
@@ -56,13 +56,13 @@ const REALMS = [
   { 
     name: "Strategist Nexus", 
     icon: "🧠", 
-    color: "from-blue-500 to-indigo-500",
+    color: "from-blue-500 to-cyan-500",
     members: "Planners, Analysts, Leaders",
   },
   { 
     name: "Innovation Commons", 
     icon: "💡", 
-    color: "from-purple-500 to-pink-500",
+    color: "from-red-500 to-amber-500",
     members: "Creators, Visionaries, Artists",
   },
   { 
@@ -133,9 +133,9 @@ export default function PassportShowcase() {
       </div>
 
       <div className="grid lg:grid-cols-2 gap-8">
-        <Card className="bg-gradient-to-br from-purple-500/10 to-pink-500/10 border-purple-500/30">
+        <Card className="bg-gradient-to-br from-red-500/10 to-amber-500/10 border-red-500/30">
           <CardHeader>
-            <Badge className="w-fit bg-purple-500/20 text-purple-300 border-purple-500/30 mb-2">
+            <Badge className="w-fit bg-red-500/20 text-red-300 border-red-500/30 mb-2">
               <Users className="w-3 h-3 mr-1" /> Creator Passport
             </Badge>
             <CardTitle className="text-white text-2xl">username.aethex.me</CardTitle>
@@ -147,12 +147,12 @@ export default function PassportShowcase() {
             <ul className="space-y-3">
               {["Verified identity badge", "XP & level progression", "Achievement showcase", "Social links & connections", "Ethos Guild integration"].map((item) => (
                 <li key={item} className="flex items-center gap-2 text-slate-300">
-                  <CheckCircle className="w-4 h-4 text-purple-400 flex-shrink-0" />
+                  <CheckCircle className="w-4 h-4 text-red-400 flex-shrink-0" />
                   <span>{item}</span>
                 </li>
               ))}
             </ul>
-            <Button className="mt-6 bg-purple-500 hover:bg-purple-600">
+            <Button className="mt-6 bg-red-500 hover:bg-red-600">
               Claim Your Passport <ArrowRight className="w-4 h-4 ml-2" />
             </Button>
           </CardContent>

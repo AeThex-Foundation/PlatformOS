@@ -194,7 +194,7 @@ const Profile = () => {
                     {profile.experience_level ? (
                       <Badge
                         variant="outline"
-                        className="capitalize border-purple-400/50 text-purple-200"
+                        className="capitalize border-amber-400/50 text-amber-200"
                       >
                         {profile.experience_level}
                       </Badge>
@@ -465,7 +465,7 @@ const Profile = () => {
                 <Card className="border-border/40 bg-background/60 backdrop-blur">
                   <CardHeader>
                     <CardTitle className="flex items-center gap-2 text-white">
-                      <Globe className="h-5 w-5 text-purple-300" />
+                      <Globe className="h-5 w-5 text-amber-300" />
                       Portfolio
                     </CardTitle>
                     <CardDescription>

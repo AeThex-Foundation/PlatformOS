@@ -29,7 +29,7 @@ export function DiscussionPreview({
   const getBadgeColor = (badge: string) => {
     switch (badge) {
       case "Diamond": return "border-blue-400/50 text-blue-400 bg-blue-500/10";
-      case "Platinum": return "border-purple-400/50 text-purple-400 bg-purple-500/10";
+      case "Platinum": return "border-red-400/50 text-red-400 bg-red-500/10";
       case "Gold": return "border-gold-400/50 text-gold-400 bg-gold-500/10";
       case "Staff": return "border-red-400/50 text-red-400 bg-red-500/10";
       default: return "border-gray-400/50 text-gray-400 bg-gray-500/10";

@@ -20,7 +20,7 @@ export default function ScopeAnchor({
     "In Development": "bg-amber-500/20 text-amber-400 border-amber-500/30",
     Beta: "bg-blue-500/20 text-blue-400 border-blue-500/30",
     Released: "bg-gameforge-green/20 text-gameforge-green border-gameforge-green/30",
-    "Early Access": "bg-purple-500/20 text-purple-400 border-purple-500/30",
+    "Early Access": "bg-red-500/20 text-red-400 border-red-500/30",
   };
 
   return (

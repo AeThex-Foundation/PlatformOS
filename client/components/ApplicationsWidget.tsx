@@ -41,7 +41,7 @@ interface ApplicationsWidgetProps {
   applications: Application[];
   title?: string;
   description?: string;
-  accentColor?: "purple" | "blue" | "cyan" | "green" | "amber" | "red";
+  accentColor?: "red" | "blue" | "cyan" | "green" | "amber";
   onViewDetails?: (application: Application) => void;
   showCTA?: boolean;
   ctaText?: string;
@@ -49,11 +49,6 @@ interface ApplicationsWidgetProps {
 }
 
 const colorMap = {
-  purple: {
-    bg: "bg-gradient-to-br from-purple-950/40 to-purple-900/20",
-    border: "border-purple-500/20",
-    text: "text-purple-300",
-  },
   blue: {
     bg: "bg-gradient-to-br from-aethex-950/40 to-aethex-900/20",
     border: "border-gold-500/20",
@@ -103,7 +98,7 @@ const statusMap = {
     label: "Rejected",
   },
   interview: {
-    color: "bg-purple-600/50 text-purple-100",
+    color: "bg-amber-600/50 text-amber-100",
     icon: Briefcase,
     label: "Interview",
   },
@@ -113,7 +108,7 @@ export function ApplicationsWidget({
   applications,
   title = "My Applications",
   description = "Track all your job applications and bids",
-  accentColor = "purple",
+  accentColor = "red",
   onViewDetails,
   showCTA = false,
   ctaText = "Browse More Opportunities",
@@ -145,7 +140,7 @@ export function ApplicationsWidget({
             {showCTA && onCTA && (
               <Button
                 onClick={onCTA}
-                className="bg-gradient-to-r from-purple-600 to-aethex-600 hover:from-purple-700 hover:to-aethex-700"
+                className="bg-gradient-to-r from-red-600 to-aethex-600 hover:from-red-700 hover:to-aethex-700"
               >
                 <ArrowRight className="h-4 w-4 mr-2" />
                 {ctaText}
@@ -169,7 +164,7 @@ export function ApplicationsWidget({
                 {statusCounts.interview > 0 && (
                   <div className="text-center">
                     <p className="text-xs text-gray-400">Interview</p>
-                    <p className="text-lg font-bold text-purple-400">
+                    <p className="text-lg font-bold text-amber-400">
                       {statusCounts.interview}
                     </p>
                   </div>

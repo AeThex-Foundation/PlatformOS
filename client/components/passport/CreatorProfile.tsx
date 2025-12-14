@@ -154,9 +154,9 @@ export default function CreatorProfile({
         <Card className="border border-slate-800 bg-slate-900/70">
           <CardContent className="pt-8 pb-6">
             <div className="flex flex-col md:flex-row items-center gap-6">
-              <Avatar className="w-28 h-28 ring-4 ring-purple-500/30" data-testid="img-avatar">
+              <Avatar className="w-28 h-28 ring-4 ring-red-500/30" data-testid="img-avatar">
                 <AvatarImage src={avatarUrl} alt={displayName} />
-                <AvatarFallback className="text-2xl font-bold bg-purple-500/20 text-purple-400">
+                <AvatarFallback className="text-2xl font-bold bg-red-500/20 text-red-400">
                   {initials}
                 </AvatarFallback>
               </Avatar>
@@ -165,11 +165,11 @@ export default function CreatorProfile({
                 <div className="flex items-center justify-center md:justify-start gap-2 mb-1">
                   <h1 className="text-3xl font-bold text-white" data-testid="text-displayname">{displayName}</h1>
                   {isVerified && (
-                    <BadgeCheck className="w-6 h-6 text-purple-400" data-testid="badge-verified" />
+                    <BadgeCheck className="w-6 h-6 text-amber-400" data-testid="badge-verified" />
                   )}
                 </div>
                 <p className="text-slate-400 mb-2" data-testid="text-username">@{username}</p>
-                <p className="text-purple-300 font-medium" data-testid="text-tagline">{tagline}</p>
+                <p className="text-amber-300 font-medium" data-testid="text-tagline">{tagline}</p>
                 
                 {badges.length > 0 && (
                   <div className="flex flex-wrap gap-2 mt-4 justify-center md:justify-start">
@@ -204,7 +204,7 @@ export default function CreatorProfile({
 
               <div className="flex gap-3">
                 {nexusUrl && (
-                  <Button asChild className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700">
+                  <Button asChild className="bg-gradient-to-r from-red-600 to-amber-600 hover:from-red-700 hover:to-amber-700">
                     <a href={nexusUrl} data-testid="button-hire-me">
                       Hire Me
                     </a>
@@ -269,7 +269,7 @@ export default function CreatorProfile({
                     <Button
                       asChild
                       variant="ghost"
-                      className="h-8 px-2 text-xs text-purple-300"
+                      className="h-8 px-2 text-xs text-amber-300"
                     >
                       <a href={`https://${project.title.toLowerCase().replace(/\s+/g, '-')}.aethex.space`}>
                         View mission
@@ -295,7 +295,7 @@ export default function CreatorProfile({
             </div>
             <Badge
               variant="outline"
-              className="border-purple-500/50 text-purple-200"
+              className="border-amber-500/50 text-amber-200"
             >
               <Award className="mr-1 h-3 w-3" /> {achievements.length}{" "}
               badges
@@ -303,7 +303,7 @@ export default function CreatorProfile({
           </div>
           {achievements.length === 0 ? (
             <Card className="border border-slate-800 bg-slate-900/60 p-8 text-center text-slate-300">
-              <Target className="mx-auto mb-3 h-8 w-8 text-purple-300" />
+              <Target className="mx-auto mb-3 h-8 w-8 text-amber-300" />
               No achievements yet. Complete onboarding and participate in
               missions to earn AeThex badges.
             </Card>
@@ -323,7 +323,7 @@ export default function CreatorProfile({
                         {getAchievementIcon(achievement) === "party" && <Award className="w-8 h-8 text-pink-500" />}
                         {getAchievementIcon(achievement) === "star" && <Award className="w-8 h-8 text-yellow-400" />}
                         {getAchievementIcon(achievement) === "rocket" && <Rocket className="w-8 h-8 text-blue-400" />}
-                        {getAchievementIcon(achievement) === "badge" && <Award className="w-8 h-8 text-purple-400" />}
+                        {getAchievementIcon(achievement) === "badge" && <Award className="w-8 h-8 text-red-400" />}
                       </span>
                       <div>
                         <h3 className="text-lg font-semibold">
@@ -336,7 +336,7 @@ export default function CreatorProfile({
                     </div>
                     <div className="flex items-center justify-between text-xs text-slate-400">
                       <span>XP Reward: {achievement.xp_reward ?? 0}</span>
-                      <span className="flex items-center gap-1 text-purple-200">
+                      <span className="flex items-center gap-1 text-amber-200">
                         <Rocket className="h-3.5 w-3.5" /> Passport stamped
                       </span>
                     </div>

@@ -194,7 +194,7 @@ export default function Community() {
                   switch (difficulty) {
                     case "Beginner": return "bg-green-500/10 text-green-400 border-green-400/30";
                     case "Intermediate": return "bg-blue-500/10 text-blue-400 border-blue-400/30";
-                    case "Advanced": return "bg-purple-500/10 text-purple-400 border-purple-400/30";
+                    case "Advanced": return "bg-red-500/10 text-red-400 border-red-400/30";
                     default: return "bg-gray-500/10 text-gray-400 border-gray-400/30";
                   }
                 };

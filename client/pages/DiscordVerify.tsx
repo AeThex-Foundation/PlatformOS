@@ -121,14 +121,14 @@ export default function DiscordVerify() {
         description="Link your Discord account to your AeThex profile"
       />
 
-      <div className="min-h-screen bg-gradient-to-br from-background via-background to-indigo-950/10 pt-20 pb-12">
+      <div className="min-h-screen bg-gradient-to-br from-background via-background to-red-950/10 pt-20 pb-12">
         <div className="max-w-lg mx-auto px-4">
-          <Card className="bg-gradient-to-br from-card/60 to-card/30 border border-indigo-500/30 backdrop-blur-sm hover:border-indigo-500/50 transition-all duration-300 shadow-2xl">
-            <CardHeader className="bg-gradient-to-r from-indigo-600/10 to-purple-600/10 border-b border-indigo-500/20 pb-6">
-              <CardTitle className="flex items-center gap-3 text-2xl font-bold bg-gradient-to-r from-indigo-300 to-purple-300 bg-clip-text text-transparent">
-                <div className="p-2 rounded-lg bg-indigo-500/20 border border-indigo-400/40">
+          <Card className="bg-gradient-to-br from-card/60 to-card/30 border border-red-500/30 backdrop-blur-sm hover:border-red-500/50 transition-all duration-300 shadow-2xl">
+            <CardHeader className="bg-gradient-to-r from-red-600/10 to-amber-600/10 border-b border-red-500/20 pb-6">
+              <CardTitle className="flex items-center gap-3 text-2xl font-bold bg-gradient-to-r from-red-300 to-amber-300 bg-clip-text text-transparent">
+                <div className="p-2 rounded-lg bg-red-500/20 border border-red-400/40">
                   <svg
-                    className="w-6 h-6 text-indigo-300"
+                    className="w-6 h-6 text-red-300"
                     viewBox="0 0 24 24"
                     fill="currentColor"
                     xmlns="http://www.w3.org/2000/svg"
@@ -152,13 +152,13 @@ export default function DiscordVerify() {
                     </AlertDescription>
                   </Alert>
 
-                  <div className="p-5 rounded-lg bg-gradient-to-br from-indigo-500/10 to-purple-500/10 border border-indigo-500/20 space-y-3">
-                    <p className="text-xs font-semibold text-indigo-300 uppercase tracking-widest">
+                  <div className="p-5 rounded-lg bg-gradient-to-br from-red-500/10 to-amber-500/10 border border-red-500/20 space-y-3">
+                    <p className="text-xs font-semibold text-red-300 uppercase tracking-widest">
                       Discord Account
                     </p>
-                    <p className="text-lg font-bold text-indigo-100">
+                    <p className="text-lg font-bold text-red-100">
                       {discordUser.username}
-                      <span className="text-indigo-400/60">#{discordUser.discriminator || "0000"}</span>
+                      <span className="text-red-400/60">#{discordUser.discriminator || "0000"}</span>
                     </p>
                   </div>
 
@@ -168,7 +168,7 @@ export default function DiscordVerify() {
 
                   <Button
                     onClick={() => navigate("/dashboard?tab=connections")}
-                    className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-semibold hover-lift transition-all duration-200"
+                    className="w-full bg-gradient-to-r from-red-600 to-amber-600 hover:from-red-700 hover:to-amber-700 text-white font-semibold hover-lift transition-all duration-200"
                   >
                     View Connections
                   </Button>
@@ -176,26 +176,26 @@ export default function DiscordVerify() {
               ) : (
                 // Input State
                 <div className="space-y-5">
-                  <div className="p-5 rounded-lg bg-gradient-to-br from-indigo-500/10 to-blue-500/10 border border-indigo-500/30 space-y-3">
-                    <p className="text-sm font-bold text-indigo-300 flex items-center gap-2">
+                  <div className="p-5 rounded-lg bg-gradient-to-br from-red-500/10 to-amber-500/10 border border-red-500/30 space-y-3">
+                    <p className="text-sm font-bold text-red-300 flex items-center gap-2">
                       <span className="text-lg">📋</span>
                       How to get your code:
                     </p>
                     <ol className="text-sm text-muted-foreground space-y-2 list-inside">
                       <li className="flex gap-2">
-                        <span className="text-indigo-400 font-bold">1.</span>
+                        <span className="text-red-400 font-bold">1.</span>
                         <span>Open Discord</span>
                       </li>
                       <li className="flex gap-2">
-                        <span className="text-indigo-400 font-bold">2.</span>
+                        <span className="text-red-400 font-bold">2.</span>
                         <span>Go to any server where the AeThex bot is installed</span>
                       </li>
                       <li className="flex gap-2">
-                        <span className="text-indigo-400 font-bold">3.</span>
-                        <span>Type <code className="bg-background/60 px-2 py-1 rounded text-indigo-300 font-mono text-xs">/verify</code></span>
+                        <span className="text-red-400 font-bold">3.</span>
+                        <span>Type <code className="bg-background/60 px-2 py-1 rounded text-red-300 font-mono text-xs">/verify</code></span>
                       </li>
                       <li className="flex gap-2">
-                        <span className="text-indigo-400 font-bold">4.</span>
+                        <span className="text-red-400 font-bold">4.</span>
                         <span>Copy the 6-digit code from the bot's response</span>
                       </li>
                     </ol>
@@ -221,7 +221,7 @@ export default function DiscordVerify() {
                       onChange={(e) => setVerificationCode(e.target.value.replace(/\D/g, '').slice(0, 6))}
                       maxLength={6}
                       disabled={isLoading}
-                      className="text-center text-3xl font-bold tracking-[0.5em] border-2 border-indigo-500/50 focus:border-indigo-500 bg-background/60 hover:bg-background/80 transition-colors"
+                      className="text-center text-3xl font-bold tracking-[0.5em] border-2 border-red-500/50 focus:border-red-500 bg-background/60 hover:bg-background/80 transition-colors"
                     />
                     <p className="text-xs text-muted-foreground text-center">
                       Enter the 6-digit code from Discord
@@ -231,7 +231,7 @@ export default function DiscordVerify() {
                   <Button
                     onClick={() => handleVerify(verificationCode)}
                     disabled={isLoading || !verificationCode.trim()}
-                    className="w-full h-12 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-bold text-base disabled:opacity-50 disabled:cursor-not-allowed hover-lift transition-all duration-200"
+                    className="w-full h-12 bg-gradient-to-r from-red-600 to-amber-600 hover:from-red-700 hover:to-amber-700 text-white font-bold text-base disabled:opacity-50 disabled:cursor-not-allowed hover-lift transition-all duration-200"
                   >
                     {isLoading ? (
                       <>
@@ -246,7 +246,7 @@ export default function DiscordVerify() {
                   <Button
                     onClick={() => navigate("/dashboard")}
                     variant="outline"
-                    className="w-full h-11 border-border/50 hover:border-indigo-400/50 hover:bg-indigo-500/5 transition-all duration-200"
+                    className="w-full h-11 border-border/50 hover:border-red-400/50 hover:bg-red-500/5 transition-all duration-200"
                   >
                     Cancel
                   </Button>
@@ -256,11 +256,11 @@ export default function DiscordVerify() {
           </Card>
 
           {/* Info Box */}
-          <div className="mt-8 p-5 rounded-lg bg-gradient-to-r from-indigo-500/10 to-purple-500/10 border border-indigo-500/30 backdrop-blur-sm animate-fade-in">
+          <div className="mt-8 p-5 rounded-lg bg-gradient-to-r from-red-500/10 to-amber-500/10 border border-red-500/30 backdrop-blur-sm animate-fade-in">
             <p className="text-sm text-muted-foreground flex items-start gap-3">
               <span className="text-lg">💡</span>
               <span>
-                <strong className="text-indigo-300">Tip:</strong> You can also sign in directly with
+                <strong className="text-red-300">Tip:</strong> You can also sign in directly with
                 Discord on the login page if you're creating a new account.
               </span>
             </p>

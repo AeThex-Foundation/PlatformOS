@@ -25,7 +25,7 @@ const difficultyColors: Record<
   bronze: "bg-amber-700/20 text-amber-600",
   silver: "bg-slate-400/20 text-slate-300",
   gold: "bg-yellow-500/20 text-yellow-400",
-  platinum: "bg-purple-500/20 text-purple-400",
+  platinum: "bg-red-500/20 text-red-400",
 };
 
 const mockAchievements: Achievement[] = [

@@ -6,7 +6,7 @@ export default function Privacy() {
       <div className="min-h-screen bg-aethex-gradient py-12">
         <div className="container mx-auto px-4 max-w-4xl space-y-8">
           <header className="space-y-2">
-            <h1 className="text-3xl font-bold text-gradient-purple">
+            <h1 className="text-3xl font-bold text-gradient">
               Privacy Policy
             </h1>
             <p className="text-sm text-muted-foreground">

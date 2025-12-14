@@ -153,8 +153,8 @@ export default function OpportunityPostForm() {
         {/* Background */}
         <div className="pointer-events-none absolute inset-0 opacity-[0.12] [background-image:radial-gradient(circle_at_top,#a855f7_0,rgba(0,0,0,0.45)_55%,rgba(0,0,0,0.9)_100%)]" />
         <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(transparent_0,transparent_calc(100%-1px),rgba(168,85,247,0.05)_calc(100%-1px))] bg-[length:100%_32px]" />
-        <div className="pointer-events-none absolute top-20 left-10 w-72 h-72 bg-purple-500/20 rounded-full blur-3xl animate-blob" />
-        <div className="pointer-events-none absolute bottom-20 right-10 w-72 h-72 bg-violet-600/10 rounded-full blur-3xl animate-blob animation-delay-2000" />
+        <div className="pointer-events-none absolute top-20 left-10 w-72 h-72 bg-red-500/20 rounded-full blur-3xl animate-blob" />
+        <div className="pointer-events-none absolute bottom-20 right-10 w-72 h-72 bg-amber-600/10 rounded-full blur-3xl animate-blob animation-delay-2000" />
 
         <main className="relative z-10">
           {/* Hero Section */}
@@ -171,8 +171,8 @@ export default function OpportunityPostForm() {
               </Button>
 
               <div className="flex items-center gap-3 mb-4">
-                <Briefcase className="h-8 w-8 text-purple-400" />
-                <h1 className="text-4xl font-bold text-purple-300">
+                <Briefcase className="h-8 w-8 text-red-400" />
+                <h1 className="text-4xl font-bold text-red-300">
                   Post an Opportunity
                 </h1>
               </div>
@@ -365,7 +365,7 @@ export default function OpportunityPostForm() {
                       <Button
                         type="submit"
                         disabled={isSubmitting}
-                        className="flex-1 bg-purple-500 text-white hover:bg-purple-600"
+                        className="flex-1 bg-red-500 text-white hover:bg-red-600"
                       >
                         {isSubmitting ? (
                           <>

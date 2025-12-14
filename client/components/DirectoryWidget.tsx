@@ -62,7 +62,7 @@ export function DirectoryWidget({
   ).length;
 
   return (
-    <Card className="bg-gradient-to-br from-purple-950/40 to-purple-900/20 border-purple-500/20">
+    <Card className="bg-gradient-to-br from-red-950/40 to-red-900/20 border-red-500/20">
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
           <Users className="h-5 w-5" />
@@ -118,7 +118,7 @@ export function DirectoryWidget({
                       className="w-10 h-10 rounded-lg object-cover flex-shrink-0"
                     />
                   ) : (
-                    <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-purple-600 to-purple-700 flex items-center justify-center flex-shrink-0">
+                    <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-red-600 to-red-700 flex items-center justify-center flex-shrink-0">
                       <span className="text-sm font-bold text-white">
                         {member.name.charAt(0).toUpperCase()}
                       </span>

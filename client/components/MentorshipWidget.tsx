@@ -44,7 +44,7 @@ interface MentorshipWidgetProps {
   onRequestMentor?: () => void;
   onScheduleSession?: () => void;
   onViewProfile?: () => void;
-  accentColor?: "red" | "blue" | "purple";
+  accentColor?: "red" | "blue" | "amber";
 }
 
 const colorMap = {
@@ -56,9 +56,9 @@ const colorMap = {
     bg: "bg-gradient-to-br from-blue-950/40 to-blue-900/20",
     border: "border-blue-500/20",
   },
-  purple: {
-    bg: "bg-gradient-to-br from-purple-950/40 to-purple-900/20",
-    border: "border-purple-500/20",
+  amber: {
+    bg: "bg-gradient-to-br from-amber-950/40 to-amber-900/20",
+    border: "border-amber-500/20",
   },
 };
 

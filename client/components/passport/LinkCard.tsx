@@ -23,7 +23,7 @@ export default function LinkCard({ icon: Icon, title, href, className }: LinkCar
       data-testid={`link-card-${title.toLowerCase().replace(/\s+/g, "-")}`}
     >
       <div className="flex items-center gap-4">
-        <Icon className="w-6 h-6 text-neon-purple" />
+        <Icon className="w-6 h-6 text-red-400" />
         <span className="font-medium">{title}</span>
       </div>
       <ArrowRight className="w-5 h-5 text-muted-foreground group-hover:text-foreground transition-colors" />

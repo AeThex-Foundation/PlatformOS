@@ -389,7 +389,7 @@ export default function Login() {
                     <div className="space-y-2">
                       <Button
                         variant="outline"
-                        className="w-full hover-lift interactive-scale border-border/50 hover:border-purple-500/50 hover:bg-purple-500/10 transition-all duration-200"
+                        className="w-full hover-lift interactive-scale border-border/50 hover:border-red-500/50 hover:bg-red-500/10 transition-all duration-200"
                         onClick={() => {
                           const u = new URL(
                             "/api/roblox/oauth/start",

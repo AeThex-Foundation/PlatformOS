@@ -16,13 +16,13 @@ export default function VerifiedBadge({ className, size = "md" }: VerifiedBadgeP
   return (
     <span
       className={cn(
-        "inline-flex items-center justify-center text-neon-purple",
+        "inline-flex items-center justify-center text-amber-400",
         className
       )}
       title="Verified AeThex Member"
       data-testid="badge-verified"
     >
-      <BadgeCheck className={cn(sizeClasses[size], "fill-neon-purple/20")} />
+      <BadgeCheck className={cn(sizeClasses[size], "fill-amber-400/20")} />
     </span>
   );
 }

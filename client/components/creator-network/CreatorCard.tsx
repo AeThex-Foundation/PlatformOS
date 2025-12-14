@@ -20,7 +20,7 @@ const realmColors: Record<string, string> = {
   'Development Forge': 'text-orange-400',
   'Strategist Nexus': 'text-blue-400',
   'Innovation Commons': 'text-green-400',
-  'Experience Hub': 'text-purple-400',
+  'Experience Hub': 'text-amber-400',
 };
 
 export function CreatorCard({ creator }: CreatorCardProps) {

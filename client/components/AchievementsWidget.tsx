@@ -27,7 +27,7 @@ interface AchievementsWidgetProps {
   description?: string;
   onViewAll?: () => void;
   maxDisplay?: number;
-  accentColor?: "red" | "blue" | "purple" | "gold";
+  accentColor?: "red" | "blue" | "amber" | "gold";
 }
 
 const rarityMap = {
@@ -41,8 +41,8 @@ const rarityMap = {
   },
   rare: { color: "bg-blue-600/50 text-blue-100", border: "border-blue-500/30" },
   epic: {
-    color: "bg-purple-600/50 text-purple-100",
-    border: "border-purple-500/30",
+    color: "bg-red-600/50 text-red-100",
+    border: "border-red-500/30",
   },
   legendary: {
     color: "bg-yellow-600/50 text-yellow-100",
@@ -59,9 +59,9 @@ const colorMap = {
     bg: "bg-gradient-to-br from-blue-950/40 to-blue-900/20",
     border: "border-blue-500/20",
   },
-  purple: {
-    bg: "bg-gradient-to-br from-purple-950/40 to-purple-900/20",
-    border: "border-purple-500/20",
+  amber: {
+    bg: "bg-gradient-to-br from-amber-950/40 to-amber-900/20",
+    border: "border-amber-500/20",
   },
   gold: {
     bg: "bg-gradient-to-br from-amber-950/40 to-amber-900/20",

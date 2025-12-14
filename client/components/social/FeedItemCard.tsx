@@ -59,16 +59,16 @@ const ARM_COLORS: Record<
     text: "text-cyan-400",
   },
   nexus: {
-    bg: "bg-purple-500/10",
-    border: "border-l-4 border-l-purple-400",
-    badge: "bg-purple-500/20 text-purple-200",
-    text: "text-purple-400",
+    bg: "bg-amber-500/10",
+    border: "border-l-4 border-l-amber-400",
+    badge: "bg-amber-500/20 text-amber-200",
+    text: "text-amber-400",
   },
   staff: {
-    bg: "bg-indigo-500/10",
-    border: "border-l-4 border-l-indigo-400",
-    badge: "bg-indigo-500/20 text-indigo-200",
-    text: "text-indigo-400",
+    bg: "bg-red-500/10",
+    border: "border-l-4 border-l-red-400",
+    badge: "bg-red-500/20 text-red-200",
+    text: "text-red-400",
   },
 };
 

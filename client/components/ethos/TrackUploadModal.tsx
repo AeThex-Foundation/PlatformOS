@@ -154,7 +154,7 @@ export default function TrackUploadModal({
                 </Button>
                 <Button
                   onClick={handleUpload}
-                  className="flex-1 bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-700 hover:to-purple-700"
+                  className="flex-1 bg-gradient-to-r from-red-600 to-amber-600 hover:from-red-700 hover:to-amber-700"
                 >
                   Proceed to Details
                 </Button>
@@ -164,7 +164,7 @@ export default function TrackUploadModal({
             {!file && (
               <Button
                 onClick={() => fileInputRef.current?.click()}
-                className="flex-1 bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-700 hover:to-purple-700"
+                className="flex-1 bg-gradient-to-r from-red-600 to-amber-600 hover:from-red-700 hover:to-amber-700"
               >
                 Browse Files
               </Button>

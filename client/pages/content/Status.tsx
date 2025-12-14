@@ -172,7 +172,7 @@ export default function Status() {
 
   return (
     <Layout>
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
+      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-red-900 to-slate-900">
         <div className="container mx-auto px-4 py-8">
           {/* Header */}
           <div className="mb-8">
@@ -188,7 +188,7 @@ export default function Status() {
               <Button
                 onClick={refreshStatus}
                 disabled={isRefreshing}
-                className="bg-purple-600 hover:bg-purple-700"
+                className="bg-red-600 hover:bg-red-700"
               >
                 <RefreshCw
                   className={`h-4 w-4 mr-2 ${isRefreshing ? "animate-spin" : ""}`}

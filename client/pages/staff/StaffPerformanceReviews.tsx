@@ -124,36 +124,36 @@ export default function StaffPerformanceReviews() {
       <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
         {/* Background effects */}
         <div className="absolute inset-0 opacity-30">
-          <div className="absolute top-20 left-10 w-96 h-96 bg-purple-600 rounded-full mix-blend-multiply filter blur-3xl animate-pulse" />
-          <div className="absolute bottom-20 right-10 w-96 h-96 bg-violet-600 rounded-full mix-blend-multiply filter blur-3xl animate-pulse" />
+          <div className="absolute top-20 left-10 w-96 h-96 bg-red-600 rounded-full mix-blend-multiply filter blur-3xl animate-pulse" />
+          <div className="absolute bottom-20 right-10 w-96 h-96 bg-amber-600 rounded-full mix-blend-multiply filter blur-3xl animate-pulse" />
         </div>
 
         <div className="relative z-10">
           {/* Header */}
           <div className="container mx-auto max-w-6xl px-4 py-16">
             <div className="flex items-center gap-3 mb-6">
-              <div className="p-3 rounded-lg bg-purple-500/20 border border-purple-500/30">
-                <TrendingUp className="h-6 w-6 text-purple-400" />
+              <div className="p-3 rounded-lg bg-red-500/20 border border-red-500/30">
+                <TrendingUp className="h-6 w-6 text-red-400" />
               </div>
               <div>
-                <h1 className="text-4xl font-bold text-purple-100">
+                <h1 className="text-4xl font-bold text-red-100">
                   Performance Reviews
                 </h1>
-                <p className="text-purple-200/70">
+                <p className="text-red-200/70">
                   360 feedback, self-assessments, and performance metrics
                 </p>
               </div>
             </div>
 
             {/* Overall Score */}
-            <Card className="bg-purple-950/30 border-purple-500/30 mb-12">
+            <Card className="bg-red-950/30 border-red-500/30 mb-12">
               <CardContent className="pt-6">
                 <div className="grid md:grid-cols-2 gap-8">
                   <div>
-                    <p className="text-sm text-purple-200/70 mb-2">
+                    <p className="text-sm text-red-200/70 mb-2">
                       Overall Rating
                     </p>
-                    <p className="text-5xl font-bold text-purple-100 mb-4">
+                    <p className="text-5xl font-bold text-red-100 mb-4">
                       {avgScore}
                     </p>
                     <p className="text-slate-400">
@@ -162,8 +162,8 @@ export default function StaffPerformanceReviews() {
                   </div>
                   <div className="flex items-center justify-center">
                     <div className="text-center">
-                      <Award className="h-16 w-16 text-purple-400 mx-auto mb-4" />
-                      <p className="text-sm text-purple-200/70">
+                      <Award className="h-16 w-16 text-red-400 mx-auto mb-4" />
+                      <p className="text-sm text-red-200/70">
                         Exceeds Expectations
                       </p>
                     </div>
@@ -174,7 +174,7 @@ export default function StaffPerformanceReviews() {
 
             {/* Performance Metrics */}
             <div className="mb-12">
-              <h2 className="text-2xl font-bold text-purple-100 mb-6">
+              <h2 className="text-2xl font-bold text-red-100 mb-6">
                 Performance Dimensions
               </h2>
               <div className="space-y-4">
@@ -186,14 +186,14 @@ export default function StaffPerformanceReviews() {
                     <CardContent className="pt-6">
                       <div className="flex items-center justify-between mb-3">
                         <div>
-                          <p className="font-semibold text-purple-100">
+                          <p className="font-semibold text-red-100">
                             {metric.name}
                           </p>
                           <p className="text-sm text-slate-400">
                             Last quarter: {metric.lastQuarter}
                           </p>
                         </div>
-                        <p className="text-2xl font-bold text-purple-300">
+                        <p className="text-2xl font-bold text-red-300">
                           {metric.score}
                         </p>
                       </div>
@@ -209,14 +209,14 @@ export default function StaffPerformanceReviews() {
 
             {/* Review History */}
             <div className="mb-12">
-              <h2 className="text-2xl font-bold text-purple-100 mb-6">
+              <h2 className="text-2xl font-bold text-red-100 mb-6">
                 Review History
               </h2>
               <div className="space-y-4">
                 {userReviews.map((review) => (
                   <Card
                     key={review.id}
-                    className="bg-slate-800/50 border-slate-700/50 hover:border-purple-500/50 transition-all cursor-pointer"
+                    className="bg-slate-800/50 border-slate-700/50 hover:border-red-500/50 transition-all cursor-pointer"
                     onClick={() =>
                       setSelectedReview(
                         selectedReview === review.id ? null : review.id,
@@ -226,7 +226,7 @@ export default function StaffPerformanceReviews() {
                     <CardHeader>
                       <div className="flex items-start justify-between">
                         <div>
-                          <CardTitle className="text-purple-100">
+                          <CardTitle className="text-red-100">
                             {review.period} Review
                           </CardTitle>
                           <CardDescription className="text-slate-400">
@@ -245,12 +245,12 @@ export default function StaffPerformanceReviews() {
                         <div className="grid md:grid-cols-3 gap-4">
                           {review.selfAssessment && (
                             <div className="flex items-center gap-3 p-3 bg-slate-700/30 rounded">
-                              <MessageSquare className="h-5 w-5 text-purple-400" />
+                              <MessageSquare className="h-5 w-5 text-red-400" />
                               <div>
                                 <p className="text-sm text-slate-300">
                                   Self Assessment
                                 </p>
-                                <p className="text-sm text-purple-300">
+                                <p className="text-sm text-red-300">
                                   Completed
                                 </p>
                               </div>
@@ -258,12 +258,12 @@ export default function StaffPerformanceReviews() {
                           )}
                           {review.feedback && (
                             <div className="flex items-center gap-3 p-3 bg-slate-700/30 rounded">
-                              <Users className="h-5 w-5 text-purple-400" />
+                              <Users className="h-5 w-5 text-red-400" />
                               <div>
                                 <p className="text-sm text-slate-300">
                                   360 Feedback
                                 </p>
-                                <p className="text-sm text-purple-300">
+                                <p className="text-sm text-red-300">
                                   {review.feedback} responses
                                 </p>
                               </div>
@@ -285,7 +285,7 @@ export default function StaffPerformanceReviews() {
                         </div>
                         <Button
                           size="sm"
-                          className="bg-purple-600 hover:bg-purple-700"
+                          className="bg-red-600 hover:bg-red-700"
                         >
                           View Full Review
                         </Button>
@@ -297,15 +297,15 @@ export default function StaffPerformanceReviews() {
             </div>
 
             {/* Action Items */}
-            <Card className="bg-slate-800/50 border-purple-500/30">
+            <Card className="bg-slate-800/50 border-red-500/30">
               <CardHeader>
-                <CardTitle className="text-purple-100">Next Steps</CardTitle>
+                <CardTitle className="text-red-100">Next Steps</CardTitle>
               </CardHeader>
               <CardContent className="space-y-3">
                 <div className="flex items-start gap-3">
-                  <Clock className="h-5 w-5 text-purple-400 mt-0.5 flex-shrink-0" />
+                  <Clock className="h-5 w-5 text-red-400 mt-0.5 flex-shrink-0" />
                   <div>
-                    <p className="font-semibold text-purple-100">
+                    <p className="font-semibold text-red-100">
                       Complete Q1 Self Assessment
                     </p>
                     <p className="text-sm text-slate-400">
@@ -314,9 +314,9 @@ export default function StaffPerformanceReviews() {
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
-                  <MessageSquare className="h-5 w-5 text-purple-400 mt-0.5 flex-shrink-0" />
+                  <MessageSquare className="h-5 w-5 text-red-400 mt-0.5 flex-shrink-0" />
                   <div>
-                    <p className="font-semibold text-purple-100">
+                    <p className="font-semibold text-red-100">
                       Schedule 1:1 with Manager
                     </p>
                     <p className="text-sm text-slate-400">

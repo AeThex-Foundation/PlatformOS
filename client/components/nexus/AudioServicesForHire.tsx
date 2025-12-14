@@ -339,7 +339,7 @@ export default function AudioServicesForHire() {
                 {/* CTA Buttons */}
                 <div className="flex gap-2 pt-2">
                   <Button
-                    className="flex-1 bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-700 hover:to-purple-700"
+                    className="flex-1 bg-gradient-to-r from-red-600 to-amber-600 hover:from-red-700 hover:to-amber-700"
                     size="sm"
                     onClick={() => navigate(`/creators/${artist.user_id}`)}
                   >
