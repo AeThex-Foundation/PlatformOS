@@ -43,6 +43,8 @@ const ALLOWED_ORIGINS = [
   'https://aethex.foundation',
   'https://aethex.dev',
   'https://aethex.studio',
+  // Railway production
+  'https://platformos-production.up.railway.app',
   // Development origins
   'http://localhost:3000',
   'http://localhost:3001',
