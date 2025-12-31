@@ -422,7 +422,7 @@ export default function FoundationLearnMore() {
               </h2>
               <p className="text-lg text-red-100/80 mb-8">
                 Choose a learning path and begin building job-ready skills
-                today. All workforce development resources are completely free.
+                today. All identity infrastructure education resources are free (nonprofit).
               </p>
               <Button
                 className="bg-red-400 text-black shadow-[0_0_30px_rgba(239,68,68,0.35)] hover:bg-red-300"

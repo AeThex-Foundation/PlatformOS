@@ -95,6 +95,7 @@ The Foundation domain should remain focused and institutional:
   - How decisions are made, how standards change, transparency reporting
 - **Programs** (optional, minimal)
   - Foundation-sponsored initiatives that support the mission (not product marketing)
+  - Workforce development as mission-aligned programming (see below)
 
 ### What should NOT live here
 - Product pages, pricing, sales offers (belongs on `aethex.dev`)
@@ -118,6 +119,30 @@ The Foundation domain should remain focused and institutional:
 ### Optional Web3 / Governance (only claim what is deployed)
 - Solidity contracts / governance tooling may exist in repo
 - On-chain governance is described as **planned or in-progress** unless deployed + active
+
+---
+
+## Workforce Development & Public Benefit (Mission-Aligned Programming)
+
+AeThex Foundation supports workforce development initiatives that are aligned with our core governance mission. These programs focus on building **digital competency in identity infrastructure, authentication standards, and trusted system participation**.
+
+### Our workforce development efforts include:
+
+- **Open educational workshops** covering identity governance principles, authentication protocols, and standards implementation
+- **Mentorship and skill-building cohorts** designed to prepare individuals for participation in identity systems and trust infrastructure
+- **Applied learning resources** such as curriculum modules, case studies, and reference implementations that demonstrate best practices in compliant identity management
+
+These nonprofit programs are structured to support ecosystem participants — from creators and developers to educators and policymakers — in gaining expertise that directly supports the governance, adoption, and responsible stewardship of digital identity standards.
+
+### Institutional positioning
+
+> "Workforce development is part of our public benefit programming, supporting education and skills in identity governance and trust infrastructure."
+
+**Key principles:**
+- Workforce programming is **secondary and supportive** to our core identity governance mission
+- Programs are **nonprofit in nature** — not commercial services or revenue vehicles
+- Content focuses on **competencies required for trusted identity systems** participation
+- Designed to **increase ecosystem capacity** for compliant identity management
 
 ---
 

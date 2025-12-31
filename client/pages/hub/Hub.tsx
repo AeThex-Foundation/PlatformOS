@@ -30,44 +30,44 @@ export default function Hub() {
 
   const hubSections = [
     {
-      title: "Protocol",
-      description: "Technical documentation, whitepaper, and architecture guides",
-      icon: BookOpen,
+      title: "Passport",
+      description: "Your AeThex identity - authentication and trusted access across the ecosystem",
+      icon: Shield,
       color: "from-aethex-500 to-red-600",
+      link: "/hub/passport",
+      badge: "Identity",
+    },
+    {
+      title: "Protocol",
+      description: "Identity standards, authentication policies, and technical documentation",
+      icon: BookOpen,
+      color: "from-red-500 to-gold-500",
       link: "/hub/protocol",
       badge: "Docs",
     },
     {
       title: "Governance",
-      description: "DAO voting, proposals, and community decision-making",
+      description: "Community decision-making framework and transparency reporting",
       icon: Vote,
-      color: "from-red-500 to-gold-500",
+      color: "from-gold-500 to-amber-500",
       link: "/hub/governance",
-      badge: "DAO",
+      badge: "Planned",
     },
     {
       title: "Community",
-      description: "Bounty board, collaboration, and project opportunities",
+      description: "Collaboration opportunities and project contributions",
       icon: Users,
-      color: "from-gold-500 to-amber-500",
+      color: "from-amber-500 to-red-500",
       link: "/hub/community",
       badge: "Active",
     },
     {
       title: "Programs",
-      description: "Foundation programs, mentorship, and learning paths",
+      description: "Workforce development in identity infrastructure (nonprofit)",
       icon: Award,
-      color: "from-amber-500 to-aethex-600",
-      link: "/curriculum",
-      badge: "Learn",
-    },
-    {
-      title: "Passport",
-      description: "Claim your .aethex domain - your on-chain identity",
-      icon: Shield,
-      color: "from-red-500 to-amber-500",
-      link: "/hub/passport",
-      badge: "Identity",
+      color: "from-red-400 to-aethex-600",
+      link: "/programs",
+      badge: "Education",
     },
   ];
 
@@ -97,7 +97,7 @@ export default function Hub() {
     <>
       <SEO
         pageTitle="Hub"
-        description="AeThex Foundation Community Hub - Access protocol docs, governance, and community collaboration."
+        description="AeThex Foundation Member Hub - Access your Passport, identity standards, governance framework, and community collaboration."
       />
       <Layout>
         <div className="container mx-auto px-4 py-16 space-y-12">

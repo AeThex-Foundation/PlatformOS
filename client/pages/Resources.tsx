@@ -391,7 +391,7 @@ export default function Resources() {
     <>
       <SEO
         pageTitle="Resource Library"
-        description="Download free workforce development resources - guides, templates, and digital literacy materials from the AeThex Foundation"
+        description="Identity infrastructure resources: Authentication standards, governance protocols, and identity management educational materials from AeThex Foundation"
       />
       <Layout>
         <div className="container mx-auto px-4 py-16 space-y-12">
@@ -406,7 +406,7 @@ export default function Resources() {
               </span>
             </h1>
             <p className="text-xl text-muted-foreground max-w-3xl">
-              Free, open-source resources to accelerate your workforce development and digital literacy journey
+              Free, open-source resources for identity infrastructure, authentication standards, and governance protocols. Mission-aligned educational materials.
             </p>
           </section>
 

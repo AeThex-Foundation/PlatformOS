@@ -29,14 +29,14 @@ export default function Contact() {
 
   const contactReasons = [
     {
-      title: "Press Inquiries",
-      description: "Media requests and press-related questions",
-      icon: MessageSquare,
+      title: "Identity Standards",
+      description: "Authentication policy and governance inquiries",
+      icon: Mail,
     },
     {
       title: "Partnership",
-      description: "Collaboration and partnership opportunities",
-      icon: Mail,
+      description: "Ecosystem integration and trusted client registration",
+      icon: MessageSquare,
     },
     {
       title: "Ethics Council",
@@ -49,7 +49,7 @@ export default function Contact() {
     <>
       <SEO
         pageTitle="Contact"
-        description="Get in touch with the AeThex Foundation team for press, partnerships, or community inquiries."
+        description="Contact the AeThex Foundation for identity governance inquiries, authentication standards questions, partnerships, or press requests."
       />
       <Layout>
         <div className="container mx-auto px-4 py-16 space-y-16">
@@ -63,7 +63,7 @@ export default function Contact() {
               </span>
             </h1>
             <p className="text-xl text-muted-foreground">
-              Have questions, partnership ideas, or press inquiries? We'd love to hear from you.
+              Identity governance inquiries, authentication standards questions, or partnership opportunities? Contact the Foundation team.
             </p>
           </section>
 

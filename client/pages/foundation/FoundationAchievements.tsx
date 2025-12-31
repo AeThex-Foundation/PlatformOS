@@ -327,7 +327,7 @@ export default function FoundationAchievements() {
                     <p className="text-slate-400 mb-6 max-w-2xl mx-auto">
                       Sign in to track your professional development, earn 
                       credentials, and build your portfolio as you progress 
-                      through our workforce training programs.
+                      through identity infrastructure education programs (nonprofit).
                     </p>
                     <Button
                       onClick={() => navigate("/login")}
