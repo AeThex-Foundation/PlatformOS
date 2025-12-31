@@ -34,7 +34,7 @@ export default function FoundationAbout() {
                 About AeThex Foundation
               </h1>
               <p className="text-lg text-red-100/80 max-w-2xl">
-                Advancing workforce development and digital literacy through accessible education
+                The AeThex Foundation is the <strong className="text-red-300">independent governance and authentication authority</strong> for the AeThex ecosystem. We govern identity policy, operate AeThex Passport, and maintain enforcement standards - with mission-aligned workforce development programs supporting identity infrastructure competency.
               </p>
             </div>
           </section>
@@ -45,10 +45,7 @@ export default function FoundationAbout() {
               <div className="rounded-lg border border-red-400/30 bg-red-950/20 p-8 mb-12">
                 <h2 className="text-2xl font-bold text-red-300 mb-4">Our Mission</h2>
                 <p className="text-red-200/80 text-lg leading-relaxed">
-                  AeThex Foundation is dedicated to advancing <strong className="text-red-300">workforce development</strong> and{" "}
-                  <strong className="text-red-300">digital literacy</strong> through accessible education, open-source 
-                  technology, and community mentorship. We believe that making professional-grade training and resources 
-                  freely available empowers learners of all backgrounds to build meaningful careers in technology.
+                  The AeThex Foundation serves as the <strong className="text-red-300">custodian of identity and authentication policy</strong> for the AeThex ecosystem. Through AeThex Passport, we provide secure, user-controlled authentication across all AeThex properties. Under the Axiom Model, we maintain strict separation between identity governance (Foundation) and commercial operations (Corporation), ensuring your digital identity remains sovereign. We also operate <strong className="text-red-300">mission-aligned workforce development</strong> programs focused on building competency in identity infrastructure, authentication standards, and trusted system participation.
                 </p>
               </div>
 

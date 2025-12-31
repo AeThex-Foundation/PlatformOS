@@ -215,12 +215,11 @@ export default function FoundationDownloadCenter() {
           {/* Header */}
           <div className="mb-12 text-center">
             <h1 className="text-4xl font-bold text-white mb-4">
-              Workforce Development Center
+              Identity Infrastructure Resource Center
             </h1>
             <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-              Download comprehensive training materials across multiple formats.
-              Full-length guides with chapters, practical exercises, and 
-              career-ready projects.
+              Educational materials for authentication standards, identity protocols,
+              and governance frameworks. Mission-aligned workforce development resources.
             </p>
           </div>
 

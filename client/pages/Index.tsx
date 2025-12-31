@@ -18,6 +18,7 @@ import {
   Award,
   Download,
   GraduationCap,
+  Shield,
 } from "lucide-react";
 import { AnimatedCounter } from "@/components/home/AnimatedCounter";
 import { TestimonialsSection } from "@/components/home/TestimonialsSection";
@@ -55,36 +56,36 @@ export default function Index() {
 
   const foundationNav = [
     {
-      title: "Programs",
-      description: "Workforce training through workshops, certifications, and project-based learning",
-      icon: GraduationCap,
+      title: "Passport",
+      description: "Secure authentication and identity management for the AeThex ecosystem",
+      icon: Shield,
       color: "from-aethex-500 to-red-600",
-      link: "/programs",
-      audience: "All skill levels",
+      link: "/hub/passport",
+      audience: "All users",
     },
     {
-      title: "Open Source",
-      description: "Real-world tools and frameworks for hands-on technical skill building",
-      icon: Code,
+      title: "Standards",
+      description: "Identity policies, security posture, and enforcement rules",
+      icon: BookOpen,
       color: "from-red-500 to-gold-500",
-      link: "/hub/community",
-      audience: "Learners",
+      link: "/hub/protocol",
+      audience: "Developers",
     },
     {
-      title: "Community",
-      description: "Connect with mentors, join collaborative teams, and grow professionally",
+      title: "Governance",
+      description: "Community decision-making and transparency reporting",
       icon: Users,
       color: "from-gold-500 to-amber-500",
-      link: "/community",
-      audience: "Everyone",
+      link: "/hub/governance",
+      audience: "Community",
     },
     {
-      title: "Achievements",
-      description: "Industry-recognized credentials and portfolio development",
-      icon: Award,
+      title: "Programs",
+      description: "Workforce development in identity infrastructure (nonprofit)",
+      icon: GraduationCap,
       color: "from-amber-500 to-aethex-600",
-      link: "/achievements",
-      audience: "Contributors",
+      link: "/programs",
+      audience: "Learners",
     },
   ];
 
@@ -125,31 +126,31 @@ export default function Index() {
 
   const showcaseImpact = [
     {
-      title: "Learners Trained",
-      metric: 5000,
+      title: "Active Passports",
+      metric: 10000,
       suffix: "+",
-      description: "Through workforce development programs",
+      description: "Unified identities across AeThex ecosystem",
       color: "bg-aethex-500/10 border-aethex-400/30",
     },
     {
-      title: "Skill-Building Projects",
-      metric: 25,
+      title: "Trusted Clients",
+      metric: 5,
       suffix: "+",
-      description: "Hands-on learning opportunities maintained",
+      description: "Authorized integrations with Passport",
       color: "bg-red-500/10 border-red-400/30",
     },
     {
       title: "Community Members",
-      metric: 10000,
+      metric: 5000,
       suffix: "+",
-      description: "Active learners in our professional network",
+      description: "Participating in governance decisions",
       color: "bg-gold-500/10 border-gold-400/30",
     },
     {
-      title: "Educational Resources",
+      title: "Training Participants",
       metric: 100,
       suffix: "+",
-      description: "Free digital literacy materials",
+      description: "In identity infrastructure education (nonprofit)",
       color: "bg-amber-500/10 border-amber-400/30",
     },
   ];
@@ -170,7 +171,7 @@ export default function Index() {
     <>
       <SEO
         pageTitle="Foundation"
-        description="AeThex Foundation: Advancing workforce development and digital literacy through hands-on mentorship, project-based learning, and open-source technology education."
+        description="AeThex Foundation: Independent governance and authentication authority for user-owned digital identity across the AeThex ecosystem. Custodian of AeThex Passport and identity policy."
         canonical={
           typeof window !== "undefined"
             ? window.location.href
@@ -220,11 +221,10 @@ export default function Index() {
                     </span>
                   </h1>
                   <h2 className="text-2xl lg:text-3xl text-gradient animate-fade-in bg-gradient-to-r from-red-400 to-gold-400 bg-clip-text text-transparent">
-                    Empowering Tomorrow's Workforce
+                    Independent Governance & Identity Authority
                   </h2>
                   <p className="text-lg text-muted-foreground max-w-3xl mx-auto animate-slide-up">
-                    Advancing <strong className="text-red-300">workforce development</strong> and{" "}
-                    <strong className="text-red-300">digital literacy</strong> through hands-on mentorship, project-based learning, and open-source technology education.
+                    The <strong className="text-red-300">authentication authority</strong> for the AeThex ecosystem through <strong className="text-red-300">AeThex Passport</strong>. We govern identity policy, enforce standards, and support mission-aligned workforce development in identity infrastructure.
                   </p>
                 </div>
               </div>

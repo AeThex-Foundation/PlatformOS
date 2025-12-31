@@ -311,7 +311,7 @@ export default function Programs() {
     <>
       <SEO
         pageTitle="Programs"
-        description="Free workforce development programs, digital literacy courses, and career-ready training paths from the AeThex Foundation."
+        description="Mission-aligned workforce development: Identity infrastructure education, authentication standards training, and digital identity competency programs from AeThex Foundation."
       />
       <Layout>
         <div className="relative min-h-screen bg-background text-foreground overflow-hidden pb-12">
@@ -331,7 +331,7 @@ export default function Programs() {
                       Programs
                     </h1>
                     <p className="text-muted-foreground">
-                      Workforce development and digital literacy training
+                      Mission-aligned nonprofit education in identity infrastructure
                     </p>
                   </div>
                 </div>
@@ -371,7 +371,7 @@ export default function Programs() {
               <div className="container mx-auto max-w-7xl px-4">
                 <h2 className="text-2xl font-bold mb-6">Career-Ready Learning Paths</h2>
                 <p className="text-muted-foreground mb-8 max-w-2xl">
-                  Structured workforce training programs designed to build job-ready skills from fundamentals to professional competency.
+                  Education programs focused on authentication standards, identity management, and trusted system participation - supporting the Foundation's core governance mission.
                 </p>
                 <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
                   {learningPaths.map((path, index) => {

@@ -136,7 +136,7 @@ export default function FoundationCurriculum() {
                 <h1 className="text-3xl font-bold">Curriculum</h1>
               </div>
               <p className="text-slate-300">
-                Workforce development training from industry professionals
+                Identity infrastructure education from authentication experts
               </p>
             </div>
           </section>

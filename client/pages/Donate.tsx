@@ -316,7 +316,7 @@ export default function Donate() {
                   </div>
                   <div className="space-y-1">
                     <p className="text-2xl font-bold text-green-400">$250</p>
-                    <p className="text-xs text-gray-400">= 1 complete training sprint</p>
+                    <p className="text-xs text-gray-400">= 1 identity infrastructure education module</p>
                   </div>
                   <div className="space-y-1">
                     <p className="text-2xl font-bold text-green-400">$1,000</p>

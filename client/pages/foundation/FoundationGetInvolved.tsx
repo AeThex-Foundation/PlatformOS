@@ -21,7 +21,7 @@ export default function FoundationGetInvolved() {
     {
       icon: Users,
       title: "Join the Community",
-      description: "Connect with thousands of learners and professionals worldwide",
+      description: "Connect with identity infrastructure professionals and ecosystem participants",
       actions: [
         "Join our Discord server",
         "Attend community events",
@@ -409,7 +409,7 @@ export default function FoundationGetInvolved() {
               </h2>
               <p className="text-lg text-red-100/80 mb-8">
                 Whether you want to learn new skills, mentor others, or contribute to 
-                workforce development, our community is here to support your growth.
+                identity infrastructure and authentication standards, our community supports your growth.
               </p>
               <Button
                 className="bg-red-400 text-black shadow-[0_0_30px_rgba(239,68,68,0.35)] hover:bg-red-300"

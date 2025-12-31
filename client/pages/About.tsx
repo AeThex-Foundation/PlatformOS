@@ -67,9 +67,9 @@ export default function About() {
               </h1>
             </div>
             <p className="text-xl text-gray-300 max-w-2xl leading-relaxed">
-              Advancing <strong className="text-red-300">workforce development</strong> and{" "}
-              <strong className="text-red-300">digital literacy</strong> through hands-on 
-              mentorship, project-based learning, and open-source technology education.
+              Independent <strong className="text-red-300">governance and authentication authority</strong> for{" "}
+              <strong className="text-red-300">user-owned digital identity</strong> across the AeThex ecosystem.
+              Custodian of AeThex Passport, identity policy, and standards enforcement.
             </p>
             <div className="flex flex-wrap gap-3">
               <Button
@@ -90,17 +90,17 @@ export default function About() {
             </div>
           </div>
 
-          {/* Flagship: GameForge Section */}
+          {/* Workforce Development: GameForge Section */}
           <Card className="bg-gradient-to-br from-green-950/40 via-emerald-950/30 to-green-950/40 border-green-500/40 overflow-hidden">
             <CardHeader className="pb-3">
               <div className="flex items-center gap-3">
                 <Gamepad2 className="h-8 w-8 text-green-400" />
                 <div>
                   <CardTitle className="text-2xl text-white">
-                    🚀 GameForge: Our Flagship Program
+                    GameForge: Workforce Development Program
                   </CardTitle>
                   <p className="text-sm text-gray-400 mt-1">
-                    30-day mentorship sprints where developers ship real games
+                    Mission-aligned nonprofit program: 30-day mentorship sprints teaching identity systems through game development
                   </p>
                 </div>
               </div>
@@ -113,12 +113,14 @@ export default function About() {
                   What is GameForge?
                 </h3>
                 <p className="text-gray-300 leading-relaxed">
-                  GameForge is the Foundation's flagship "master-apprentice"
-                  mentorship program. It's our "gym" where developers
-                  collaborate on focused, high-impact game projects within
-                  30-day sprints. Teams of 5 (1 mentor + 4 mentees) tackle real
-                  game development challenges and ship playable games to our
-                  community arcade.
+                  GameForge is a <strong>nonprofit workforce development program</strong> operated by the Foundation.
+                  It teaches authentication standards, identity management, and collaborative development practices
+                  through project-based game development. Teams of 5 (1 mentor + 4 mentees) complete
+                  30-day sprints, building real-world portfolio projects while learning industry practices.
+                </p>
+                <p className="text-sm text-gray-400">
+                  <strong>Program status:</strong> Mission-aligned educational initiative, not a commercial product.
+                  Supports the Foundation's core mission by building workforce capacity in identity infrastructure.
                 </p>
               </div>
 
@@ -250,48 +252,50 @@ export default function About() {
               <CardContent className="p-6 space-y-6">
                 <div className="space-y-4">
                   <p className="text-gray-300 text-lg leading-relaxed">
-                    The AeThex Foundation is a 501(c)(3) nonprofit organization dedicated to{" "}
-                    <strong className="text-white">workforce development</strong> and{" "}
-                    <strong className="text-white">digital literacy</strong> in emerging technology fields.
-                    Through structured mentorship programs, project-based learning, and open-source 
-                    educational resources, we prepare individuals for careers in software development, 
-                    digital media production, and creative technology.
+                    The AeThex Foundation is the <strong className="text-white">independent governance and authentication authority</strong> for the AeThex ecosystem.
+                    We are the custodian of <strong className="text-white">AeThex Passport</strong>, the unified identity system that enables secure, 
+                    user-controlled authentication across all AeThex properties.
                   </p>
                   <p className="text-gray-400 leading-relaxed">
-                    We believe that technical skills are best developed through real-world application. 
-                    Our programs connect learners with experienced professionals who guide them through 
-                    completing portfolio-ready projects, building the practical experience employers seek.
+                    Under the <strong className="text-white">Axiom Model</strong>, we maintain strict separation between identity governance (Foundation) 
+                    and commercial operations (Corporation). This constitutional separation ensures your digital identity remains 
+                    yours — never a product to be sold or exploited. If any AeThex property violates community trust, 
+                    the Foundation has authority to revoke its access to Passport.
+                  </p>
+                  <p className="text-gray-400 leading-relaxed">
+                    We also support mission-aligned <strong className="text-white">workforce development programs</strong> focused on building 
+                    competency in identity infrastructure, authentication standards, and trusted system participation.
                   </p>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   <div className="space-y-2">
                     <h3 className="font-semibold text-red-300 flex items-center gap-2">
-                      <GraduationCap className="h-5 w-5" />
-                      Workforce Development
+                      <Heart className="h-5 w-5" />
+                      Identity Governance
                     </h3>
                     <p className="text-sm text-gray-400">
-                      Preparing individuals for technology careers through 
-                      hands-on training and mentorship with industry professionals.
+                      Custodian of authentication policy, privacy standards, and 
+                      enforcement rules for the AeThex Passport system.
                     </p>
                   </div>
                   <div className="space-y-2">
                     <h3 className="font-semibold text-red-300 flex items-center gap-2">
                       <Code className="h-5 w-5" />
-                      Digital Literacy
+                      Standards & Enforcement
                     </h3>
                     <p className="text-sm text-gray-400">
-                      Teaching essential technical skills including programming, 
-                      version control, and collaborative development practices.
+                      Maintaining trusted client registry and authority to revoke 
+                      access for properties that violate community trust.
                     </p>
                   </div>
                   <div className="space-y-2">
                     <h3 className="font-semibold text-red-300 flex items-center gap-2">
                       <Users className="h-5 w-5" />
-                      Community Impact
+                      Workforce Development
                     </h3>
                     <p className="text-sm text-gray-400">
-                      Creating pathways to economic opportunity through accessible, 
-                      project-based technology education.
+                      Mission-aligned nonprofit programs supporting education in 
+                      identity infrastructure and authentication standards.
                     </p>
                   </div>
                 </div>

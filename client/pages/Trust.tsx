@@ -34,9 +34,9 @@ export default function Trust() {
     },
     {
       name: "Council Member 3",
-      role: "Educational Integrity",
-      bio: "Maintains quality and accessibility of educational content",
-      expertise: "Education & Curriculum",
+      role: "Identity Standards",
+      bio: "Maintains authentication policy and identity infrastructure integrity",
+      expertise: "Identity Governance & Standards",
     },
   ];
 
@@ -70,13 +70,18 @@ export default function Trust() {
       icon: Vote,
     },
     {
-      title: "Privacy First",
-      description: "We protect user data and never sell or share personal information.",
+      title: "Identity Sovereignty",
+      description: "Users control their own digital identity. The Foundation governs policy, not data.",
       icon: Lock,
     },
     {
+      title: "Enforcement Authority",
+      description: "The Foundation can revoke access to Passport for properties that violate trust standards.",
+      icon: Shield,
+    },
+    {
       title: "Equal Access",
-      description: "Education and resources are available to everyone, regardless of background.",
+      description: "Authentication and identity services are available to all ecosystem participants.",
       icon: Scale,
     },
     {

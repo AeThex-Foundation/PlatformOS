@@ -155,7 +155,7 @@ export default function FoundationContribute() {
                 Ways to Contribute
               </h1>
               <p className="text-lg text-red-100/80 max-w-3xl">
-                Join our community and help advance workforce development and digital literacy.
+                Join our community and support identity governance infrastructure and authentication standards. Mission-aligned workforce development in identity systems.
                 There are many ways to contribute and grow professionally, regardless of your
                 current skill level.
               </p>

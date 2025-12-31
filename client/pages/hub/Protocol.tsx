@@ -120,7 +120,7 @@ export default function Protocol() {
                 <CardContent className="prose prose-invert max-w-none">
                   <h3 className="text-xl font-semibold mb-4">Overview</h3>
                   <p className="text-muted-foreground mb-6">
-                    The AeThex Foundation operates as a non-profit organization dedicated to empowering game developers through open-source tools, quality education, and community collaboration.
+                    The AeThex Foundation serves as the independent governance and authentication authority for the AeThex ecosystem. We maintain identity policy, operate AeThex Passport, and support mission-aligned workforce development in identity infrastructure.
                   </p>
                   <h3 className="text-xl font-semibold mb-4">Core Principles</h3>
                   <ul className="text-muted-foreground space-y-2 mb-6">
