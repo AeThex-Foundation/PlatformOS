@@ -27,6 +27,19 @@ export default function Nexus() {
   const [isLoading, setIsLoading] = useState(true);
   const toastShownRef = useRef(false);
 
+  const IdentityBanner = () => (
+    <div className="bg-gradient-to-r from-red-500/10 to-amber-500/10 border-b border-border/40 py-3 mb-8">
+      <div className="container mx-auto max-w-6xl px-4">
+        <div className="flex items-center gap-3 text-sm">
+          <Badge variant="outline" className="text-xs">Identity-Gated Ecosystem</Badge>
+          <p className="text-muted-foreground">
+            Nexus requires AeThex Passport verification - All members are identity-authenticated
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);

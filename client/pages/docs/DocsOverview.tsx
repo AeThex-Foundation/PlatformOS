@@ -18,7 +18,18 @@ import DocsSupportCTA from "@/components/docs/DocsSupportCTA";
 
 export default function DocsOverview() {
   return (
-    <DocsLayout title="Documentation Overview" description="Everything you need to build with AeThex">
+    <DocsLayout title="Documentation Overview" description="Identity infrastructure and AeThex Passport integration documentation">
+      {/* Identity Focus Banner */}
+      <div className="bg-gradient-to-r from-aethex-500/10 to-neon-blue/10 border-y border-border/40 py-3 mb-8">
+        <div className="container mx-auto max-w-6xl px-4">
+          <div className="flex items-center gap-3 text-sm">
+            <Badge variant="outline" className="text-xs">Identity Infrastructure</Badge>
+            <p className="text-muted-foreground">
+              Documentation focused on AeThex Passport, authentication standards, and identity protocols
+            </p>
+          </div>
+        </div>
+      </div>
       <DocsHeroSection />
       <QuickStartSection />
       <ResourceSectionsGrid />

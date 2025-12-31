@@ -84,14 +84,22 @@ export default function MentorApply() {
   return (
     <Layout>
       <div className="container mx-auto px-4 py-12">
+        {/* Foundation Program Banner */}
+        <div className="bg-gradient-to-r from-aethex-500/10 to-neon-blue/10 border-y border-border/40 py-3 mb-8 -mx-4 px-4">
+          <div className="flex items-center gap-3 text-sm">
+            <Badge variant="outline" className="text-xs">Foundation Program</Badge>
+            <p className="text-muted-foreground">
+              Identity Infrastructure Education - Teach authentication, governance, and identity systems
+            </p>
+          </div>
+        </div>
         <div className="mb-8">
           <Badge variant="outline" className="mb-2">
-            Mentorship
+            Educator Application
           </Badge>
-          <h1 className="text-3xl font-bold">Become a mentor</h1>
+          <h1 className="text-3xl font-bold">Become an Identity Infrastructure Educator</h1>
           <p className="text-muted-foreground mt-1">
-            Share your expertise and guide community members through 1:1
-            sessions and clinics.
+            Share your expertise in identity systems, authentication protocols, and governance frameworks through Foundation's nonprofit workforce development program.
           </p>
         </div>
 

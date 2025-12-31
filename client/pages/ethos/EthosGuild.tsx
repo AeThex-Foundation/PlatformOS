@@ -44,6 +44,19 @@ interface FeaturedTrack {
 export default function EthosGuild() {
   const [activeTab, setActiveTab] = useState("overview");
 
+  const IntegrationBanner = () => (
+    <div className="bg-gradient-to-r from-blue-500/10 to-purple-500/10 border-b border-border/40 py-3 mb-8">
+      <div className="container mx-auto max-w-6xl px-4">
+        <div className="flex items-center gap-3 text-sm">
+          <Badge variant="outline" className="text-xs">Partner Integration</Badge>
+          <p className="text-muted-foreground">
+            Third-party platform using AeThex Passport for identity verification and licensing
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+
   const guildStats = [
     {
       label: "Guild Members",

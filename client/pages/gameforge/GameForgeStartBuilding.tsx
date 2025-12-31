@@ -99,6 +99,17 @@ export default function GameForgeStartBuilding() {
   return (
     <Layout>
       <div className="relative min-h-screen bg-black text-white overflow-hidden">
+        {/* Foundation Program Banner */}
+        <div className="bg-gradient-to-r from-green-500/10 to-blue-500/10 border-b border-green-400/20 py-4 relative z-20">
+          <div className="container mx-auto max-w-6xl px-4">
+            <div className="flex items-center gap-3 text-sm">
+              <Badge className="bg-green-500/20 text-green-300 border-green-400/40 text-xs">Foundation Workforce Development</Badge>
+              <p className="text-green-100/70">
+                Learn game development through hands-on educational projects - Not commercial product development
+              </p>
+            </div>
+          </div>
+        </div>
         {/* Background */}
         <div className="pointer-events-none absolute inset-0 opacity-[0.12] [background-image:radial-gradient(circle_at_top,#22c55e_0,rgba(0,0,0,0.45)_55%,rgba(0,0,0,0.9)_100%)]" />
         <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(transparent_0,transparent_calc(100%-1px),rgba(34,197,94,0.05)_calc(100%-1px))] bg-[length:100%_32px]" />

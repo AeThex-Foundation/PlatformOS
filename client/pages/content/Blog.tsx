@@ -35,6 +35,19 @@ const Blog = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
 
+  const GovernanceBanner = () => (
+    <div className="bg-gradient-to-r from-aethex-500/10 to-neon-blue/10 border-b border-border/40 py-3 mb-8">
+      <div className="container mx-auto max-w-6xl px-4">
+        <div className="flex items-center gap-3 text-sm">
+          <Badge variant="outline" className="text-xs">Foundation Governance Blog</Badge>
+          <p className="text-muted-foreground">
+            Policy updates, standards announcements, and identity infrastructure news
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+
   const staticPosts = useMemo<BlogPost[]>(() => blogSeedPosts, []);
 
   useEffect(() => {

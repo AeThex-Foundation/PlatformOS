@@ -99,6 +99,19 @@ const sections: HandbookSection[] = [
 ];
 
 export default function StaffTeamHandbook() {
+  const FoundationBanner = () => (
+    <div className="bg-gradient-to-r from-red-500/10 to-orange-500/10 border-b border-red-400/20 py-3 mb-8">
+      <div className="container mx-auto max-w-6xl px-4">
+        <div className="flex items-center gap-3 text-sm">
+          <Badge className="bg-red-500/20 text-red-300 border-red-400/40 text-xs">Foundation Team Only</Badge>
+          <p className="text-red-100/70">
+            Internal handbook - Foundation team policies and nonprofit operations guidelines
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+
   return (
     <Layout>
       <SEO

@@ -51,6 +51,19 @@ export default function TLDHome() {
   const [message, setMessage] = useState('');
   const { user, profile } = useAuth();
 
+  const IdentityBanner = () => (
+    <div className="bg-gradient-to-r from-aethex-500/10 to-neon-blue/10 border-b border-border/40 py-3 mb-8">
+      <div className="container mx-auto max-w-6xl px-4">
+        <div className="flex items-center gap-3 text-sm">
+          <Badge variant="outline" className="text-xs">Identity Namespace</Badge>
+          <p className="text-muted-foreground">
+            Passport-based domain system - Identity ownership and verification through AeThex TLD
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+
   const isConnected = !!user;
   const address = profile?.wallet_address || user?.id || '';
 

@@ -59,6 +59,19 @@ export default function AgoraPage() {
   const [proposalDescription, setProposalDescription] = useState('');
   const [submitError, setSubmitError] = useState('');
 
+  const GovernanceBanner = () => (
+    <div className="bg-gradient-to-r from-aethex-500/10 to-red-500/10 border-b border-border/40 py-3 mb-8">
+      <div className="container mx-auto max-w-6xl px-4">
+        <div className="flex items-center gap-3 text-sm">
+          <Badge variant="outline" className="text-xs">Foundation Governance</Badge>
+          <p className="text-muted-foreground">
+            Community proposals and DAO discussions - Foundation governance forum
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+
   const fetchData = async () => {
     setIsLoading(true);
     const [proposalsData, treasuryData] = await Promise.all([getProposals(), getTreasuryBalance()]);
