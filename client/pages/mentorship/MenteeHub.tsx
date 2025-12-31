@@ -95,16 +95,27 @@ export default function MenteeHub() {
   return (
     <Layout>
       <div className="min-h-screen bg-[radial-gradient(circle_at_top,_rgba(110,141,255,0.12),transparent_60%)] py-10">
+        {/* Foundation Program Banner */}
+        <div className="bg-gradient-to-r from-aethex-500/10 to-neon-blue/10 border-y border-border/40 py-3 mb-8">
+          <div className="container mx-auto max-w-6xl px-4">
+            <div className="flex items-center gap-3 text-sm">
+              <Badge variant="outline" className="text-xs">Foundation Program</Badge>
+              <p className="text-muted-foreground">
+                Identity Infrastructure Education - Nonprofit workforce development
+              </p>
+            </div>
+          </div>
+        </div>
         <div className="mx-auto w-full max-w-6xl px-4 lg:px-6 space-y-6">
           {/* Header */}
           <section className="rounded-3xl border border-border/40 bg-background/80 p-6 shadow-2xl backdrop-blur">
             <div className="flex items-start justify-between">
               <div>
                 <h1 className="text-3xl font-semibold text-foreground">
-                  Mentee Hub
+                  Identity Education Hub
                 </h1>
                 <p className="mt-1 text-sm text-muted-foreground">
-                  Connect with experienced mentors and accelerate your growth
+                  Connect with identity infrastructure experts and learn authentication systems, governance frameworks, and digital identity standards
                 </p>
               </div>
               <div className="hidden sm:block p-3 rounded-2xl bg-gradient-to-br from-aethex-500/10 to-neon-blue/10">

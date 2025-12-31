@@ -128,6 +128,17 @@ export default function StaffAnnouncements() {
       <SEO title="Announcements" description="Company news and updates" />
 
       <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
+        {/* Foundation Team Banner */}
+        <div className="bg-gradient-to-r from-red-500/10 to-orange-500/10 border-b border-red-400/20 py-3 relative z-20">
+          <div className="container mx-auto max-w-6xl px-4">
+            <div className="flex items-center gap-3 text-sm">
+              <Badge className="bg-red-500/20 text-red-300 border-red-400/40 text-xs">Foundation Team Only</Badge>
+              <p className="text-red-100/70">
+                Internal operations - Foundation governance and nonprofit team communications
+              </p>
+            </div>
+          </div>
+        </div>
         {/* Background effects */}
         <div className="absolute inset-0 opacity-30">
           <div className="absolute top-20 left-10 w-96 h-96 bg-rose-600 rounded-full mix-blend-multiply filter blur-3xl animate-pulse" />

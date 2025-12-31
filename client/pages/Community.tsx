@@ -123,6 +123,17 @@ export default function Community() {
       />
       <Layout>
         <div className="relative min-h-screen bg-background text-foreground overflow-hidden pb-12">
+          {/* Identity-Verified Community Banner */}
+          <div className="bg-gradient-to-r from-aethex-500/10 to-neon-blue/10 border-b border-aethex-400/20 py-3 relative z-30">
+            <div className="container mx-auto max-w-6xl px-4">
+              <div className="flex items-center gap-3 text-sm">
+                <Badge variant="outline" className="text-xs">Identity-Verified Ecosystem</Badge>
+                <p className="text-muted-foreground">
+                  All members verified through AeThex Passport - Trusted, authenticated community
+                </p>
+              </div>
+            </div>
+          </div>
           <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-aethex-900/30 via-background to-red-900/20" />
           <div className="pointer-events-none absolute top-20 left-10 w-72 h-72 bg-aethex-500/10 rounded-full blur-3xl" />
           <div className="pointer-events-none absolute bottom-20 right-10 w-72 h-72 bg-red-600/10 rounded-full blur-3xl" />

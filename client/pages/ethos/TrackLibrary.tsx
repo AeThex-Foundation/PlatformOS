@@ -62,6 +62,19 @@ export default function TrackLibrary() {
   const [licenseFilter, setLicenseFilter] = useState("all");
   const [sortBy, setSortBy] = useState("newest");
 
+  const PartnerBanner = () => (
+    <div className="bg-gradient-to-r from-blue-500/10 to-purple-500/10 border-b border-border/40 py-3 mb-8">
+      <div className="container mx-auto max-w-6xl px-4">
+        <div className="flex items-center gap-3 text-sm">
+          <Badge variant="outline" className="text-xs">Partner Integration</Badge>
+          <p className="text-muted-foreground">
+            Licensed music library verified through AeThex Passport identity system
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+
   useEffect(() => {
     const fetchTracks = async () => {
       try {

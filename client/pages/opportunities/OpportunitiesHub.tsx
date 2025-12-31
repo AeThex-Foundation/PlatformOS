@@ -63,6 +63,17 @@ export default function OpportunitiesHub() {
   return (
     <Layout>
       <div className="relative min-h-screen bg-black text-white overflow-hidden">
+        {/* Identity-Verified Banner */}
+        <div className="bg-gradient-to-r from-red-500/10 to-amber-500/10 border-b border-red-400/20 py-4 relative z-20">
+          <div className="container mx-auto max-w-6xl px-4">
+            <div className="flex items-center gap-3 text-sm">
+              <Badge className="bg-red-500/20 text-red-300 border-red-400/40 text-xs">Passport-Verified Opportunities</Badge>
+              <p className="text-red-100/70">
+                Identity-gated marketplace - All opportunities require AeThex Passport verification
+              </p>
+            </div>
+          </div>
+        </div>
         {/* Background - Foundation Red/Gold Theme */}
         <div className="pointer-events-none absolute inset-0 opacity-[0.12] [background-image:radial-gradient(circle_at_top,#EF4444_0,rgba(0,0,0,0.45)_55%,rgba(0,0,0,0.9)_100%)]" />
         <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(transparent_0,transparent_calc(100%-1px),rgba(239,68,68,0.05)_calc(100%-1px))] bg-[length:100%_32px]" />

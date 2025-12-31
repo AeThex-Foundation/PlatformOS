@@ -78,6 +78,17 @@ export default function GameForgeAbout() {
         <div className="pointer-events-none absolute bottom-20 right-10 w-72 h-72 bg-green-600/10 rounded-full blur-3xl animate-blob animation-delay-2000" />
 
         <main className="relative z-10">
+          {/* Foundation Program Banner */}
+          <div className="bg-gradient-to-r from-green-500/10 to-blue-500/10 border-b border-green-400/20 py-4">
+            <div className="container mx-auto max-w-6xl px-4">
+              <div className="flex items-center gap-3 text-sm">
+                <Badge className="bg-green-500/20 text-green-300 border-green-400/40 text-xs">Foundation Workforce Development</Badge>
+                <p className="text-green-100/70">
+                  GameForge is a nonprofit educational program operated by AeThex Foundation - Not a commercial product
+                </p>
+              </div>
+            </div>
+          </div>
           {/* Header */}
           <section className="py-16 lg:py-20">
             <div className="container mx-auto max-w-6xl px-4">
@@ -113,14 +124,10 @@ export default function GameForgeAbout() {
                     Our Mission
                   </h2>
                   <p className="text-lg text-green-100/80 mb-4">
-                    To democratize game development by providing tools,
-                    resources, and community support that enable anyone to
-                    create and ship games at scale.
+                    <strong>GameForge is AeThex Foundation's nonprofit workforce development program.</strong> We teach identity-verified creators how to build, ship, and manage game development projects while learning professional collaboration skills.
                   </p>
                   <p className="text-lg text-green-100/80">
-                    We believe that great games come from passionate creators.
-                    Our job is to remove barriers and accelerate their journey
-                    from idea to shipped product.
+                    This is an educational initiative, not a commercial product. We train the next generation of identity-literate developers through hands-on game development curriculum.
                   </p>
                 </div>
 

@@ -92,6 +92,17 @@ export default function GameForgePricing() {
         <div className="pointer-events-none absolute bottom-20 right-10 w-72 h-72 bg-green-600/10 rounded-full blur-3xl animate-blob animation-delay-2000" />
 
         <main className="relative z-10">
+          {/* Foundation Program Banner */}
+          <div className="bg-gradient-to-r from-green-500/10 to-blue-500/10 border-b border-green-400/20 py-4">
+            <div className="container mx-auto max-w-6xl px-4">
+              <div className="flex items-center gap-3 text-sm">
+                <Badge className="bg-green-500/20 text-green-300 border-green-400/40 text-xs">Foundation Program</Badge>
+                <p className="text-green-100/70">
+                  Program fees support nonprofit educational operations - Not commercial pricing
+                </p>
+              </div>
+            </div>
+          </div>
           {/* Header */}
           <section className="py-16 lg:py-20">
             <div className="container mx-auto max-w-6xl px-4">

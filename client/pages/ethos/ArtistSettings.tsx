@@ -70,6 +70,20 @@ export default function ArtistSettings() {
   const navigate = useNavigate();
   const toast = useAethexToast();
 
+  // Partner Integration Banner Component
+  const PartnerBanner = () => (
+    <div className="bg-gradient-to-r from-blue-500/10 to-purple-500/10 border-b border-border/40 py-3 mb-8">
+      <div className="container mx-auto max-w-6xl px-4">
+        <div className="flex items-center gap-3 text-sm">
+          <Badge variant="outline" className="text-xs">Partner Integration</Badge>
+          <p className="text-muted-foreground">
+            Ethos Guild powered by AeThex Passport - Identity-verified artist licensing
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+
   const [profile, setProfile] = useState<ArtistProfile>({
     skills: [],
     for_hire: true,

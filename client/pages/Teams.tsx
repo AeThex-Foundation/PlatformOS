@@ -27,6 +27,19 @@ export default function Teams() {
   const [description, setDescription] = useState("");
   const [creating, setCreating] = useState(false);
 
+  const IdentityBanner = () => (
+    <div className="bg-gradient-to-r from-aethex-500/10 to-neon-blue/10 border-b border-border/40 py-3 mb-8">
+      <div className="container mx-auto max-w-6xl px-4">
+        <div className="flex items-center gap-3 text-sm">
+          <Badge variant="outline" className="text-xs">Identity-Verified Ecosystem</Badge>
+          <p className="text-muted-foreground">
+            Passport-verified collaborative teams - Authenticated identity for trusted collaboration
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+
   useEffect(() => {
     if (!loading && !user) navigate("/login", { replace: true });
   }, [loading, user, navigate]);

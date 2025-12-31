@@ -288,6 +288,17 @@ export default function MentorshipPrograms() {
       />
       <Layout>
         <div className="min-h-screen bg-aethex-gradient">
+          {/* Foundation Program Banner */}
+          <div className="bg-gradient-to-r from-aethex-500/10 to-neon-blue/10 border-b border-border/40 py-3">
+            <div className="container mx-auto max-w-6xl px-4">
+              <div className="flex items-center gap-3 text-sm">
+                <Badge variant="outline" className="text-xs">Foundation Program</Badge>
+                <p className="text-muted-foreground">
+                  Nonprofit workforce development focused on identity infrastructure education
+                </p>
+              </div>
+            </div>
+          </div>
           {/* Hero Section */}
           <section className="relative py-16 sm:py-24 lg:py-32 overflow-hidden">
             <div className="absolute inset-0 opacity-10">
@@ -315,19 +326,17 @@ export default function MentorshipPrograms() {
                   className="border-emerald-400/50 text-emerald-300 animate-bounce-gentle"
                 >
                   <GraduationCap className="h-3 w-3 mr-1" />
-                  Mentorship & Education Division
+                  Identity Infrastructure Education
                 </Badge>
 
                 <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight">
                   <span className="bg-gradient-to-r from-emerald-300 via-aethex-400 to-neon-blue bg-clip-text text-transparent">
-                    Accelerate Your Tech Journey
+                    Learn Identity Systems & Authentication
                   </span>
                 </h1>
 
                 <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-                  Learn from industry experts through personalized mentorship,
-                  hands-on workshops, and intensive boot camps designed to
-                  fast-track your technology career.
+                  Foundation workforce development programs - Master digital identity protocols, authentication standards, and governance frameworks through hands-on mentorship from identity infrastructure experts.
                 </p>
 
                 <div className="flex flex-col sm:flex-row justify-center gap-4">
