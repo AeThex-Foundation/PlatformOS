@@ -232,9 +232,16 @@ export function createServer() {
     app.use(express.static(distPath));
     app.use(express.static(publicPath));
 
-    // SPA fallback - serve index.html for all non-API routes
+    // Domain-based SPA entry
     app.get("*", (req, res) => {
-      res.sendFile(path.join(distPath, "index.html"));
+      const host = req.headers.host?.toLowerCase() || "";
+      if (host.includes("aethex.education")) {
+        // Serve a custom entry for education (if you want a different build, use a separate HTML file)
+        // For now, serve the same SPA, but you can swap to a different HTML if needed
+        return res.sendFile(path.join(distPath, "education.html"));
+      }
+      // Default: serve main app
+      return res.sendFile(path.join(distPath, "index.html"));
     });
   }
 
