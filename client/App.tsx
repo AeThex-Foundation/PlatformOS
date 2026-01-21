@@ -13,6 +13,7 @@ import SkipAgentController from "./components/SkipAgentController";
 import PassportRouter from "./components/passport/PassportRouter";
 
 import Index from "./pages/Index";
+import EducationLanding from "./pages/EducationLanding";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Login from "./pages/Login";
@@ -142,13 +143,20 @@ function isPassportSubdomain(): "creator" | "project" | false {
   return false;
 }
 
+function isEducationDomain() {
+  if (typeof window !== "undefined") {
+    const host = window.location.hostname;
+    return host && host.toLowerCase().includes("aethex.education");
+  }
+  return false;
+}
+
 function AppContent() {
   const passportType = isPassportSubdomain();
-  
   if (passportType) {
     return <PassportRouter />;
   }
-  
+  const isEducation = isEducationDomain();
   return (
     <BrowserRouter>
       <ArmThemeProvider>
@@ -156,7 +164,7 @@ function AppContent() {
         <PageTransition>
           <Routes>
             {/* Homepage */}
-            <Route path="/" element={<Index />} />
+            <Route path="/" element={isEducation ? <EducationLanding /> : <Index />} />
 
             {/* Public Pages */}
             <Route path="/about" element={<About />} />
