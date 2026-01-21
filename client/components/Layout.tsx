@@ -116,7 +116,7 @@ export default function CodeLayout({ children, hideFooter }: LayoutProps) {
             {/* Desktop - Regular Link */}
             <Link
               to="/"
-              className="hover-glow group inline-block hidden sm:block"
+              className="hover-glow group hidden sm:inline-block"
             >
               <img 
                 src={FOUNDATION_LOGO_URL} 
