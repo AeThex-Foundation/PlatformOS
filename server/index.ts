@@ -224,11 +224,14 @@ export function createServer() {
   // Session Management (requires auth)
   app.use("/api/sessions", sessionsRoutes);
 
+
   // Serve static files in production
   if (process.env.NODE_ENV === "production") {
     const distPath = path.join(__dirname, "../dist/spa");
+    const publicPath = path.join(__dirname, "../public");
     app.use(express.static(distPath));
-    
+    app.use(express.static(publicPath));
+
     // SPA fallback - serve index.html for all non-API routes
     app.get("*", (req, res) => {
       res.sendFile(path.join(distPath, "index.html"));
