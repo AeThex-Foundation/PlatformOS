@@ -11,6 +11,7 @@ import { ArmThemeProvider } from "./contexts/ArmThemeContext";
 import PageTransition from "./components/PageTransition";
 import SkipAgentController from "./components/SkipAgentController";
 import PassportRouter from "./components/passport/PassportRouter";
+import EducationRouter from "./routers/EducationRouter";
 
 import Index from "./pages/Index";
 import EducationLanding from "./pages/EducationLanding";
@@ -157,6 +158,13 @@ function AppContent() {
     return <PassportRouter />;
   }
   const isEducation = isEducationDomain();
+  if (isEducation) {
+    return (
+      <BrowserRouter>
+        <EducationRouter />
+      </BrowserRouter>
+    );
+  }
   return (
     <BrowserRouter>
       <ArmThemeProvider>
@@ -164,7 +172,7 @@ function AppContent() {
         <PageTransition>
           <Routes>
             {/* Homepage */}
-            <Route path="/" element={isEducation ? <EducationLanding /> : <Index />} />
+            <Route path="/" element={<Index />} />
 
             {/* Public Pages */}
             <Route path="/about" element={<About />} />
