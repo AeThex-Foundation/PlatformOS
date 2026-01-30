@@ -234,13 +234,8 @@ export function createServer() {
 
     // Domain-based SPA entry
     app.get("*", (req, res) => {
-      const host = req.headers.host?.toLowerCase() || "";
-      if (host.includes("aethex.education")) {
-        // Serve a custom entry for education (if you want a different build, use a separate HTML file)
-        // For now, serve the same SPA, but you can swap to a different HTML if needed
-        return res.sendFile(path.join(distPath, "education.html"));
-      }
-      // Default: serve main app
+      // Serve the main SPA for all domains
+      // Client-side routing in App.tsx handles domain detection and renders appropriate components
       return res.sendFile(path.join(distPath, "index.html"));
     });
   }
