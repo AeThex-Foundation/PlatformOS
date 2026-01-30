@@ -43,6 +43,7 @@ const ALLOWED_ORIGINS = [
   'https://aethex.foundation',
   'https://aethex.dev',
   'https://aethex.studio',
+  'https://aethex.education',
   // Railway production
   'https://platformos-production.up.railway.app',
   // Development origins
