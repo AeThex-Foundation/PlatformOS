@@ -1,59 +1,222 @@
 import { useState, useEffect } from "react";
-import Layout from "@/components/Layout";
+import EducationLayout from "@/components/EducationLayout";
 import SEO from "@/components/SEO";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import LoadingScreen from "@/components/LoadingScreen";
 import { Link } from "react-router-dom";
-import { ArrowRight, Sparkles, BookOpen, Code, Users, Award, Download, GraduationCap, Shield } from "lucide-react";
+import {
+  ArrowRight,
+  BookOpen,
+  Code,
+  Users,
+  Award,
+  GraduationCap,
+  Gamepad2,
+  Rocket,
+  CheckCircle,
+  Star
+} from "lucide-react";
 
 export default function EducationLanding() {
-  const [isLoading, setIsLoading] = useState(true);
-  useEffect(() => {
-    const timer = setTimeout(() => setIsLoading(false), 900);
-    return () => clearTimeout(timer);
-  }, []);
+  const [email, setEmail] = useState("");
+
+  const features = [
+    {
+      icon: Gamepad2,
+      title: "Roblox Development",
+      description: "Master Lua scripting, game design, and monetization strategies for Roblox."
+    },
+    {
+      icon: Code,
+      title: "Fortnite Creative",
+      description: "Build immersive experiences with UEFN and creative mode development."
+    },
+    {
+      icon: Rocket,
+      title: "Unity & Unreal",
+      description: "Professional game development with industry-standard engines."
+    },
+    {
+      icon: GraduationCap,
+      title: "Certified Programs",
+      description: "Earn recognized certifications in game development and metaverse creation."
+    }
+  ];
+
+  const stats = [
+    { value: "100%", label: "Free" },
+    { value: "1000+", label: "Students" },
+    { value: "50+", label: "Courses" },
+    { value: "24/7", label: "Support" }
+  ];
+
+  const upcomingCourses = [
+    {
+      title: "Roblox Scripting Fundamentals",
+      level: "Beginner",
+      duration: "8 weeks",
+      status: "Coming Soon"
+    },
+    {
+      title: "Fortnite UEFN Mastery",
+      level: "Intermediate",
+      duration: "10 weeks",
+      status: "Coming Soon"
+    },
+    {
+      title: "Metaverse Builder Track",
+      level: "Advanced",
+      duration: "12 weeks",
+      status: "Coming Soon"
+    }
+  ];
 
   return (
     <>
       <SEO
-        pageTitle="AeThex Education"
-        description="Free game development education for the metaverse generation. Part of the AeThex Foundation's mission to empower developers with cross-platform game development skills."
+        pageTitle="AeThex Education - Free Game Development Courses"
+        description="Free game development education for the metaverse generation. Learn Roblox, Fortnite Creative, Unity, and more. Part of the AeThex Foundation."
       />
-      <Layout hideFooter={false}>
-        <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 sm:pt-36">
-          <div className="absolute inset-0">
-            <div className="absolute inset-0 bg-gradient-to-br from-orange-600/60 via-green-700/40 to-green-900/60" />
-            <div className="absolute inset-0">
-              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                <div className="relative w-80 h-80 opacity-10">
-                  <img
-                    src="/aethex-logo.png"
-                    alt="AeThex Education Logo"
-                    className="w-full h-full animate-float"
+      <EducationLayout>
+        {/* Hero Section */}
+        <section className="relative overflow-hidden bg-gradient-to-br from-blue-600 via-green-600 to-blue-700 text-white">
+          <div className="absolute inset-0 opacity-10">
+            <img
+              src="/aethex-logo.png"
+              alt="Background"
+              className="w-full h-full object-cover"
+            />
+          </div>
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-32 relative z-10">
+            <div className="max-w-4xl mx-auto text-center space-y-8">
+              <Badge className="bg-white/20 text-white border-white/30 px-4 py-1 text-sm">
+                🎮 Launching Spring 2026
+              </Badge>
+              <h1 className="text-5xl md:text-7xl font-bold">
+                Build the Future of Gaming
+              </h1>
+              <p className="text-xl md:text-2xl text-blue-100 max-w-2xl mx-auto">
+                Free, world-class game development education. Learn Roblox, Fortnite, Unity,
+                and metaverse technologies from industry experts.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <div className="flex gap-3 w-full sm:w-auto">
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="Enter your email"
+                    className="px-6 py-3 rounded-lg bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-300 flex-1 sm:w-80"
                   />
+                  <Button
+                    className="bg-green-500 hover:bg-green-600 text-white px-8"
+                  >
+                    Get Notified
+                  </Button>
                 </div>
               </div>
-            </div>
-          </div>
-          <div className="container mx-auto px-4 relative z-10 pb-24 sm:pb-28">
-            <div className="text-center space-y-10">
-              <img src="/aethex-logo.png" alt="AeThex Logo" className="mx-auto mb-4 w-20 h-20" />
-              <h1 className="text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-green-400 to-green-600">AeThex Education</h1>
-              <h2 className="text-xl sm:text-2xl text-green-200 font-medium mb-4">Free game development education for the metaverse generation</h2>
-              <p className="text-lg text-orange-100 max-w-2xl mx-auto mb-8">
-                Part of the AeThex Foundation's mission to empower developers with cross-platform game development skills. Launching soon with courses on Roblox, Fortnite, metaverse building, and AeThex tools.
+              <p className="text-sm text-blue-200">
+                ✨ 100% Free · No Credit Card Required · An AeThex Foundation Initiative
               </p>
-              <form action="mailto:developers@aethex.education" method="POST" className="flex flex-col sm:flex-row gap-3 justify-center items-center mb-8">
-                <input type="email" name="email" placeholder="Your email address" required className="px-4 py-2 rounded bg-white/90 text-gray-900 focus:outline-none focus:ring-2 focus:ring-orange-400" />
-                <Button type="submit" className="bg-gradient-to-r from-orange-500 to-green-500 text-white font-bold px-6 py-2 rounded shadow hover:from-orange-600 hover:to-green-600 transition">Notify Me</Button>
-              </form>
-              <div className="text-sm text-green-200 mt-8">An initiative of the AeThex Foundation</div>
             </div>
           </div>
         </section>
-      </Layout>
+
+        {/* Stats Section */}
+        <section className="py-12 bg-white border-b">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+              {stats.map((stat, index) => (
+                <div key={index}>
+                  <div className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-600 to-green-600 bg-clip-text text-transparent">
+                    {stat.value}
+                  </div>
+                  <div className="text-gray-600 mt-2">{stat.label}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Features Section */}
+        <section className="py-20">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl font-bold mb-4">What You'll Learn</h2>
+              <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+                Comprehensive courses designed to take you from beginner to professional game developer
+              </p>
+            </div>
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {features.map((feature, index) => (
+                <Card key={index} className="border-2 hover:border-blue-500 transition-all hover:shadow-lg">
+                  <CardHeader>
+                    <div className="w-12 h-12 rounded-lg bg-gradient-to-r from-blue-600 to-green-600 flex items-center justify-center mb-4">
+                      <feature.icon className="h-6 w-6 text-white" />
+                    </div>
+                    <CardTitle>{feature.title}</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-gray-600">{feature.description}</p>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Upcoming Courses */}
+        <section className="py-20 bg-gradient-to-br from-blue-50 to-green-50">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl font-bold mb-4">Upcoming Courses</h2>
+              <p className="text-xl text-gray-600">First cohort starting Spring 2026</p>
+            </div>
+            <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+              {upcomingCourses.map((course, index) => (
+                <Card key={index} className="hover:shadow-xl transition-shadow">
+                  <CardHeader>
+                    <Badge className="w-fit mb-2 bg-green-100 text-green-700">
+                      {course.status}
+                    </Badge>
+                    <CardTitle className="text-xl">{course.title}</CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-2">
+                    <div className="flex items-center gap-2 text-sm text-gray-600">
+                      <Award className="h-4 w-4" />
+                      <span>{course.level}</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-sm text-gray-600">
+                      <BookOpen className="h-4 w-4" />
+                      <span>{course.duration}</span>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* CTA Section */}
+        <section className="py-20 bg-gradient-to-r from-blue-600 to-green-600 text-white">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 className="text-4xl font-bold mb-4">Ready to Start Your Journey?</h2>
+            <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
+              Join thousands of aspiring game developers learning to build the next generation of games and metaverse experiences.
+            </p>
+            <Button
+              size="lg"
+              className="bg-white text-blue-600 hover:bg-blue-50 px-8 py-6 text-lg"
+              asChild
+            >
+              <Link to="/enroll">
+                Enroll Now - It's Free <ArrowRight className="ml-2 h-5 w-5" />
+              </Link>
+            </Button>
+          </div>
+        </section>
+      </EducationLayout>
     </>
   );
 }
