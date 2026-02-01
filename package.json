@@ -11,7 +11,12 @@
     "preview": "vite preview",
     "test": "vitest --run",
     "format": "prettier --write .",
-    "typecheck": "tsc"
+    "typecheck": "tsc",
+    "electron:dev": "concurrently \"vite\" \"wait-on http://localhost:5000 && electron .\"",
+    "electron:build": "npm run build && tsc electron/main.ts --outDir dist-electron --module esnext --target esnext --moduleResolution bundler && electron-builder",
+    "electron:build:win": "npm run build && tsc electron/main.ts --outDir dist-electron --module esnext --target esnext --moduleResolution bundler && electron-builder --win",
+    "electron:build:mac": "npm run build && tsc electron/main.ts --outDir dist-electron --module esnext --target esnext --moduleResolution bundler && electron-builder --mac",
+    "electron:build:linux": "npm run build && tsc electron/main.ts --outDir dist-electron --module esnext --target esnext --moduleResolution bundler && electron-builder --linux"
   },
   "dependencies": {
     "@openzeppelin/contracts": "^5.4.0",
@@ -84,8 +89,11 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cmdk": "^1.0.0",
+    "concurrently": "^9.1.2",
     "cors": "^2.8.5",
     "date-fns": "^3.6.0",
+    "electron": "^33.4.2",
+    "electron-builder": "^25.1.8",
     "embla-carousel-react": "^8.3.0",
     "ethers": "^6.15.0",
     "framer-motion": "^12.6.2",
@@ -114,6 +122,7 @@
     "typescript": "^5.5.3",
     "vaul": "^0.9.3",
     "vite": "^6.2.2",
-    "vitest": "^3.1.4"
+    "vitest": "^3.1.4",
+    "wait-on": "^8.0.1"
   }
 }
