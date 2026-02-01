@@ -18,6 +18,7 @@ import {
   Users,
   Mail,
   Home,
+  Download,
 } from "lucide-react";
 
 interface EducationLayoutProps {
@@ -85,6 +86,15 @@ export default function EducationLayout({ children, hideFooter }: EducationLayou
                 variant="outline"
                 className="border-blue-600 text-blue-600 hover:bg-blue-50"
               >
+                <Link to="/download">
+                  <Download className="h-4 w-4 mr-2" />
+                  Download
+                </Link>
+              </Button>
+              <Button
+                asChild
+                className="bg-gradient-to-r from-blue-600 to-green-600 hover:from-blue-700 hover:to-green-700"
+              >
                 <Link to="/enroll">Enroll Now</Link>
               </Button>
             </div>
@@ -124,7 +134,19 @@ export default function EducationLayout({ children, hideFooter }: EducationLayou
                       </Link>
                     </SheetClose>
                   ))}
-                  <div className="pt-4 border-t">
+                  <div className="pt-4 border-t space-y-2">
+                    <SheetClose asChild>
+                      <Button
+                        asChild
+                        variant="outline"
+                        className="w-full border-blue-600 text-blue-600"
+                      >
+                        <Link to="/download">
+                          <Download className="mr-2 h-4 w-4" />
+                          Download App
+                        </Link>
+                      </Button>
+                    </SheetClose>
                     <SheetClose asChild>
                       <Button
                         asChild

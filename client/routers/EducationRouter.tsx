@@ -5,6 +5,7 @@ import EducationPrograms from "@/pages/education/EducationPrograms";
 import EducationAbout from "@/pages/education/EducationAbout";
 import EducationEnroll from "@/pages/education/EducationEnroll";
 import EducationContact from "@/pages/education/EducationContact";
+import EducationDownload from "@/pages/education/EducationDownload";
 
 export default function EducationRouter() {
   return (
@@ -18,6 +19,7 @@ export default function EducationRouter() {
       <Route path="/about" element={<EducationAbout />} />
       <Route path="/enroll" element={<EducationEnroll />} />
       <Route path="/contact" element={<EducationContact />} />
+      <Route path="/download" element={<EducationDownload />} />
 
       {/* Privacy & Terms (can create these later or redirect to foundation) */}
       <Route path="/privacy" element={<Navigate to="/about" replace />} />

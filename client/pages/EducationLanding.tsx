@@ -15,7 +15,9 @@ import {
   Gamepad2,
   Rocket,
   CheckCircle,
-  Star
+  Star,
+  Download,
+  Monitor
 } from "lucide-react";
 
 export default function EducationLanding() {
@@ -194,6 +196,87 @@ export default function EducationLanding() {
                   </CardContent>
                 </Card>
               ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Desktop App Download Section */}
+        <section className="py-20 border-t">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-5xl mx-auto">
+              <div className="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                  <Badge className="mb-4 bg-blue-100 text-blue-700">
+                    Desktop App Available
+                  </Badge>
+                  <h2 className="text-4xl font-bold mb-4">
+                    Learn Faster with the Desktop App
+                  </h2>
+                  <p className="text-lg text-gray-600 mb-6">
+                    Download our native desktop application for Windows, macOS, and Linux.
+                    Enjoy a faster, more focused learning experience with offline access
+                    and dedicated window.
+                  </p>
+                  <div className="space-y-3 mb-8">
+                    <div className="flex items-center gap-3">
+                      <CheckCircle className="h-5 w-5 text-green-600" />
+                      <span className="text-gray-700">Faster performance than web browsers</span>
+                    </div>
+                    <div className="flex items-center gap-3">
+                      <CheckCircle className="h-5 w-5 text-green-600" />
+                      <span className="text-gray-700">Offline access to downloaded content</span>
+                    </div>
+                    <div className="flex items-center gap-3">
+                      <CheckCircle className="h-5 w-5 text-green-600" />
+                      <span className="text-gray-700">Dedicated window without distractions</span>
+                    </div>
+                    <div className="flex items-center gap-3">
+                      <CheckCircle className="h-5 w-5 text-green-600" />
+                      <span className="text-gray-700">Auto-updates with latest features</span>
+                    </div>
+                  </div>
+                  <div className="flex flex-col sm:flex-row gap-4">
+                    <Button
+                      size="lg"
+                      className="bg-gradient-to-r from-blue-600 to-green-600 hover:from-blue-700 hover:to-green-700"
+                      asChild
+                    >
+                      <Link to="/download">
+                        <Download className="mr-2 h-5 w-5" />
+                        Download Desktop App
+                      </Link>
+                    </Button>
+                    <Button
+                      size="lg"
+                      variant="outline"
+                      asChild
+                    >
+                      <Link to="/download">
+                        View All Platforms
+                      </Link>
+                    </Button>
+                  </div>
+                </div>
+                <div className="bg-gradient-to-br from-blue-100 to-green-100 rounded-2xl p-12 flex items-center justify-center">
+                  <div className="text-center">
+                    <Monitor className="h-32 w-32 mx-auto mb-6 text-blue-600" />
+                    <div className="flex items-center justify-center gap-4 text-sm text-gray-600">
+                      <div className="flex items-center gap-2">
+                        <Monitor className="h-4 w-4" />
+                        <span>Windows</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Monitor className="h-4 w-4" />
+                        <span>macOS</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Monitor className="h-4 w-4" />
+                        <span>Linux</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </section>
