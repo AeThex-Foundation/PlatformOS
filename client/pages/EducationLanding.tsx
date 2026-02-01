@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import EducationLayout from "@/components/EducationLayout";
-import SEO from "@/components/SEO";
+import EducationSEO from "@/components/EducationSEO";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -74,7 +74,7 @@ export default function EducationLanding() {
 
   return (
     <>
-      <SEO
+      <EducationSEO
         pageTitle="AeThex Education - Free Game Development Courses"
         description="Free game development education for the metaverse generation. Learn Roblox, Fortnite Creative, Unity, and more. Part of the AeThex Foundation."
       />
