@@ -12,6 +12,7 @@ import PageTransition from "./components/PageTransition";
 import SkipAgentController from "./components/SkipAgentController";
 import PassportRouter from "./components/passport/PassportRouter";
 import EducationRouter from "./routers/EducationRouter";
+import PWAInstaller from "./components/PWAInstaller";
 
 import Index from "./pages/Index";
 import EducationLanding from "./pages/EducationLanding";
@@ -36,6 +37,8 @@ import GameForgePricing from "./pages/gameforge/GameForgePricing";
 import GameForgeStartBuilding from "./pages/gameforge/GameForgeStartBuilding";
 import GameForgeTeams from "./pages/gameforge/GameForgeTeams";
 import GameForgeViewPortfolio from "./pages/gameforge/GameForgeViewPortfolio";
+import GameForgeShowcase from "./pages/gameforge/GameForgeShowcase";
+import GameForgePipeline from "./pages/gameforge/GameForgePipeline";
 
 import Hub from "./pages/hub/Hub";
 import Protocol from "./pages/hub/Protocol";
@@ -212,6 +215,8 @@ function AppContent() {
             <Route path="/gameforge/start-building" element={<GameForgeStartBuilding />} />
             <Route path="/gameforge/teams" element={<GameForgeTeams />} />
             <Route path="/gameforge/view-portfolio" element={<GameForgeViewPortfolio />} />
+            <Route path="/gameforge/showcase" element={<GameForgeShowcase />} />
+            <Route path="/gameforge/pipeline" element={<GameForgePipeline />} />
             
             {/* Admin Routes */}
             <Route path="/admin" element={<Admin />} />
@@ -343,6 +348,7 @@ const App = () => (
         <TooltipProvider>
           <Toaster />
           <Analytics />
+          <PWAInstaller />
           <AppContent />
         </TooltipProvider>
       </AuthProvider>
