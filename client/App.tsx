@@ -12,6 +12,7 @@ import PageTransition from "./components/PageTransition";
 import SkipAgentController from "./components/SkipAgentController";
 import PassportRouter from "./components/passport/PassportRouter";
 import EducationRouter from "./routers/EducationRouter";
+import PWAInstaller from "./components/PWAInstaller";
 
 import Index from "./pages/Index";
 import EducationLanding from "./pages/EducationLanding";
@@ -347,6 +348,7 @@ const App = () => (
         <TooltipProvider>
           <Toaster />
           <Analytics />
+          <PWAInstaller />
           <AppContent />
         </TooltipProvider>
       </AuthProvider>
