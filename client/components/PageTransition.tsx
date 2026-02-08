@@ -20,11 +20,25 @@ const foundationConfig: PageConfig = {
   armLogo: "https://cdn.builder.io/api/v1/image/assets%2Ffc53d607e21d497595ac97e0637001a1%2Fc02cb1bf5056479bbb3ea4bd91f0d472?format=webp&width=800",
 };
 
+const educationConfig: PageConfig = {
+  message: "Loading AeThex Education...",
+  bootMessage: "Education Platform Ready",
+  accentColor: "from-orange-500 to-amber-500",
+  armLogo: "/education-logo.png",
+};
+
+function isEducationMode(): boolean {
+  if (typeof window !== "undefined") {
+    return !!(window as any).__AETHEX_EDUCATION_MODE__;
+  }
+  return false;
+}
+
 export default function PageTransition({ children }: PageTransitionProps) {
   const [visible, setVisible] = useState(true);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const location = useLocation();
-  const config = foundationConfig;
+  const config = isEducationMode() ? educationConfig : foundationConfig;
 
   useEffect(() => {
     setIsTransitioning(true);

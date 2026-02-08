@@ -6,6 +6,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "dev:foundation": "bash scripts/dev-foundation.sh",
+    "dev:education": "bash scripts/dev-education.sh",
     "build": "vite build",
     "start": "NODE_ENV=production tsx server/index.ts",
     "preview": "vite preview",

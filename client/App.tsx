@@ -149,6 +149,10 @@ function isPassportSubdomain(): "creator" | "project" | false {
 
 function isEducationDomain() {
   if (typeof window !== "undefined") {
+    // Check for education mode flag (set in education.html)
+    if ((window as any).__AETHEX_EDUCATION_MODE__) {
+      return true;
+    }
     const host = window.location.hostname;
     return host && host.toLowerCase().includes("aethex.education");
   }

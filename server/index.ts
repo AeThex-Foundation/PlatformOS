@@ -59,6 +59,13 @@ const PASSPORT_DOMAIN_PATTERN = /^https?:\/\/[a-z0-9-]+\.(aethex\.me|aethex\.spa
 export function createServer() {
   const app = express();
 
+  // Serve static files FIRST (before CORS) - assets don't need CORS protection
+  const distPath = path.join(__dirname, "../dist/spa");
+  const publicPath = path.join(__dirname, "../public");
+  app.use("/assets", express.static(path.join(distPath, "assets")));
+  app.use(express.static(distPath, { index: false }));
+  app.use(express.static(publicPath, { index: false }));
+
   // Configure CORS with specific origins for OAuth security
   app.use(cors({
     origin: (origin, callback) => {
@@ -67,6 +74,11 @@ export function createServer() {
       
       // Allow Replit preview domains
       if (origin.includes('.replit.dev') || origin.includes('.repl.co')) {
+        return callback(null, true);
+      }
+      
+      // Allow GitHub Codespaces domains
+      if (origin.includes('.app.github.dev') || origin.includes('.github.dev')) {
         return callback(null, true);
       }
       
@@ -233,10 +245,13 @@ export function createServer() {
     app.use(express.static(distPath));
     app.use(express.static(publicPath));
 
-    // Domain-based SPA entry
+    // Port-based SPA entry - serve education.html on port 4321, index.html otherwise
     app.get("*", (req, res) => {
-      // Serve the main SPA for all domains
-      // Client-side routing in App.tsx handles domain detection and renders appropriate components
+      const devPort = parseInt(process.env.PORT || "", 10);
+      if (devPort === 4321) {
+        return res.sendFile(path.join(distPath, "education.html"));
+      }
+      // Default: serve main app
       return res.sendFile(path.join(distPath, "index.html"));
     });
   }
