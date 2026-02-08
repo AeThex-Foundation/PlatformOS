@@ -11,11 +11,9 @@ import { ArmThemeProvider } from "./contexts/ArmThemeContext";
 import PageTransition from "./components/PageTransition";
 import SkipAgentController from "./components/SkipAgentController";
 import PassportRouter from "./components/passport/PassportRouter";
-import EducationRouter from "./routers/EducationRouter";
 import PWAInstaller from "./components/PWAInstaller";
 
 import Index from "./pages/Index";
-import EducationLanding from "./pages/EducationLanding";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Login from "./pages/Login";
@@ -147,30 +145,10 @@ function isPassportSubdomain(): "creator" | "project" | false {
   return false;
 }
 
-function isEducationDomain() {
-  if (typeof window !== "undefined") {
-    // Check for education mode flag (set in education.html)
-    if ((window as any).__AETHEX_EDUCATION_MODE__) {
-      return true;
-    }
-    const host = window.location.hostname;
-    return host && host.toLowerCase().includes("aethex.education");
-  }
-  return false;
-}
-
 function AppContent() {
   const passportType = isPassportSubdomain();
   if (passportType) {
     return <PassportRouter />;
-  }
-  const isEducation = isEducationDomain();
-  if (isEducation) {
-    return (
-      <BrowserRouter>
-        <EducationRouter />
-      </BrowserRouter>
-    );
   }
   return (
     <BrowserRouter>
