@@ -6,9 +6,11 @@ import {
   Github, Twitter, Globe, Mail, Linkedin, Link as LinkIcon,
   type LucideIcon
 } from "lucide-react";
-import maleAvatar from "@assets/generated_images/creator_profile_avatar_male.png";
-import heroImage from "@assets/generated_images/gameforge_project_hero_image.png";
 import type { CreatorPassport, ProjectWithTeam } from "@/types/passport";
+
+// Placeholder images (using UI Avatars service)
+const maleAvatar = "https://ui-avatars.com/api/?name=Demo+Creator&background=6366f1&color=fff&size=256";
+const heroImage = "/placeholder.svg";
 
 type RouteType = "creator" | "project" | "unknown" | "loading" | "error";
 

@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Sparkles, Rocket, User, Gamepad2 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import backgroundPattern from "@assets/generated_images/night_mode_background_pattern.png";
 
 interface ClaimPassportProps {
   slug: string;
@@ -31,12 +30,7 @@ export default function ClaimPassport({
         </a>
 
         <section
-          className="relative min-h-screen flex flex-col items-center justify-center px-6"
-          style={{
-            backgroundImage: `url(${backgroundPattern})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-          }}
+          className="relative min-h-screen flex flex-col items-center justify-center px-6 bg-gradient-to-br from-slate-900 via-purple-900/20 to-slate-900"
         >
           <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/60 to-background" />
 
