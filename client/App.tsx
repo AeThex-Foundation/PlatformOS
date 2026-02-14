@@ -1,5 +1,6 @@
 import "./global.css";
 
+import { lazy, Suspense } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { createRoot } from "react-dom/client";
 
@@ -12,119 +13,123 @@ import PageTransition from "./components/PageTransition";
 import SkipAgentController from "./components/SkipAgentController";
 import PassportRouter from "./components/passport/PassportRouter";
 import PWAInstaller from "./components/PWAInstaller";
+import LoadingScreen from "./components/LoadingScreen";
 
+// Critical path - load immediately
 import Index from "./pages/Index";
-import About from "./pages/About";
-import Contact from "./pages/Contact";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
-import Onboarding from "./pages/Onboarding";
-import Dashboard from "./pages/Dashboard";
-import ProfileSettings from "./pages/ProfileSettings";
-import Profile from "./pages/Profile";
-import Privacy from "./pages/Privacy";
-import Terms from "./pages/Terms";
-import Passport from "./pages/Passport";
-import PassportHub from "./pages/PassportHub";
-import DiscordVerify from "./pages/DiscordVerify";
 import FourOhFourPage from "./pages/404";
-import GameForge from "./pages/GameForge";
-import GameForgeAbout from "./pages/gameforge/GameForgeAbout";
-import GameForgeJoinGameForge from "./pages/gameforge/GameForgeJoinGameForge";
-import GameForgePricing from "./pages/gameforge/GameForgePricing";
-import GameForgeStartBuilding from "./pages/gameforge/GameForgeStartBuilding";
-import GameForgeTeams from "./pages/gameforge/GameForgeTeams";
-import GameForgeViewPortfolio from "./pages/gameforge/GameForgeViewPortfolio";
-import GameForgeShowcase from "./pages/gameforge/GameForgeShowcase";
-import GameForgePipeline from "./pages/gameforge/GameForgePipeline";
 
-import Hub from "./pages/hub/Hub";
-import Protocol from "./pages/hub/Protocol";
-import Governance from "./pages/hub/Governance";
-import CommunityHub from "./pages/hub/Community";
-import HubPassport from "./pages/hub/Passport";
+// Lazy loaded pages - loaded on demand
+const About = lazy(() => import("./pages/About"));
+const Contact = lazy(() => import("./pages/Contact"));
+const Onboarding = lazy(() => import("./pages/Onboarding"));
+const Dashboard = lazy(() => import("./pages/Dashboard"));
+const ProfileSettings = lazy(() => import("./pages/ProfileSettings"));
+const Profile = lazy(() => import("./pages/Profile"));
+const Privacy = lazy(() => import("./pages/Privacy"));
+const Terms = lazy(() => import("./pages/Terms"));
+const Passport = lazy(() => import("./pages/Passport"));
+const PassportHub = lazy(() => import("./pages/PassportHub"));
+const DiscordVerify = lazy(() => import("./pages/DiscordVerify"));
+const GameForge = lazy(() => import("./pages/GameForge"));
+const GameForgeAbout = lazy(() => import("./pages/gameforge/GameForgeAbout"));
+const GameForgeJoinGameForge = lazy(() => import("./pages/gameforge/GameForgeJoinGameForge"));
+const GameForgePricing = lazy(() => import("./pages/gameforge/GameForgePricing"));
+const GameForgeStartBuilding = lazy(() => import("./pages/gameforge/GameForgeStartBuilding"));
+const GameForgeTeams = lazy(() => import("./pages/gameforge/GameForgeTeams"));
+const GameForgeViewPortfolio = lazy(() => import("./pages/gameforge/GameForgeViewPortfolio"));
+const GameForgeShowcase = lazy(() => import("./pages/gameforge/GameForgeShowcase"));
+const GameForgePipeline = lazy(() => import("./pages/gameforge/GameForgePipeline"));
 
-import EthosArtistSettings from "./pages/ethos/ArtistSettings";
-import EthosTrackLibrary from "./pages/ethos/TrackLibrary";
-import EthosGuild from "./pages/ethos/EthosGuild";
-import EthosArtistProfile from "./pages/ethos/ArtistProfile";
-import EthosLicensingDashboard from "./pages/ethos/LicensingDashboard";
+const Hub = lazy(() => import("./pages/hub/Hub"));
+const Protocol = lazy(() => import("./pages/hub/Protocol"));
+const Governance = lazy(() => import("./pages/hub/Governance"));
+const CommunityHub = lazy(() => import("./pages/hub/Community"));
+const HubPassport = lazy(() => import("./pages/hub/Passport"));
 
-import MenteeHub from "./pages/mentorship/MenteeHub";
-import MentorApply from "./pages/mentorship/MentorApply";
-import MentorProfile from "./pages/mentorship/MentorProfile";
-import MentorshipPrograms from "./pages/mentorship/MentorshipPrograms";
-import MentorshipRequest from "./pages/mentorship/MentorshipRequest";
+const EthosArtistSettings = lazy(() => import("./pages/ethos/ArtistSettings"));
+const EthosTrackLibrary = lazy(() => import("./pages/ethos/TrackLibrary"));
+const EthosGuild = lazy(() => import("./pages/ethos/EthosGuild"));
+const EthosArtistProfile = lazy(() => import("./pages/ethos/ArtistProfile"));
+const EthosLicensingDashboard = lazy(() => import("./pages/ethos/LicensingDashboard"));
 
-import FoundationAchievements from "./pages/foundation/FoundationAchievements";
-import FoundationContribute from "./pages/foundation/FoundationContribute";
-import FoundationCurriculum from "./pages/foundation/FoundationCurriculum";
-import FoundationDashboard from "./pages/foundation/FoundationDashboard";
-import FoundationGetInvolved from "./pages/foundation/FoundationGetInvolved";
-import FoundationLearnMore from "./pages/foundation/FoundationLearnMore";
-import FoundationTeams from "./pages/foundation/FoundationTeams";
+const MenteeHub = lazy(() => import("./pages/mentorship/MenteeHub"));
+const MentorApply = lazy(() => import("./pages/mentorship/MentorApply"));
+const MentorProfile = lazy(() => import("./pages/mentorship/MentorProfile"));
+const MentorshipPrograms = lazy(() => import("./pages/mentorship/MentorshipPrograms"));
+const MentorshipRequest = lazy(() => import("./pages/mentorship/MentorshipRequest"));
 
-import OpportunitiesHub from "./pages/opportunities/OpportunitiesHub";
-import OpportunityDetail from "./pages/opportunities/OpportunityDetail";
-import OpportunityPostForm from "./pages/opportunities/OpportunityPostForm";
-import MyApplications from "./pages/opportunities/MyApplications";
+const FoundationAchievements = lazy(() => import("./pages/foundation/FoundationAchievements"));
+const FoundationContribute = lazy(() => import("./pages/foundation/FoundationContribute"));
+const FoundationCurriculum = lazy(() => import("./pages/foundation/FoundationCurriculum"));
+const FoundationDashboard = lazy(() => import("./pages/foundation/FoundationDashboard"));
+const FoundationGetInvolved = lazy(() => import("./pages/foundation/FoundationGetInvolved"));
+const FoundationLearnMore = lazy(() => import("./pages/foundation/FoundationLearnMore"));
+const FoundationTeams = lazy(() => import("./pages/foundation/FoundationTeams"));
 
-import StaffAnnouncements from "./pages/staff/StaffAnnouncements";
-import StaffKnowledgeBase from "./pages/staff/StaffKnowledgeBase";
-import StaffProjectTracking from "./pages/staff/StaffProjectTracking";
-import StaffTeamHandbook from "./pages/staff/StaffTeamHandbook";
-import StaffExpenseReports from "./pages/staff/StaffExpenseReports";
-import StaffLearningPortal from "./pages/staff/StaffLearningPortal";
-import StaffPerformanceReviews from "./pages/staff/StaffPerformanceReviews";
-import StaffInternalMarketplace from "./pages/staff/StaffInternalMarketplace";
+const OpportunitiesHub = lazy(() => import("./pages/opportunities/OpportunitiesHub"));
+const OpportunityDetail = lazy(() => import("./pages/opportunities/OpportunityDetail"));
+const OpportunityPostForm = lazy(() => import("./pages/opportunities/OpportunityPostForm"));
+const MyApplications = lazy(() => import("./pages/opportunities/MyApplications"));
 
-import Blog from "./pages/content/Blog";
-import BlogPost from "./pages/content/BlogPost";
-import Feed from "./pages/content/Feed";
-import Changelog from "./pages/content/Changelog";
-import Status from "./pages/content/Status";
-import Tutorials from "./pages/content/Tutorials";
+const StaffAnnouncements = lazy(() => import("./pages/staff/StaffAnnouncements"));
+const StaffKnowledgeBase = lazy(() => import("./pages/staff/StaffKnowledgeBase"));
+const StaffProjectTracking = lazy(() => import("./pages/staff/StaffProjectTracking"));
+const StaffTeamHandbook = lazy(() => import("./pages/staff/StaffTeamHandbook"));
+const StaffExpenseReports = lazy(() => import("./pages/staff/StaffExpenseReports"));
+const StaffLearningPortal = lazy(() => import("./pages/staff/StaffLearningPortal"));
+const StaffPerformanceReviews = lazy(() => import("./pages/staff/StaffPerformanceReviews"));
+const StaffInternalMarketplace = lazy(() => import("./pages/staff/StaffInternalMarketplace"));
 
-import Programs from "./pages/Programs";
-import Achievements from "./pages/Achievements";
-import Community from "./pages/Community";
-import Trust from "./pages/Trust";
-import Resources from "./pages/Resources";
-import Downloads from "./pages/Downloads";
+const Blog = lazy(() => import("./pages/content/Blog"));
+const BlogPost = lazy(() => import("./pages/content/BlogPost"));
+const Feed = lazy(() => import("./pages/content/Feed"));
+const Changelog = lazy(() => import("./pages/content/Changelog"));
+const Status = lazy(() => import("./pages/content/Status"));
+const Tutorials = lazy(() => import("./pages/content/Tutorials"));
 
-import Admin from "./pages/Admin";
-import OAuthClients from "./pages/OAuthClients";
-import ProfileView from "./pages/ProfileView";
-import ProfileEdit from "./pages/ProfileEdit";
+const Programs = lazy(() => import("./pages/Programs"));
+const Achievements = lazy(() => import("./pages/Achievements"));
+const Community = lazy(() => import("./pages/Community"));
+const Trust = lazy(() => import("./pages/Trust"));
+const Resources = lazy(() => import("./pages/Resources"));
+const Downloads = lazy(() => import("./pages/Downloads"));
+
+const Admin = lazy(() => import("./pages/Admin"));
+const OAuthClients = lazy(() => import("./pages/OAuthClients"));
+const ProfileView = lazy(() => import("./pages/ProfileView"));
+const ProfileEdit = lazy(() => import("./pages/ProfileEdit"));
 import { Analytics } from "@vercel/analytics/react";
 import { Web3Provider } from "./components/Web3Provider";
 
-import Teams from "./pages/Teams";
-import Nexus from "./pages/Nexus";
-import Support from "./pages/Support";
+const Teams = lazy(() => import("./pages/Teams"));
+const Nexus = lazy(() => import("./pages/Nexus"));
+const Support = lazy(() => import("./pages/Support"));
 
-import TLDHome from "./pages/tld/TLDHome";
-import TLDDashboard from "./pages/tld/TLDDashboard";
-import AgoraPage from "./pages/tld/AgoraPage";
-import GrantsPage from "./pages/tld/GrantsPage";
+const TLDHome = lazy(() => import("./pages/tld/TLDHome"));
+const TLDDashboard = lazy(() => import("./pages/tld/TLDDashboard"));
+const AgoraPage = lazy(() => import("./pages/tld/AgoraPage"));
+const GrantsPage = lazy(() => import("./pages/tld/GrantsPage"));
 
-import CreatorDirectory from "./pages/creators/CreatorDirectory";
-import CreatorProfile from "./pages/creators/CreatorProfile";
+const CreatorDirectory = lazy(() => import("./pages/creators/CreatorDirectory"));
+const CreatorProfile = lazy(() => import("./pages/creators/CreatorProfile"));
 
-import DocsOverview from "./pages/docs/DocsOverview";
-import DocsGettingStarted from "./pages/docs/DocsGettingStarted";
-import DocsTutorials from "./pages/docs/DocsTutorials";
-import DocsApiReference from "./pages/docs/DocsApiReference";
-import DocsCli from "./pages/docs/DocsCli";
-import DocsCurriculum from "./pages/docs/DocsCurriculum";
-import DocsCurriculumEthos from "./pages/docs/DocsCurriculumEthos";
-import DocsExamples from "./pages/docs/DocsExamples";
-import DocsIntegrations from "./pages/docs/DocsIntegrations";
-import DocsPlatform from "./pages/docs/DocsPlatform";
-import DocsPartnerProposal from "./pages/docs/DocsPartnerProposal";
-import DocsEditorsGuide from "./pages/docs/DocsEditorsGuide";
-import Donate from "./pages/Donate";
-import LegalDisclaimer from "./pages/LegalDisclaimer";
+const DocsOverview = lazy(() => import("./pages/docs/DocsOverview"));
+const DocsGettingStarted = lazy(() => import("./pages/docs/DocsGettingStarted"));
+const DocsTutorials = lazy(() => import("./pages/docs/DocsTutorials"));
+const DocsApiReference = lazy(() => import("./pages/docs/DocsApiReference"));
+const DocsCli = lazy(() => import("./pages/docs/DocsCli"));
+const DocsCurriculum = lazy(() => import("./pages/docs/DocsCurriculum"));
+const DocsCurriculumEthos = lazy(() => import("./pages/docs/DocsCurriculumEthos"));
+const DocsExamples = lazy(() => import("./pages/docs/DocsExamples"));
+const DocsIntegrations = lazy(() => import("./pages/docs/DocsIntegrations"));
+const DocsPlatform = lazy(() => import("./pages/docs/DocsPlatform"));
+const DocsPartnerProposal = lazy(() => import("./pages/docs/DocsPartnerProposal"));
+const DocsEditorsGuide = lazy(() => import("./pages/docs/DocsEditorsGuide"));
+const Donate = lazy(() => import("./pages/Donate"));
+const LegalDisclaimer = lazy(() => import("./pages/LegalDisclaimer"));
 
 const queryClient = new QueryClient();
 
@@ -155,19 +160,20 @@ function AppContent() {
       <ArmThemeProvider>
         <SkipAgentController />
         <PageTransition>
-          <Routes>
-            {/* Homepage */}
-            <Route path="/" element={<Index />} />
+          <Suspense fallback={<LoadingScreen />}>
+            <Routes>
+              {/* Homepage */}
+              <Route path="/" element={<Index />} />
 
-            {/* Public Pages */}
-            <Route path="/about" element={<About />} />
-            <Route path="/programs" element={<Programs />} />
-            <Route path="/achievements" element={<Achievements />} />
-            <Route path="/community" element={<Community />} />
-            <Route path="/resources" element={<Resources />} />
-            <Route path="/trust" element={<Trust />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/donate" element={<Donate />} />
+              {/* Public Pages */}
+              <Route path="/about" element={<About />} />
+              <Route path="/programs" element={<Programs />} />
+              <Route path="/achievements" element={<Achievements />} />
+              <Route path="/community" element={<Community />} />
+              <Route path="/resources" element={<Resources />} />
+              <Route path="/trust" element={<Trust />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/donate" element={<Donate />} />
 
             {/* Hub (Authenticated Member Area) */}
             <Route path="/hub" element={<Hub />} />
@@ -317,6 +323,7 @@ function AppContent() {
             {/* 404 Not Found */}
             <Route path="*" element={<FourOhFourPage />} />
           </Routes>
+          </Suspense>
         </PageTransition>
       </ArmThemeProvider>
     </BrowserRouter>
