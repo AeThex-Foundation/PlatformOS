@@ -26,7 +26,7 @@ dist-electron
 
 .config/
 discord-bot/.env
-!.env
+.env
 
 # Hardhat
 cache
