@@ -25,6 +25,7 @@ import {
   Home,
   Target,
   ListTodo,
+  ExternalLink,
 } from "lucide-react";
 import { TeamWidget } from "@/components/TeamWidget";
 import SprintManager from "@/components/SprintManager";
@@ -172,14 +173,23 @@ export default function GameForgeDashboard() {
                       Project: {sprint.gameforge_projects?.name || sprint.title}
                     </p>
                   </div>
-                  <Button
-                    variant="outline"
-                    className="border-green-500/40 text-green-300"
-                    onClick={() => navigate("/gameforge")}
-                  >
-                    <Home className="h-4 w-4 mr-2" />
-                    GameForge Home
-                  </Button>
+                  <div className="flex gap-2">
+                    <Button
+                      className="bg-white text-black hover:bg-gray-100"
+                      onClick={() => window.open("https://aethex.studio", "_blank")}
+                    >
+                      <ExternalLink className="h-4 w-4 mr-2" />
+                      Open Studio
+                    </Button>
+                    <Button
+                      variant="outline"
+                      className="border-green-500/40 text-green-300"
+                      onClick={() => navigate("/gameforge")}
+                    >
+                      <Home className="h-4 w-4 mr-2" />
+                      GameForge Home
+                    </Button>
+                  </div>
                 </div>
 
                 {sprint.end_date && (

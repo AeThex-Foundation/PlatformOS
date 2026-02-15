@@ -10,6 +10,7 @@ import {
   TrendingUp,
   Rocket,
   ArrowRight,
+  ExternalLink,
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState, useRef } from "react";
@@ -149,6 +150,13 @@ export default function GameForge() {
               </div>
 
               <div className="flex flex-col sm:flex-row gap-4 flex-wrap">
+                <Button
+                  className="bg-white text-black hover:bg-gray-100"
+                  onClick={() => window.open("https://aethex.studio", "_blank")}
+                >
+                  <ExternalLink className="mr-2 h-4 w-4" />
+                  Open AeThex Studio
+                </Button>
                 <Button
                   className="bg-green-400 text-black hover:bg-green-300"
                   onClick={() => navigate("/gameforge/showcase")}
