@@ -324,7 +324,7 @@ export default function CodeLayout({ children, hideFooter }: LayoutProps) {
                             </Link>
                           </DropdownMenuItem>
                           <DropdownMenuItem asChild>
-                            <Link to="/admin" className="cursor-pointer">
+                            <Link to="/hub/admin" className="cursor-pointer">
                               <Shield className="mr-2 h-4 w-4" />
                               Admin Control Center
                             </Link>

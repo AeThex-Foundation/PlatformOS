@@ -74,15 +74,6 @@ const OpportunityDetail = lazy(() => import("./pages/opportunities/OpportunityDe
 const OpportunityPostForm = lazy(() => import("./pages/opportunities/OpportunityPostForm"));
 const MyApplications = lazy(() => import("./pages/opportunities/MyApplications"));
 
-const StaffAnnouncements = lazy(() => import("./pages/staff/StaffAnnouncements"));
-const StaffKnowledgeBase = lazy(() => import("./pages/staff/StaffKnowledgeBase"));
-const StaffProjectTracking = lazy(() => import("./pages/staff/StaffProjectTracking"));
-const StaffTeamHandbook = lazy(() => import("./pages/staff/StaffTeamHandbook"));
-const StaffExpenseReports = lazy(() => import("./pages/staff/StaffExpenseReports"));
-const StaffLearningPortal = lazy(() => import("./pages/staff/StaffLearningPortal"));
-const StaffPerformanceReviews = lazy(() => import("./pages/staff/StaffPerformanceReviews"));
-const StaffInternalMarketplace = lazy(() => import("./pages/staff/StaffInternalMarketplace"));
-
 const Blog = lazy(() => import("./pages/content/Blog"));
 const BlogPost = lazy(() => import("./pages/content/BlogPost"));
 const Feed = lazy(() => import("./pages/content/Feed"));
@@ -206,9 +197,9 @@ function AppContent() {
             <Route path="/gameforge/showcase" element={<GameForgeShowcase />} />
             <Route path="/gameforge/pipeline" element={<GameForgePipeline />} />
             
-            {/* Admin Routes */}
-            <Route path="/admin" element={<Admin />} />
-            <Route path="/admin/oauth-clients" element={<OAuthClients />} />
+            {/* Admin Routes (role-gated) */}
+            <Route path="/hub/admin" element={<Admin />} />
+            <Route path="/hub/admin/oauth-clients" element={<OAuthClients />} />
 
             {/* Discord OAuth */}
             <Route path="/discord-verify" element={<DiscordVerify />} />
@@ -232,6 +223,8 @@ function AppContent() {
             <Route path="/workshops" element={<Navigate to="/programs" replace />} />
             <Route path="/leaderboard" element={<Navigate to="/community" replace />} />
             <Route path="/projects" element={<Navigate to="/hub/community" replace />} />
+            <Route path="/admin" element={<Navigate to="/hub/admin" replace />} />
+            <Route path="/admin/*" element={<Navigate to="/hub/admin" replace />} />
 
             {/* Ethos Guild */}
             <Route path="/ethos" element={<EthosGuild />} />
@@ -266,16 +259,6 @@ function AppContent() {
             <Route path="/opportunities" element={<Navigate to="/gig-radar" replace />} />
             <Route path="/opportunities/post" element={<Navigate to="/gig-radar/post" replace />} />
             <Route path="/opportunities/:id" element={<OpportunityIdRedirect />} />
-
-            {/* Staff */}
-            <Route path="/staff/announcements" element={<StaffAnnouncements />} />
-            <Route path="/staff/knowledge-base" element={<StaffKnowledgeBase />} />
-            <Route path="/staff/project-tracking" element={<StaffProjectTracking />} />
-            <Route path="/staff/handbook" element={<StaffTeamHandbook />} />
-            <Route path="/staff/expenses" element={<StaffExpenseReports />} />
-            <Route path="/staff/learning" element={<StaffLearningPortal />} />
-            <Route path="/staff/reviews" element={<StaffPerformanceReviews />} />
-            <Route path="/staff/marketplace" element={<StaffInternalMarketplace />} />
 
             {/* Content */}
             <Route path="/blog" element={<Blog />} />
