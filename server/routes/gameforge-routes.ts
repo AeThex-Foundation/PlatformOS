@@ -193,4 +193,66 @@ router.get('/team/:projectId', async (req: Request, res: Response) => {
   }
 });
 
+/**
+ * POST /api/gameforge/publish
+ * Receive project submissions from AeThex Studio
+ * Requires authentication via Passport OAuth
+ * 
+ * This creates a "submission" that goes into moderation queue
+ * before appearing on the public showcase.
+ */
+router.post('/publish', async (req: Request, res: Response) => {
+  try {
+    // Verify authentication
+    const authHeader = req.headers.authorization;
+    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+      return res.status(401).json({ error: 'Authentication required' });
+    }
+
+    const token = authHeader.substring(7);
+    
+    // Verify the token with Supabase
+    const { data: { user }, error: authError } = await supabaseAdmin.auth.getUser(token);
+    if (authError || !user) {
+      return res.status(401).json({ error: 'Invalid or expired token' });
+    }
+
+    const { title, description, genre, platform, tags } = req.body;
+
+    if (!title?.trim()) {
+      return res.status(400).json({ error: 'Project title is required' });
+    }
+
+    // Create submission as pending review
+    const { data: project, error } = await supabaseAdmin
+      .from('gameforge_projects')
+      .insert({
+        name: title.trim(),
+        description: description?.trim() || '',
+        genre: Array.isArray(tags) ? [genre, ...tags] : [genre],
+        platform: platform || 'roblox',
+        status: 'submitted', // Goes to moderation queue
+        lead_id: user.id,
+        source: 'aethex_studio', // Track submissions from Studio
+      })
+      .select()
+      .single();
+
+    if (error) {
+      console.error('[GameForge Publish] DB Error:', error);
+      throw error;
+    }
+
+    res.json({
+      success: true,
+      message: 'Project submitted for review',
+      url: `${process.env.VITE_APP_URL || 'https://aethex.foundation'}/gameforge/showcase`,
+      projectId: project.id,
+    });
+  } catch (err: any) {
+    console.error('[GameForge Publish]', err);
+    res.status(500).json({ error: err.message || 'Failed to publish project' });
+  }
+});
+
 export default router;
