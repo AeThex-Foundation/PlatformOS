@@ -149,7 +149,7 @@ export default function Donate() {
         
         if (statsRes.ok) {
           const data = await statsRes.json();
-          setStats(data);
+          setStats(prev => ({ ...prev, ...data }));
         }
         if (goalsRes.ok) {
           const data = await goalsRes.json();
