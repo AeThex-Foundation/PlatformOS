@@ -351,56 +351,56 @@ export default function Donate() {
               <Card className="bg-gradient-to-br from-green-950/40 to-green-900/20 border-green-500/30">
                 <CardContent className="p-4 text-center">
                   <Users className="h-6 w-6 text-green-400 mx-auto mb-2" />
-                  <div className="text-2xl font-bold text-white">{stats.recruits_trained.toLocaleString()}</div>
+                  <div className="text-2xl font-bold text-white">{(stats.recruits_trained ?? 0).toLocaleString()}</div>
                   <div className="text-xs text-gray-400">Students Trained</div>
                 </CardContent>
               </Card>
               <Card className="bg-gradient-to-br from-blue-950/40 to-blue-900/20 border-blue-500/30">
                 <CardContent className="p-4 text-center">
                   <Code className="h-6 w-6 text-blue-400 mx-auto mb-2" />
-                  <div className="text-2xl font-bold text-white">{stats.code_commits.toLocaleString()}</div>
+                  <div className="text-2xl font-bold text-white">{(stats.code_commits ?? 0).toLocaleString()}</div>
                   <div className="text-xs text-gray-400">Code Commits</div>
                 </CardContent>
               </Card>
               <Card className="bg-gradient-to-br from-green-950/40 to-green-900/20 border-green-500/30">
                 <CardContent className="p-4 text-center">
                   <Gamepad2 className="h-6 w-6 text-green-400 mx-auto mb-2" />
-                  <div className="text-2xl font-bold text-white">{stats.games_shipped}</div>
+                  <div className="text-2xl font-bold text-white">{stats.games_shipped ?? 0}</div>
                   <div className="text-xs text-gray-400">Games Shipped</div>
                 </CardContent>
               </Card>
               <Card className="bg-gradient-to-br from-purple-950/40 to-purple-900/20 border-purple-500/30">
                 <CardContent className="p-4 text-center">
                   <Play className="h-6 w-6 text-purple-400 mx-auto mb-2" />
-                  <div className="text-2xl font-bold text-white">{stats.total_players.toLocaleString()}</div>
+                  <div className="text-2xl font-bold text-white">{(stats.total_players ?? 0).toLocaleString()}</div>
                   <div className="text-xs text-gray-400">Total Players</div>
                 </CardContent>
               </Card>
               <Card className="bg-gradient-to-br from-amber-950/40 to-amber-900/20 border-amber-500/30">
                 <CardContent className="p-4 text-center">
                   <Gift className="h-6 w-6 text-amber-400 mx-auto mb-2" />
-                  <div className="text-2xl font-bold text-white">${stats.grants_awarded.toLocaleString()}</div>
+                  <div className="text-2xl font-bold text-white">${(stats.grants_awarded ?? 0).toLocaleString()}</div>
                   <div className="text-xs text-gray-400">Grants Awarded</div>
                 </CardContent>
               </Card>
               <Card className="bg-gradient-to-br from-amber-950/40 to-amber-900/20 border-amber-500/30">
                 <CardContent className="p-4 text-center">
                   <GraduationCap className="h-6 w-6 text-amber-400 mx-auto mb-2" />
-                  <div className="text-2xl font-bold text-white">{stats.mentorship_matches}</div>
+                  <div className="text-2xl font-bold text-white">{stats.mentorship_matches ?? 0}</div>
                   <div className="text-xs text-gray-400">Mentorship Matches</div>
                 </CardContent>
               </Card>
               <Card className="bg-gradient-to-br from-red-950/40 to-red-900/20 border-red-500/30">
                 <CardContent className="p-4 text-center">
                   <Heart className="h-6 w-6 text-red-400 mx-auto mb-2" />
-                  <div className="text-2xl font-bold text-white">{stats.active_donors}</div>
+                  <div className="text-2xl font-bold text-white">{stats.active_donors ?? 0}</div>
                   <div className="text-xs text-gray-400">Active Donors</div>
                 </CardContent>
               </Card>
               <Card className="bg-gradient-to-br from-emerald-950/40 to-emerald-900/20 border-emerald-500/30">
                 <CardContent className="p-4 text-center">
                   <TrendingUp className="h-6 w-6 text-emerald-400 mx-auto mb-2" />
-                  <div className="text-2xl font-bold text-white">${stats.total_raised.toLocaleString()}</div>
+                  <div className="text-2xl font-bold text-white">${(stats.total_raised ?? 0).toLocaleString()}</div>
                   <div className="text-xs text-gray-400">Total Raised</div>
                 </CardContent>
               </Card>
