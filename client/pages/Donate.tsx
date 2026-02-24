@@ -22,6 +22,7 @@ import {
   Trophy,
   Star,
   TrendingUp,
+  TrendingDown,
   Activity,
   Target,
   Wallet,
@@ -42,6 +43,10 @@ import {
   Scale,
   Gamepad2,
   Play,
+  PieChart,
+  DollarSign,
+  Server,
+  Wrench,
 } from "lucide-react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useEffect, useState, useRef } from "react";
@@ -429,6 +434,125 @@ export default function Donate() {
                 </div>
               </div>
             )}
+          </div>
+
+          {/* Financial Transparency Section */}
+          <div className="grid md:grid-cols-2 gap-6 p-6 bg-gradient-to-br from-black/60 to-gray-900/40 rounded-xl border border-gray-700/50">
+            <div className="text-center md:col-span-2 mb-2">
+              <h2 className="text-2xl font-bold text-white flex items-center justify-center gap-2">
+                <Scale className="h-6 w-6 text-amber-400" />
+                Financial Transparency
+              </h2>
+              <p className="text-gray-400 text-sm mt-1">Where your support comes from and where it goes</p>
+            </div>
+            
+            {/* Money In */}
+            <Card className="bg-black/40 border-green-500/30">
+              <CardHeader className="pb-3">
+                <CardTitle className="text-lg text-white flex items-center gap-2">
+                  <TrendingUp className="h-5 w-5 text-green-400" />
+                  Revenue Sources
+                </CardTitle>
+                <CardDescription className="text-green-200/70">FY 2025-2026</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="space-y-3">
+                  <div className="space-y-1">
+                    <div className="flex justify-between text-sm">
+                      <span className="text-gray-300 flex items-center gap-1">
+                        <Heart className="h-3 w-3 text-red-400" /> Individual Donations
+                      </span>
+                      <span className="text-green-400 font-medium">42%</span>
+                    </div>
+                    <Progress value={42} className="h-2 bg-gray-800" />
+                  </div>
+                  <div className="space-y-1">
+                    <div className="flex justify-between text-sm">
+                      <span className="text-gray-300 flex items-center gap-1">
+                        <Building2 className="h-3 w-3 text-amber-400" /> Corporate Sponsors
+                      </span>
+                      <span className="text-green-400 font-medium">28%</span>
+                    </div>
+                    <Progress value={28} className="h-2 bg-gray-800" />
+                  </div>
+                  <div className="space-y-1">
+                    <div className="flex justify-between text-sm">
+                      <span className="text-gray-300 flex items-center gap-1">
+                        <Trophy className="h-3 w-3 text-purple-400" /> Grants & Awards
+                      </span>
+                      <span className="text-green-400 font-medium">18%</span>
+                    </div>
+                    <Progress value={18} className="h-2 bg-gray-800" />
+                  </div>
+                  <div className="space-y-1">
+                    <div className="flex justify-between text-sm">
+                      <span className="text-gray-300 flex items-center gap-1">
+                        <Gamepad2 className="h-3 w-3 text-blue-400" /> GameForge Revenue Share
+                      </span>
+                      <span className="text-green-400 font-medium">12%</span>
+                    </div>
+                    <Progress value={12} className="h-2 bg-gray-800" />
+                  </div>
+                </div>
+                <div className="pt-2 border-t border-gray-700">
+                  <p className="text-xs text-gray-500">Last updated: February 2026</p>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Money Out */}
+            <Card className="bg-black/40 border-red-500/30">
+              <CardHeader className="pb-3">
+                <CardTitle className="text-lg text-white flex items-center gap-2">
+                  <TrendingDown className="h-5 w-5 text-red-400" />
+                  How We Spend It
+                </CardTitle>
+                <CardDescription className="text-red-200/70">Expense Allocation</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="space-y-3">
+                  <div className="space-y-1">
+                    <div className="flex justify-between text-sm">
+                      <span className="text-gray-300 flex items-center gap-1">
+                        <Gamepad2 className="h-3 w-3 text-purple-400" /> GameForge Development
+                      </span>
+                      <span className="text-red-400 font-medium">35%</span>
+                    </div>
+                    <Progress value={35} className="h-2 bg-gray-800" />
+                  </div>
+                  <div className="space-y-1">
+                    <div className="flex justify-between text-sm">
+                      <span className="text-gray-300 flex items-center gap-1">
+                        <GraduationCap className="h-3 w-3 text-green-400" /> Student Programs
+                      </span>
+                      <span className="text-red-400 font-medium">30%</span>
+                    </div>
+                    <Progress value={30} className="h-2 bg-gray-800" />
+                  </div>
+                  <div className="space-y-1">
+                    <div className="flex justify-between text-sm">
+                      <span className="text-gray-300 flex items-center gap-1">
+                        <Server className="h-3 w-3 text-blue-400" /> Infrastructure
+                      </span>
+                      <span className="text-red-400 font-medium">20%</span>
+                    </div>
+                    <Progress value={20} className="h-2 bg-gray-800" />
+                  </div>
+                  <div className="space-y-1">
+                    <div className="flex justify-between text-sm">
+                      <span className="text-gray-300 flex items-center gap-1">
+                        <Wrench className="h-3 w-3 text-amber-400" /> Operations
+                      </span>
+                      <span className="text-red-400 font-medium">15%</span>
+                    </div>
+                    <Progress value={15} className="h-2 bg-gray-800" />
+                  </div>
+                </div>
+                <div className="pt-2 border-t border-gray-700">
+                  <p className="text-xs text-gray-500">85% goes directly to programs</p>
+                </div>
+              </CardContent>
+            </Card>
           </div>
 
           {/* Main Content Grid */}
