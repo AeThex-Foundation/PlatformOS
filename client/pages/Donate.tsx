@@ -437,122 +437,233 @@ export default function Donate() {
           </div>
 
           {/* Financial Transparency Section */}
-          <div className="grid md:grid-cols-2 gap-6 p-6 bg-gradient-to-br from-black/60 to-gray-900/40 rounded-xl border border-gray-700/50">
-            <div className="text-center md:col-span-2 mb-2">
+          <div className="space-y-6 p-6 bg-gradient-to-br from-black/60 to-gray-900/40 rounded-xl border border-gray-700/50">
+            <div className="text-center">
               <h2 className="text-2xl font-bold text-white flex items-center justify-center gap-2">
                 <Scale className="h-6 w-6 text-amber-400" />
                 Financial Transparency
               </h2>
-              <p className="text-gray-400 text-sm mt-1">Where your support comes from and where it goes</p>
+              <p className="text-gray-400 text-sm mt-1">Full visibility into how we're funded and where every dollar goes</p>
+            </div>
+
+            {/* Big Numbers Overview */}
+            <div className="grid md:grid-cols-3 gap-4">
+              <Card className="bg-gradient-to-br from-green-950/50 to-black/40 border-green-500/40">
+                <CardContent className="p-6 text-center">
+                  <TrendingUp className="h-8 w-8 text-green-400 mx-auto mb-2" />
+                  <div className="text-3xl font-bold text-green-400">$47,250</div>
+                  <div className="text-sm text-gray-400">Total Raised (FY 2025-26)</div>
+                </CardContent>
+              </Card>
+              <Card className="bg-gradient-to-br from-blue-950/50 to-black/40 border-blue-500/40">
+                <CardContent className="p-6 text-center">
+                  <DollarSign className="h-8 w-8 text-blue-400 mx-auto mb-2" />
+                  <div className="text-3xl font-bold text-blue-400">$42,500</div>
+                  <div className="text-sm text-gray-400">Annual Budget</div>
+                </CardContent>
+              </Card>
+              <Card className="bg-gradient-to-br from-amber-950/50 to-black/40 border-amber-500/40">
+                <CardContent className="p-6 text-center">
+                  <PieChart className="h-8 w-8 text-amber-400 mx-auto mb-2" />
+                  <div className="text-3xl font-bold text-amber-400">85%</div>
+                  <div className="text-sm text-gray-400">Goes to Programs</div>
+                </CardContent>
+              </Card>
             </div>
             
-            {/* Money In */}
-            <Card className="bg-black/40 border-green-500/30">
-              <CardHeader className="pb-3">
-                <CardTitle className="text-lg text-white flex items-center gap-2">
-                  <TrendingUp className="h-5 w-5 text-green-400" />
-                  Revenue Sources
-                </CardTitle>
-                <CardDescription className="text-green-200/70">FY 2025-2026</CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="space-y-3">
-                  <div className="space-y-1">
-                    <div className="flex justify-between text-sm">
-                      <span className="text-gray-300 flex items-center gap-1">
-                        <Heart className="h-3 w-3 text-red-400" /> Individual Donations
-                      </span>
-                      <span className="text-green-400 font-medium">42%</span>
+            <div className="grid md:grid-cols-2 gap-6">
+              {/* Money In */}
+              <Card className="bg-black/40 border-green-500/30">
+                <CardHeader className="pb-3">
+                  <CardTitle className="text-lg text-white flex items-center gap-2">
+                    <TrendingUp className="h-5 w-5 text-green-400" />
+                    How We're Funded
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between p-3 rounded-lg bg-green-950/30 border border-green-500/20">
+                      <div className="flex items-center gap-2">
+                        <Heart className="h-5 w-5 text-red-400" />
+                        <div>
+                          <div className="text-white font-medium">Individual Donations</div>
+                          <div className="text-xs text-gray-400">People like you</div>
+                        </div>
+                      </div>
+                      <div className="text-right">
+                        <div className="text-green-400 font-bold">$19,845</div>
+                        <div className="text-xs text-gray-500">42%</div>
+                      </div>
                     </div>
-                    <Progress value={42} className="h-2 bg-gray-800" />
-                  </div>
-                  <div className="space-y-1">
-                    <div className="flex justify-between text-sm">
-                      <span className="text-gray-300 flex items-center gap-1">
-                        <Building2 className="h-3 w-3 text-amber-400" /> Corporate Sponsors
-                      </span>
-                      <span className="text-green-400 font-medium">28%</span>
+                    <div className="flex items-center justify-between p-3 rounded-lg bg-amber-950/30 border border-amber-500/20">
+                      <div className="flex items-center gap-2">
+                        <Building2 className="h-5 w-5 text-amber-400" />
+                        <div>
+                          <div className="text-white font-medium">Corporate Sponsors</div>
+                          <div className="text-xs text-gray-400">Studios & Companies</div>
+                        </div>
+                      </div>
+                      <div className="text-right">
+                        <div className="text-green-400 font-bold">$13,230</div>
+                        <div className="text-xs text-gray-500">28%</div>
+                      </div>
                     </div>
-                    <Progress value={28} className="h-2 bg-gray-800" />
-                  </div>
-                  <div className="space-y-1">
-                    <div className="flex justify-between text-sm">
-                      <span className="text-gray-300 flex items-center gap-1">
-                        <Trophy className="h-3 w-3 text-purple-400" /> Grants & Awards
-                      </span>
-                      <span className="text-green-400 font-medium">18%</span>
+                    <div className="flex items-center justify-between p-3 rounded-lg bg-purple-950/30 border border-purple-500/20">
+                      <div className="flex items-center gap-2">
+                        <Trophy className="h-5 w-5 text-purple-400" />
+                        <div>
+                          <div className="text-white font-medium">Grants & Awards</div>
+                          <div className="text-xs text-gray-400">Foundations & Programs</div>
+                        </div>
+                      </div>
+                      <div className="text-right">
+                        <div className="text-green-400 font-bold">$8,505</div>
+                        <div className="text-xs text-gray-500">18%</div>
+                      </div>
                     </div>
-                    <Progress value={18} className="h-2 bg-gray-800" />
-                  </div>
-                  <div className="space-y-1">
-                    <div className="flex justify-between text-sm">
-                      <span className="text-gray-300 flex items-center gap-1">
-                        <Gamepad2 className="h-3 w-3 text-blue-400" /> GameForge Revenue Share
-                      </span>
-                      <span className="text-green-400 font-medium">12%</span>
+                    <div className="flex items-center justify-between p-3 rounded-lg bg-blue-950/30 border border-blue-500/20">
+                      <div className="flex items-center gap-2">
+                        <Gamepad2 className="h-5 w-5 text-blue-400" />
+                        <div>
+                          <div className="text-white font-medium">GameForge Revenue</div>
+                          <div className="text-xs text-gray-400">Game sales & in-app</div>
+                        </div>
+                      </div>
+                      <div className="text-right">
+                        <div className="text-green-400 font-bold">$5,670</div>
+                        <div className="text-xs text-gray-500">12%</div>
+                      </div>
                     </div>
-                    <Progress value={12} className="h-2 bg-gray-800" />
                   </div>
-                </div>
-                <div className="pt-2 border-t border-gray-700">
-                  <p className="text-xs text-gray-500">Last updated: February 2026</p>
+                </CardContent>
+              </Card>
+
+              {/* Money Out */}
+              <Card className="bg-black/40 border-red-500/30">
+                <CardHeader className="pb-3">
+                  <CardTitle className="text-lg text-white flex items-center gap-2">
+                    <TrendingDown className="h-5 w-5 text-red-400" />
+                    Where It Goes
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between p-3 rounded-lg bg-purple-950/30 border border-purple-500/20">
+                      <div className="flex items-center gap-2">
+                        <Gamepad2 className="h-5 w-5 text-purple-400" />
+                        <div>
+                          <div className="text-white font-medium">GameForge Development</div>
+                          <div className="text-xs text-gray-400">Game creation & tools</div>
+                        </div>
+                      </div>
+                      <div className="text-right">
+                        <div className="text-red-400 font-bold">$14,875</div>
+                        <div className="text-xs text-gray-500">35%</div>
+                      </div>
+                    </div>
+                    <div className="flex items-center justify-between p-3 rounded-lg bg-green-950/30 border border-green-500/20">
+                      <div className="flex items-center gap-2">
+                        <GraduationCap className="h-5 w-5 text-green-400" />
+                        <div>
+                          <div className="text-white font-medium">Student Programs</div>
+                          <div className="text-xs text-gray-400">Education & mentorship</div>
+                        </div>
+                      </div>
+                      <div className="text-right">
+                        <div className="text-red-400 font-bold">$12,750</div>
+                        <div className="text-xs text-gray-500">30%</div>
+                      </div>
+                    </div>
+                    <div className="flex items-center justify-between p-3 rounded-lg bg-blue-950/30 border border-blue-500/20">
+                      <div className="flex items-center gap-2">
+                        <Server className="h-5 w-5 text-blue-400" />
+                        <div>
+                          <div className="text-white font-medium">Infrastructure</div>
+                          <div className="text-xs text-gray-400">Servers & hosting</div>
+                        </div>
+                      </div>
+                      <div className="text-right">
+                        <div className="text-red-400 font-bold">$8,500</div>
+                        <div className="text-xs text-gray-500">20%</div>
+                      </div>
+                    </div>
+                    <div className="flex items-center justify-between p-3 rounded-lg bg-amber-950/30 border border-amber-500/20">
+                      <div className="flex items-center gap-2">
+                        <Wrench className="h-5 w-5 text-amber-400" />
+                        <div>
+                          <div className="text-white font-medium">Operations</div>
+                          <div className="text-xs text-gray-400">Admin & overhead</div>
+                        </div>
+                      </div>
+                      <div className="text-right">
+                        <div className="text-red-400 font-bold">$6,375</div>
+                        <div className="text-xs text-gray-500">15%</div>
+                      </div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+
+            {/* Partner With Us CTA */}
+            <Card className="bg-gradient-to-r from-amber-950/40 via-black/40 to-amber-950/40 border-amber-500/30">
+              <CardContent className="p-6">
+                <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+                  <div className="text-center md:text-left">
+                    <h3 className="text-xl font-bold text-white flex items-center gap-2 justify-center md:justify-start">
+                      <Building2 className="h-6 w-6 text-amber-400" />
+                      Want to Fund Our Mission?
+                    </h3>
+                    <p className="text-gray-400 mt-1 max-w-md">
+                      We're actively seeking corporate sponsors, grant partnerships, and foundation support. 
+                      Your organization can make a real impact on the next generation of game developers.
+                    </p>
+                  </div>
+                  <div className="flex flex-col sm:flex-row gap-3">
+                    <Button 
+                      onClick={() => window.open('mailto:partnerships@aethex.foundation?subject=Corporate%20Sponsorship%20Inquiry', '_blank')}
+                      className="bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-black font-semibold"
+                    >
+                      <Building2 className="h-4 w-4 mr-2" />
+                      Become a Sponsor
+                    </Button>
+                    <Button 
+                      onClick={() => window.open('mailto:grants@aethex.foundation?subject=Grant%20Partnership%20Inquiry', '_blank')}
+                      variant="outline"
+                      className="border-purple-500/50 text-purple-300 hover:bg-purple-500/10"
+                    >
+                      <Trophy className="h-4 w-4 mr-2" />
+                      Grant Partnership
+                    </Button>
+                  </div>
                 </div>
               </CardContent>
             </Card>
 
-            {/* Money Out */}
-            <Card className="bg-black/40 border-red-500/30">
-              <CardHeader className="pb-3">
-                <CardTitle className="text-lg text-white flex items-center gap-2">
-                  <TrendingDown className="h-5 w-5 text-red-400" />
-                  How We Spend It
-                </CardTitle>
-                <CardDescription className="text-red-200/70">Expense Allocation</CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="space-y-3">
-                  <div className="space-y-1">
-                    <div className="flex justify-between text-sm">
-                      <span className="text-gray-300 flex items-center gap-1">
-                        <Gamepad2 className="h-3 w-3 text-purple-400" /> GameForge Development
-                      </span>
-                      <span className="text-red-400 font-medium">35%</span>
-                    </div>
-                    <Progress value={35} className="h-2 bg-gray-800" />
-                  </div>
-                  <div className="space-y-1">
-                    <div className="flex justify-between text-sm">
-                      <span className="text-gray-300 flex items-center gap-1">
-                        <GraduationCap className="h-3 w-3 text-green-400" /> Student Programs
-                      </span>
-                      <span className="text-red-400 font-medium">30%</span>
-                    </div>
-                    <Progress value={30} className="h-2 bg-gray-800" />
-                  </div>
-                  <div className="space-y-1">
-                    <div className="flex justify-between text-sm">
-                      <span className="text-gray-300 flex items-center gap-1">
-                        <Server className="h-3 w-3 text-blue-400" /> Infrastructure
-                      </span>
-                      <span className="text-red-400 font-medium">20%</span>
-                    </div>
-                    <Progress value={20} className="h-2 bg-gray-800" />
-                  </div>
-                  <div className="space-y-1">
-                    <div className="flex justify-between text-sm">
-                      <span className="text-gray-300 flex items-center gap-1">
-                        <Wrench className="h-3 w-3 text-amber-400" /> Operations
-                      </span>
-                      <span className="text-red-400 font-medium">15%</span>
-                    </div>
-                    <Progress value={15} className="h-2 bg-gray-800" />
-                  </div>
+            {/* Current Sponsors */}
+            <div className="text-center space-y-4">
+              <h3 className="text-lg font-semibold text-white">Current Sponsors & Partners</h3>
+              <div className="flex flex-wrap items-center justify-center gap-8 p-4 rounded-lg bg-black/30 border border-gray-700/30">
+                <div className="text-gray-500 text-sm italic">
+                  Your logo could be here — 
+                  <button 
+                    onClick={() => window.open('mailto:partnerships@aethex.foundation?subject=Sponsorship%20Inquiry', '_blank')}
+                    className="text-amber-400 hover:text-amber-300 underline ml-1"
+                  >
+                    become our first sponsor
+                  </button>
                 </div>
-                <div className="pt-2 border-t border-gray-700">
-                  <p className="text-xs text-gray-500">85% goes directly to programs</p>
-                </div>
-              </CardContent>
-            </Card>
+              </div>
+              <p className="text-xs text-gray-500">
+                Updated February 2026 • 
+                <button 
+                  onClick={() => window.open('/transparency', '_blank')}
+                  className="text-blue-400 hover:text-blue-300 ml-1"
+                >
+                  View full financial report →
+                </button>
+              </p>
+            </div>
           </div>
 
           {/* Main Content Grid */}
