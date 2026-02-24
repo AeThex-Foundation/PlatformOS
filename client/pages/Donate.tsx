@@ -40,6 +40,8 @@ import {
   BadgeCheck,
   X,
   Scale,
+  Gamepad2,
+  Play,
 } from "lucide-react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useEffect, useState, useRef } from "react";
@@ -54,6 +56,8 @@ interface DonationStats {
   mentorship_matches: number;
   active_donors: number;
   total_raised: number;
+  games_shipped: number;
+  total_players: number;
 }
 
 interface FundingGoal {
@@ -120,6 +124,8 @@ export default function Donate() {
     mentorship_matches: 0,
     active_donors: 0,
     total_raised: 0,
+    games_shipped: 0,
+    total_players: 0,
   });
   
   const [fundingGoals, setFundingGoals] = useState<FundingGoal[]>([]);
@@ -291,9 +297,10 @@ export default function Donate() {
                 Fund the Future Workforce
               </h1>
               <p className="text-xl text-gray-300 max-w-3xl leading-relaxed">
-                Your donation directly funds <strong className="text-white">workforce development</strong> and{" "}
+                Your donation directly funds <strong className="text-white">workforce development</strong>,{" "}
+                <strong className="text-white">game development training</strong>, and{" "}
                 <strong className="text-white">digital literacy</strong> programs. Every dollar goes toward 
-                training the next generation of technology professionals through hands-on mentorship and 
+                training the next generation through hands-on mentorship, our GameForge studio, and 
                 project-based learning.
               </p>
             </div>
@@ -305,7 +312,7 @@ export default function Donate() {
                   <Target className="h-5 w-5 text-green-400" />
                   Your Impact, Quantified
                 </h3>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 text-center">
                   <div className="space-y-1">
                     <p className="text-2xl font-bold text-green-400">$10</p>
                     <p className="text-xs text-gray-400">= 1 hour of mentorship</p>
@@ -315,19 +322,27 @@ export default function Donate() {
                     <p className="text-xs text-gray-400">= 1 student's monthly tools</p>
                   </div>
                   <div className="space-y-1">
-                    <p className="text-2xl font-bold text-green-400">$250</p>
-                    <p className="text-xs text-gray-400">= 1 identity infrastructure education module</p>
+                    <p className="text-2xl font-bold text-emerald-400">$100</p>
+                    <p className="text-xs text-gray-400">= 1 week of game dev training</p>
                   </div>
                   <div className="space-y-1">
-                    <p className="text-2xl font-bold text-green-400">$1,000</p>
-                    <p className="text-xs text-gray-400">= 1 career launched</p>
+                    <p className="text-2xl font-bold text-green-400">$250</p>
+                    <p className="text-xs text-gray-400">= 1 education module</p>
+                  </div>
+                  <div className="space-y-1">
+                    <p className="text-2xl font-bold text-emerald-400">$500</p>
+                    <p className="text-xs text-gray-400">= Assets for 1 GameForge release</p>
+                  </div>
+                  <div className="space-y-1">
+                    <p className="text-2xl font-bold text-green-400">$2,500</p>
+                    <p className="text-xs text-gray-400">= Ship 1 game to players</p>
                   </div>
                 </div>
               </CardContent>
             </Card>
             
             {/* Live Stats Dashboard */}
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-4">
               <Card className="bg-gradient-to-br from-green-950/40 to-green-900/20 border-green-500/30">
                 <CardContent className="p-4 text-center">
                   <Users className="h-6 w-6 text-green-400 mx-auto mb-2" />
@@ -340,6 +355,20 @@ export default function Donate() {
                   <Code className="h-6 w-6 text-blue-400 mx-auto mb-2" />
                   <div className="text-2xl font-bold text-white">{stats.code_commits.toLocaleString()}</div>
                   <div className="text-xs text-gray-400">Code Commits</div>
+                </CardContent>
+              </Card>
+              <Card className="bg-gradient-to-br from-green-950/40 to-green-900/20 border-green-500/30">
+                <CardContent className="p-4 text-center">
+                  <Gamepad2 className="h-6 w-6 text-green-400 mx-auto mb-2" />
+                  <div className="text-2xl font-bold text-white">{stats.games_shipped}</div>
+                  <div className="text-xs text-gray-400">Games Shipped</div>
+                </CardContent>
+              </Card>
+              <Card className="bg-gradient-to-br from-purple-950/40 to-purple-900/20 border-purple-500/30">
+                <CardContent className="p-4 text-center">
+                  <Play className="h-6 w-6 text-purple-400 mx-auto mb-2" />
+                  <div className="text-2xl font-bold text-white">{stats.total_players.toLocaleString()}</div>
+                  <div className="text-xs text-gray-400">Total Players</div>
                 </CardContent>
               </Card>
               <Card className="bg-gradient-to-br from-amber-950/40 to-amber-900/20 border-amber-500/30">
@@ -496,6 +525,10 @@ export default function Donate() {
                           <Check className="h-4 w-4 text-green-400" />
                           Bronze Passport Badge
                         </li>
+                        <li className="flex items-center gap-2 text-green-300">
+                          <Gamepad2 className="h-4 w-4 text-green-400" />
+                          Name in GameForge Credits
+                        </li>
                       </ul>
                       <Button 
                         onClick={() => handleDonate('initiate', 10, isMonthly)}
@@ -530,6 +563,10 @@ export default function Donate() {
                         <li className="flex items-center gap-2 text-gray-300">
                           <Check className="h-4 w-4 text-green-400" />
                           All Initiate perks
+                        </li>
+                        <li className="flex items-center gap-2 text-green-300">
+                          <Gamepad2 className="h-4 w-4 text-green-400" />
+                          Early Access to GameForge Releases
                         </li>
                         <li className="flex items-center gap-2 text-gray-300">
                           <Check className="h-4 w-4 text-green-400" />
@@ -575,6 +612,14 @@ export default function Donate() {
                           <Check className="h-4 w-4 text-green-400" />
                           All Architect perks
                         </li>
+                        <li className="flex items-center gap-2 text-green-300">
+                          <Gamepad2 className="h-4 w-4 text-green-400" />
+                          NPC or Item named after you in-game
+                        </li>
+                        <li className="flex items-center gap-2 text-green-300">
+                          <Gamepad2 className="h-4 w-4 text-green-400" />
+                          Vote on GameForge game themes
+                        </li>
                         <li className="flex items-center gap-2 text-gray-300">
                           <Check className="h-4 w-4 text-green-400" />
                           1-on-1 Strategy Call
@@ -607,7 +652,7 @@ export default function Donate() {
                 </h2>
                 <p className="text-gray-400">Choose exactly where your support goes.</p>
                 
-                <div className="grid md:grid-cols-3 gap-4">
+                <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
                   <Card className="bg-gradient-to-br from-green-950/40 to-black/40 border-green-500/30 hover:border-green-400/50 transition-all cursor-pointer" onClick={() => handleDonate('equip_recruit', 25, false)}>
                     <CardContent className="p-6 text-center space-y-3">
                       <div className="w-12 h-12 rounded-full bg-green-600/30 flex items-center justify-center mx-auto">
@@ -649,6 +694,20 @@ export default function Donate() {
                       </Button>
                     </CardContent>
                   </Card>
+
+                  <Card className="bg-gradient-to-br from-purple-950/40 to-black/40 border-purple-500/30 hover:border-purple-400/50 transition-all cursor-pointer" onClick={() => handleDonate('ship_a_game', 2500, false)}>
+                    <CardContent className="p-6 text-center space-y-3">
+                      <div className="w-12 h-12 rounded-full bg-purple-600/30 flex items-center justify-center mx-auto">
+                        <Gamepad2 className="h-6 w-6 text-purple-400" />
+                      </div>
+                      <h3 className="font-bold text-white">Ship a Game</h3>
+                      <p className="text-2xl font-bold text-purple-400">$2,500</p>
+                      <p className="text-sm text-gray-400">Funds one complete GameForge game from concept to Roblox</p>
+                      <Button variant="outline" className="w-full border-purple-500/50 text-purple-300 hover:bg-purple-500/10">
+                        Fund This
+                      </Button>
+                    </CardContent>
+                  </Card>
                 </div>
               </div>
 
@@ -660,7 +719,7 @@ export default function Donate() {
                 </h2>
                 <p className="text-gray-400">For studios and companies looking to invest in the next generation of talent.</p>
                 
-                <div className="grid md:grid-cols-2 gap-6">
+                <div className="grid md:grid-cols-3 gap-6">
                   <Card className="bg-gradient-to-br from-red-950/30 via-black/40 to-red-950/30 border-red-500/40">
                     <CardHeader>
                       <CardTitle className="text-white flex items-center gap-2">
@@ -728,6 +787,44 @@ export default function Donate() {
                         className="w-full bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-black font-semibold"
                       >
                         Become a Guild Patron
+                        <ArrowRight className="h-4 w-4 ml-2" />
+                      </Button>
+                    </CardContent>
+                  </Card>
+
+                  <Card className="bg-gradient-to-br from-purple-950/30 via-black/40 to-purple-950/30 border-purple-500/40">
+                    <CardHeader>
+                      <CardTitle className="text-white flex items-center gap-2">
+                        <Gamepad2 className="h-5 w-5 text-purple-400" />
+                        Title Sponsor a Game
+                      </CardTitle>
+                      <CardDescription className="text-purple-200">$10,000 One-Time</CardDescription>
+                    </CardHeader>
+                    <CardContent className="space-y-4">
+                      <p className="text-gray-300">Be the presenting sponsor for an entire GameForge game release on Roblox.</p>
+                      <ul className="space-y-2 text-sm">
+                        <li className="flex items-center gap-2 text-gray-300">
+                          <Check className="h-4 w-4 text-green-400" />
+                          "[Game] Presented by [Company]" branding
+                        </li>
+                        <li className="flex items-center gap-2 text-gray-300">
+                          <Check className="h-4 w-4 text-green-400" />
+                          Logo in game loading screen
+                        </li>
+                        <li className="flex items-center gap-2 text-gray-300">
+                          <Check className="h-4 w-4 text-green-400" />
+                          Credits as Title Sponsor
+                        </li>
+                        <li className="flex items-center gap-2 text-gray-300">
+                          <Check className="h-4 w-4 text-green-400" />
+                          Press release announcement
+                        </li>
+                      </ul>
+                      <Button 
+                        onClick={() => handleDonate('title_sponsor_game', 10000, false)}
+                        className="w-full bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800"
+                      >
+                        Sponsor a Game
                         <ArrowRight className="h-4 w-4 ml-2" />
                       </Button>
                     </CardContent>
